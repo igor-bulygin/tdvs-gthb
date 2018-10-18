@@ -795,6 +795,21 @@ a.btn span {
   .btn-black-on-white:hover {
     background-color: #e9e9e9; }
 
+.btn-send-message {
+  background-color: #ffffff;
+  border: 1px solid #1C1919;
+  color: #1C1919;
+  padding: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: bold;
+  white-space: nowrap;
+  letter-spacing: 0.02em; }
+  .btn-send-message:hover {
+    background-color: #e9e9e9; }
+
 .btn-transparent {
   background-color: transparent;
   border: 1px solid #ffffff;
@@ -4197,6 +4212,7 @@ h3 {
 
 .our-devisers-header {
   background: url(/imgs/devisers-cover.jpg) center #000000 no-repeat;
+  background-size: cover;
   /*
   margin: -20px 0 0 0;
   padding: 0;//50px 0 42px;
@@ -4240,6 +4256,7 @@ h3 {
 
 .our-influencers-header {
   background: url(/imgs/influencers-cover.jpg) center #000000 no-repeat;
+  background-size: cover;
   /*
   margin: -20px 0 0 0;
   padding: 0;//50px 0 42px;
@@ -4283,6 +4300,7 @@ h3 {
 
 .our-boxes-header {
   background: url(/imgs/boxes-cover.jpg) center #000000 no-repeat;
+  background-size: cover;
   /*
   margin: -20px 0 0 0;
   padding: 0;//50px 0 42px;
@@ -4505,10 +4523,9 @@ h3 {
       width: 100%; }
 
 .panel-accordion h4.panel-title a {
-  float: left;
   width: 100%;
   display: block;
-  margin: -15px 0 0 0; }
+  margin: -15px 0 -15px 0; }
 .panel-accordion .panel-heading {
   padding: 30px 15px; }
 .panel-accordion .panel-body {
@@ -4517,7 +4534,6 @@ h3 {
   clear: both; }
 .panel-accordion .bought-orders-accordion {
   border: 0 none !important;
-  padding-bottom: 30px;
   margin-bottom: 15px; }
 
 .panel {
@@ -9615,12 +9631,14 @@ cart-panel .cart-panel-div {
   .accordion-header-item .accordion-header-title {
     color: #9D9D9D;
     font-weight: lighter;
-    font-size: 13px; }
+    font-size: 13px;
+    margin-top: 5px; }
   .accordion-header-item .accordion-header-subtitle {
     font-size: 13px;
     margin-top: 5px;
     font-weight: normal;
-    text-transform: initial; }
+    text-transform: initial;
+    margin-bottom: 5px; }
     .accordion-header-item .accordion-header-subtitle.bold {
       font-weight: bold; }
 

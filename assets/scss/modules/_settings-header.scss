@@ -161,13 +161,15 @@
 	.accordion-header-title{
 		color: #9D9D9D;
 		font-weight: lighter;
-		font-size: 13px;
+    font-size: 13px;
+    margin-top: 5px;
 	}
 	.accordion-header-subtitle{
 		font-size: 13px;
     	margin-top: 5px;
 		font-weight: normal;
-		text-transform: initial;
+    text-transform: initial;
+    margin-bottom: 5px;
 		&.bold{
 			font-weight: bold;
 		}

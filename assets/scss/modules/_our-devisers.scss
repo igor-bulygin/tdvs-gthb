@@ -12,6 +12,7 @@
 .our-devisers-header{
 	@extend %person_header;
 	background: url(/imgs/devisers-cover.jpg) center #000000 no-repeat;
+	background-size: cover;
 	/*
 	margin: -20px 0 0 0;
 	padding: 0;//50px 0 42px;
@@ -64,6 +65,7 @@
 .our-influencers-header{
 	@extend %person_header;
 	background: url(/imgs/influencers-cover.jpg) center #000000 no-repeat;
+	background-size: cover;
 	/*
 	margin: -20px 0 0 0;
 	padding: 0;//50px 0 42px;
@@ -114,6 +116,7 @@
 .our-boxes-header{
 	@extend %person_header;
 	background: url(/imgs/boxes-cover.jpg) center #000000 no-repeat;
+	background-size: cover;
 	/*
 	margin: -20px 0 0 0;
 	padding: 0;//50px 0 42px;
