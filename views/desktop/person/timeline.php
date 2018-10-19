@@ -44,7 +44,9 @@ Yii::$app->opengraph->title = $this->title;
 										<span class="timeline-time" am-time-ago="timeline.date | amUtc"></span>
 									</div>
 									<div class="row timeline-img">
-										<img class="col-xs-12 grid-image responsive" ng-src="{{timeline.photo}}">
+										<a ng-href="{{ timeline.link }}">
+											<img class="col-xs-12 grid-image responsive" ng-src="{{timeline.photo}}">
+										</a>
 									</div>
 									<div class="row text-right">
 										<span class="timeline-loved" ng-bind="timeline.loveds"></span>
