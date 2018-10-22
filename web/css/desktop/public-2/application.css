@@ -641,6 +641,9 @@ a, a:hover, a:focus {
   .no-pad-left-md {
     padding-left: 0px; } }
 
+.height-100 {
+  height: 100% !important; }
+
 .box-icon {
   background: url("/imgs/box-black.svg") no-repeat; }
 
