@@ -111,3 +111,8 @@
 .no-pad-left{
 	padding-left:0!important;
 }
+.no-pad-left-md {
+	@media(max-width: 991px) {
+		padding-left: 0px;
+	}
+}
