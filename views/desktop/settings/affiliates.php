@@ -95,9 +95,9 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
 
         <div class="col-xs-12 hidden-sm hidden-md hidden-lg no-pad block-separator-full"></div>
 
-        <?php if($person->isDeviser()) { ?>
+        <!-- <?php //if($person->isDeviser()) { ?>
 
-          <?php if (empty($person->settingsMapping->stripeInfoMapping->access_token)) { ?>
+          <?php //if (empty($person->settingsMapping->stripeInfoMapping->access_token)) { ?>
             <div class="line-title-only col-md-12 no-pad"><span translate="settings.general.BANK_ACCOUNT"></span></div>
             <div class="col-md-12 no-pad"><span translate="settings.general.IBAN"></span> </div>
             <div class="col-md-12 no-pad"><span translate="settings.general.FILL_IBAN_NUMBER_TEXT"></span> </div>
@@ -119,14 +119,19 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
                 <span translate="settings.general.INCORRECT_IBAN"></span>
               </div>
               <div class="col-md-12 no-pad block-separator-light"></div>
-              <div class="col-md-12 mt-20">
-                <button class="btn btn-small btn-red auto-center" ng-click="affiliatesSettingsCtrl.update()" ng-if="affiliatesSettingsCtrl.editMode" translate="global.SAVE"></button>
-                <button class="btn btn-small btn-black-on-white auto-center" ng-click="affiliatesSettingsCtrl.changeModeFn()" ng-if="!affiliatesSettingsCtrl.editMode" translate="settings.EDIT"></button>
+              <div class="col-md-12 mt-20 text-center">
+              <button class="btn btn-red btn-small auto-center" ng-click="affiliatesSettingsCtrl.update()" ng-if="affiliatesSettingsCtrl.editMode" translate="settings.SAVE_IBAN"></button>
+                <?php //if (!array_key_exists("iban", $person['personal_info']) || empty($person['personal_info']['iban'])): ?>
+                  <button class="btn btn-small btn-black-on-white" ng-click="affiliatesSettingsCtrl.changeModeFn()" ng-if="!affiliatesSettingsCtrl.editMode && !affiliatesSettingsCtrl.success" translate="settings.ADD_IBAN"></button>
+                  <button class="btn btn-small btn-black-on-white" ng-click="affiliatesSettingsCtrl.changeModeFn()" ng-if="!affiliatesSettingsCtrl.editMode && affiliatesSettingsCtrl.success" translate="settings.EDIT_IBAN"></button>
+                <?php //else: ?>
+                  <button class="btn btn-small btn-black-on-white" ng-click="affiliatesSettingsCtrl.changeModeFn()" ng-if="!affiliatesSettingsCtrl.editMode" translate="settings.EDIT_IBAN"></button>
+                <?php //endif;?>
               </div>
             </form>
-          <?php } ?>
+          <?php //} ?>
 
-        <?php } ?>
+        <?php //} ?> -->
 
         <?php if($person->isInfluencer()) { ?>
 
@@ -156,7 +161,7 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
   					</div>
   				<?php } ?>
 
-          <?php if (empty($person->settingsMapping->stripeInfoMapping->access_token)) { ?>
+          <!-- <?php //if (empty($person->settingsMapping->stripeInfoMapping->access_token)) { ?>
             <div class="col-md-12 no-pad block-separator-light"></div>
             <div class="col-md-12 no-pad block-separator-light"></div>
             <div class="col-md-12 no-pad block-separator-light"></div>
@@ -186,10 +191,15 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
               <div class="col-md-12 no-pad block-separator-light"></div>
               <div class="col-md-12 mt-20 text-center">
                 <button class="btn btn-red btn-small auto-center" ng-click="affiliatesSettingsCtrl.update()" ng-if="affiliatesSettingsCtrl.editMode" translate="settings.SAVE_IBAN"></button>
-                <button class="btn btn-small btn-black-on-white" ng-click="affiliatesSettingsCtrl.changeModeFn()" ng-if="!affiliatesSettingsCtrl.editMode" translate="settings.EDIT_IBAN"></button>
+                <?php //if (!array_key_exists("iban", $person['personal_info']) || empty($person['personal_info']['iban'])): ?>
+                  <button class="btn btn-small btn-black-on-white" ng-click="affiliatesSettingsCtrl.changeModeFn()" ng-if="!affiliatesSettingsCtrl.editMode && !affiliatesSettingsCtrl.success" translate="settings.ADD_IBAN"></button>
+                  <button class="btn btn-small btn-black-on-white" ng-click="affiliatesSettingsCtrl.changeModeFn()" ng-if="!affiliatesSettingsCtrl.editMode && affiliatesSettingsCtrl.success" translate="settings.EDIT_IBAN"></button>
+                <?php //else: ?>
+                  <button class="btn btn-small btn-black-on-white" ng-click="affiliatesSettingsCtrl.changeModeFn()" ng-if="!affiliatesSettingsCtrl.editMode" translate="settings.EDIT_IBAN"></button>
+                <?php //endif;?>
               </div>
             </form>
-          <?php } ?>
+          <?php //} ?> -->
 
         <?php } ?>
 

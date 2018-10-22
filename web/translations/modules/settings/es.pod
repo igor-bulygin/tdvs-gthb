@@ -3,7 +3,8 @@
 		"EDIT": "Editar",
 		"REQUIRED": "Obligatorio",
     "SAVE_IBAN": "Guardar IBAN",
-    "EDIT_IBAN": "Modifica IBAN",
+    "EDIT_IBAN": "Modificar IBAN",
+	"ADD_IBAN": "Añadir IBAN",
 		"general": {
 			"PERSONAL_INFORMATION": "Información personal",
 			"BRAND": "MARCA / NOMBRE ARTÍSTICO",

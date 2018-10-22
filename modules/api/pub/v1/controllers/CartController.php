@@ -368,12 +368,31 @@ class CartController extends AppPublicController
               'currency' => 'eur',
               'amount' => $stripeAmount,
               "description" => "Order Nº " . $order->short_id . "/" . $pack->short_id,
+							'transfer_group' => $order->short_id."-".$pack->short_id,
               "metadata" => [
                 "order_id" => $order->short_id,
                 "pack_id" => $pack->short_id,
                 "person_id" => $person->short_id,
               ],
             ]);
+
+						$chargeResponse = [
+              'id' => $charge->id,
+              'object' => $charge->object,
+              'amount' => $charge->amount,
+              'amount_refunded' => $charge->amount_refunded,
+              'application' => $charge->application,
+              'application_fee' => $charge->application_fee,
+              'balance_transaction' => $charge->balance_transaction,
+              'captured' => $charge->captured,
+              'created' => $charge->created,
+              'currency' => $charge->currency,
+              'customer' => $charge->customer,
+              'description' => $charge->description,
+              'destination' => $charge->destination,
+              'receipt_email' => $charge->receipt_email,
+              'status' => $charge->status,
+            ];
           }
 
         }
@@ -404,6 +423,7 @@ class CartController extends AppPublicController
                 'currency' => 'eur',
                 'amount' => $stripeAmount,
                 'description' => 'Order Nº ' . $order->short_id . '/' . $pack->short_id,
+								'transfer_group' => $order->short_id."-".$pack->short_id,
                 'application_fee' => $applicationFeeAmount,
                 'metadata' => [
                   'order_id' => $order->short_id,
@@ -439,13 +459,12 @@ class CartController extends AppPublicController
           else {
             // Make the transfer to the user who earn the amount
             $transfer = \Stripe\Transfer::create(array(
-              "amount" => (int)$stripeAmount * ( 1 - $order->totalFees()), // TODO: Calculate the correct amount to send to deviser (¿¿ 0.855 of order, and then affilitates ??)
+              "amount" => (int)round( ( $stripeAmount * ( 1 - $order->totalFees()) ), 0 , PHP_ROUND_HALF_DOWN),
               "currency" => "eur",
-              // "source_transaction" => $charge->id, // Use the amount of previous CHARGE instead the account funds.
               "destination" => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
               "transfer_group" => $order->short_id."-".$pack->short_id,
               "metadata" => [
-                    "description" => "Comision Order Nº " . $order->short_id . "/" . $pack->short_id,
+                    "description" => "Order Nº " . $order->short_id . "/" . $pack->short_id,
                     "order_id" => $order->short_id,
                     "pack_id" => $pack->short_id,
                     "person_id" => $person->short_id,
@@ -466,7 +485,9 @@ class CartController extends AppPublicController
 
         }
 
-        array_push($charge_info, $chargeResponse);
+				if(!empty($chargeResponse)) {
+        	array_push($charge_info, $chargeResponse);
+				}
 
         $charge = "";
 
@@ -493,78 +514,33 @@ class CartController extends AppPublicController
 
               if($person_earner != null) {
 
-                // var_dump("earner_id: ".$earner_id." | EARNER_AMOUNT: ". $amount);
-
                 if(!$person_earner->isClient()) { // Deviser or influencer -> try to charge to stripe
 
                   if(!empty($person_earner->settingsMapping->stripeInfoMapping->access_token)) {
 
-                    // if($person_earner->short_id == $deviser->short_id)
-                    //   $amount = $amount + ($pack->shipping_price * 100);
-
-                    if($pay_with_credit) {
-                      // Make the transfer to the user who earn the amount
-                      $transfer = \Stripe\Transfer::create(array(
-                        "amount" => (int)$amount,
-                        "currency" => "eur",
-                        // "source_transaction" => $charge->id, // Use the amount of previous CHARGE instead the account funds.
-                        "destination" => $person_earner->settingsMapping->stripeInfoMapping->stripe_user_id,
-                        "transfer_group" => $order->short_id."-".$pack->short_id,
-                        "metadata" => [
-                              "description" => "Comision Order Nº " . $order->short_id . "/" . $pack->short_id,
-                              "order_id" => $order->short_id,
-                              "pack_id" => $pack->short_id,
-                              "person_id" => $person->short_id,
-                            ],
-                      ));
-                      $chargeResponse = [
-                        'id' => $transfer->id,
-                        'object' => $transfer->object,
-                        'amount' => $transfer->amount,
-                        'balance_transaction' => $transfer->balance_transaction,
-                        'created' => $transfer->created,
-                        'currency' => $transfer->currency,
-                        'description' => $transfer->description,
-                        'destination' => $transfer->destination,
-                      ];
-                    }
-                    else {
-                      // Make the transfer to the user who earn the amount
-                      $charge = \Stripe\Charge::create([
-                        'customer' => $customer->id,
-                        'currency' => 'eur',
-                        'amount' => $amount,
-                        'description' => 'Comission Order Nº ' . $order->short_id . '/' . $pack->short_id,
-                        'destination' => [
-                          'account' => $person_earner->settingsMapping->stripeInfoMapping->stripe_user_id
-                        ],
-                        'metadata' => [
-                          'order_id' => $order->short_id,
-                          'pack_id' => $pack->short_id,
-                          'person_id' => $person->short_id,
-
-                        ],
-                      ]);
-
-                      $chargeResponse = [
-                        'id' => $charge->id,
-                        'object' => $charge->object,
-                        'amount' => $charge->amount,
-                        'amount_refunded' => $charge->amount_refunded,
-                        'application' => $charge->application,
-                        'application_fee' => $charge->application_fee,
-                        'balance_transaction' => $charge->balance_transaction,
-                        'captured' => $charge->captured,
-                        'created' => $charge->created,
-                        'currency' => $charge->currency,
-                        'customer' => $charge->customer,
-                        'description' => $charge->description,
-                        'destination' => $charge->destination,
-                        'receipt_email' => $charge->receipt_email,
-                        'status' => $charge->status,
-                      ];
-
-                    }
+                    // Make the transfer to the user who earn the amount
+                    $transfer = \Stripe\Transfer::create(array(
+                      "amount" => (int)$amount,
+                      "currency" => "eur",
+                      "destination" => $person_earner->settingsMapping->stripeInfoMapping->stripe_user_id,
+                      "transfer_group" => $order->short_id."-".$pack->short_id,
+                      "metadata" => [
+                            "description" => "Comision Order Nº " . $order->short_id . "/" . $pack->short_id,
+                            "order_id" => $order->short_id,
+                            "pack_id" => $pack->short_id,
+                            "person_id" => $person->short_id,
+                          ],
+                    ));
+                    $chargeResponse = [
+                      'id' => $transfer->id,
+                      'object' => $transfer->object,
+                      'amount' => $transfer->amount,
+                      'balance_transaction' => $transfer->balance_transaction,
+                      'created' => $transfer->created,
+                      'currency' => $transfer->currency,
+                      'description' => $transfer->description,
+                      'destination' => $transfer->destination,
+                    ];
 
                     array_push($charge_info, $chargeResponse);
                   }

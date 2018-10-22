@@ -262,7 +262,7 @@
 
 
 
-    angular.module('util', ['util.formMessages', 'LocalStorageModule', 'ui.bootstrap', 'infinite-scroll', 'uiCropper', 'pascalprecht.translate', 'ngCookies'])
+    angular.module('util', ['util.formMessages', 'LocalStorageModule', 'ui.bootstrap', 'infinite-scroll', 'uiCropper', 'pascalprecht.translate'])
         .service('UtilService', UtilService)
         .filter('capitalize', capitalize)
         .config(config);

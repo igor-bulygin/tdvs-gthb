@@ -4,6 +4,7 @@
 		"REQUIRED": "Required",
     "SAVE_IBAN": "Save IBAN",
     "EDIT_IBAN": "Edit IBAN",
+	"ADD_IBAN": "Add IBAN",
 		"general": {
 			"PERSONAL_INFORMATION": "Personal information",
 			"BRAND": "BRAND / ARTIST NAME",
