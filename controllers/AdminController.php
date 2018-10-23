@@ -929,4 +929,66 @@ class AdminController extends CController {
 
 		return Yii::$app->request->isAjax ? $this->renderPartial("banners", $data) : $this->render("banners", $data);
 	}
+
+  public function actionStripeWithdrawal($filters = null) {
+
+    $fields = ['available_earnings'];
+    $filters["type"]['$in'] = [Person::CLIENT];
+    $filters["available_earnings"]['$gt'] = 0;
+
+    $total = Person::find()
+            ->select($fields)
+            ->where($filters)
+            ->sum('available_earnings');
+
+    $data = [
+      'total' => $total,
+    ];
+
+    return Yii::$app->request->isAjax ? $this->renderPartial("stripe-withdrawal", $data) : $this->render("stripe-withdrawal", $data);
+  }
+
+
+  public function actionStripeTodeviseEarnings($filters = null) {
+
+    $fields = ['earnings_by_user'];
+    $filters["short_id"]['$eq'] = (string)Yii::$app->params['short_id_todevise_user'];
+
+    $todevise_earnings_by_user = Person::find()
+            ->select($fields)
+            ->where($filters)
+            ->one();
+
+    $todevise_earnings = array();
+
+    foreach ($todevise_earnings_by_user['earnings_by_user'] as $person_id => $earningsByOrder) {
+      foreach ($earningsByOrder as $earningAux) {
+        foreach ($earningAux as $order_id => $earning) {
+          $todevise_earnings[] = [
+            'order_id' => $order_id,
+            'earning' => $earning['amount'],
+            'date' => $earning['created']->toDateTime()->format('Y-m-d'),
+            'date_for_order' => $earning['created']->toDateTime()->format('U')
+          ];
+        }
+      }
+    }
+
+    // Order by date DESC
+    usort($todevise_earnings, function($b, $a) {
+        return $a['date_for_order'] - $b['date_for_order'];
+    });
+
+    $provider = new ArrayDataProvider([
+			'allModels' => $todevise_earnings,
+			'pagination' => ['pageSize' => 100]
+		]);
+
+    $data = [
+      'todevise_earnings_by_user' => $provider,
+    ];
+
+    return Yii::$app->request->isAjax ? $this->renderPartial("stripe-todevise-earnings", $data) : $this->render("stripe-todevise-earnings", $data);
+  }
+
 }

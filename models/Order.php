@@ -214,7 +214,8 @@ class Order extends CActiveRecord {
 //					'charges',
 					'first_discount',
 					'percent_discount',
-          'pay_with_credit'
+          'pay_with_credit',
+          'created_at'
 				];
 				static::$retrieveExtraFields = [
 				];
@@ -874,6 +875,8 @@ class Order extends CActiveRecord {
 
       // Calculating...
 
+      $already_earned = '';
+
       // 1 - Always a % to TODEVISE
       $todeviseAmountToAdd = (float)round((($p['price'] * $p['quantity']) * \Yii::$app->params['fees']['default_todevise_fee_minimum']),2,PHP_ROUND_HALF_DOWN);
 
@@ -887,25 +890,7 @@ class Order extends CActiveRecord {
 
       if(!isset($this->percent_discount) || $this->percent_discount <= 0) {
 
-        // 2 - Fee from discovering user, else to TODEVISE
-        $discoverer = (isset($buyer->product_discovery_from_user['PRODUCT'.$p['product_id']])) ? $buyer->product_discovery_from_user['PRODUCT'.$p['product_id']] : "0";
-        $discoverAmountToAdd = (float)round(( ($p['price'] * $p['quantity']) * \Yii::$app->params['fees']['default_fee_from_discovering']),2,PHP_ROUND_HALF_DOWN);
-
-        if((string)$discoverer != "0" && in_array($discoverer, $buyer->follow)) { // Product is discovered by a user
-
-            if(array_key_exists($discoverer, $earningsByPack))
-              $earningsByPack[$discoverer] = (float)$earningsByPack[$discoverer] + $discoverAmountToAdd;
-            else
-              $earningsByPack[$discoverer] = $discoverAmountToAdd;
-
-        }
-        else { // Product discovered by search or another
-          $earningsByPack['todevise'] = (float)$earningsByPack['todevise'] + $discoverAmountToAdd;
-        }
-        $earningsByPack['totalEarning'] = $earningsByPack['totalEarning'] + $discoverAmountToAdd;
-
-
-        // 3 - Fee from affiliate && follow, else to TODEVISE
+        // 2 - Fee from affiliate && follow, else to TODEVISE
         $affiliateAmountToAdd = (float)round(( ($p['price'] * $p['quantity']) * \Yii::$app->params['fees']['default_fee_from_affiliate']),2,PHP_ROUND_HALF_DOWN);
         $affiliate = (isset($buyer->parent_affiliate_id) && trim($buyer->parent_affiliate_id != "")) ? Person::findOne(['affiliate_id' => $buyer->parent_affiliate_id]) : '';
 
@@ -914,12 +899,31 @@ class Order extends CActiveRecord {
             $earningsByPack[$affiliate->short_id] = (float)$earningsByPack[$affiliate->short_id] + $affiliateAmountToAdd;
           else
             $earningsByPack[$affiliate->short_id] = $affiliateAmountToAdd;
+
+          $already_earned = $affiliate->short_id;
         }
         else { // No affiliate or not follow
           $earningsByPack['todevise'] = (float)$earningsByPack['todevise'] + $affiliateAmountToAdd;
         }
         $earningsByPack['totalEarning'] = $earningsByPack['totalEarning'] + $affiliateAmountToAdd;
 
+
+        // 3 - Fee from discovering user && follow, else to TODEVISE
+        $discoverer = (isset($buyer->product_discovery_from_user['PRODUCT'.$p['product_id']])) ? $buyer->product_discovery_from_user['PRODUCT'.$p['product_id']] : "0";
+        $discoverAmountToAdd = (float)round(( ($p['price'] * $p['quantity']) * \Yii::$app->params['fees']['default_fee_from_discovering']),2,PHP_ROUND_HALF_DOWN);
+
+        if( (string)$discoverer != "0" && in_array($discoverer, $buyer->follow) && $already_earned != $discoverer ) { // Product is discovered by a user
+
+          if(array_key_exists($discoverer, $earningsByPack))
+          $earningsByPack[$discoverer] = (float)$earningsByPack[$discoverer] + $discoverAmountToAdd;
+          else
+          $earningsByPack[$discoverer] = $discoverAmountToAdd;
+
+        }
+        else { // Product discovered by search or another or already earn by affiliates
+          $earningsByPack['todevise'] = (float)$earningsByPack['todevise'] + $discoverAmountToAdd;
+        }
+        $earningsByPack['totalEarning'] = $earningsByPack['totalEarning'] + $discoverAmountToAdd;
       }
 
 
