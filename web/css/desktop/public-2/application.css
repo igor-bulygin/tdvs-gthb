@@ -571,6 +571,9 @@ a, a:hover, a:focus {
 .mt-50 {
   margin-top: 50px; }
 
+.mb-0 {
+  margin-bottom: 0px !important; }
+
 .mb-100 {
   margin-bottom: 100px; }
 
@@ -624,6 +627,9 @@ a, a:hover, a:focus {
 
 .pl-15 {
   padding-left: 15px !important; }
+
+.pl-30 {
+  padding-left: 30px !important; }
 
 .no-pad-r {
   padding-right: 0 !important; }
@@ -6350,6 +6356,11 @@ h3 {
 @media (min-width: 992px) {
   .separator-bar {
     border-right: 1px solid #bfbfbf; } }
+
+.separator-size {
+  height: 2px;
+  border: solid 1px #bfbfbf;
+  margin-top: 12.5px; }
 
 .pencil-edit {
   color: #ffffff;

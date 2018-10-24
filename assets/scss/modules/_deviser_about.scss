@@ -274,6 +274,11 @@
         border-right: 1px solid $light_grey;
     }
 }
+.separator-size{
+    height: 2px;
+    border: solid 1px $light_grey;
+    margin-top: 12.5px;
+}
 .pencil-edit{
     color: $white;
     font-size:14px;
