@@ -80,26 +80,28 @@
 			"DAYS": " días",
 			"SPECIFY_RETURNS_DAYS": "Debe especificar los días para devolución",
 			"PHOTOS": "Fotos",
-			"ADD_PHOTOS": "+ Añadir fotos",
+			"ADD_PHOTOS": "Añadir fotos",
 			"MARK_AS_MAIN": "Marque una de las fotos como 'foto principal' pinchando en el icno de estrella.",
 			"MARKED_AS_MAIN": "Marcar como foto principal",
 			"UPLOAD_1_PHOTO": "Por favor suba al menos 1 foto.",
 			"TAGS": "Etiquetas",
 			"PLS_TRANSLATE": "Por favor, traduce cada campo a español y a inglés",
 			"NO_WARRANTY": "No tiene garantía",
-			"NO_RETURNS": "No se admiten devoluciones"
+			"NO_RETURNS": "No se admiten devoluciones",
+			"UPLOAD_IMAGE": "Subir imagen"
 		},
 		"more_details": {
 			"TITLE": "Más detalles sobre su trabajo (opcional)",
 			"PHOTOS_DESCRIPTION": "Fotos para la descripción",
 			"ENRICH_DESCRIPTION": "Enriquezca su descripión con fotos que muestran sus principales características.",
-			"ADD_PHOTOS": "+ Añadir fotos",
+			"ADD_PHOTOS": "Añadir fotos",
 			"WORK_FAQS": "FAQs de producto",
 			"WRITE_FAQ": "¿Quieres escribir FAQ específicas para este producto?",
 			"DELETE_QUESTION": "Eliminar pregunta",
 			"QUESTION": "Pregunta",
 			"ANSWER": "Respuesta",
-			"ADD_QUESTION": "+ Añadir pregunta"
+			"ADD_QUESTION": "+ Añadir pregunta",
+			"UPLOAD_IMAGE": "Subir imagen"
 		},
 		"price_stock": {
 			"TITLE": "Precio & Stock",
@@ -116,7 +118,8 @@
 			"PRICE": "Precio",
 			"APPLY_ALL": "Aplicar a todo",
 			"CURRENCY": "€ ",
-			"UNLIMITED_STOCK": "Stock ilimitado"
+			"UNLIMITED_STOCK": "Stock ilimitado",
+			"MINIMUM_PRODUCT_PRICE": "El precio mínimo por producto debe ser {{priceProduct}}."
 		},
 		"variations": {
 			"TITLE": "Variaciones & Manufactura",

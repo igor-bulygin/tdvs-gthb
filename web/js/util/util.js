@@ -11,6 +11,7 @@
         this.has_error = has_error;
         this.parseImagesUrl = parseImagesUrl;
         this.isZeroOrLess = isZeroOrLess;
+        this.isLessThanOne = isLessThanOne;
         this.isStringNotEmpty = isStringNotEmpty;
         this.returnPathFromCategory = returnPathFromCategory;
         this.stripHTMLTags = stripHTMLTags;
@@ -165,6 +166,12 @@
             if (value === undefined || value === null) return true;
             if (typeof value !== 'number') return false;
             return value <= 0 ? true : false;
+        }
+
+        function isLessThanOne(value){
+            if (value === undefined || value === null) return true;
+            if (typeof value !== 'number') return false;
+            return value < 1 ? true : false;
         }
 
         function isStringNotEmpty(string) {

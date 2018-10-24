@@ -195,7 +195,6 @@
         }
         &.btn.btn-default.dropdown-toggle {
             background-color: transparent !important;
-            padding-left: 10px;
             border: none;
         }
     }
@@ -249,7 +248,15 @@
         .filter-option{
             width: auto;        
         }
-        .caret{     
+        .caret{
+            right: auto;
+            top: 45%;
+            @media (max-width: 1199px){
+                margin-left: 3px;
+            }
+            @media (min-width: 1200px) {
+                margin-left: -3px;
+            }
         }
     }
     .nya-bs-select {
@@ -260,6 +267,11 @@
         width: 25% !important;
         border: none;
         top: 180px;
+    }
+}
+.separator-bar{
+    @media (min-width: 992px) {
+        border-right: 1px solid $light_grey;
     }
 }
 .pencil-edit{

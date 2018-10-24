@@ -72,10 +72,11 @@
 							</div>
 						</div>
 					</td>
-					<td xeditable-select><a href="#" editable-number="product.price" buttons="no" e-min="0" e-step="0.01" class="ng-class:{'purple-text': productPriceStockCtrl.priceStockValuesValidation(product.price, product.available)}" ng-bind="(product.price || 0)" blur="submit"><span translate="product.price_stock.CURRENCY"></span></a>
-					<span class="apply-to-all-btn" ng-click="productPriceStockCtrl.applyToAll('price', product.price)"><span translate="product.price_stock.APPLY_ALL"></span></span>
+					<td xeditable-select><a href="#" editable-number="product.price" buttons="no" e-min="0" e-step="0.01" class="ng-class:{'purple-text': productPriceStockCtrl.priceStockPriceValidation(product.price)}" ng-bind="(product.price || 0)" blur="submit"><span translate="product.price_stock.CURRENCY"></span></a>
+						<span class="apply-to-all-btn" ng-click="productPriceStockCtrl.applyToAll('price', product.price)"><span translate="product.price_stock.APPLY_ALL"></span></span>
 					</td>
 				</tr>
 			</tbody>
 		</table>
+		<span ng-if="productPriceStockCtrl.priceStockPriceValidation(product.price)" translate="product.price_stock.MINIMUM_PRODUCT_PRICE" translate-values='{ priceProduct: 1}' class="error-text ng-scope"></span>
 </div>

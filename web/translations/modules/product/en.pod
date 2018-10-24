@@ -77,26 +77,28 @@
 			"DAYS":" Days",
 			"SPECIFY_RETURNS_DAYS":"You must specify the return days",
 			"PHOTOS":"Photos",
-			"ADD_PHOTOS":"+ Add photos",
+			"ADD_PHOTOS":"Add photos",
 			"MARK_AS_MAIN":"Mark one of the photos as 'main photo' by clicking the star icon.",
 			"MARKED_AS_MAIN":"Marked as main photo",
 			"UPLOAD_1_PHOTO":"Please upload at least 1 photo.",
 			"TAGS":"Tags",
 			"PLS_TRANSLATE": "Please translate each field into Spanish and English",
 			"NO_WARRANTY": "No warranty",
-			"NO_RETURNS": "No returns"
+			"NO_RETURNS": "No returns",
+			"UPLOAD_IMAGE": "Upload image"
 		},
 		"more_details": {
 			"TITLE":"More details about your work (optional)",
 			"PHOTOS_DESCRIPTION":"Description photos",
 			"ENRICH_DESCRIPTION":"Enrich your work description with photos that showcase its main features.",
-			"ADD_PHOTOS":"+ Add photos",
+			"ADD_PHOTOS":"Add photos",
 			"WORK_FAQS":"WORK FAQs",
 			"WRITE_FAQ":"Do you want to write FAQ question specific for this product?",
 			"DELETE_QUESTION":"Delete question",
 			"QUESTION":"Question",
 			"ANSWER":"Answer",
-			"ADD_QUESTION":"+ Add another question"
+			"ADD_QUESTION":"+ Add another question",
+			"UPLOAD_IMAGE": "Upload image"
 		},
 		"price_stock": {
 			"TITLE":"Price & Stock",
@@ -113,7 +115,8 @@
 			"PRICE":"Price",
 			"APPLY_ALL":"Apply to all",
 			"CURRENCY":"$ ",
-			"UNLIMITED_STOCK": "Unlimited stock"
+			"UNLIMITED_STOCK": "Unlimited stock",
+			"MINIMUM_PRODUCT_PRICE": "The minimum price per product must be {{priceProduct}}."
 		},
 		"variations": {
 			"TITLE":"Variations & Manufacturing",

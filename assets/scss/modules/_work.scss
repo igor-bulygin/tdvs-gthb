@@ -63,8 +63,7 @@
 			.title-lang-btn{
 				button{
 					position: absolute;
-					left: 12px;
-					top: -20px;
+					top: -18px;
 				}
 			}
 			.title-input{
@@ -74,7 +73,7 @@
 			.description-input{
 				.ta-editor.ta-html, .ta-scroll-window.form-control{
 					padding: 20px;
-					min-height: 175px;
+					min-height: 123px;
 					@include border-radius(6px,6px,6px,6px);
 				}
 				.ta-scroll-window.form-control {
@@ -92,6 +91,9 @@
 			}
 		}
 	}
+}
+.title-bold{
+	font-weight: bold;
 }
 .items-row{
 	margin-left:0;
@@ -161,7 +163,6 @@
 			background-color: transparent!important;
 			border-color:#b933f4!important;
 		}
-		border: 1px solid $black;
 		margin: 0;
 		height: 150px;
 		width: 150px!important;
@@ -186,7 +187,16 @@
             display: block;
             margin: -11px 0 0 0;
         }
-    }
+	}
+	p{
+		color: $dark_grey;
+		text-align: center;
+	}
+	img{
+		display: block;
+    	margin-left: auto;
+    	margin-right: auto;
+	}
 }
 .crop-modal-large{
 	.crop-modal{

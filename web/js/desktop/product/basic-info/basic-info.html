@@ -1,9 +1,9 @@
 <div class="card">
-    <span class="title"><span translate="product.basic_info.BASIC_INFO"></span></span>
+    <span class="title"><span class="title-bold" translate="product.basic_info.BASIC_INFO"></span></span>
     <form class="row" name="productBasicInfoCtrl.form" novalidate>
-        <div class="col-md-6">
-            <div class="col-md-12" id="name">
-                <label class="col-md-12 mb-20" for="name"><span translate="product.basic_info.TITLE"></span></label>
+        <div class="col-md-6 separator-bar">
+            <div class="col-md-12 mb-10" id="name">
+                <label class="col-md-12 mb-10" for="name"><span class="title-bold" translate="product.basic_info.TITLE"></span></label>
                 <div class="col-md-10">
                     <input class="mb-20 title-input form-control ng-class:{'error-input': productBasicInfoCtrl.nameRequired}" type="text" name="name" ng-model="productBasicInfoCtrl.product.name[productBasicInfoCtrl.name_language]" uib-popover="{{'product.basic_info.PLS_TRANSLATE' | translate}}"
                         popover-placement="right" popover-trigger="'focus'">
@@ -11,16 +11,16 @@
                 </div>
                 <ol class="col-md-2 about-edit-select title-lang-btn nya-bs-select" ng-model="productBasicInfoCtrl.name_language">
                     <li nya-bs-option="language in productBasicInfoCtrl.languages" data-value="language.code" deep-watch="true">
-                        <a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+                        <a href=""><span ng-bind="language.name"></span> <span style="right: 0px;" class="glyphicon glyphicon-ok check-mark"></span></a>
                     </li>
                 </ol>
             </div>
-            <div class="col-md-12" id="categories">
-                <label class="col-md-12" for="categories"><span translate="product.basic_info.CATEGORIES"></span></label>
+            <div class="col-md-12 mb-20" id="categories">
+                <label class="col-md-12 mb-10" for="categories"><span class="title-bold" translate="product.basic_info.CATEGORIES"></span></label>
                 <a class="link-red" href="#" ng-if="!productBasicInfoCtrl.product.emptyCategory" ng-cloak ng-click="productBasicInfoCtrl.addCategory(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index])">
-                    <span class="col-md-12"><span translate="product.basic_info.ADD_CATEGORY"></span></span>
+                    <span class="col-md-12 mb-10"><span translate="product.basic_info.ADD_CATEGORY"></span></span>
                 </a>
-                <div class="col-md-12 mt-20 mb-20" ng-repeat="item in productBasicInfoCtrl.categories_helper track by $index">
+                <div class="col-md-12" ng-repeat="item in productBasicInfoCtrl.categories_helper track by $index">
                     <div class="items-row">
                         <span class="category-select" ng-repeat="category in productBasicInfoCtrl.categories_helper[$index].categories_selected">
 							<ol name="{{'categories_' + $parent.$index + '_' + $index}}" class="col-sm-2 col-md-2 nya-bs-select btn-group bootstrap-select form-control product-select ng-class:{'error-input': productBasicInfoCtrl.has_error(productBasicInfoCtrl.form, productBasicInfoCtrl.form['categories_'+$parent.$index+'_'+$index])}" ng-model="productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index]" ng-change="productBasicInfoCtrl.categorySelected(productBasicInfoCtrl.categories_helper[$parent.$index].categories_selected[$index], $parent.$index, $index)" required>
@@ -36,8 +36,8 @@
                 </div>
             </div>
             <div class="col-md-12 error-text" ng-if="productBasicInfoCtrl.categorySelectionRequired" id="emptyCategory"><span translate="product.basic_info.SELECT_CATEGORY"></span></div>
-            <div class="col-md-12" id="description">
-                <label class="col-md-12 mb-20" for="description"><span translate="product.basic_info.DESCRIPTION"></span></label>
+            <div class="col-md-12 mb-10" id="description">
+                <label class="col-md-12 mb-10" for="description"><span class="title-bold" translate="product.basic_info.DESCRIPTION"></span></label>
                 <div class="col-md-10">
                     <div class="mb-20 description-input ng-class:{'error-input': productBasicInfoCtrl.descriptionRequired}" text-angular ng-model="productBasicInfoCtrl.product.description[productBasicInfoCtrl.description_language]" ta-paste="productBasicInfoCtrl.stripHTMLTags($html)"
                         ng-cloak ta-toolbar="[]"></div>
@@ -49,9 +49,9 @@
                     </li>
                 </ol>
             </div>
-            <div class="col-md-12" id="tags">
-                <label class="col-md-12 mb-20" for="tags"><span translate="product.basic_info.TAGS"></span></label>
-                <tags-input min-length="2" class="mb-20 tags-wrapper col-md-10" ng-model="productBasicInfoCtrl.tags[productBasicInfoCtrl.tags_language]" on-tag-added="productBasicInfoCtrl.addTag($tag, productBasicInfoCtrl.tags_language)" on-tag-removed="productBasicInfoCtrl.removeTag($tag)"></tags-input>
+            <div class="col-md-12 mb-10" id="tags">
+                <label class="col-md-12 mb-10" for="tags"><span class="title-bold" translate="product.basic_info.TAGS"></span></label>
+                <tags-input min-length="2" class="mb-20 tags-wrapper col-md-10" style="margin-top: -5px;" ng-model="productBasicInfoCtrl.tags[productBasicInfoCtrl.tags_language]" on-tag-added="productBasicInfoCtrl.addTag($tag, productBasicInfoCtrl.tags_language)" on-tag-removed="productBasicInfoCtrl.removeTag($tag)"></tags-input>
                 <ol class="about-edit-select title-lang-btn nya-bs-select col-md-2" ng-model="productBasicInfoCtrl.tags_language">
                     <li nya-bs-option="language in productBasicInfoCtrl.languages" data-value="language.code" deep-watch="true">
                         <a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
@@ -59,8 +59,8 @@
                 </ol>
             </div>
             <div class="personal-info-wrapper">
-                <div class="col-md-12" id="warranty">
-                    <label class="col-md-3" for="warranty"><span translate="product.basic_info.WARRANTIES"></span></label>
+                <div class="col-md-12 mt-10" id="warranty">
+                    <label class="col-md-3 m-0" for="warranty"><span class="title-bold" translate="product.basic_info.WARRANTIES"></span></label>
                     <div class="col-md-3" id="warrantyNotNumber">
                         <input class="form-control ng-class:{'error-input': productBasicInfoCtrl.warrantyRequired}" type="text" name="warranty" ng-model="productBasicInfoCtrl.product.warranty.value" ng-disabled="productBasicInfoCtrl.noWarranty">
                     </div>
@@ -75,7 +75,7 @@
                     <div class="col-md-12 error-text" ng-if="productBasicInfoCtrl.warrantyNumberRequired"><span translate="product.basic_info.VALUE_MUST_NUMBER"></span></div>
                 </div>
                 <div class="col-md-12 mt-20" id="returns">
-                    <label class="col-md-3" for="returns"><span translate="product.basic_info.RETURNS"></span></label>
+                    <label class="col-md-3 m-0" for="returns"><span class="title-bold" translate="product.basic_info.RETURNS"></span></label>
                     <div class="col-md-3" id="returnsNotNumber">
                         <input class="form-control ng-class:{'error-input': productBasicInfoCtrl.retunrsRequired}" type="text" name="returns" ng-model="productBasicInfoCtrl.product.returns.value" ng-disabled="productBasicInfoCtrl.noReturns">
                     </div>
@@ -91,22 +91,24 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" style="margin-top: 15%;">
             <div class="col-md-12" id="main_photo">
                 <div id="photos">
-                    <label class="col-md-12" for="Photos"><span translate="product.basic_info.PHOTOS"></span></label>
+                    <label class="col-md-12 mb-10" for="Photos"><span class="title-bold" translate="product.basic_info.PHOTOS"></span></label>
                     <div class="col-md-12">
                         <div class="col-md-4 button no-pad" name="file" ngf-select="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-multiple="true">
                             <a style="cursor:pointer;" class="btn btn-small btn-red" translate="product.basic_info.ADD_PHOTOS"></a>
                         </div>
-                        <p class="info col-md-8"><span translate="product.basic_info.MARK_AS_MAIN"></span></p>
+                        <div class="col-md-8">
+                            <span class="info" translate="product.basic_info.MARK_AS_MAIN"></span>
+                        </div>
                     </div>
-                    <div class="col-md-12 ml-15">
+                    <div class="col-md-12 ml-15 mt-20">
                         <div class="row">
                             <div class="col-md-3" ngf-no-file-drop>
                                 <input type="file" name="file" ngf-select="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-multiple="true">
                             </div>
-                            <ul class="item draggable-list" ui-sortable ng-model="productBasicInfoCtrl.images" ng-if="productBasicInfoCtrl.images.length > 0">
+                            <ul class="item draggable-list" ui-sortable ng-model="productBasicInfoCtrl.images" ng-if="productBasicInfoCtrl.images.length > 0" style="margin-bottom: 0px;">
                                 <li class="col-md-3 image-basic-info-edit" ng-repeat="image in productBasicInfoCtrl.images">
                                     <img class="grid-image" ng-src="{{image.url}}" draggable="false">
                                     <div class="crop ion-android-star-outline" ng-if="!image.filename.main_product_photo" ng-click="productBasicInfoCtrl.openCropModal(image.url, $index)"></div>
@@ -120,16 +122,20 @@
                                     <img ngf-thumbnail="item" class="grid-image">
                                 </div>
                             </div>
+                            <div class="col-md-3 no-pad">
+                                <div class="basic-info-add-photos">
+                                    <div class="plus-add-wrapper ng-class:{'error-input': productBasicInfoCtrl.photosRequired}" ngf-select="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-multiple="true">
+                                        <br/>
+                                        <img class="mb-20 mt-10" src="/imgs/product_placeholder_ico_small.svg" style="width: 40px; height: 32px;">
+                                        <img src="/imgs/upload_photo_camera.png">
+                                        <p><span translate="product.basic_info.UPLOAD_IMAGE"></span></p>
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row purple-text" ng-if="productBasicInfoCtrl.photosRequired" ng-cloak>
                             <p><span translate="product.basic_info.UPLOAD_1_PHOTO"></span></p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mr-15" ng-if="productBasicInfoCtrl.images.length<1">
-                        <div class="basic-info-add-photos">
-                            <div class="plus-add-wrapper ng-class:{'error-input': productBasicInfoCtrl.photosRequired}" ngf-select="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-multiple="true">
-                                <br/><br/><br/>
-                            </div>
                         </div>
                     </div>
                     <div class="row purple-text" ng-if="productBasicInfoCtrl.mainPhotoRequired" ng-cloak>
