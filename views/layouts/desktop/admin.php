@@ -400,6 +400,34 @@ use yii\widgets\Breadcrumbs;
 										],
 										'url'=> Url::to('/admin/invoices'),
 									],
+                  [
+										'label' => 'Stripe',
+										'options' => [
+											'class' => 'item-menu-left funiv_bold fs0-857 fs-upper',
+										],
+										'items' => [
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'Balance',
+												'url'=> Url::toRoute(['admin/stripe-withdrawal']),
+												'active' => (
+												Utils::compareURL('admin/stripe-withdrawal')
+												)
+											],
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'Todevise earnings',
+												'url'=> Url::toRoute(['admin/stripe-todevise-earnings']),
+												'active' => (
+												Utils::compareURL('admin/stripe-todevise-earnings')
+												)
+											],
+										],
+									],
 										[
 										'label' => 'Packages',
 										'options' => [
