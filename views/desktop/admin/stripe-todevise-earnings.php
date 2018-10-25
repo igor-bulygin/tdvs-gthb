@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = [
 	'url' => ['/admin/stripe-todevise-earnings']
 ];
 
-$this->title = 'Todevise / Admin / Stripe - Todevise Earnings by Affiliates';
+$this->title = 'Todevise / Admin / Stripe - Todevise Earnings';
 ?>
 
 <div class="row no-gutter">
@@ -27,7 +27,7 @@ $this->title = 'Todevise / Admin / Stripe - Todevise Earnings by Affiliates';
 		<div class="row no-gutter page-title-row">
 			<div class="row-same-height">
 				<div class="col-xs-2 col-height col-middle">
-					<h2 class="page-title funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Todevise Earnings by Affiliates"); ?></h2>
+					<h2 class="page-title funiv_bold fs-upper fc-fff fs1-071"><?= Yii::t("app/admin", "Todevise Earnings"); ?></h2>
 				</div>
 				<div class="col-xs-6 col-height col-middle flex flex-align-center">
 				</div>
