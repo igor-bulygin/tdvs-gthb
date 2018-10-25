@@ -410,7 +410,7 @@ use yii\widgets\Breadcrumbs;
 												'options' => [
 													'class' => 'item-submenu funiv fs0-929',
 												],
-												'label' => 'Balance',
+												'label' => 'Minimum Balance',
 												'url'=> Url::toRoute(['admin/stripe-withdrawal']),
 												'active' => (
 												Utils::compareURL('admin/stripe-withdrawal')

@@ -169,4 +169,5 @@ return [
     'question' => '',
     'title' => '',
     'yd' => '',
+    'Total credit available for clients' => 'Crédito total disponible de todos los clientes',
 ];
