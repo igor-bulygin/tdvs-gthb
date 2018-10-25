@@ -961,15 +961,17 @@ class AdminController extends CController {
 
     $todevise_earnings = array();
 
-    foreach ($todevise_earnings_by_user['earnings_by_user'] as $person_id => $earningsByOrder) {
-      foreach ($earningsByOrder as $earningAux) {
-        foreach ($earningAux as $order_id => $earning) {
-          $todevise_earnings[] = [
-            'order_id' => $order_id,
-            'earning' => $earning['amount'],
-            'date' => $earning['created']->toDateTime()->format('Y-m-d'),
-            'date_for_order' => $earning['created']->toDateTime()->format('U')
-          ];
+    if(!empty($todevise_earnings_by_user['earnings_by_user'])) {
+      foreach ($todevise_earnings_by_user['earnings_by_user'] as $person_id => $earningsByOrder) {
+        foreach ($earningsByOrder as $earningAux) {
+          foreach ($earningAux as $order_id => $earning) {
+            $todevise_earnings[] = [
+              'order_id' => $order_id,
+              'earning' => $earning['amount'],
+              'date' => $earning['created']->toDateTime()->format('Y-m-d'),
+              'date_for_order' => $earning['created']->toDateTime()->format('U')
+            ];
+          }
         }
       }
     }
