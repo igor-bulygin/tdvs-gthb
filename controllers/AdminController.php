@@ -961,7 +961,7 @@ class AdminController extends CController {
 
     $todevise_earnings = array();
 
-    if(count($todevise_earnings_by_user['earnings_by_user']) > 0) {
+    if(!empty($todevise_earnings_by_user['earnings_by_user'])) {
       foreach ($todevise_earnings_by_user['earnings_by_user'] as $person_id => $earningsByOrder) {
         foreach ($earningsByOrder as $earningAux) {
           foreach ($earningAux as $order_id => $earning) {
