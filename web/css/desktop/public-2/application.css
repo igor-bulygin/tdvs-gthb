@@ -571,6 +571,14 @@ a, a:hover, a:focus {
 .mt-50 {
   margin-top: 50px; }
 
+@media (min-width: 992px) {
+  .mt-md-15p {
+    margin-top: 15%; } }
+
+@media (max-width: 767px) {
+  .mt-xs-10 {
+    margin-top: 10px !important; } }
+
 .mb-0 {
   margin-bottom: 0px !important; }
 
@@ -620,7 +628,7 @@ a, a:hover, a:focus {
   padding-left: 0 !important; }
 
 .pl-5 {
-  padding-left: 5 !important; }
+  padding-left: 5px !important; }
 
 .pl-10 {
   padding-left: 10 !important; }
@@ -630,6 +638,12 @@ a, a:hover, a:focus {
 
 .pl-30 {
   padding-left: 30px !important; }
+
+.pl-45 {
+  padding-left: 45px !important; }
+
+.pr-10 {
+  padding-right: 10px !important; }
 
 .no-pad-r {
   padding-right: 0 !important; }
@@ -8900,7 +8914,6 @@ tags-input .tags .tag-item {
   -moz-border-radius: 90px 90px 90px 90px !important; }
 
 .manufacturing-textarea {
-  padding-top: 60px;
   border-radius: 20px 20px 20px 20px !important;
   -webkit-border-radius: 20px 20px 20px 20px !important;
   -moz-border-radius: 20px 20px 20px 20px !important; }
