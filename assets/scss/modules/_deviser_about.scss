@@ -269,6 +269,9 @@
         top: 180px;
     }
 }
+#filter-caret button span:nth-child(2){
+    right: 12px;
+}
 .separator-bar{
     @media (min-width: 992px) {
         border-right: 1px solid $light_grey;
