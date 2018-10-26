@@ -116,13 +116,13 @@
                                     <p class="main-marked" ng-if="image.filename.main_product_photo"><span translate="product.basic_info.MARKED_AS_MAIN"></span></p>
                                 </li>
                             </ul>
-                            <div class="col-xs-3 image-basic-info-edit" ng-repeat="item in productBasicInfoCtrl.tempFiles" ng-if="item.progress">
+                            <div class="col-xs-6 image-basic-info-edit" ng-repeat="item in productBasicInfoCtrl.tempFiles" ng-if="item.progress">
                                 <div ng-if="item.progress <= 100">
                                     <uib-progressbar value="item.progress" class="progress-striped active">{{item.progress}}</uib-progressbar>
                                     <img ngf-thumbnail="item" class="grid-image">
                                 </div>
                             </div>
-                            <div class="col-xs-3 no-pad">
+                            <div class="col-xs-6 no-pad">
                                 <div class="basic-info-add-photos">
                                     <div class="plus-add-wrapper ng-class:{'error-input': productBasicInfoCtrl.photosRequired}" ngf-select="productBasicInfoCtrl.uploadPhoto($files, $invalidFiles)" ngf-accept="'image/*'" ngf-drop-available="productBasicInfoCtrl.isDropAvailable" ngf-multiple="true">
                                         <br/>

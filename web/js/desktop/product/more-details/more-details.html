@@ -1,94 +1,103 @@
 <div class="card">
-	<span class="title" translate="product.more_details.TITLE"></span>
+	<span class="title title-bold" translate="product.more_details.TITLE"></span>
 	<form name="productMoreDetailsCtrl.form" novalidate>
 		<div class="row">
-			<label class="col-xs-12">
-				<span translate="product.more_details.PHOTOS_DESCRIPTION"></span>
-			</label>
-			<div class="col-md-12"  ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-select="productMoreDetailsCtrl.newCropModal($file)" ngf-accept="'image/*'">
-				<a class="btn btn-small btn-red mb-30" style="cursor:pointer;" translate="product.more_details.ADD_PHOTOS"></a>
-			</div>
-			
-			<span class="info col-md-10 mt-20 mb-20" translate="product.more_details.ENRICH_DESCRIPTION"></span>
-			<div class="col-md-8">
-				<div class="col-md-3 pad-about mr-15">
-					<div ng-if="productMoreDetailsCtrl.isDropAvailable">
-						<div class="description-add-photos" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select="productMoreDetailsCtrl.newCropModal($file)" ngf-accept="'image/*'">
-							<div class="plus-add-wrapper">
-
+			<div class="col-xs-12">
+				<label class="col-xs-12 title-bold">
+					<span translate="product.more_details.PHOTOS_DESCRIPTION"></span>
+				</label>
+				<div class="col-xs-12"  ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-select="productMoreDetailsCtrl.newCropModal($file)" ngf-accept="'image/*'">
+					<a class="btn btn-small btn-red mb-30" style="cursor:pointer;" translate="product.more_details.ADD_PHOTOS"></a>
+				</div>
+				<span class="info col-xs-10 mt-20 mb-20" translate="product.more_details.ENRICH_DESCRIPTION"></span>
+				<div class="col-xs-12">
+					<ul class="item draggable-list mb-0" dnd-list="productMoreDetailsCtrl.images" dnd-dragover="productMoreDetailsCtrl.dragOver(index)">
+						<li class="col-xs-3 image-description-edit" ng-repeat="image in productMoreDetailsCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-dragstart="productMoreDetailsCtrl.dragStart($index)" dnd-canceled="productMoreDetailsCtrl.canceled()" dnd-moved="productMoreDetailsCtrl.moved($index)">
+							<img class="grid-image" ng-src="{{image.url}}" draggable="false">
+							<span class="ion-edit red-icon edit" ng-click="productMoreDetailsCtrl.editCropModal($index)"></span>
+							<span class="ion-trash-a red-icon delete" ng-click="productMoreDetailsCtrl.deleteImage($index)"></span>
+						</li>
+					</ul>
+					<div class="col-xs-6 col-sm-3 pad-about mr-15">
+						<div ng-if="productMoreDetailsCtrl.isDropAvailable">
+							<div class="basic-info-add-photos" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-drag-over-class="drag-over" ngf-drop ngf-select="productMoreDetailsCtrl.newCropModal($file)" ngf-accept="'image/*'">
+								<div class="plus-add-wrapper">
+									<br/>
+									<img class="mb-20 mt-10" src="/imgs/product_placeholder_ico_small.svg" style="width: 40px; height: 32px;">
+									<img src="/imgs/upload_photo_camera.png">
+									<p><span translate="product.basic_info.UPLOAD_IMAGE"></span></p>
+									<br/>
+								</div>
 							</div>
 						</div>
+						<div ngf-no-file-drop>
+							<input type="file" name="file" ngf-select="productMoreDetailsCtrl.newCropModal($file)" ngf-accept="'image/*'" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-multiple="true">
+						</div>
 					</div>
-					<div ngf-no-file-drop>
-						<input type="file" name="file" ngf-select="productMoreDetailsCtrl.newCropModal($file)" ngf-accept="'image/*'" ngf-drop-available="productMoreDetailsCtrl.isDropAvailable" ngf-multiple="true">
-					</div>
-				</div>
-				<ul class="item draggable-list" dnd-list="productMoreDetailsCtrl.images" dnd-dragover="productMoreDetailsCtrl.dragOver(index)">
-					<li class="col-md-3 image-description-edit" ng-repeat="image in productMoreDetailsCtrl.images" dnd-draggable="image" dnd-effect-allowed="move" dnd-dragstart="productMoreDetailsCtrl.dragStart($index)" dnd-canceled="productMoreDetailsCtrl.canceled()" dnd-moved="productMoreDetailsCtrl.moved($index)">
-						<img class="grid-image" ng-src="{{image.url}}" draggable="false">
-						<span class="ion-edit red-icon edit" ng-click="productMoreDetailsCtrl.editCropModal($index)"></span>
-						<span class="ion-trash-a red-icon delete" ng-click="productMoreDetailsCtrl.deleteImage($index)"></span>
-					</li>
-				</ul>
-				<div class="col-md-3 image-description-edit" ng-if="productMoreDetailsCtrl.file.progress">
-					<div ng-if="productMoreDetailsCtrl.file.progress <= 100">
-						<uib-progressbar value="productMoreDetailsCtrl.file.progress" class="progress-striped active">{{productMoreDetailsCtrl.file.progress}}</uib-progressbar>
-						<img ngf-thumbnail="productMoreDetailsCtrl.file" class="grid-image">
+					<div class="col-xs-3 image-description-edit" ng-if="productMoreDetailsCtrl.file.progress">
+						<div ng-if="productMoreDetailsCtrl.file.progress <= 100">
+							<uib-progressbar value="productMoreDetailsCtrl.file.progress" class="progress-striped active">{{productMoreDetailsCtrl.file.progress}}</uib-progressbar>
+							<img ngf-thumbnail="productMoreDetailsCtrl.file" class="grid-image">
+						</div>
 					</div>
 				</div>
 			</div>
-			
 		</div>
 		<div class="row" id="faq">
-			<div class="col-md-12">
-				<label for="faqs"><span translate="product.more_details.WORK_FAQS"></span></label>
-			</div>
-			<span class="col-md-12" translate="product.more_details.WRITE_FAQ"></span>
-			<div class="col-md-12">
-			<div class="radio radio-inline">
-					<input type="radio" name="faq_selected" id="faq_selected" value="faq_selected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="true" ng-change="productMoreDetailsCtrl.showFaq()">
-					<label for="faq_selected"><span translate="global.YES"></span>
-					</label>
+			<div class="col-xs-12">
+
+				<div class="col-xs-12">
+					<label for="faqs" class="title-bold"><span translate="product.more_details.WORK_FAQS"></span></label>
 				</div>
-				<div class="radio radio-inline">
-					<input type="radio" name="faq_unselected" id="faq_unselected" value="faq_unselected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="false" checked>
-					<label for="faq_unselected"><span translate="global.NO"></span>
-					</label>
+				<span class="col-xs-12" translate="product.more_details.WRITE_FAQ"></span>
+				<div class="col-xs-12 mb-10">
+					<div class="radio radio-inline">
+						<input type="radio" name="faq_selected" id="faq_selected" value="faq_selected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="true" ng-change="productMoreDetailsCtrl.showFaq()">
+						<label for="faq_selected"><span translate="global.YES"></span>
+						</label>
+					</div>
+					<div class="radio radio-inline">
+						<input type="radio" name="faq_unselected" id="faq_unselected" value="faq_unselected" ng-model="productMoreDetailsCtrl.faq_selected" ng-value="false" checked>
+						<label for="faq_unselected"><span translate="global.NO"></span>
+						</label>
+					</div>
 				</div>
-			</div>
-			<div ng-if="productMoreDetailsCtrl.faq_selected">
-				<div class="col-md-12 pad-about" ng-repeat="question in productMoreDetailsCtrl.product.faq track by $index" class="delete-options-wrapper">
-					<a href="" class="delete-link pull-right" ng-click="productMoreDetailsCtrl.deleteQuestion($index)"><span translate="product.more_details.DELETE_QUESTION"></span></a>
-					<div class="edit-faq-panel no-mar">
-						<div class="faq-language-menu">
-							<ol class="nya-bs-select form-control" ng-model="productMoreDetailsCtrl.faq_helper[$index].languageSelected" ng-change="productMoreDetailsCtrl.parseQuestion(question, $index)">
-								<li nya-bs-option="language in productMoreDetailsCtrl.languages" class="ng-class:{'lang-selected': productMoreDetailsCtrl.isLanguageOk(language.code, $parent.$index)}" data-value="language.code" deep-watch="true">
-									<a href="">
-										<span ng-bind="language.name"></span>
-										<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="productMoreDetailsCtrl.isLanguageOk(language.code, $parent.$index)"></span>
-									</a>
-								</li>
-							</ol>
-							<div class="faq-row">
-								<div class="col-sm-1">
-									<span class="faq-edit-question" translate="product.more_details.QUESTION"></span>
+				<div ng-if="productMoreDetailsCtrl.faq_selected">
+					<div class="col-xs-12 pad-about mb-20" ng-repeat="question in productMoreDetailsCtrl.product.faq track by $index" class="delete-options-wrapper">
+						<div class="edit-faq-panel no-mar col-xs-10">
+							<div class="faq-language-menu">
+								<ol class="nya-bs-select form-control" ng-model="productMoreDetailsCtrl.faq_helper[$index].languageSelected" ng-change="productMoreDetailsCtrl.parseQuestion(question, $index)">
+									<li nya-bs-option="language in productMoreDetailsCtrl.languages" class="ng-class:{'lang-selected': productMoreDetailsCtrl.isLanguageOk(language.code, $parent.$index)}" data-value="language.code" deep-watch="true">
+										<a href="">
+											<span ng-bind="language.name"></span>
+											<span class="glyphicon glyphicon-ok ok-white-icon pull-right" ng-if="productMoreDetailsCtrl.isLanguageOk(language.code, $parent.$index)"></span>
+										</a>
+									</li>
+								</ol>
+								<div class="faq-row">
+									<div class="col-xs-12 mb-10 title-bold">
+										<span class="faq-edit-question" translate="product.more_details.QUESTION"></span>
+									</div>
+									<div class="col-xs-12">
+										<input type="text" name="{{'faq_question_' + $index}}" class="faq-edit-answer ng-class:{'error-input': productMoreDetailsCtrl.faqRequired && !question.question['en-US']}" placeholder="{{ 'product.more_details.QUESTION' | translate }}" ng-model="question.question[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" required>
+									</div>
 								</div>
-								<div class="col-sm-11">
-									<input type="text" name="{{'faq_question_' + $index}}" class="faq-edit-answer ng-class:{'error-input': productMoreDetailsCtrl.faqRequired && !question.question['en-US']}" placeholder="{{ 'product.more_details.QUESTION' | translate }}" ng-model="question.question[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" required>
-								</div>
-							</div>
-							<div class="faq-row">
-								<div class="col-sm-1">
-									<span class="faq-edit-question" translate="product.more_details.ANSWER"></span>
-								</div>
-								<div class="col-sm-11">
-									<div class="faq-edit-answer ng-class:{'error-input': productMoreDetailsCtrl.faqRequired && !question.answer['en-US']}" name="{{'faq_answer_' + $index}}" text-angular ng-model="question.answer[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" ta-toolbar="[]" placeholder="{{ 'product.more_details.ANSWER' | translate }}" ta-paste="productMoreDetailsCtrl.stripHTMLTags($html)" required></div>
+								<div class="faq-row">
+									<div class="col-xs-12 mb-10 title-bold">
+										<span class="faq-edit-question" translate="product.more_details.ANSWER"></span>
+									</div>
+									<div class="col-xs-12">
+										<div class="faq-edit-answer ng-class:{'error-input': productMoreDetailsCtrl.faqRequired && !question.answer['en-US']}" name="{{'faq_answer_' + $index}}" text-angular ng-model="question.answer[productMoreDetailsCtrl.faq_helper[$index].languageSelected]" ta-toolbar="[]" placeholder="{{ 'product.more_details.ANSWER' | translate }}" ta-paste="productMoreDetailsCtrl.stripHTMLTags($html)" required></div>
+									</div>
 								</div>
 							</div>
 						</div>
+						<div class="col-xs-2">
+							<a href="" class="delete-link ml-0" ng-click="productMoreDetailsCtrl.deleteQuestion($index)"><span translate="product.more_details.DELETE_QUESTION"></span></a>
+						</div>
 					</div>
+					<a class="add-cathegory" href="" ng-click="productMoreDetailsCtrl.addFaq()"><span translate="product.more_details.ADD_QUESTION"></span></a>
 				</div>
-				<a class="add-cathegory" href="" ng-click="productMoreDetailsCtrl.addFaq()"><span translate="product.more_details.ADD_QUESTION"></span></a>
 			</div>
 		</div>
 	</form>

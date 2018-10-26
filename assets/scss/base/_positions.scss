@@ -55,6 +55,11 @@
 		margin-top: 10px !important;
 	}
 }
+.mt-xs-40{
+	@media(max-width: 767px){
+		margin-top: 40px !important;
+	}
+}
 .mb-0{
 	margin-bottom: 0px !important;
 }
@@ -118,8 +123,18 @@
 .pl-45{
 	padding-left: 45px !important;
 }
+.pl-xs-10{
+	@media (max-width: 767px) {
+		padding-left: 10px !important;
+	}
+}
 .pr-10{
 	padding-right: 10px !important;
+}
+.pr-xs-10{
+	@media (max-width: 767px) {
+		padding-right: 10px !important;
+	}
 }
 .no-pad-r{
 	padding-right: 0!important;
