@@ -5,7 +5,7 @@
 		var vm = this;
 		vm.results={items:[]};
 		vm.limit=99;
-		vm.searchMore=searchMore;
+		vm.searchMore = searchMore;
 		vm.page=1;
 		vm.isMobile = true;
 

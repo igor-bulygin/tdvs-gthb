@@ -3,7 +3,7 @@
 
 function config($translatePartialLoaderProvider) {
 		$translatePartialLoaderProvider.addPart('discover');
-	}
-	angular
-		.module('discover', ['api', 'util','pascalprecht.translate']).config(config);
+}
+angular
+	.module('discover', ['api', 'util','pascalprecht.translate']).config(config);
 }());

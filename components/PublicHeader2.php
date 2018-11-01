@@ -30,6 +30,7 @@ class PublicHeader2 extends Widget {
 			'categories' => Category::getHeaderCategories(),
 			'login_model' => $model,
 			'q' => Yii::$app->request->get('q'),
+            'searchTypeId' => Yii::$app->request->get('searchTypeId'), // variable indices id of search objects (products, boxes, devisers, influencers). Used to make selected choice
 		]);
 	}
 

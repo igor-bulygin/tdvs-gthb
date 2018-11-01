@@ -344,7 +344,8 @@
 }
 #categoryFilter{
     padding-top: 20px;
-    cursor: pointer; 
+    cursor: pointer;
+    text-transform: uppercase;
     a {
         color: $black;
     }

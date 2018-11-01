@@ -175,3 +175,8 @@
     margin-top: 0.2em;
   }*/
 }
+@mixin appearance($value) {
+    -webkit-appearance: $value;
+    -moz-appearance:    $value;
+    appearance:         $value;
+}

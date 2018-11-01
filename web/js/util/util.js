@@ -26,6 +26,7 @@
         this.truncateString = truncateString;
         this.isConnectedUser = isConnectedUser;
         this.getConnectedUser = getConnectedUser;
+        this.getSearchTypes = getSearchTypes;
 
         //regex from: https://gist.github.com/dperini/729294
         //added "?" after (?:(?:https?|ftp):\/\/) for urls like www.google.es
@@ -176,7 +177,7 @@
         }
 
         function onError(err) {
-            console.log(err);
+            // console.log(err);
         }
 
         function setLeavingModal(value) {
@@ -213,7 +214,30 @@
             return array.map(function(element, index) {
                 element.position = index + 1;
                 return element;
-            })
+            });
+        }
+
+        function getSearchTypes() {
+            return [
+                {
+                    name:'discover.PRODUCTS',
+                    id: 1
+                },
+                {
+                    name:'discover.BOXES_NAME',
+                    id: 2
+                },
+                {
+                    name:'discover.DEVISERS',
+                    id:3,
+                    type: 2
+                },
+                {
+                    name: 'discover.INFLUENCERS',
+                    id: 4,
+                    type: 3
+                }
+            ];
         }
 
     }
@@ -223,6 +247,7 @@
             .setPrefix('todevise-')
             .setStorageType('localStorage');
         $translatePartialLoaderProvider.addPart('util');
+        $translatePartialLoaderProvider.addPart('discover');
     }
 
     function capitalize() {
