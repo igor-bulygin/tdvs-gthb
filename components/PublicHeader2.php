@@ -24,13 +24,17 @@ class PublicHeader2 extends Widget {
 
 		Category::setSerializeScenario(Category::SERIALIZE_SCENARIO_PUBLIC);
 
+        $searchTypeId = Yii::$app->request->get('searchTypeId'); // variable indices id of search objects (products, boxes, devisers, influencers). Used to make selected choice
+
+        var_dump($searchTypeId);
+
 		return $this->render('PublicHeader2', [
-			'selectedCategory' => $selectedCategory,
-			'categoryId' => $categoryId,
-			'categories' => Category::getHeaderCategories(),
-			'login_model' => $model,
-			'q' => Yii::$app->request->get('q'),
-            'searchTypeId' => Yii::$app->request->get('searchTypeId'), // variable indices id of search objects (products, boxes, devisers, influencers). Used to make selected choice
+			'selectedCategory'  => $selectedCategory,
+			'categoryId'        => $categoryId,
+			'categories'        => Category::getHeaderCategories(),
+			'login_model'       => $model,
+			'q'                 => Yii::$app->request->get('q'),
+            'searchTypeId'      => $searchTypeId
 		]);
 	}
 

@@ -19,7 +19,6 @@ app\components\assets\PublicHeader2Asset::register($this);
 
 <div ng-controller="publicHeaderCtrl as publicHeaderCtrl">
 <header>
-    <?=$searchTypeId?>
 	<nav class="navbar navbar-default" id="main_header" >
 		<div class="container">
 			<div class="row align-items-center">
