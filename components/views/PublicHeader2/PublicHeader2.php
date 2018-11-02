@@ -14,10 +14,12 @@ app\components\assets\PublicHeader2Asset::register($this);
 	.navbar.terciary ul {margin: 12px 0 0 0;}
 </style>
 
-<?php $this->registerJs("var _selectedCategoryId = '" . $categoryId."', _searchTypeId = '".$searchTypeId."';", \yii\web\View::POS_HEAD); ?>
+<?php $this->registerJs("var _selectedCategoryId = '" . $categoryId."';", \yii\web\View::POS_HEAD); ?>
+<?php $this->registerJs("var _searchTypeId = '".$searchTypeId."';", \yii\web\View::POS_HEAD); ?>
 
 <div ng-controller="publicHeaderCtrl as publicHeaderCtrl">
 <header>
+    <?=$searchTypeId?>
 	<nav class="navbar navbar-default" id="main_header" >
 		<div class="container">
 			<div class="row align-items-center">
