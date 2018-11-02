@@ -26,8 +26,6 @@ class PublicHeader2 extends Widget {
 
         $searchTypeId = Yii::$app->request->get('searchTypeId'); // variable indices id of search objects (products, boxes, devisers, influencers). Used to make selected choice
 
-        var_dump($searchTypeId);
-
 		return $this->render('PublicHeader2', [
 			'selectedCategory'  => $selectedCategory,
 			'categoryId'        => $categoryId,
