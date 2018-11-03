@@ -35,8 +35,9 @@
 					limit: vm.maxResults,
 					page: vm.page
 				}
-				if(vm.searchdata.key)
-					params = Object.assign(params, {q: vm.searchdata.key});
+				if(vm.searchdata.key) {
+                    params = Object.assign(params, {q: vm.searchdata.key});
+                }
 				
 				Object.keys(vm.filters).map(function(filter_type) {
 					var new_filter = []

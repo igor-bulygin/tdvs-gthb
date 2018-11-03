@@ -7,6 +7,10 @@
 		var PaperType = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'paper-type');
 		var Categories = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'categories');
 		var Products = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'products');
+        /**
+         * endpoint to count products based on GET params
+         */
+        var ProductsCount = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'products/count');
 		//priv
 		var ProductPriv = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct', {}, {
 			'update': {
@@ -23,6 +27,7 @@
 		this.postProductPriv = postProductPriv;
 		this.updateProductPriv = updateProductPriv;
 		this.deleteProductPriv = deleteProductPriv;
+		this.getProductsCount = getProductsCount;
 
 		function getProducts(params, onSuccess, onError) {
 			apiMethods.get(Products, params, onSuccess, onError);
@@ -56,7 +61,13 @@
 			apiMethods.deleteItem(ProductPriv, params, onSuccess, onError);
 		}
 
-		
+        /**
+         * @param params - GET params
+         * @returns Promise for use in Promise.all
+         */
+        function getProductsCount(params) {
+            return apiMethods.getUnresolved(ProductsCount, params);
+        }
 	}
 
 	angular.module('api')

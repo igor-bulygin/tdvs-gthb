@@ -48,7 +48,7 @@
 				if (vm.search_key != vm.key || resetPage) {
 					vm.results={items:[], counter:0};
 					vm.page=1;
-					$scope.$emit("resetPage"); 
+					$scope.$emit('resetPage');
 				}
 				var params = {
 					limit: vm.limit,
@@ -72,14 +72,14 @@
                     }
 				});
 
-				function onGetProductsSuccess(data) {
+				var onGetProductsSuccess = function(data) {
 					vm.search_key = angular.copy(vm.key);
 					vm.results.items = vm.results.items.concat(angular.copy(data.items));
 					vm.results.counter=angular.copy(data.meta.total_count);
 					vm.searching = false;
 				}
 
-				function onGetProductsError(err) {
+				var onGetProductsError = function(err) {
 					UtilService.onError(err);
 					vm.searching = false;
 				}

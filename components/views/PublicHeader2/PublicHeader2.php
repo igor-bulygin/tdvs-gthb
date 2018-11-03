@@ -88,6 +88,11 @@ app\components\assets\PublicHeader2Asset::register($this);
 				<form class="navbar-form navbar-left navbar-searcher mobile" action="<?=Url::to(["/works"])?>" method="get">
 					<div class="input-group searcher-header">
 						<input type="text" name="q" value="<?=$q?>" class="form-control" translate-attr="{placeholder: 'global.SEARCH'}">
+                        <!-- select of search objects -->
+                        <select name="searchTypeId">
+                            <option value="">All</option>
+                            <option value="{{ searchType.id }}" ng-repeat="searchType in publicHeaderCtrl.searchTypes" translate="{{ searchType.name }}" ng-selected="searchType.id == publicHeaderCtrl.selectedSearchTypeId"></option>
+                        </select>
 						<span class="input-group-btn">
 							<button class="btn btn-default btn-send" type="submit">
 								<span class="ion-search"></span>

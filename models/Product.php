@@ -57,6 +57,7 @@ class Product extends CActiveRecord {
 	const SCENARIO_PRODUCT_OLD_API = 'scenario-product-old-api';
 	const SCENARIO_PRODUCT_DRAFT = 'scenario-product-draft';
 	const SCENARIO_PRODUCT_PUBLIC = 'scenario-product-public';
+    const SCENARIO_PRODUCT_COUNT = 'scenario-product-count';
 
 	/**
 	 * The attributes that should be serialized
@@ -587,6 +588,15 @@ class Product extends CActiveRecord {
 				];
 				static::$translateFields = false;
 				break;
+            case self::SERIALIZE_SCENARIO_COUNT: // used for count items, so we take only ids
+                static::$serializeFields = [
+                    'id' => 'short_id',
+                ];
+                static::$retrieveExtraFields = [];
+
+                static::$translateFields = false;
+                break;
+
 			default:
 				// now available for this Model
 				static::$serializeFields = [];
@@ -746,6 +756,93 @@ class Product extends CActiveRecord {
 		}
 		return $products;
 	}
+
+    /**
+     * Get a number of entities serialized, according to serialization configuration
+     *
+     * @param array $criteria
+     * @return Product[]
+     * @throws Exception
+     */
+    public static function findDocumentsCount($criteria = [])
+    {
+
+        // Products query
+        $query = new ActiveQuery(static::className());
+
+        // Retrieve only fields that gonna be used
+        $query->select(self::getSelectFields());
+
+        // if product id is specified
+        if ((array_key_exists("id", $criteria)) && (!empty($criteria["id"]))) {
+            $query->andWhere(["short_id" => $criteria["id"]]);
+        }
+
+        // if deviser id is specified
+        if ((array_key_exists("deviser_id", $criteria)) && (!empty($criteria["deviser_id"]))) {
+            $query->andWhere(["deviser_id" => $criteria["deviser_id"]]);
+        }
+
+        // if categories are specified
+        if ((array_key_exists("categories", $criteria)) && (!empty($criteria["categories"]))) {
+            if (is_array($criteria["categories"])) {
+                $ids = [];
+                foreach ($criteria["categories"] as $categoryId) {
+                    $category = Category::findOne(["short_id" => $categoryId]);
+                    if ($category) {
+                        $ids = array_merge($ids, $category->getShortIds());
+                    }
+                }
+            } else {
+                $ids = [];
+                $category = Category::findOne(["short_id" => $criteria["categories"]]);
+                if ($category) {
+                    $ids = array_merge($ids, $category->getShortIds());
+                }
+            }
+            $query->andWhere(["categories" => $ids]);
+        }
+
+        // if product_state is specified
+        if ((array_key_exists("product_state", $criteria)) && (!empty($criteria["product_state"]))) {
+            $query->andWhere(["product_state" => $criteria["product_state"]]);
+        }
+        // if only_active_persons are specified
+        if ((array_key_exists("only_active_persons", $criteria)) && (!empty($criteria["only_active_persons"]))) {
+
+            // Get different person_ids available by country
+            $queryPerson= new ActiveQuery(Person::className());
+            $queryPerson->andWhere(["account_state" => Person::ACCOUNT_STATE_ACTIVE]);
+            $idsPerson = $queryPerson->distinct("short_id");
+
+            if ($idsPerson) {
+                $query->andFilterWhere(["in", "deviser_id", $idsPerson]);
+            } else {
+                $query->andFilterWhere(["in", "deviser_id", "dummy_person"]); // Force no results if there are no boxes
+            }
+        }
+
+        // if name is specified
+        if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
+//			// search the word in all available languages
+            $query->andFilterWhere(Utils::getFilterForTranslatableField("name", $criteria["name"]));
+        }
+
+        // if text is specified
+        if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
+//			// search the word in all available languages
+            $parts = explode(' ', $criteria['text']);
+            foreach ($parts as $part) {
+                $query->andFilterWhere(static::getFilterForText(static::$textFilterAttributes, $part));
+            }
+        }
+
+        // Count how many items are with those conditions, before limit them for pagination
+        $count = static::$countItemsFound = $query->count();
+
+        return $count;
+    }
+
 
 	public function deletePhotos() {
 		$product_path = Utils::join_paths(Yii::getAlias("@product"), $this->short_id);

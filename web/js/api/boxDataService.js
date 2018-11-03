@@ -3,7 +3,12 @@
 
 	function boxDataService($resource, apiConfig, apiMethods) {
 		//pub
+        /**
+         * endpoint to count products based on GET params
+         */
+        var BoxesCount = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'box/count');
 		var Box = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'box/:idBox');
+
 		//priv
 		var BoxPriv = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'box/:idBox', null, {
 			'update': {
@@ -20,6 +25,7 @@
 		this.deleteBox = deleteBox;
 		this.addProduct = addProduct;
 		this.deleteProduct = deleteProduct;
+		this.getBoxesCount = getBoxesCount;
 
 		function getBoxPub(params, onSuccess, onError) {
 			apiMethods.get(Box, params, onSuccess, onError);
@@ -48,6 +54,14 @@
 		function deleteProduct(params, onSuccess, onError) {
 			apiMethods.deleteItem(BoxProduct, params, onSuccess, onError);
 		}
+        /**
+         * @param params - GET params
+         * @returns Promise for use in Promise.all
+         */
+        function getBoxesCount(params) {
+            return apiMethods.getUnresolved(BoxesCount, params);
+        }
+
 
 	}
 

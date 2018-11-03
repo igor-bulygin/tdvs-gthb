@@ -21,6 +21,7 @@
 		"DEVISERS": "Devisers",
 		"INFLUENCERS": "Influencers",
 		"BOXES_NAME": "Boxes",
+		"ALL": "All",
 		"boxes": {
 			"DISCOVER_LATEST_TRENDS": "Es el momento de descubrir las últimas tendencias",
 			"NO_BOXES_FOUND": "No se han encontrado cajas con el criterio de búsqueda especificado."

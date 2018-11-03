@@ -21,11 +21,11 @@
             } else {
                 vm.refreshResults = false;
 
-                function onSetFollowSuccess(data) {
+                var onSetFollowSuccess = function(data) {
                     item.is_followed = !item.is_followed;
                 }
 
-                function onSetFollowError(err) {
+                var onSetFollowError = function (err) {
                     UtilService.onError(err);
                     vm.refreshResults = true;
                 }

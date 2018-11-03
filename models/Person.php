@@ -992,6 +992,16 @@ class Person extends CActiveRecord implements IdentityInterface
 				self::$translateFields = false;
 
 				break;
+
+            case self::SERIALIZE_SCENARIO_COUNT: // used for count items, so we take only ids
+                static::$serializeFields = [
+                    'id' => 'short_id',
+                ];
+                static::$retrieveExtraFields = [];
+
+                static::$translateFields = false;
+                break;
+
 			default:
 				// now available for this Model
 				static::$serializeFields = [];

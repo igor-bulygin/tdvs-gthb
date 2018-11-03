@@ -9,6 +9,10 @@
         var PassResetRequest = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/forgot-password');
         var PassReset = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'auth/reset-password');
         var PublicPost = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'post');
+        /**
+         * endpoint to count persons based on GET params
+         */
+        var PersonsCount = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'person/count');
 
         //priv
         var Profile = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'person/:personId', {}, {
@@ -65,6 +69,7 @@
         this.getOwnerPost = getOwnerPost;
         this.deletePost = deletePost;
         this.getTimeline = getTimeline;
+        this.getPersonsCount = getPersonsCount;
 
         function getPeople(params, onSuccess, onError) {
             apiMethods.get(Person, params, onSuccess, onError);
@@ -148,6 +153,14 @@
         function getTimeline(params, onSuccess, onError) {
             apiMethods.get(Timeline, params, onSuccess, onError);
         }
+        /**
+         * @param params - GET params
+         * @returns Promise for use in Promise.all
+         */
+        function getPersonsCount(params) {
+            return apiMethods.getUnresolved(PersonsCount, params);
+        }
+
     }
 
     angular

@@ -236,6 +236,10 @@
                     name: 'discover.INFLUENCERS',
                     id: 4,
                     type: 3
+                },
+                {
+                    name: 'discover.ALL',
+                    id: 100
                 }
             ];
         }

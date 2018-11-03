@@ -53,4 +53,31 @@ class BoxController extends AppPublicController
 			]
 		];
 	}
+
+    /**
+     * @return array
+     * @throws \Exception
+     * Function returns number of boxes based on request params and type of response ("box")
+     */
+	public function actionCount()
+    {
+        // show only fields needed in this scenario
+        Box::setSerializeScenario(Box::SERIALIZE_SCENARIO_COUNT);
+
+        $query = Box::findSerialized([
+            "id" => Yii::$app->request->get("id"),
+            "text" => Yii::$app->request->get("q"), // search in name, description, and more
+            "person_id" => Yii::$app->request->get("person_id"),
+            "product_id" => Yii::$app->request->get("product_id"),
+            "ignore_empty_boxes" => Yii::$app->request->get("ignore_empty_boxes", false),
+            "only_active_persons" => true,
+            "countries" => Yii::$app->request->get("countries"),
+        ]);
+        $count = Box::$countItemsFound;
+        return [
+            "type"  => 'box',
+            "count" => $count,
+        ];
+    }
+
 }
