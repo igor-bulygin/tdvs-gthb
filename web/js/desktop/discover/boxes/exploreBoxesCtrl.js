@@ -51,14 +51,14 @@
                     }
 				})
 
-				function onGetBoxesSuccess(data) {
+				var onGetBoxesSuccess = function(data) {
 					vm.results_found=data.meta.total_count;
 					vm.search_key = angular.copy(vm.searchdata.key);
 					vm.results.items=vm.results.items.concat(angular.copy(data.items));
 					vm.searching= false;
 				}
 
-				function onGetBoxesError(err) {
+				var onGetBoxesError = function(err) {
 					UtilService.onError(err);
 					vm.searching = false;
 				}
@@ -73,6 +73,14 @@
 			vm.page=1;
 			search();
 		}, true);
+
+        /**
+         * Watch event generated in filters.js when all filters are cleared
+         */
+		$scope.$on("clearAllFilters", function(evt,data) {
+            vm.filters = {};
+        }, true);
+
 
 	}
 

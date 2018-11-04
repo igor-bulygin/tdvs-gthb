@@ -4202,6 +4202,15 @@ h3 {
   font-weight: bold;
   font-size: 16px; }
 
+.filter-clear {
+  display: block;
+  float: right;
+  color: #bfbfbf;
+  font-weight: bold;
+  font-size: 13px;
+  padding-top: 3px;
+  cursor: pointer; }
+
 .filter-wrapper {
   margin: 30px 0 150px 0; }
   @media (max-width: 767px) {

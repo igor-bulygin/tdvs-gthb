@@ -9,6 +9,7 @@
 		"FILTER_BY_COUNTRY": "Filter by location",
 		"SEE_MORE": "See more",
 		"FILTER_BY_THEME": "Filter by category",
+		"CLEAR_ALL": "clear",
 		"FOLLOW": "Follow",
 		"UNFOLLOW": "Unfollow",
 		"NO_PRODUCTS_FOUND": "No products found with the specified search criteria.",

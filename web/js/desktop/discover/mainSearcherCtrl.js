@@ -14,7 +14,7 @@
         /**
          * @type {number}
          * taken from global @var _searchTypeId defined in /components/views/PublicHeader2/PublicHeader2.php  (from GET request)
-         * if 100 - search for ALL categories
+         * if its value=100 - search for ALL categories
          */
         vm.searchTypeId = (parseInt(_searchTypeId) > 0) ? parseInt(_searchTypeId) : 100; //
         vm.currentSearchType = vm.setCurrentSearchType(vm.searchTypeId); // get searchType according to
@@ -24,7 +24,7 @@
             personType : vm.currentSearchType.type
         };
         /**
-         * hide categories menu until number of items in each category be counted
+         * hide categories menu until number of items in each category is counting
          * @type {boolean}
          */
         vm.counted = false;

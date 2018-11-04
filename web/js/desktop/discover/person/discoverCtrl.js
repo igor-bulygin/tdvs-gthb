@@ -73,6 +73,21 @@
 			search();
 		}, true);
 
+        /**
+         * Watch event generated in filters.js when categories filters are cleared
+         */
+		$scope.$on("clearFiltersCategories", function(evt,data) {
+            vm.filters.categories = {};
+        }, true);
+
+        /**
+         * Watch event generated in filters.js when countries filters are cleared
+         */
+        $scope.$on("clearFiltersCountries", function(evt,data) {
+            vm.filters.countries = {};
+        }, true);
+
+
 	}
 
 	var component = {

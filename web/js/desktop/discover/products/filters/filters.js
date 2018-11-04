@@ -11,7 +11,8 @@
 					{value: "expensive", name:"discover.PRICE_HIGH_TO_LOW"}];
 		vm.orderFilter={value:"", name: "discover.ORDER_BY"};
 		vm.filters = {};
-		vm.search=search;
+		vm.search = search;
+		vm.clearAllFilters = clearAllFilters;
 		vm.page=1;
 
 		init();
@@ -33,6 +34,14 @@
 				default:
 					break;
 			}
+		}
+
+        /**
+         * clears alll filters and start search again
+         */
+		function clearAllFilters() {
+			vm.filters = {};
+			search(true);
 		}
 
 		function getCategories() {

@@ -1,10 +1,11 @@
 (function() {
 	"use strict";
 
-	function controller(UtilService, productDataService, locationDataService) {
+	function controller(UtilService, productDataService, locationDataService, $scope) {
 		var vm = this;
 		vm.seeMore = seeMore;
 		vm.show_countries = 10;
+        vm.emitClearFilters = emitClearFilters;
 
 		init();
 
@@ -40,13 +41,32 @@
 		function seeMore(value) {
 			switch (value) {
 				case 'countries':
-					if (vm.show_countries < vm.countries.meta.total_count)
-						vm.show_countries += 10;
+					if (vm.show_countries < vm.countries.meta.total_count) {
+                        vm.show_countries += 10;
+                    }
 					break;
 				default:
 					break;
 			}
 		}
+
+        /**
+         * Emit event for discoverCtrl.js to clear filters depending on type: clear Theme filters or Country filters
+         * @param type - type of filters to be cleared
+         */
+        function emitClearFilters(type) {
+		    switch (type) {
+                case 'categories':
+                    $scope.$emit('clearFiltersCategories');
+                    break;
+                case 'countries':
+                    $scope.$emit('clearFiltersCountries');
+                    break;
+                default:
+                    break;
+            }
+        }
+
 	}
 
 	var component = {
