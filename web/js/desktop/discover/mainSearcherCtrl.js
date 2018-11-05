@@ -96,6 +96,9 @@
                 var boxesCount = boxDataService.getBoxesCount(params);
                 var devisersCount = personDataService.getPersonsCount(Object.assign({}, params, {type: 2}));
                 var influencersCount = personDataService.getPersonsCount(Object.assign({}, params, {type: 3}));
+                /**
+                 * Resolve all promises and write number of items found in searchTypes array
+                 */
                 Promise.all([productCount, boxesCount, devisersCount, influencersCount]).then(function (values) {
                     values.forEach(function (item, i) {
                         var index = vm.searchTypes.findIndex(function(type) {
