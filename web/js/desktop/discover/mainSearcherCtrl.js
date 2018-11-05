@@ -9,6 +9,7 @@
 		vm.searchTypeClass = searchTypeClass;
 		vm.setCurrentSearchType = setCurrentSearchType;
 		vm.countItems = countItems;
+		vm.getFirstExistingSearchType = getFirstExistingSearchType;
 		vm.hideHeader = true;
 		vm.searchParam = searchParam;
         /**
@@ -23,6 +24,11 @@
             hideHeader: vm.hideHeader,
             personType : vm.currentSearchType.type
         };
+        /**
+         * if searchType = 100 (all categories) we get first category where number of items > 0 abd show them
+         * @type {number}
+         */
+        vm.firstExistingSearchType = 0;
         /**
          * hide categories menu until number of items in each category is counting
          * @type {boolean}
@@ -53,7 +59,7 @@
 		}
 
 		function searchTypeClass(searchTypeId) {
-			if ((vm.currentSearchType.id === searchTypeId) || (searchTypeId === 1 && vm.currentSearchType.id === 100)) {
+			if ((vm.currentSearchType.id === searchTypeId) || (searchTypeId === vm.firstExistingSearchType.id && vm.currentSearchType.id === 100)) {
 				return 'tracking-link strong';
 			}
 			return '';
@@ -97,9 +103,22 @@
                         });
                         vm.searchTypes[index].num = item.count;
                     });
+                    vm.firstExistingSearchType = vm.getFirstExistingSearchType();
                     vm.counted = true;
                 });
             }
+        }
+
+        /**
+         * Function finds first category where number of items > 0. Shows this category in case of "All" search type
+         * @return {*}
+         */
+        function getFirstExistingSearchType() {
+            return vm.searchTypes.find(function (item) {
+                if (item.num > 0) {
+                    return item;
+                }
+            });
         }
 
 	}
