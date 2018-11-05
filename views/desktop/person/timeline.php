@@ -20,7 +20,7 @@ Yii::$app->opengraph->title = $this->title;
 <div ng-controller="timelineCtrl as timelineCtrl">
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12 col-md-3"><nav class="menu-store"><ul>
+			<div class="col-xs-12 col-md-3"><nav class="timeline-menu"><ul>
 				<li ng-class="{'active': !timelineCtrl.selectedPersonType}">
 					<a style="cursor:pointer;" ng-class="{'active': !timelineCtrl.selectedPersonType}" ng-click="timelineCtrl.resetFilter()" translate="person.ALL"></a>
 				</li>
