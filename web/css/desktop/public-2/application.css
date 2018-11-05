@@ -1421,11 +1421,11 @@ footer .social-items {
 
 .menu-store {
   padding: 40px 0; }
-  @media (max-width: 575px) {
+  @media (max-width: 991px) {
     .menu-store {
       padding: 0;
       margin-top: 0.5em; } }
-  @media (max-width: 575px) {
+  @media (max-width: 991px) {
     .menu-store ul {
       display: table;
       margin: auto; } }
@@ -1433,7 +1433,7 @@ footer .social-items {
     margin-top: 0.2em; }
   .menu-store ul li {
     margin: 5px 0; }
-    @media (max-width: 575px) {
+    @media (max-width: 991px) {
       .menu-store ul li {
         margin: 4px;
         display: inline-table;
@@ -1443,9 +1443,11 @@ footer .social-items {
         background-color: #1C1919; }
         .menu-store ul li:not(.active) {
           background-color: transparent !important; } }
-    @media (max-width: 575px) {
+    @media (max-width: 991px) {
       .menu-store ul li:hover {
-        background-color: #1C1919; } }
+        background-color: #1C1919 !important; }
+        .menu-store ul li:hover a {
+          color: #ffffff !important; } }
     .menu-store ul li a {
       font-size: 16px;
       color: #1C1919;
@@ -1453,18 +1455,18 @@ footer .social-items {
       text-transform: lowercase;
       display: block;
       padding: 0px 0 0px 15px; }
-      @media (max-width: 575px) {
+      @media (max-width: 991px) {
         .menu-store ul li a {
           padding: 0; } }
       .menu-store ul li a.active {
         font-weight: bold; }
-        @media (max-width: 575px) {
+        @media (max-width: 991px) {
           .menu-store ul li a.active {
             font-weight: normal;
             color: #ffffff; } }
       .menu-store ul li a:hover {
         color: #c91c39; }
-        @media (max-width: 575px) {
+        @media (max-width: 991px) {
           .menu-store ul li a:hover {
             color: #ffffff; } }
     .menu-store ul li ul.submenu-store {
@@ -1476,7 +1478,7 @@ footer .social-items {
           font: normal 14px "Univers Condensed Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }
           .menu-store ul li ul.submenu-store li a:hover {
             color: #c91c39; }
-  @media (max-width: 575px) {
+  @media (max-width: 991px) {
     .menu-store ul.submenu-store li {
       border: none;
       display: block;
