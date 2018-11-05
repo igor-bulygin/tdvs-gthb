@@ -9,6 +9,7 @@
 		vm.setUnlimitedStock = setUnlimitedStock;
 		vm.applyToAll = applyToAll;
 		vm.selected_language=_lang;
+		vm.priceStockError = false;
 
 		var set_original_artwork = false;
 
@@ -177,7 +178,8 @@
 		}
 
 		function priceStockPriceValidation(value){
-			return UtilService.isLessThanOne(value) && vm.form_submitted ? true : false;
+			vm.priceStockError = UtilService.isLessThanOne(value) && vm.form_submitted ? true : false;
+			return vm.priceStockError;
 		}
 
 		//watches

@@ -763,14 +763,25 @@ footer{
         color: $red;
     }
 }
+.btn-header-product{
+    @media (max-width: 578px) {
+        padding: 5px !important;
+        margin-top: 2px !important;
+    }
+    @media (max-width: 450px) {
+        font-size: 12px !important;
+        padding: 5px 2px !important;
+        margin-top: 5px !important;
+    }
+}
+.hidden-sm-header{
+    @media (max-width: 568px) {
+        display: none;
+    }
+}
 #btn_create_box, #btn_create_box_popup, .btn-minpad {   //tenemos 2 estilos con esta característica btn-auto y btn-small hay que revisar LOCALIZAR
     padding-left: 20px !important;
     padding-right: 20px !important;
-}
-#newProductHeader{  //Hay que eliminarlo después de añadir el estilo btn-small LOCALIZAR
-    button{
-        padding: 8px 20px !important;
-    }
 }
 .btn-change-password{
     background-color: transparent;

@@ -22,17 +22,17 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 <div ng-controller="createProductCtrl as createProductCtrl">
 	<div id="newProductHeader" class="new-product-header ng-class:{'purple': createProductCtrl.errors}" data-spy="affix" data-offset-top="120" ng-if="createProductCtrl.isPublicProfile">
 		<div class="container relative">
-			<div class="pull-left">
+			<div class="hidden-sm-header pull-left">
 				<a class="back-link" ng-href="{{createProductCtrl.link_profile}}"><span translate="product.creation_edition.BACK_TO_PROFILE"></span></a>
 			</div>
 			<div class="avatar">
-				<img ng-src="{{createProductCtrl.profile || '/imgs/default-avatar.png'}}">
+				<a ng-href="{{createProductCtrl.link_profile}}">
+					<img ng-src="{{createProductCtrl.profile || '/imgs/default-avatar.png'}}">
+				</a>
 			</div>
-			<div class="text-center" ng-if="!createProductCtrl.errors"><h4 class="title"><span translate="product.creation_edition.NEW_WORK"></span></h4></div>
-			<div class="text-center" ng-if="createProductCtrl.errors" ng-cloak><p><span translate="product.creation_edition.COMPLETE_REQUIRED_FIELDS"></span></p></div>
 			<div class="btns-group">
-				<button class="btn btn-transparent" ng-click="createProductCtrl.save('product_state_draft')" ng-disabled="createProductCtrl.saving"><span translate="product.creation_edition.SAVE_DRAFT"></span></button>
-				<button class="btn btn-default btn-red" ng-click="createProductCtrl.save('product_state_active')" ng-disabled="createProductCtrl.saving"><span translate="product.creation_edition.PUBLISH_WORK"></span></button>
+				<button class="btn btn-transparent btn-small btn-header-product" ng-click="createProductCtrl.save('product_state_draft')" ng-disabled="createProductCtrl.saving"><span translate="product.creation_edition.SAVE_DRAFT"></span></button>
+				<button class="btn btn-default btn-red btn-small btn-header-product" ng-click="createProductCtrl.save('product_state_active')" ng-disabled="createProductCtrl.saving"><span translate="product.creation_edition.PUBLISH_WORK"></span></button>
 			</div>
 		</div>
 	</div>

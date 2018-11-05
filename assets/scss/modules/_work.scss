@@ -12,7 +12,6 @@
 		text-transform: uppercase;
 	}
 	.btns-group{
-		margin: -39px 0 0 0;
 		float: right;
 		button{
 			display: inline;
@@ -539,7 +538,8 @@ a.editable-click.purple-text:hover {
 	border:0!important;
 }
 .editable-controls input{
-	max-width:60px;
+	max-width:68px;
+	width: 68px !important;
 }
 
 .switch-checkbox {

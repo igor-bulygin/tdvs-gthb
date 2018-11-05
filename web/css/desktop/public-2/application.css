@@ -1360,12 +1360,23 @@ footer .social-items {
   background-color: transparent;
   color: #F7284B; }
 
+@media (max-width: 578px) {
+  .btn-header-product {
+    padding: 5px !important;
+    margin-top: 2px !important; } }
+@media (max-width: 450px) {
+  .btn-header-product {
+    font-size: 12px !important;
+    padding: 5px 2px !important;
+    margin-top: 5px !important; } }
+
+@media (max-width: 568px) {
+  .hidden-sm-header {
+    display: none; } }
+
 #btn_create_box, #btn_create_box_popup, .btn-minpad {
   padding-left: 20px !important;
   padding-right: 20px !important; }
-
-#newProductHeader button {
-  padding: 8px 20px !important; }
 
 .btn-change-password {
   background-color: transparent;
@@ -8480,7 +8491,6 @@ span.optional-text.pull-left {
     color: #ffffff;
     text-transform: uppercase; }
   .new-product-header .btns-group {
-    margin: -39px 0 0 0;
     float: right; }
     .new-product-header .btns-group button {
       display: inline;
@@ -9002,7 +9012,8 @@ a.editable-click.purple-text:hover {
   border: 0 !important; }
 
 .editable-controls input {
-  max-width: 60px; }
+  max-width: 68px;
+  width: 68px !important; }
 
 .switch-checkbox {
   position: relative;

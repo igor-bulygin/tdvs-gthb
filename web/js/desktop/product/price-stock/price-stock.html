@@ -87,5 +87,7 @@
 			</tbody>
 		</table>
 	</div>
-		<span ng-if="productPriceStockCtrl.priceStockPriceValidation(product.price)" translate="product.price_stock.MINIMUM_PRODUCT_PRICE" translate-values='{ priceProduct: 1}' class="error-text ng-scope"></span>
+		<div ng-if="productPriceStockCtrl.priceStockError">
+				<span translate="product.price_stock.MINIMUM_PRODUCT_PRICE" translate-values='{ priceProduct: 1}' class="error-text ng-scope"></span>
+		</div>
 </div>
