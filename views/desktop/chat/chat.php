@@ -26,15 +26,15 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 <div class="our-devisers-wrapper" ng-controller="chatCtrl as chatCtrl">	
 	<div class="container">
 		
-		<div class="our-devisers-body chat-body" >
+		<div class="our-devisers-body chat-body mt-20 mb-20" >
 			<div class="hidden-sm hidden-md hidden-lg mt-20">
 				<div class="mt-20 mb-20" >
 				<div class="mt-40" ng-if="chatCtrl.loading" style="padding: 20px;" ng-cloak>
 					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 				</div>
 					<div ng-if="!chatCtrl.loading" ng-cloak>
-						<div class="col-xs-12 col-sm-4" ng-if="chatCtrl.currentChat">
-							<a class="col-xs-12 btn btn-medium btn-red auto-center" role="button" ng-click="chatCtrl.unselectChat()"><span translate="chat.BACK"></span></a>
+						<div class="col-xs-12 col-sm-4 pl-15" ng-if="chatCtrl.currentChat">
+							<a class="col-xs-4 btn btn-small btn-red auto-center" role="button" ng-click="chatCtrl.unselectChat()"><span translate="chat.BACK"></span></a>
 						</div>
 						<div class="col-xs-12 col-sm-4" ng-if="!chatCtrl.currentChat">
 							<uib-tabset active="chatCtrl.active">
@@ -121,10 +121,10 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 						</div>
 					</div>
 					<form class="col-xs-12 chat-send" >
-						<div class="col-xs-7 col-sm-8">
+						<div class="col-xs-7 col-sm-8" style="margin: 7.5px 0px;">
 							<input class="col-xs-12" type="text" ng-model="chatCtrl.newMsg" on-press-enter="chatCtrl.sendMsg()">
 						</div>
-						<div class="col-xs-5 col-sm-4">
+						<div class="col-xs-5 col-sm-4" style="margin: 7.5px 0px;">
 							<button class="col-xs-12 btn btn-small btn-red" ng-click="chatCtrl.sendMsg()" translate="chat.SEND"></button>
 						</div>
 					</form>

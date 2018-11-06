@@ -556,6 +556,9 @@ a, a:hover, a:focus {
 .mt-10 {
   margin-top: 10px !important; }
 
+.mt-15 {
+  margin-top: 15px !important; }
+
 .mt-20 {
   margin-top: 20px !important; }
 
@@ -593,7 +596,7 @@ a, a:hover, a:focus {
   margin-bottom: 10px; }
 
 .mb-20 {
-  margin-bottom: 20px; }
+  margin-bottom: 20px !important; }
 
 .mb-40 {
   margin-bottom: 40px !important; }
@@ -9918,11 +9921,13 @@ cart-panel .cart-panel-div {
     display: block; }
 
 .chat-body {
-  border-left: 1px solid #bfbfbf;
-  border-right: 1px solid #bfbfbf;
+  border: 1px solid #bfbfbf;
   margin-bottom: 0;
   padding-bottom: 0;
   height: calc(100vh - 462px); }
+  @media (min-width: 768px) {
+    .chat-body {
+      height: 546px !important; } }
   @media (max-width: 991px) {
     .chat-body {
       height: calc(100vh - 642.65px); } }
@@ -10004,7 +10009,6 @@ cart-panel .cart-panel-div {
       display: flex; }
     .chat-body #chat-messages .chat-send {
       padding: 30px 0;
-      margin-top: 2px;
       border-top: 1px solid #bfbfbf;
       background-color: #f4f4f4;
       bottom: 0;
@@ -10021,7 +10025,7 @@ cart-panel .cart-panel-div {
       -webkit-border-radius: 6px 6px 6px 6px !important;
       -moz-border-radius: 6px 6px 6px 6px !important;
       padding: 0.55em 0;
-      border: none;
+      border: 1px solid #bfbfbf;
       line-height: 1.5; }
   .chat-body .chat-header {
     border-bottom: 1px solid #bfbfbf;
@@ -10037,7 +10041,7 @@ cart-panel .cart-panel-div {
     /*el div que contiene a todos los mensajes*/
     height: calc(100% - 165.60px);
     overflow-y: scroll; }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
       .chat-body .chat-message-chat {
         height: auto;
         max-height: 300px; } }

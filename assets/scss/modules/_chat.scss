@@ -2,8 +2,10 @@
 // Chat
 // ==========================================================================
 .chat-body {
-	border-left: 1px solid $light_grey;
-    border-right: 1px solid $light_grey;
+	@media (min-width: 768px) {
+		height: 546px !important;
+	}
+	border: 1px solid $light_grey;
     margin-bottom: 0;
     padding-bottom: 0;
     height: calc(100vh - 462px);
@@ -132,7 +134,6 @@
 	    }
 		.chat-send{
 			padding: 30px 0;
-			margin-top: 2px;
 			border-top: 1px solid $light_grey;
 			background-color: $background_grey_05;
 			bottom: 0;
@@ -151,7 +152,7 @@
 	    input {
 	    	@include border-radius(6px,6px,6px,6px);
 	    	padding: 0.55em 0;
-	    	border: none;
+	    	border: 1px solid $light_grey;
     		line-height: 1.5;
 	    }
 	}	
@@ -178,7 +179,7 @@
 		height: calc(100% - 165.60px);
 		min-height: 240px;
 		overflow-y: scroll;
-		@media(max-width: 768px){
+		@media(max-width: 767px){
 			height: 240px; //auto;
 			max-height: 300px;
 		}
