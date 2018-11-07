@@ -426,6 +426,16 @@ use yii\widgets\Breadcrumbs;
 												Utils::compareURL('admin/stripe-todevise-earnings')
 												)
 											],
+											[
+												'options' => [
+													'class' => 'item-submenu funiv fs0-929',
+												],
+												'label' => 'Payment errors',
+												'url'=> Url::toRoute(['admin/stripe-payment-errors']),
+												'active' => (
+												Utils::compareURL('admin/stripe-payment-errors')
+												)
+											],
 										],
 									],
 										[

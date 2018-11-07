@@ -17,6 +17,7 @@ use app\models\Person;
 use app\models\PostmanEmail;
 use app\models\SizeChart;
 use app\models\Tag;
+use app\models\PaymentErrors;
 use DateInterval;
 use DateTime;
 use Yii;
@@ -225,7 +226,7 @@ class AdminController extends CController {
 			'Total number of registered users' => count($clients),
 			'Total number of sales' => count($orders),
 			'Gross amount from the sales, in EUROS' => $amount,
-			'Total amount in Todevise commission' => $todeviseFees,
+			//'Total amount in Todevise commission' => $todeviseFees,
 		);
 
 		$data = [
@@ -265,7 +266,7 @@ class AdminController extends CController {
 				<h4>Date: '.$date.'<span class="pull-right">Amount: '.$order->subtotal.$orderCurrency.'</span></h4>
 				<h4>Client: '.$clientLink.'<span class="pull-right">Order id: '.$order->short_id .'</span></h4>
 			';
-			
+
 			$detail .= '<hr />';
 
 			$nProducts = 0;
@@ -991,6 +992,28 @@ class AdminController extends CController {
     ];
 
     return Yii::$app->request->isAjax ? $this->renderPartial("stripe-todevise-earnings", $data) : $this->render("stripe-todevise-earnings", $data);
+  }
+
+	public function actionStripePaymentErrors($filters = null) {
+
+    $payment_errors = PaymentErrors::find()->all();
+
+
+    // Order by date DESC
+    usort($payment_errors, function($b, $a) {
+        return $a['created_at'] - $b['created_at'];
+    });
+
+    $provider = new ArrayDataProvider([
+			'allModels' => $payment_errors,
+			'pagination' => ['pageSize' => 100]
+		]);
+
+    $data = [
+      'payment_errors' => $provider,
+    ];
+
+    return Yii::$app->request->isAjax ? $this->renderPartial("stripe-payment-errors", $data) : $this->render("stripe-payment-errors", $data);
   }
 
 }
