@@ -8,6 +8,7 @@
 		"FILTER_BY_COUNTRY": "Filtrar por ubicación",
 		"SEE_MORE": "Ver más",
 		"FILTER_BY_THEME": "Filtrar por categoría",
+		"FILTER_BY_SIZE": "Sizes",
 		"CLEAR_ALL": "clear",
 		"FOLLOW": "Seguir",
 		"UNFOLLOW": "Siguiendo",

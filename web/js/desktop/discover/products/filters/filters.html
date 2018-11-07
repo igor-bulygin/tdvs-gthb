@@ -26,6 +26,20 @@
 				</label>
 			</div>
 			<span class="more-btn" ng-click="exploreProductsFiltersCtrl.seeMore('categories')" ng-if="exploreProductsFiltersCtrl.show_categories < exploreProductsFiltersCtrl.categories.meta.total_count" ng-cloak translate="discover.SEE_MORE"></span>
+
+            <div class="clearfix" style="height: 15px"></div>
+
+            <span class="filter-title" translate="discover.FILTER_BY_SIZE"></span>
+            <span class="filter-clear" translate="discover.CLEAR_ALL" ng-click="exploreProductsFiltersCtrl.clearAllFilters()"></span>
+            <div class="clearfix" style="height: 5px"></div>
+            <div class="checkbox checkbox-red two-cols" ng-repeat="size in exploreProductsFiltersCtrl.filters.sizes" ng-if="$index < exploreProductsFiltersCtrl.show_sizes">
+                <input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="sizes" ng-model="exploreProductsFiltersCtrl.filters.sizes[size]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.sizes[size]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search(true)">
+                <label ng-attr-for="{{'checkbox'+($index+10)}}">
+                    <span ng-bind="size"></span>
+                </label>
+            </div>
+            <!--<span class="more-btn" ng-click="exploreProductsFiltersCtrl.seeMore('categories')" ng-if="exploreProductsFiltersCtrl.show_categories < exploreProductsFiltersCtrl.categories.meta.total_count" ng-cloak translate="discover.SEE_MORE"></span>-->
+
 		</form>
 	</div>
 </div>
