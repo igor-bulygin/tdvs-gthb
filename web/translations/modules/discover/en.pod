@@ -18,6 +18,7 @@
 		"OLD": "Old",
 		"PRICE_LOW_TO_HIGH": "Price low to high",
 		"PRICE_HIGH_TO_LOW": "Price high to low",
+		"RELEVANT": "Most relevant",
 		"SEE_MORE": "See more",
 		"PRODUCTS": "Products",
 		"DEVISERS": "Devisers",

@@ -44,6 +44,7 @@ use yii2tech\ar\position\PositionBehavior;
  * @property int loveds
  * @property int boxes
  * @property array prints
+ * @property int sold_num
  * @property MongoDate created_at
  * @property MongoDate updated_at
  * @property int enabled
@@ -108,6 +109,7 @@ class Product extends CActiveRecord {
 			'loveds',
 			'boxes',
 			'prints',
+            'sold_num',
 			'created_at',
 			'updated_at',
 		];
@@ -153,6 +155,7 @@ class Product extends CActiveRecord {
 		$this->position = 0;
 		$this->loveds = 0;
 		$this->boxes = 0;
+		$this->sold_num = 0; // number of product sales. Incremented (according to product quantity in pack) when order with this product is paid
 
 		$this->faq = [];
 	}
@@ -728,6 +731,10 @@ class Product extends CActiveRecord {
 					$criteria['order_col'] = 'created_at';
 					$criteria['order_dir'] = 'asc';
 					break;
+                case 'relevant':
+                    $criteria['order_col'] = 'sold_num';
+                    $criteria['order_dir'] = 'desc';
+                    break;
 				case 'cheapest':
 					$criteria['order_col'] = 'price_stock.price';
 					$criteria['order_dir'] = 'asc';
@@ -745,7 +752,14 @@ class Product extends CActiveRecord {
 				$criteria["order_col"] => $criteria["order_dir"] == 'desc' ? SORT_DESC : SORT_ASC,
 			]);
 		} else {
-			$query->orderBy("deviser_id, position");
+//			$query->orderBy("deviser_id, position");
+            $query->orderBy(
+                array(
+                    "sold_num"      => SORT_DESC,
+                    "deviser_id"    => SORT_ASC,
+                    "position"      => SORT_ASC
+                )
+            );
 		}
 
 		$products = $query->all();

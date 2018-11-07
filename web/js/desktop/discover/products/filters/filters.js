@@ -5,10 +5,13 @@
 		var vm = this;
 		vm.seeMore = seeMore;
 		vm.show_categories = 10;
-		vm.orderTypes=[{value: "new", name: "discover.NEW"},
-					{value: "old", name: "discover.OLD"},
-					{value: "cheapest", name: "discover.PRICE_LOW_TO_HIGH"}, 
-					{value: "expensive", name:"discover.PRICE_HIGH_TO_LOW"}];
+		vm.orderTypes=[
+            {value: "relevant", name: 'discover.RELEVANT'},
+			{value: "new", name: 'discover.NEW'},
+            // {value: "old", name: 'discover.OLD'},
+            {value: "cheapest", name: 'discover.PRICE_LOW_TO_HIGH'},
+            {value: "expensive", name: 'discover.PRICE_HIGH_TO_LOW'}
+        ];
 		vm.orderFilter={value:"", name: "discover.ORDER_BY"};
 		vm.filters = {};
 		vm.search = search;
