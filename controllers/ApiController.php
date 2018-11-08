@@ -13,6 +13,7 @@ use app\models\SizeChart;
 use app\models\Tag;
 use app\models\Term;
 use app\models\PaymentErrors;
+use Stripe\Stripe;
 use Yii;
 use yii\base\ActionFilter;
 use yii\base\Exception;
@@ -667,39 +668,63 @@ class ApiController extends CController {
 			}
 
 			if(!empty($filters)) {
-				$res = PaymentErrors::find()->where($filters);
-				$res = $res->asArray()->all();
+				$res = PaymentErrors::find()->where($filters)->one();
 			}
 
-		} else if ($request->isPost) {
-			$_deviser = $this->getJsonFromRequest("payment_errors");
+			if(!empty($res)) {
+				try
+				{
+					Stripe::setApiKey(Yii::$app->params['stripe_secret_key']);
+					$person = Person::find()->where(['short_id' => $res->person_id])->one();
 
-			if ($_deviser["short_id"] === "new") {
-				$deviser = new PaymentErrors();
-			} else {
-				$deviser = Person::findOne(["short_id" => $_deviser["short_id"]]);
+					\Stripe\Account::retrieve($person->settingsMapping->stripeInfoMapping->stripe_user_id);
+
+					// Make the transfer to the user who earn the amount
+					$amount = $res->amount_earned;
+
+					$transfer = \Stripe\Transfer::create(array(
+						"amount" => round($amount*100, 0),
+						"currency" => "eur",
+						"destination" => $person->settingsMapping->stripeInfoMapping->stripe_user_id,
+						"transfer_group" => $res->order_id."-".$res->pack_id,
+						"metadata" => [
+							"description" => "Order Nº " . $res->order_id . "/" . $res->pack_id,
+							"order_id" => $res->order_id,
+							"pack_id" => $res->pack_id,
+							"person_id" => $person->short_id,
+							],
+					));
+					$res->error_type_id = 'ok';
+					$res->error_type_description = 'ok';
+					
+					$collection = Yii::$app->mongodb->getCollection('payment_errors');
+					$collection->update(
+						[
+							'short_id' => $res->short_id
+						],
+						[
+							'error_type_id' => 'ok',
+							'error_type_description' => 'ok',
+						]
+					);
+				}
+				catch (\Exception $e) {
+					// LOG PaymentErrors
+					$collection = Yii::$app->mongodb->getCollection('payment_errors');
+					$collection->update(
+						[
+							'short_id' => $res->short_id
+						],
+						[
+							'error_type_id' => $e->getJsonBody()['error']['code'],
+							'error_type_description' => $e->getMessage(),
+						]
+					);
+				}
 			}
-
-			if (!$deviser) {
-				throw new Exception("Cannot create/update person");
-			}
-
-			$deviser->setScenario(Person::SCENARIO_ADMIN);
-			$deviser->setAttributes($_deviser, true);
-			$deviser->save(false);
-
-			if (isset($_deviser['change_email']) && !empty($_deviser['change_email'])) {
-				$credentials = $deviser->credentials;
-				$credentials['email'] = $_deviser['change_email'];
-				$deviser->setAttribute('credentials', $credentials);
-				$deviser->save(false);
-			}
-
-			$res = $deviser;
 
 		} else if ($request->isDelete) {
 			$payment_error = $this->getJsonFromRequest("payment_error");
-return $payment_error;
 			$payment_error = PaymentErrors::findOne(["short_id" => $payment_error["short_id"]]);
 			$payment_error->delete();
 		}

@@ -29,24 +29,19 @@
 			modalInstance.result.then(function () {
 				$payment_error.get({
 					short_id: short_id
-				}).then(function (payment_errors) {
-					if (payment_errors.length !== 1) return;
-					var payment_error = payment_errors[0];
-          console.log(payment_error);
+				}).then(function (payment_error) {
 
-          $payment_error.delete(payment_error).then(function (data) {
-						toastr.success("Payment Error solved and deleted!");
-						vm.renderPartial();
-					}, function (err) {
-						toastr.error("Couldn't solve Payment Error!", err);
-					});
-
-					//$person.delete(client).then(function (data) {
-					// 	toastr.success("Influencer deleted!");
-					// 	vm.renderPartial();
-					// }, function (err) {
-					// 	toastr.error("Couldn't delete client!", err);
-					// });
+          if(payment_error['error_type_id'] == 'ok' && payment_error['error_type_description'] == 'ok')
+          {
+            $payment_error.delete(payment_error).then(function (data) {
+  						toastr.success("Payment Error solved and deleted!");
+  					}, function (err) {
+  						toastr.error("Couldn't solve Payment Error!", err);
+  					});
+          } else {
+            toastr.error("Couldn't solve Payment Error!");
+          }
+          vm.renderPartial();
 				}, function (err) {
 					toastr.error("Couldn't find Payment Error!", err);
 				});
