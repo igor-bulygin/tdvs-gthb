@@ -6,6 +6,7 @@ use app\models\Order;
 use app\models\OrderPack;
 use app\models\OrderProduct;
 use app\models\Person;
+use app\models\PaymentErrors;
 use Stripe\Stripe;
 use Yii;
 use yii\web\BadRequestHttpException;
@@ -393,6 +394,10 @@ class CartController extends AppPublicController
               'receipt_email' => $charge->receipt_email,
               'status' => $charge->status,
             ];
+
+            // LOG PaymentErrors
+            $applicationFeeAmount = round($stripeAmount * $totalFeePercentage, 0);
+            PaymentErrors::createPaymentError($deviser->short_id, $order->short_id, $pack->short_id, (($stripeAmount - $applicationFeeAmount) / 100), "no_stripe_account", "User doesn't have an Stripe account.");
           }
 
         }
@@ -458,6 +463,9 @@ class CartController extends AppPublicController
                 ],
               ]);
 
+              // LOG PaymentErrors
+              PaymentErrors::createPaymentError($deviser->short_id, $order->short_id, $pack->short_id, (($stripeAmount - $applicationFeeAmount) / 100), $e->getJsonBody()['error']['code'], $e->getMessage());
+
             }
 
             $chargeResponse = [
@@ -486,8 +494,10 @@ class CartController extends AppPublicController
               \Stripe\Account::retrieve($deviser->settingsMapping->stripeInfoMapping->stripe_user_id);
 
               // Make the transfer to the user who earn the amount
+              $amount = (int)round( ( $stripeAmount * ( 1 - $order->totalFees()) ), 0 , PHP_ROUND_HALF_DOWN);
+
               $transfer = \Stripe\Transfer::create(array(
-                "amount" => (int)round( ( $stripeAmount * ( 1 - $order->totalFees()) ), 0 , PHP_ROUND_HALF_DOWN),
+                "amount" => $amount,
                 "currency" => "eur",
                 "destination" => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
                 "transfer_group" => $order->short_id."-".$pack->short_id,
@@ -513,6 +523,9 @@ class CartController extends AppPublicController
             catch (\Exception $e) {
               $message = sprintf(__FILE__.":".__LINE__."- Error in checking stripe_user_id: " . $e->getMessage());
               Yii::info($message, 'Stripe');
+
+              // LOG PaymentErrors
+              PaymentErrors::createPaymentError($deviser->short_id, $order->short_id, $pack->short_id, ($amount / 100), $e->getJsonBody()['error']['code'], $e->getMessage());
 
               $chargeResponse = [
                 'error' => 'STRIPE_USER_ID_INCORRECT',
@@ -588,6 +601,9 @@ class CartController extends AppPublicController
                     catch (\Exception $e) {
                       $message = sprintf(__FILE__.":".__LINE__."- Error in checking stripe_user_id: " . $e->getMessage());
                       Yii::info($message, 'Stripe');
+
+                      // LOG PaymentErrors
+                      PaymentErrors::createPaymentError($person_earner->short_id, $order->short_id, $pack->short_id, ($amount / 100), $e->getJsonBody()['error']['code'], $e->getMessage());
 
                       $chargeResponse = [
                         'error' => 'STRIPE_USER_ID_INCORRECT',
