@@ -998,10 +998,9 @@ class AdminController extends CController {
 
     $payment_errors = PaymentErrors::find()->all();
 
-
     // Order by date DESC
     usort($payment_errors, function($b, $a) {
-        return $a['created_at'] - $b['created_at'];
+        return $a['created_at']->toDateTime()->format('U') - $b['created_at']->toDateTime()->format('U');
     });
 
     $provider = new ArrayDataProvider([

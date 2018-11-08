@@ -12,6 +12,7 @@ use app\models\Person;
 use app\models\SizeChart;
 use app\models\Tag;
 use app\models\Term;
+use app\models\PaymentErrors;
 use Yii;
 use yii\base\ActionFilter;
 use yii\base\Exception;
@@ -650,6 +651,60 @@ class ApiController extends CController {
 		}
 
 		Term::setSerializeScenario(Term::SERIALIZE_SCENARIO_ADMIN);
+		return $res;
+	}
+
+	public function actionPaymentErrors($filters = null) {
+		$request = Yii::$app->getRequest();
+		$res = null;
+
+		if ($request->isGet) {
+			$filters = json_decode($filters, true) ?: [];
+
+			if (!empty($filters)) {
+				$filters = Utils::removeAllExcept($filters, ['short_id']);
+				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
+			}
+
+			if(!empty($filters)) {
+				$res = PaymentErrors::find()->where($filters);
+				$res = $res->asArray()->all();
+			}
+
+		} else if ($request->isPost) {
+			$_deviser = $this->getJsonFromRequest("payment_errors");
+
+			if ($_deviser["short_id"] === "new") {
+				$deviser = new PaymentErrors();
+			} else {
+				$deviser = Person::findOne(["short_id" => $_deviser["short_id"]]);
+			}
+
+			if (!$deviser) {
+				throw new Exception("Cannot create/update person");
+			}
+
+			$deviser->setScenario(Person::SCENARIO_ADMIN);
+			$deviser->setAttributes($_deviser, true);
+			$deviser->save(false);
+
+			if (isset($_deviser['change_email']) && !empty($_deviser['change_email'])) {
+				$credentials = $deviser->credentials;
+				$credentials['email'] = $_deviser['change_email'];
+				$deviser->setAttribute('credentials', $credentials);
+				$deviser->save(false);
+			}
+
+			$res = $deviser;
+
+		} else if ($request->isDelete) {
+			$payment_error = $this->getJsonFromRequest("payment_error");
+return $payment_error;
+			$payment_error = PaymentErrors::findOne(["short_id" => $payment_error["short_id"]]);
+			$payment_error->delete();
+		}
+
+		PaymentErrors::setSerializeScenario(PaymentErrors::SERIALIZE_SCENARIO_ADMIN);
 		return $res;
 	}
 

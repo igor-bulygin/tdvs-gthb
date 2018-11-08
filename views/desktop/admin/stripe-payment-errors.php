@@ -1,7 +1,8 @@
 <?php
 
-use app\assets\desktop\admin\AdminsAsset;
+use app\assets\desktop\admin\PaymentErrorsAsset;
 use app\models\Person;
+use app\models\PaymentErrors;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Json;
@@ -10,7 +11,7 @@ use yii\web\View;
 /* @var $this yii\web\View */
 /* @var $influencers yii\data\ActiveDataProvider */
 
-AdminsAsset::register($this);
+PaymentErrorsAsset::register($this);
 
 
 $this->params['breadcrumbs'][] = [
@@ -21,7 +22,7 @@ $this->params['breadcrumbs'][] = [
 $this->title = 'Todevise / Admin / Stripe - Stripe Payment Errors';
 ?>
 
-<div class="row no-gutter">
+<div class="row no-gutter" ng-controller="paymentErrorsCtrl as paymentErrorsCtrl">
 	<div class="col-xs-12 no-horizontal-padding">
 
 		<div class="row no-gutter page-title-row">
@@ -37,7 +38,7 @@ $this->title = 'Todevise / Admin / Stripe - Stripe Payment Errors';
     <div style=""
     <?php
     echo GridView::widget([
-      'id' => 'admins_list',
+      'id' => 'payment_errors_list',
       'dataProvider' => $payment_errors,
       'options' => [
         'class' => 'funiv fc-fff fs1-071',
@@ -50,12 +51,13 @@ $this->title = 'Todevise / Admin / Stripe - Stripe Payment Errors';
       'columns' => [
 				[
 					'class' => 'yii\grid\ActionColumn',
-					'template' => " {delete} ",
+					'template' => " {transfer} ",
 					'buttons' => [
-						'delete' => function($url, $model, $key) {
+						'transfer' => function($url, $model, $key) {
 							return Html::tag("span", "", [
-								"class" => "pointer glyphicon glyphicon-trash fc-fff fs1",
-								"ng-click" => "devisersCtrl.delete('$model->short_id')"
+								"class" => "pointer glyphicon glyphicon-transfer fc-fff fs1",
+								"title" => "Transfer Money",
+								"ng-click" => "paymentErrorsCtrl.transfer('$model->short_id')"
 							]);
 						},
 					],
@@ -107,7 +109,7 @@ $this->title = 'Todevise / Admin / Stripe - Stripe Payment Errors';
         ],
         [
           'value' => function($item){
-            return $item['created_at']->toDateTime()->format('U');
+            return $item['created_at']->toDateTime()->format('Y-m-d H:i:s');
           },
           'header' => Yii::t("app/admin", "Date")
         ],

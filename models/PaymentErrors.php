@@ -40,7 +40,7 @@ class PaymentErrors extends CActiveRecord
 
 	public static function collectionName()
 	{
-		return 'person';
+		return 'payment_errors';
 	}
 
   public function attributes()
@@ -114,4 +114,66 @@ class PaymentErrors extends CActiveRecord
       ]
     );
   }
+
+	/**
+	 * Prepare the ActiveRecord properties to serialize the objects properly, to retrieve an serialize
+	 * only the attributes needed for a query context
+	 *
+	 * @param $view
+	 */
+	public static function setSerializeScenario($view)
+	{
+			switch ($view) {
+					case self::SERIALIZE_SCENARIO_PUBLIC:
+							static::$serializeFields = [
+									'id' => 'short_id',
+									'short_id',
+				          'person_id',
+				          'order_id',
+				          'pack_id',
+				          'amount_earned',
+				          'error_type_id',
+				          'error_type_description',
+				          'created_at',
+							];
+							static::$translateFields = true;
+							break;
+					case self::SERIALIZE_SCENARIO_ADMIN:
+							static::$serializeFields = [
+									'id' => 'short_id',
+									'short_id',
+									'person_id',
+									'order_id',
+									'pack_id',
+									'amount_earned',
+									'error_type_id',
+									'error_type_description',
+									'created_at',
+							];
+							static::$translateFields = false;
+							break;
+					default:
+							// now available for this Model
+							static::$serializeFields = [];
+							break;
+			}
+	}
+
+	/**
+	 * Get a collection of entities serialized, according to serialization configuration
+	 *
+	 * @return array
+	 */
+	public static function getSerialized() {
+
+			// retrieve only fields that want to be serialized
+			$payment_errors = PaymentErrors::find()->select(self::getSelectFields())->all();
+
+			// if automatic translation is enabled
+			if (static::$translateFields) {
+					Utils::translate($payment_errors);
+			}
+			return $payment_errors;
+	}
+
 }
