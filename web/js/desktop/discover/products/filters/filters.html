@@ -7,7 +7,7 @@
 			<div ng-if="!exploreProductsFiltersCtrl.searchParam" translate="discover.WE_FOUND_X_RESULTS" style="padding:10px;" translate-values="{ counter: exploreProductsFiltersCtrl.results.counter }"></div>
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;">
-			<ol class="nya-bs-select" ng-model="exploreProductsFiltersCtrl.orderFilter" ng-change="exploreProductsFiltersCtrl.search(true)">
+			<ol class="nya-bs-select" ng-model="exploreProductsFiltersCtrl.orderFilter" ng-change="exploreProductsFiltersCtrl.search(true, true)">
 				<li nya-bs-option="type in exploreProductsFiltersCtrl.orderTypes">
 					<a href="#"><span>{{ type.name | translate }}</span></a>
 				</li>
@@ -20,7 +20,7 @@
 			<span class="filter-title" translate="discover.FILTER_BY_THEME"></span>
             <span class="filter-clear" translate="discover.CLEAR_ALL" ng-click="exploreProductsFiltersCtrl.clearAllFilters()"></span>
 			<div class="checkbox checkbox-red" ng-repeat="category in exploreProductsFiltersCtrl.categories.items | orderBy: 'category.name'" ng-if="$index < exploreProductsFiltersCtrl.show_categories">
-				<input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="categories" ng-model="exploreProductsFiltersCtrl.filters.categories[category.id]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.categories[category.id]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search(true)">
+				<input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="categories" ng-model="exploreProductsFiltersCtrl.filters.categories[category.id]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.categories[category.id]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search(true, false)">
 				<label ng-attr-for="{{'checkbox'+($index+10)}}">
 					<span ng-bind="category.name"></span>
 				</label>
@@ -32,9 +32,9 @@
             <span class="filter-title" translate="discover.FILTER_BY_SIZE"></span>
             <span class="filter-clear" translate="discover.CLEAR_ALL" ng-click="exploreProductsFiltersCtrl.clearAllFilters()"></span>
             <div class="clearfix" style="height: 5px"></div>
-            <div class="checkbox checkbox-red two-cols" ng-repeat="size in exploreProductsFiltersCtrl.filters.sizes" ng-if="$index < exploreProductsFiltersCtrl.show_sizes">
-                <input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="sizes" ng-model="exploreProductsFiltersCtrl.filters.sizes[size]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.sizes[size]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search(true)">
-                <label ng-attr-for="{{'checkbox'+($index+10)}}">
+            <div class="checkbox checkbox-red two-cols" ng-repeat="size in exploreProductsFiltersCtrl.sizes" ng-if="$index < exploreProductsFiltersCtrl.show_sizes">
+                <input ng-attr-id="{{'checkbox'+($index+10+exploreProductsFiltersCtrl.categories.items.length)}}" type="checkbox" name="sizes" ng-model="exploreProductsFiltersCtrl.filters.sizes[size]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.sizes[size]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search(true, false)">
+                <label ng-attr-for="{{'checkbox'+($index+10+exploreProductsFiltersCtrl.categories.items.length)}}">
                     <span ng-bind="size"></span>
                 </label>
             </div>

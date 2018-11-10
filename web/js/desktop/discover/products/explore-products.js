@@ -6,11 +6,11 @@
 		vm.results={items:[]};
 		vm.limit=99;
 		vm.searchMore = searchMore;
-		vm.page=1;
+		vm.page = 1;
 		vm.isMobile = true;
 
 		function searchMore() {
-			vm.page=vm.page + 1;
+			vm.page = vm.page + 1;
 			$scope.$broadcast("changePage",vm.page); 
 		}
 
@@ -25,8 +25,8 @@
 
 
 
-		$scope.$on("resetPage", function(evt){ 
-				vm.page=1;
+		$scope.$on('resetPage', function(evt){
+				vm.page = 1;
 		}, true);
 	}
 

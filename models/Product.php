@@ -673,6 +673,27 @@ class Product extends CActiveRecord {
 			$query->andWhere(["categories" => $ids]);
 		}
 
+        // if sizes are specified
+        if ((array_key_exists("sizes", $criteria)) && (!empty($criteria["sizes"]))) {
+            $ids = [];
+            foreach ($criteria["sizes"] as $size) {
+                if ($size && strlen($size) > 0) {
+                    $ids[] = $size;
+                }
+            }
+            $query->andWhere(
+                ['sizechart.values' =>
+                    ['$elemMatch' =>
+                        ['$elemMatch' =>
+                            ['$in' => $ids]
+                        ]
+                    ]
+                ]
+            );
+
+        }
+
+
 		// if product_state is specified
 		if ((array_key_exists("product_state", $criteria)) && (!empty($criteria["product_state"]))) {
 			$query->andWhere(["product_state" => $criteria["product_state"]]);

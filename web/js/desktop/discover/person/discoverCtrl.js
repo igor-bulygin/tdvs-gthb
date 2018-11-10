@@ -1,5 +1,5 @@
 (function () {
-	"use strict";
+	'use strict';
 
 	function controller(personDataService, UtilService, $scope) {
 		var vm = this;
@@ -19,7 +19,7 @@
 		}
 
 		function searchMore() {
-			vm.page=vm.page + 1;
+			vm.page = vm.page + 1;
 			search();
 		}
 

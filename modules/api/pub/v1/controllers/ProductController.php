@@ -40,16 +40,17 @@ class ProductController extends AppPublicController {
 		$offset = ($limit * ($page - 1));
 
 		$products = Product::findSerialized([
-			"id" => Yii::$app->request->get("id"),
-			"name" => Yii::$app->request->get("name"), // search only in name attribute
-			"text" => Yii::$app->request->get("q"), // search in name, description, and more
-			"deviser_id" => Yii::$app->request->get("deviser"),
-			"categories" => Yii::$app->request->get("categories"),
-			"order_type" => Yii::$app->request->get("order_type"),
-			"product_state" => Product::PRODUCT_STATE_ACTIVE,
-			"only_active_persons" => true,
-			"limit" => $limit,
-			"offset" => $offset,
+			"id"                    => Yii::$app->request->get("id"),
+			"name"                  => Yii::$app->request->get("name"), // search only in name attribute
+			"text"                  => Yii::$app->request->get("q"), // search in name, description, and more
+			"deviser_id"            => Yii::$app->request->get("deviser"),
+			"categories"            => Yii::$app->request->get("categories"),
+            "sizes"                 => Yii::$app->request->get("sizes"),
+			"order_type"            => Yii::$app->request->get("order_type"),
+			"product_state"         => Product::PRODUCT_STATE_ACTIVE,
+			"only_active_persons"   => true,
+			"limit"                 => $limit,
+			"offset"                => $offset,
 		]);
 
 		return [

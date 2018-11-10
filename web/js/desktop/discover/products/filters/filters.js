@@ -13,17 +13,17 @@
             {value: "cheapest", name: 'discover.PRICE_LOW_TO_HIGH'},
             {value: "expensive", name: 'discover.PRICE_HIGH_TO_LOW'}
         ];
-		vm.orderFilter={value:"", name: "discover.ORDER_BY"};
+		vm.orderFilter={value:"", name: 'discover.ORDER_BY'};
 		vm.filters = {};
 		vm.search = search;
 		vm.clearAllFilters = clearAllFilters
-        vm.getProductSizes = getProductSizes;
-		vm.page=1;
+        vm.getProductSizesFilters = getProductSizesFilters;
+		vm.page = 1;
 
 		init();
 
 		function init() {
-			if (!angular.isUndefined(searchParam) &&searchParam.length>0) {
+			if (!angular.isUndefined(searchParam) && searchParam.length>0) {
 				vm.searchParam = angular.copy(searchParam);
 			}
 			getCategories();
@@ -42,11 +42,11 @@
 		}
 
         /**
-         * clears alll filters and start search again
+         * clears all filters and start search again
          */
 		function clearAllFilters() {
 			vm.filters = {};
-			search(true);
+			search(true, false);
 		}
 
 		function getCategories() {
@@ -56,85 +56,76 @@
 			productDataService.getCategories({}, onGetCategoriesSuccess, UtilService.onError);
 		}
 
-		function search(resetPage) {
+		function search(resetPage, resetFilters) {
 			if (!vm.searching) {
 				vm.searching = true;
 				if (vm.search_key != vm.key || resetPage) {
 					vm.results={items:[], counter:0};
-					vm.page=1;
+					vm.page = 1;
 					$scope.$emit('resetPage');
 				}
 				var params = {
 					limit: vm.limit,
 					page: vm.page
-				}
+				};
+
 				if (!angular.isUndefined(vm.orderFilter) && !angular.isUndefined(vm.orderFilter.value)) {
 					params = Object.assign(params, {order_type: vm.orderFilter.value});
 				}
 				if (!angular.isUndefined(vm.searchParam) && vm.searchParam.length>0) {
-					params.q=vm.searchParam;
+					params.q = vm.searchParam;
 				}
+                console.log('filters', vm.filters);
 				Object.keys(vm.filters).map(function(filter_type) {
-					var new_filter = []
+					var new_filter = [];
 					Object.keys(vm.filters[filter_type]).map(function(filter) {
 						if (vm.filters[filter_type][filter]) {
                             new_filter.push(filter);
                         }
-					})
+					});
 					if (new_filter.length > 0) {
                         params[filter_type + '[]'] = new_filter;
                     }
 				});
 
+				console.log('params', params);
+
 				var onGetProductsSuccess = function(data) {
-					vm.search_key = angular.copy(vm.key);
-					vm.results.items = vm.results.items.concat(angular.copy(data.items));
-					vm.results.counter=angular.copy(data.meta.total_count);
-                    vm.getProductSizes();
-                    console.log(vm.filters.sizes);
+                    vm.search_key = angular.copy(vm.key);
+                    vm.results.items = vm.results.items.concat(angular.copy(data.items));
+                    vm.results.counter = angular.copy(data.meta.total_count);
+                    if (resetFilters) {
+                        vm.getProductSizesFilters();
+                	}
 					vm.searching = false;
-				}
+				};
 
 				var onGetProductsError = function(err) {
 					UtilService.onError(err);
 					vm.searching = false;
-				}
+				};
 				productDataService.getProducts(params, onGetProductsSuccess, onGetProductsError);
 			}
 		}
 
-		function getProductSizes() {
-		    vm.filters.sizes = [];
+		function getProductSizesFilters() {
+		    vm.sizes = [];
             vm.results.items.forEach(function(product) {
                 if(typeof product.sizechart.values === 'object') {
                     product.sizechart.values.forEach(function (size) {
-                        if (vm.filters.sizes.indexOf(size[0]) == -1) {
-                            vm.filters.sizes.push(size[0]);
+                        if (vm.sizes.indexOf(size[0]) == -1) {
+                            vm.sizes.push(size[0]);
                         }
                     });
                 }
             });
-            vm.filters.sizes.sort(function (a, b) {
-                var re = /^\d+$/;
-                var aa = a.match(re);
-                var bb = b.match(re);
-                if (aa === null && bb !== null) {
-                    return -1;
-                }
-                else if (aa !== null && bb === null) {
-                    return 1;
-                }
-                else {
-                    if (parseInt(a) > parseInt(b)) return 1;
-                    if (parseInt(a) < parseInt(b)) return -1;
-                }
-            });
+            vm.sizes.sort(sortAlphaNum);
         }
 
 
 		$scope.$on("changePage", function(evt,data){ 
 				vm.page=data;
-				search(false);
+				search(false, true);
 		}, true);
 	}
 
@@ -156,3 +147,44 @@
 	.component('exploreProductsFilters', component);
 
 }());
+
+var reA = /[a-zA-Z)(]/g;
+var reN = /[0-9]/g;
+function sortAlphaNum(a,b) {
+    var AInt = parseInt(a, 10);
+    var BInt = parseInt(b, 10);
+
+    if(isNaN(AInt) && isNaN(BInt)){
+        var aA = a.replace(reA, '');
+        var bA = b.replace(reA, '');
+        if (aA.length > 0 && bA.length > 0) {
+            if (aA === bA) {
+                var aN = parseInt(a.replace(reN, ""), 10);
+                var bN = parseInt(b.replace(reN, ""), 10);
+                return aN === bN ? 0 : aN > bN ? 1 : -1;
+            } else {
+                return aA > bA ? 1 : -1;
+            }
+        }
+        else {
+            return a > b ? 1 : -1;
+        }
+    }
+    else if (isNaN(AInt)){//A is not an Int
+        return 1;//to make alphanumeric sort first return -1 here
+    }
+    else if (isNaN(BInt)){//B is not an Int
+        return -1;//to make alphanumeric sort first return 1 here
+    }
+    else {
+        if ((reA.test(a) && reA.test(b)) || (!reA.test(a) && !reA.test(b))) {
+            return a > b;
+        }
+        else if (reA.test(a) && !reA.test(b)) {
+            return -1;
+        }
+        else {
+            return 1;
+        }
+    }
+}
