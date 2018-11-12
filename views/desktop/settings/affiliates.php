@@ -140,7 +140,9 @@ $this->registerJs("var person= ".Json::encode($person), yii\web\View::POS_HEAD, 
           <div class="col-md-12 no-pad block-separator-light"></div>
 
           <div class="col-md-12 no-pad">
-            <span class="option-number">1</span><span class="text-16 bold uppercase" translate="settings.general.STRIPE"></span><span class="text-grey uppercase" translate="settings.general.RECOMMENDED"></span><br/>
+            <span class="option-number">1</span><span class="text-16 bold uppercase" translate="settings.general.STRIPE"></span>
+            <!-- <span class="text-grey uppercase" translate="settings.general.RECOMMENDED"></span> -->
+            <br/>
             <span class="text-pad-35" translate="settings.general.STRIPE_DESCRIPTION"></span>
           </div>
 

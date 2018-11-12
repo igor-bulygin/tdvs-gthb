@@ -352,6 +352,36 @@
 		return termObject;
 	}
 
+	function $payment_error($services_util) {
+		var api_point = currentHost() + "/api/payment-errors/";
+
+		var paymentErrorObject = {};
+
+		paymentErrorObject.get = _get;
+		paymentErrorObject.modify = _modify;
+		paymentErrorObject.delete = _delete;
+
+		function _get(filters) {
+			var req = $services_util._get(api_point, filters);
+
+			return req.then($services_util._handleSuccess, $services_util._handleError);
+		}
+
+		function _modify(method, payment_error) {
+			var req = $services_util._modify(api_point, method, {
+				payment_error: payment_error
+			});
+
+			return req.then($services_util._handleSuccess, $services_util._handleError);
+		}
+
+		function _delete(payment_error) {
+			return this.modify("DELETE", payment_error);
+		}
+
+		return paymentErrorObject;
+	}
+
 	angular.module('api')
 		.factory("$services_util", $services_util)
 		.service("$admin", $admin)
@@ -363,5 +393,6 @@
 		.service("$category", $category)
 		.service("$faqs", $faqs)
 		.service("$terms", $terms)
-		.service("$term", $term);
+		.service("$term", $term)
+		.service("$payment_error", $payment_error);
 }());

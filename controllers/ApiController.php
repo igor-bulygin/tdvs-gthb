@@ -12,6 +12,8 @@ use app\models\Person;
 use app\models\SizeChart;
 use app\models\Tag;
 use app\models\Term;
+use app\models\PaymentErrors;
+use Stripe\Stripe;
 use Yii;
 use yii\base\ActionFilter;
 use yii\base\Exception;
@@ -650,6 +652,84 @@ class ApiController extends CController {
 		}
 
 		Term::setSerializeScenario(Term::SERIALIZE_SCENARIO_ADMIN);
+		return $res;
+	}
+
+	public function actionPaymentErrors($filters = null) {
+		$request = Yii::$app->getRequest();
+		$res = null;
+
+		if ($request->isGet) {
+			$filters = json_decode($filters, true) ?: [];
+
+			if (!empty($filters)) {
+				$filters = Utils::removeAllExcept($filters, ['short_id']);
+				//TODO: If not admin, force some fields (enabled only, visible by public only, etc...)
+			}
+
+			if(!empty($filters)) {
+				$res = PaymentErrors::find()->where($filters)->one();
+			}
+
+			if(!empty($res)) {
+				try
+				{
+					Stripe::setApiKey(Yii::$app->params['stripe_secret_key']);
+					$person = Person::find()->where(['short_id' => $res->person_id])->one();
+
+					\Stripe\Account::retrieve($person->settingsMapping->stripeInfoMapping->stripe_user_id);
+
+					// Make the transfer to the user who earn the amount
+					$amount = $res->amount_earned;
+
+					$transfer = \Stripe\Transfer::create(array(
+						"amount" => round($amount*100, 0),
+						"currency" => "eur",
+						"destination" => $person->settingsMapping->stripeInfoMapping->stripe_user_id,
+						"transfer_group" => $res->order_id."-".$res->pack_id,
+						"metadata" => [
+							"description" => "Order Nº " . $res->order_id . "/" . $res->pack_id,
+							"order_id" => $res->order_id,
+							"pack_id" => $res->pack_id,
+							"person_id" => $person->short_id,
+							],
+					));
+					$res->error_type_id = 'ok';
+					$res->error_type_description = 'ok';
+					
+					$collection = Yii::$app->mongodb->getCollection('payment_errors');
+					$collection->update(
+						[
+							'short_id' => $res->short_id
+						],
+						[
+							'error_type_id' => 'ok',
+							'error_type_description' => 'ok',
+						]
+					);
+				}
+				catch (\Exception $e) {
+					// LOG PaymentErrors
+					$collection = Yii::$app->mongodb->getCollection('payment_errors');
+					$collection->update(
+						[
+							'short_id' => $res->short_id
+						],
+						[
+							'error_type_id' => $e->getJsonBody()['error']['code'],
+							'error_type_description' => $e->getMessage(),
+						]
+					);
+				}
+			}
+
+		} else if ($request->isDelete) {
+			$payment_error = $this->getJsonFromRequest("payment_error");
+			$payment_error = PaymentErrors::findOne(["short_id" => $payment_error["short_id"]]);
+			$payment_error->delete();
+		}
+
+		PaymentErrors::setSerializeScenario(PaymentErrors::SERIALIZE_SCENARIO_ADMIN);
 		return $res;
 	}
 

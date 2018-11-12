@@ -6,6 +6,7 @@ use app\models\Order;
 use app\models\OrderPack;
 use app\models\OrderProduct;
 use app\models\Person;
+use app\models\PaymentErrors;
 use Stripe\Stripe;
 use Yii;
 use yii\web\BadRequestHttpException;
@@ -393,6 +394,10 @@ class CartController extends AppPublicController
               'receipt_email' => $charge->receipt_email,
               'status' => $charge->status,
             ];
+
+            // LOG PaymentErrors
+            $applicationFeeAmount = round($stripeAmount * $totalFeePercentage, 0);
+            PaymentErrors::createPaymentError($deviser->short_id, $order->short_id, $pack->short_id, (($stripeAmount - $applicationFeeAmount) / 100), "no_stripe_account", "User doesn't have an Stripe account.");
           }
 
         }
@@ -402,40 +407,66 @@ class CartController extends AppPublicController
           $applicationFeeAmount = round($stripeAmount * $totalFeePercentage, 0);
 
           if(!$pay_with_credit) {
-            // Create a Token for the customer on the connected deviser account
-            $token = \Stripe\Token::create(
-              [
+
+            try // First try if stripe_user_id it's OK
+            {
+              \Stripe\Account::retrieve($deviser->settingsMapping->stripeInfoMapping->stripe_user_id);
+
+              // Create a Token for the customer on the connected deviser account
+              $token = \Stripe\Token::create(
+                [
+                  'customer' => $customer->id,
+                  'card' => $currentPaymentInfo['card']['id'],
+                ],
+                [
+                  // id of the connected account
+                  'stripe_account' => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
+                ]
+              );
+
+              // Create a charge for this customer in the connected deviser account
+              $charge = \Stripe\Charge::create(
+                [
+                  'source' => $token,
+                  'currency' => 'eur',
+                  'amount' => $stripeAmount,
+                  'description' => 'Order Nº ' . $order->short_id . '/' . $pack->short_id,
+                  'transfer_group' => $order->short_id."-".$pack->short_id,
+                  'application_fee' => $applicationFeeAmount,
+                  'metadata' => [
+                    'order_id' => $order->short_id,
+                    'pack_id' => $pack->short_id,
+                    'person_id' => $person->short_id,
+                  ],
+                ],
+                [
+                  // id of the connected account
+                  'stripe_account' => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
+                ]
+              );
+
+            }
+            catch (\Exception $e) {
+              $message = sprintf(__FILE__.":".__LINE__."- Error in checking stripe_user_id: " . $e->getMessage());
+              Yii::info($message, 'Stripe');
+
+              $charge = \Stripe\Charge::create([
                 'customer' => $customer->id,
-                'card' => $currentPaymentInfo['card']['id'],
-              ],
-              [
-                // id of the connected account
-                'stripe_account' => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
-              ]
-            );
-
-
-
-            // Create a charge for this customer in the connected deviser account
-            $charge = \Stripe\Charge::create(
-              [
-                'source' => $token,
                 'currency' => 'eur',
                 'amount' => $stripeAmount,
-                'description' => 'Order Nº ' . $order->short_id . '/' . $pack->short_id,
-								'transfer_group' => $order->short_id."-".$pack->short_id,
-                'application_fee' => $applicationFeeAmount,
-                'metadata' => [
-                  'order_id' => $order->short_id,
-                  'pack_id' => $pack->short_id,
-                  'person_id' => $person->short_id,
+                "description" => "Order Nº " . $order->short_id . "/" . $pack->short_id,
+  							'transfer_group' => $order->short_id."-".$pack->short_id,
+                "metadata" => [
+                  "order_id" => $order->short_id,
+                  "pack_id" => $pack->short_id,
+                  "person_id" => $person->short_id,
                 ],
-              ],
-              [
-                // id of the connected account
-                'stripe_account' => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
-              ]
-            );
+              ]);
+
+              // LOG PaymentErrors
+              PaymentErrors::createPaymentError($deviser->short_id, $order->short_id, $pack->short_id, (($stripeAmount - $applicationFeeAmount) / 100), $e->getJsonBody()['error']['code'], $e->getMessage());
+
+            }
 
             $chargeResponse = [
               'id' => $charge->id,
@@ -457,32 +488,52 @@ class CartController extends AppPublicController
 
           }
           else {
-            // Make the transfer to the user who earn the amount
-            $transfer = \Stripe\Transfer::create(array(
-              "amount" => (int)round( ( $stripeAmount * ( 1 - $order->totalFees()) ), 0 , PHP_ROUND_HALF_DOWN),
-              "currency" => "eur",
-              "destination" => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
-              "transfer_group" => $order->short_id."-".$pack->short_id,
-              "metadata" => [
-                    "description" => "Order Nº " . $order->short_id . "/" . $pack->short_id,
-                    "order_id" => $order->short_id,
-                    "pack_id" => $pack->short_id,
-                    "person_id" => $person->short_id,
+
+            try
+            {
+              \Stripe\Account::retrieve($deviser->settingsMapping->stripeInfoMapping->stripe_user_id);
+
+              // Make the transfer to the user who earn the amount
+              $amount = (int)round( ( $stripeAmount * ( 1 - $order->totalFees()) ), 0 , PHP_ROUND_HALF_DOWN);
+
+              $transfer = \Stripe\Transfer::create(array(
+                "amount" => $amount,
+                "currency" => "eur",
+                "destination" => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
+                "transfer_group" => $order->short_id."-".$pack->short_id,
+                "metadata" => [
+                  "description" => "Order Nº " . $order->short_id . "/" . $pack->short_id,
+                  "order_id" => $order->short_id,
+                  "pack_id" => $pack->short_id,
+                  "person_id" => $person->short_id,
                   ],
-            ));
+              ));
 
-            $chargeResponse = [
-              'id' => $transfer->id,
-              'object' => $transfer->object,
-              'amount' => $transfer->amount,
-              'balance_transaction' => $transfer->balance_transaction,
-              'created' => $transfer->created,
-              'currency' => $transfer->currency,
-              'description' => $transfer->description,
-              'destination' => $transfer->destination,
-            ];
+              $chargeResponse = [
+                'id' => $transfer->id,
+                'object' => $transfer->object,
+                'amount' => $transfer->amount,
+                'balance_transaction' => $transfer->balance_transaction,
+                'created' => $transfer->created,
+                'currency' => $transfer->currency,
+                'description' => $transfer->description,
+                'destination' => $transfer->destination,
+              ];
+            }
+            catch (\Exception $e) {
+              $message = sprintf(__FILE__.":".__LINE__."- Error in checking stripe_user_id: " . $e->getMessage());
+              Yii::info($message, 'Stripe');
+
+              // LOG PaymentErrors
+              PaymentErrors::createPaymentError($deviser->short_id, $order->short_id, $pack->short_id, ($amount / 100), $e->getJsonBody()['error']['code'], $e->getMessage());
+
+              $chargeResponse = [
+                'error' => 'STRIPE_USER_ID_INCORRECT',
+                'stripe_user_id' => $deviser->settingsMapping->stripeInfoMapping->stripe_user_id,
+                'description' => 'No transfer applied because deviser stripe_user_id is incorrect.',
+              ];
+            }
           }
-
         }
 
 				if(!empty($chargeResponse)) {
@@ -518,29 +569,48 @@ class CartController extends AppPublicController
 
                   if(!empty($person_earner->settingsMapping->stripeInfoMapping->access_token)) {
 
-                    // Make the transfer to the user who earn the amount
-                    $transfer = \Stripe\Transfer::create(array(
-                      "amount" => (int)$amount,
-                      "currency" => "eur",
-                      "destination" => $person_earner->settingsMapping->stripeInfoMapping->stripe_user_id,
-                      "transfer_group" => $order->short_id."-".$pack->short_id,
-                      "metadata" => [
-                            "description" => "Comision Order Nº " . $order->short_id . "/" . $pack->short_id,
-                            "order_id" => $order->short_id,
-                            "pack_id" => $pack->short_id,
-                            "person_id" => $person->short_id,
-                          ],
-                    ));
-                    $chargeResponse = [
-                      'id' => $transfer->id,
-                      'object' => $transfer->object,
-                      'amount' => $transfer->amount,
-                      'balance_transaction' => $transfer->balance_transaction,
-                      'created' => $transfer->created,
-                      'currency' => $transfer->currency,
-                      'description' => $transfer->description,
-                      'destination' => $transfer->destination,
-                    ];
+                    try
+                    {
+                      \Stripe\Account::retrieve($person_earner->settingsMapping->stripeInfoMapping->stripe_user_id);
+
+                      // Make the transfer to the user who earn the amount
+                      $transfer = \Stripe\Transfer::create(array(
+                        "amount" => (int)$amount,
+                        "currency" => "eur",
+                        "destination" => $person_earner->settingsMapping->stripeInfoMapping->stripe_user_id,
+                        "transfer_group" => $order->short_id."-".$pack->short_id,
+                        "metadata" => [
+                              "description" => "Comision Order Nº " . $order->short_id . "/" . $pack->short_id,
+                              "order_id" => $order->short_id,
+                              "pack_id" => $pack->short_id,
+                              "person_id" => $person->short_id,
+                            ],
+                      ));
+                      $chargeResponse = [
+                        'id' => $transfer->id,
+                        'object' => $transfer->object,
+                        'amount' => $transfer->amount,
+                        'balance_transaction' => $transfer->balance_transaction,
+                        'created' => $transfer->created,
+                        'currency' => $transfer->currency,
+                        'description' => $transfer->description,
+                        'destination' => $transfer->destination,
+                      ];
+
+                    }
+                    catch (\Exception $e) {
+                      $message = sprintf(__FILE__.":".__LINE__."- Error in checking stripe_user_id: " . $e->getMessage());
+                      Yii::info($message, 'Stripe');
+
+                      // LOG PaymentErrors
+                      PaymentErrors::createPaymentError($person_earner->short_id, $order->short_id, $pack->short_id, ($amount / 100), $e->getJsonBody()['error']['code'], $e->getMessage());
+
+                      $chargeResponse = [
+                        'error' => 'STRIPE_USER_ID_INCORRECT',
+                        'stripe_user_id' => $person_earner->settingsMapping->stripeInfoMapping->stripe_user_id,
+                        'description' => 'No transfer applied because person_earner stripe_user_id is incorrect.',
+                      ];
+                    }
 
                     array_push($charge_info, $chargeResponse);
                   }
@@ -642,7 +712,9 @@ class CartController extends AppPublicController
 
         if($personAux != null) {
           $personAux->setHistoric('earning', $amount, $person->short_id);
-          $personAux->setEarningsByUser($order->short_id, $amount, $person->short_id);
+          $personAux->setEarningsByUser($order->short_id, $amount, $person->short_id, $order->created_at);
+
+          Yii::info('ORDER_ID:'.$order->short_id.' - AMOUNT:'.$amount.' - PERSON_ID:'.$per_id, 'Stripe');
         }
       }
       // --------------------

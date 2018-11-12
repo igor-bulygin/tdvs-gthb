@@ -17,6 +17,7 @@ use app\models\Person;
 use app\models\PostmanEmail;
 use app\models\SizeChart;
 use app\models\Tag;
+use app\models\PaymentErrors;
 use DateInterval;
 use DateTime;
 use Yii;
@@ -225,7 +226,7 @@ class AdminController extends CController {
 			'Total number of registered users' => count($clients),
 			'Total number of sales' => count($orders),
 			'Gross amount from the sales, in EUROS' => $amount,
-			'Total amount in Todevise commission' => $todeviseFees,
+			//'Total amount in Todevise commission' => $todeviseFees,
 		);
 
 		$data = [
@@ -265,7 +266,7 @@ class AdminController extends CController {
 				<h4>Date: '.$date.'<span class="pull-right">Amount: '.$order->subtotal.$orderCurrency.'</span></h4>
 				<h4>Client: '.$clientLink.'<span class="pull-right">Order id: '.$order->short_id .'</span></h4>
 			';
-			
+
 			$detail .= '<hr />';
 
 			$nProducts = 0;
@@ -929,4 +930,89 @@ class AdminController extends CController {
 
 		return Yii::$app->request->isAjax ? $this->renderPartial("banners", $data) : $this->render("banners", $data);
 	}
+
+  public function actionStripeWithdrawal($filters = null) {
+
+    $fields = ['available_earnings'];
+    $filters["type"]['$in'] = [Person::CLIENT];
+    $filters["available_earnings"]['$gt'] = 0;
+
+    $total = Person::find()
+            ->select($fields)
+            ->where($filters)
+            ->sum('available_earnings');
+
+    $data = [
+      'total' => $total,
+    ];
+
+    return Yii::$app->request->isAjax ? $this->renderPartial("stripe-withdrawal", $data) : $this->render("stripe-withdrawal", $data);
+  }
+
+
+  public function actionStripeTodeviseEarnings($filters = null) {
+
+    $fields = ['earnings_by_user'];
+    $filters["short_id"]['$eq'] = (string)Yii::$app->params['short_id_todevise_user'];
+
+    $todevise_earnings_by_user = Person::find()
+            ->select($fields)
+            ->where($filters)
+            ->one();
+
+    $todevise_earnings = array();
+
+    if(!empty($todevise_earnings_by_user['earnings_by_user'])) {
+      foreach ($todevise_earnings_by_user['earnings_by_user'] as $person_id => $earningsByOrder) {
+        foreach ($earningsByOrder as $earningAux) {
+          foreach ($earningAux as $order_id => $earning) {
+            $todevise_earnings[] = [
+              'order_id' => $order_id,
+              'earning' => $earning['amount'],
+              'date' => $earning['created']->toDateTime()->format('Y-m-d'),
+              'date_for_order' => $earning['created']->toDateTime()->format('U')
+            ];
+          }
+        }
+      }
+    }
+
+    // Order by date DESC
+    usort($todevise_earnings, function($b, $a) {
+        return $a['date_for_order'] - $b['date_for_order'];
+    });
+
+    $provider = new ArrayDataProvider([
+			'allModels' => $todevise_earnings,
+			'pagination' => ['pageSize' => 100]
+		]);
+
+    $data = [
+      'todevise_earnings_by_user' => $provider,
+    ];
+
+    return Yii::$app->request->isAjax ? $this->renderPartial("stripe-todevise-earnings", $data) : $this->render("stripe-todevise-earnings", $data);
+  }
+
+	public function actionStripePaymentErrors($filters = null) {
+
+    $payment_errors = PaymentErrors::find()->all();
+
+    // Order by date DESC
+    usort($payment_errors, function($b, $a) {
+        return $a['created_at']->toDateTime()->format('U') - $b['created_at']->toDateTime()->format('U');
+    });
+
+    $provider = new ArrayDataProvider([
+			'allModels' => $payment_errors,
+			'pagination' => ['pageSize' => 100]
+		]);
+
+    $data = [
+      'payment_errors' => $provider,
+    ];
+
+    return Yii::$app->request->isAjax ? $this->renderPartial("stripe-payment-errors", $data) : $this->render("stripe-payment-errors", $data);
+  }
+
 }

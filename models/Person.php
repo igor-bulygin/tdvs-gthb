@@ -2617,11 +2617,13 @@ class Person extends CActiveRecord implements IdentityInterface
     return $recent_history;
   }
 
-  public function setEarningsByUser($order_id, $amount, $person_id)
+  public function setEarningsByUser($order_id, $amount, $person_id, $order_created)
   {
     $earningsByUser = $this->earnings_by_user;
 
-    $earningsByUser[$person_id]['earnings_by_order']["ORDER".$order_id] = $amount;
+    $earningsByUser[$person_id]['earnings_by_order']["ORDER".$order_id]['amount'] = $amount;
+
+    $earningsByUser[$person_id]['earnings_by_order']["ORDER".$order_id]['created'] = $order_created;
 
     $this->setAttribute('earnings_by_user', $earningsByUser);
     $this->save(false);
