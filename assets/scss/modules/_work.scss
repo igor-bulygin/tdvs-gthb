@@ -247,8 +247,6 @@
 		border: 1px solid $white;
 		@include border-radius(90px,90px,90px,90px);
 		display: none;
-		background: rgba($black,.25);
-		box-shadow: 0 0 0 6px rgba($white,0.25);
 	}
 	.delete{
 		cursor: pointer;
