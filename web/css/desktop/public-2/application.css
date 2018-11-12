@@ -365,8 +365,8 @@ a, a:hover, a:focus {
     top: 70px; } }
 
 .form-control {
-  -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
+  -webkit-box-shadow: 0 0 0 transparent;
+  box-shadow: 0 0 0 transparent; }
 
 .btn-default:hover {
   background-color: #cecece; }
@@ -657,7 +657,7 @@ a, a:hover, a:focus {
 .black-icons svg {
   width: 18px; }
 
-.btn-red, .btn-grey, .btn-light-grey, .btn-black, .btn-black-line, .btn-white, .btn-black-on-white, .btn-transparent, .btn-follow, .btn-follow-header, .big-btn, .btn-single-love, .heart-red-icon-btn, .btn-love, .btn-save-box, .btn-icon, .accordion-btn, .button-error, .btn-save {
+.btn-red, .btn-grey, .btn-light-grey, .btn-black, .btn-black-line, .btn-white, .btn-black-on-white, .btn-send-message, .btn-transparent, .btn-follow, .btn-follow-header, .big-btn, .btn-single-love, .heart-red-icon-btn, .btn-love, .btn-save-box, .btn-icon, .accordion-btn, .button-error, .btn-save {
   cursor: pointer;
   font-family: "Roboto Condensed", sans-serif;
   font-weight: bold;
@@ -672,7 +672,7 @@ a, a:hover, a:focus {
   border-radius: 0.25em 0.25em 0.25em 0.25em !important;
   -webkit-border-radius: 0.25em 0.25em 0.25em 0.25em !important;
   -moz-border-radius: 0.25em 0.25em 0.25em 0.25em !important; }
-  .btn-red:hover, .btn-grey:hover, .btn-light-grey:hover, .btn-black:hover, .btn-black-line:hover, .btn-white:hover, .btn-black-on-white:hover, .btn-transparent:hover, .btn-follow:hover, .btn-follow-header:hover, .big-btn:hover, .btn-single-love:hover, .heart-red-icon-btn:hover, .btn-love:hover, .btn-save-box:hover, .btn-icon:hover, .accordion-btn:hover, .button-error:hover, .btn-save:hover {
+  .btn-red:hover, .btn-grey:hover, .btn-light-grey:hover, .btn-black:hover, .btn-black-line:hover, .btn-white:hover, .btn-black-on-white:hover, .btn-send-message:hover, .btn-transparent:hover, .btn-follow:hover, .btn-follow-header:hover, .big-btn:hover, .btn-single-love:hover, .heart-red-icon-btn:hover, .btn-love:hover, .btn-save-box:hover, .btn-icon:hover, .accordion-btn:hover, .button-error:hover, .btn-save:hover {
     -moz-transition-property: background-color;
     -o-transition-property: background-color;
     -webkit-transition-property: background-color;
@@ -864,7 +864,7 @@ a.btn span {
   padding: 1em 0 !important; }
 
 /*.big-btn{
-    @extend %btn; 
+    @extend %btn;
     width: 460px;
     height: 60px;
     margin: 20px 0!important;
@@ -6144,8 +6144,8 @@ h3 {
   overflow: hidden;
   overflow: hidden;
   position: relative;
-  line-height: 1.42857143em;
-  max-height: 55.71428577em;
+  line-height: 1.42857em;
+  max-height: 55.71429em;
   /*text-align: justify;
   margin-right: -1em;
   padding-right: 1em;
@@ -8461,6 +8461,9 @@ span.optional-text.pull-left {
         font-size: 1.15em; }
       .create-work-wrapper .card .row .pad-about label {
         margin: 0; }
+
+.title-bold {
+  font-weight: bold; }
 
 .items-row {
   margin-left: 0;

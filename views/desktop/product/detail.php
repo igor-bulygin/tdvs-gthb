@@ -989,12 +989,6 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 													</div>
 												</div>
 											</div>
-											<div class="col-xs-12 text-center">
-												<!-- <span class="pr-5" ng-if="!detailProductCtrl.voted.includes(comment.id)"><a ng-click="detailProductCtrl.sendHelpfulComment(comment, 'yes')"><span class="helpful-red" translate="global.YES"></span></a> <span ng-if="comment.helpfuls.yes[0]">(<span ng-bind="comment.helpfuls.yes[0]"></span>)</span></span>
-												<span class="pr-5" ng-if="detailProductCtrl.voted.includes(comment.id)"><a><span class="helpful-black" translate="global.YES"></span></a> <span ng-if="comment.helpfuls.yes[0]">(<span ng-bind="comment.helpfuls.yes[0]"></span>)</span></span>
-												<span class="pl-5" ng-if="!detailProductCtrl.voted.includes(comment.id)"><a ng-click="detailProductCtrl.sendHelpfulComment(comment, 'no')"><span class="helpful-red" translate="global.NO"></span></a> <span ng-if="comment.helpfuls.no[0]">(<span ng-bind="comment.helpfuls.no[0]"></span>)</span></span>
-												<span class="pl-5" ng-if="detailProductCtrl.voted.includes(comment.id)"><a><span class="helpful-black" translate="global.NO"></span></a> <span ng-if="comment.helpfuls.no[0]">(<span ng-bind="comment.helpfuls.no[0]"></span>)</span></span> -->
-											</div>
 										</div>
 									</div>
 									<div class="row mt-5 mb-10 ml-0 mr-0">
