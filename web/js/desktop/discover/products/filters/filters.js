@@ -13,17 +13,18 @@
             {value: "cheapest", name: 'discover.PRICE_LOW_TO_HIGH'},
             {value: "expensive", name: 'discover.PRICE_HIGH_TO_LOW'}
         ];
-		vm.orderFilter={value:"", name: 'discover.ORDER_BY'};
+		vm.orderFilter={value: "", name: 'discover.ORDER_BY'};
 		vm.filters = {};
 		vm.search = search;
 		vm.clearAllFilters = clearAllFilters
         vm.getProductSizesFilters = getProductSizesFilters;
+		vm.clearFilter = clearFilter;
 		vm.page = 1;
 
 		init();
 
 		function init() {
-			if (!angular.isUndefined(searchParam) && searchParam.length>0) {
+			if (!angular.isUndefined(searchParam) && searchParam.length > 0) {
 				vm.searchParam = angular.copy(searchParam);
 			}
 			getCategories();
@@ -48,6 +49,20 @@
 			vm.filters = {};
 			search(true, false);
 		}
+
+        /**
+         * clears certain type of filters and start search again
+         */
+        function clearFilter(type) {
+            if (type === 'categories') {
+                vm.filters.categories = {};
+			}
+			else if (type === 'sizes') {
+                vm.filters.sizes = {};
+			}
+            search(true, false);
+        }
+
 
 		function getCategories() {
 			function onGetCategoriesSuccess(data) {
@@ -75,7 +90,7 @@
 				if (!angular.isUndefined(vm.searchParam) && vm.searchParam.length>0) {
 					params.q = vm.searchParam;
 				}
-                console.log('filters', vm.filters);
+                // console.log('filters', vm.filters);
 				Object.keys(vm.filters).map(function(filter_type) {
 					var new_filter = [];
 					Object.keys(vm.filters[filter_type]).map(function(filter) {
@@ -87,8 +102,6 @@
                         params[filter_type + '[]'] = new_filter;
                     }
 				});
-
-				console.log('params', params);
 
 				var onGetProductsSuccess = function(data) {
                     vm.search_key = angular.copy(vm.key);

@@ -18,7 +18,7 @@
 	<div class="col-xs-12 col-sm-2">
 		<form name="exploreProductsFiltersCtrl.form">
 			<span class="filter-title" translate="discover.FILTER_BY_THEME"></span>
-            <span class="filter-clear" translate="discover.CLEAR_ALL" ng-click="exploreProductsFiltersCtrl.clearAllFilters()"></span>
+            <span class="filter-clear" translate="discover.CLEAR_ALL" ng-click="exploreProductsFiltersCtrl.clearFilter('categories')"></span>
 			<div class="checkbox checkbox-red" ng-repeat="category in exploreProductsFiltersCtrl.categories.items | orderBy: 'category.name'" ng-if="$index < exploreProductsFiltersCtrl.show_categories">
 				<input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="categories" ng-model="exploreProductsFiltersCtrl.filters.categories[category.id]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.categories[category.id]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search(true, false)">
 				<label ng-attr-for="{{'checkbox'+($index+10)}}">
@@ -30,7 +30,7 @@
             <div class="clearfix" style="height: 15px"></div>
 
             <span class="filter-title" translate="discover.FILTER_BY_SIZE"></span>
-            <span class="filter-clear" translate="discover.CLEAR_ALL" ng-click="exploreProductsFiltersCtrl.clearAllFilters()"></span>
+            <span class="filter-clear" translate="discover.CLEAR_ALL" ng-click="exploreProductsFiltersCtrl.clearFilter('sizes')"></span>
             <div class="clearfix" style="height: 5px"></div>
             <div class="checkbox checkbox-red two-cols" ng-repeat="size in exploreProductsFiltersCtrl.sizes" ng-if="$index < exploreProductsFiltersCtrl.show_sizes">
                 <input ng-attr-id="{{'checkbox'+($index+10+exploreProductsFiltersCtrl.categories.items.length)}}" type="checkbox" name="sizes" ng-model="exploreProductsFiltersCtrl.filters.sizes[size]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.sizes[size]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search(true, false)">
