@@ -193,7 +193,7 @@
 		"EDIT_WORK": "Editar trabajo",
 		"SAVE_EXIT": "Guardar y salir",
 		"IF_MEMBER": "If you are a Todevise member",
-		"BECOME_MEMBER": "Become a member",
+		"BECOME_MEMBER": "Conviértase en miembro de Todevise",
 		"SOCIAL": "<p>To use the <strong>social network</strong> features, you need to create a profile.</p><p>It is 100% free, and you will be able to follow brands & influencers, save products in boxes and interact with the rest of the community.</p>",
 		"ALL": "Todo",
 		"DEVISERS": "Deviser",

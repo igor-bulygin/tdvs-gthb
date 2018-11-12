@@ -486,409 +486,552 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<ul class="nav nav-tabs product-tabs" role="tablist" id="productTabs">
-			<li role="presentation" class="active">
-				<a href="#works" aria-controls="works" role="tab" data-toggle="tab"><span class="title-product-name">works by <?= \yii\helpers\StringHelper::truncate($person->getName(), 40, '…') ?></span></a>
-			</li>
-			<li role="presentation" class="no-b-r">
-				<a href="#boxes" aria-controls="boxes" role="tab" data-toggle="tab"><span class="title-product-name">Boxes</span></a>
-			</li>
-			<?php if (count($videos)) { ?>
-			<li role="presentation" class="no-b-r">
-				<a href="#videos" aria-controls="videos" role="tab" data-toggle="tab"><span translate="product.detail.VIDEOS" class="title-product-name"></span></a>
-			</li>
-			<?php } ?>
-			<?php if (count($product->faqMapping) > 0) { ?>
-			<li role="presentation" class="no-b-r">
-				<a href="#faqs" aria-controls="faqs" role="tab" data-toggle="tab"><span class="title-product-name">FAQs</span></a>
-			</li>
-			<?php } ?>
-		</ul>
-	</div>
-	<!-- /PRODUCT COMMENTS -->
-	<div  class="container" ng-controller="detailProductCtrl as detailProductCtrl">
-		<div class="col-xs-12 text-center">
-			<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
-				<i class="ion-ios-star  ng-class:{'red-text': $index+1 <= detailProductCtrl.productStars }"></i>
-			</span>
-			<span ng-bind="detailProductCtrl.productStars"></span>
+	<div ng-controller="detailProductCtrl as detailProductCtrl">
+		<div class="container">
+			<ul class="nav nav-tabs product-tabs bb-xs-0 bb-xs-ddd" role="tablist" id="productTabs">
+				<li role="presentation" class="active">
+					<a class="bb-xs-ddd" href="#comments" aria-controls="comments" role="tab" data-toggle="tab" ng-click="detailProductCtrl.tabDetailProduct('comments')"><span class="title-product-name" translate="product.detail.USER_REVIEWS"></span></a>
+				</li>
+				<li role="presentation" class="no-b-r">
+					<a class="bb-xs-ddd" href="#works" aria-controls="works" role="tab" data-toggle="tab" ng-click="detailProductCtrl.tabDetailProduct('works')"><span class="title-product-name" translate="product.detail.WORKS_BY"></span><span class="title-product-name"> <?= \yii\helpers\StringHelper::truncate($person->getName(), 40, '…') ?></span></a>
+				</li>
+				<li role="presentation" class="no-b-r">
+					<a class="bb-xs-ddd" href="#boxes" aria-controls="boxes" role="tab" data-toggle="tab" ng-click="detailProductCtrl.tabDetailProduct('boxes')"><span class="title-product-name" translate="global.BOXES"></span></a>
+				</li>
+				<?php if (count($videos)) { ?>
+				<li role="presentation" class="no-b-r">
+					<a class="bb-xs-ddd" href="#videos" aria-controls="videos" role="tab" data-toggle="tab" ng-click="detailProductCtrl.tabDetailProduct('videos')"><span translate="product.detail.VIDEOS" class="title-product-name"></span></a>
+				</li>
+				<?php } ?>
+				<?php if (count($product->faqMapping) > 0) { ?>
+				<li role="presentation" class="no-b-r">
+					<a class="bb-xs-ddd" href="#faqs" aria-controls="faqs" role="tab" data-toggle="tab" ng-click="detailProductCtrl.tabDetailProduct('faqs')"><span class="title-product-name">FAQs</span></a>
+				</li>
+				<?php } ?>
+			</ul>
 		</div>
-		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val5>0" ng-cloak>
-			5 <span translate="product.detail.STARS"></span> ({{detailProductCtrl.stars_counter.val5}})
-		</div>
-		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val4>0" ng-cloak>
-			4 <span translate="product.detail.STARS"></span> ({{detailProductCtrl.stars_counter.val4}})
-		</div>
-		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val3>0" ng-cloak>
-			3 <span translate="product.detail.STARS"></span> ({{detailProductCtrl.stars_counter.val3}})
-		</div>
-		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val2>0" ng-cloak>
-			2 <span translate="product.detail.STARS"></span> ({{detailProductCtrl.stars_counter.val2}})
-		</div>
-		<div class="col-xs-12 text-center" ng-if="detailProductCtrl.stars_counter.val1>0" ng-cloak>
-			1 <span translate="product.detail.STARS"></span> ({{detailProductCtrl.stars_counter.val1}})
-		</div>
-		<div class="col-xs-12 text-center">
-			<form class="col-xs-12 chat-send" >
-				<label for="comment" class="col-xs-1"><img class="avatar-logued-user" src="<?= $person->getProfileImage(50, 50) ?>"></label>
-				<div class="col-xs-9">
-					<input class="col-xs-12" type="text" ng-model="detailProductCtrl.newComment.text" translate-attr="{placeholder: 'product.detail.ADD_COMMENT'}" name="comment" required on-press-enter="detailProductCtrl.sendComment()">
-					<div class="col-xs-12 text-left">
-						<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
-							<a ng-click="detailProductCtrl.newComment.stars=$index+1">
-								<i class="ion-ios-star  ng-class:{'red-text': $index+1 <= detailProductCtrl.newComment.stars }"></i>
-							</a>
-						</span>
-					</div>
-				</div>
-				<div class="col-xs-2">
-					<button class="col-xs-12 btn btn-small btn-red" ng-click="detailProductCtrl.sendComment()">>></button>
-				</div>
-			</form>
-		</div>
-		<div class="col-xs-12" ng-repeat="comment in detailProductCtrl.product.comments " style="border-bottom: solid 1px #bfbfbf;">
-			<div class="col-xs-1">
-				<img class="avatar-logued-user" ng-src="{{comment.person.url_avatar}}">
+		<!-- /PRODUCT COMMENTS
+		<div class="container" style="padding-right: 30px; padding-left: 30px;" ng-if="detailProductCtrl.tabComments">
+			<div class="col-xs-12 mt-20 text-center mb-5">
+				<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
+					<i ng-if="$index+1 > detailProductCtrl.productStars" class="ion-ios-star-outline" style="font-size: 20px; letter-spacing: 2px;"></i>
+					<i ng-if="$index+1 <= detailProductCtrl.productStars" class="ion-ios-star red-text" style="font-size: 20px; letter-spacing: 2px;"></i>
+				</span>
+				<span class="review-average" ng-bind="detailProductCtrl.productStars"></span>
 			</div>
-			<div class="col-xs-8" >
-				<div class="row">
-							<span ng-bind="comment.person.name"></span>
-						<span am-time-ago="comment.created_at.sec | amFromUnix"></span>
+			<div class="col-xs-12 text-center revier-stars" ng-if="detailProductCtrl.stars_counter.val5>0" ng-cloak>
+				5 <span translate="product.detail.STARS"></span> <span class="grey-link-set">({{detailProductCtrl.stars_counter.val5}})</span>
+			</div>
+			<div class="col-xs-12 text-center revier-stars" ng-if="detailProductCtrl.stars_counter.val4>0" ng-cloak>
+				4 <span translate="product.detail.STARS"></span> <span class="grey-link-set">({{detailProductCtrl.stars_counter.val4}})</span>
+			</div>
+			<div class="col-xs-12 text-center revier-stars" ng-if="detailProductCtrl.stars_counter.val3>0" ng-cloak>
+				3 <span translate="product.detail.STARS"></span> <span class="grey-link-set">({{detailProductCtrl.stars_counter.val3}})</span>
+			</div>
+			<div class="col-xs-12 text-center revier-stars" ng-if="detailProductCtrl.stars_counter.val2>0" ng-cloak>
+				2 <span translate="product.detail.STARS"></span> <span class="grey-link-set">({{detailProductCtrl.stars_counter.val2}})</span>
+			</div>
+			<div class="col-xs-12 text-center revier-stars" ng-if="detailProductCtrl.stars_counter.val1>0" ng-cloak>
+				1 <span translate="product.detail.STARS"></span> <span class="grey-link-set">({{detailProductCtrl.stars_counter.val1}})</span>
+			</div>
+			<div class="col-xs-12 mt-10 text-center mb-40 font-sz-16">
+				<form class="col-xs-12 chat-send" >
+					<div class="col-xs-12 col-md-1 text-left p-0">
+						<label for="comment" class="m-0">
+							<img class="avatar-logued-user m-0" src="<?= $person->getProfileImage(50, 50) ?>" style="width: 70px; height: 70px;">
+						</label>
+					</div>
+					<div class="col-xs-10 mt-15 pl-0">
+						<input class="col-xs-12 send-comment-input" type="text" ng-model="detailProductCtrl.newComment.text" translate-attr="{placeholder: 'product.detail.ADD_COMMENT'}" name="comment" required on-press-enter="detailProductCtrl.sendComment()">
+						<div class="col-xs-12 text-left mt-10" style="font-size: 20px;">
+							<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
+								<a ng-click="detailProductCtrl.newComment.stars=$index+1">
+									<i ng-if="$index+1 > detailProductCtrl.newComment.stars" class="ion-ios-star-outline" style="letter-spacing: 2px;"></i>
+									<i ng-if="$index+1 <= detailProductCtrl.newComment.stars" class="ion-ios-star red-text" style="letter-spacing: 2px;"></i>
+								</a>
+							</span>
 						</div>
-					<span class="row">{{comment.text}}</span>
-					<div class="row">
-						<a href="" ng-if="!comment.showReply" ng-click="detailProductCtrl.showReplyComment(comment)"><span translate="product.detail.REPLY"></span></a>
+					</div>
+					<div class="col-xs-2 col-md-1 mt-15">
+						<button class="col-xs-12 send-comment-button" ng-click="detailProductCtrl.sendComment()"><img src="/imgs/plane.svg"></button>
+					</div>
+				</form>
+			</div>
+			<div class="col-xs-12 mt-5 mb-10 font-sz-16 p-0" ng-repeat="comment in detailProductCtrl.product.comments " style="border-bottom: solid 1px #bfbfbf;">
+				<div class="col-xs-2 col-md-1">
+					<img class="avatar-logued-user m-0" ng-src="{{comment.person.url_avatar}}" style="width: 41px; height: 41px;">
+				</div>
+				<div class="col-xs-10 col-md-11" >
+					<div class="row ml-0 mb-10">
+						<span ng-bind="comment.person.name" class="pr-10" style="font-weight: bold;"></span>
+						<span class="text-dark-grey font-sz-14" am-time-ago="comment.created_at.sec | amFromUnix"></span>
+					</div>
+					<div class="col-xs-12 p-0">
+						<div class="col-xs-8 p-0">
+							<span class="ml-0">{{comment.text}}</span>
+						</div>	
+						<div class="col-xs-4 text-center p-0 font-sz-14">
+							<div class="col-xs-12 p-0 mb-10">
+								<span translate="product.detail.REVIEW_HELPFUL"></span>
+							</div>
+							<div class="col-xs-6 p-0 text-right pr-5">
+								<a ng-click="detailProductCtrl.sendHelpfulComment(comment, 'yes')"><span class="helpful-red" translate="global.YES"></span></a> (4)
+							</div>
+							<div class="col-xs-6 p-0 text-left pl-5">
+								<a ng-click="detailProductCtrl.sendHelpfulComment(comment, 'no')"><span class="helpful-red" translate="global.NO"></span></a> (6)
+							</div>
+						</div>
+					</div>
+					<div class="row mt-5 mb-10 ml-0">
+						<a href="" ng-if="!comment.showReply" ng-click="detailProductCtrl.showReplyComment(comment)"><span class="pr-10 reply-red" translate="product.detail.REPLY"></span></a>
 						<span class="text-left" ng-if="comment.stars>0" ng-cloak>
 							<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
-									<i class="ion-ios-star  ng-class:{'red-text': $index+1 <= comment.stars }"></i>
+								<i ng-if="$index+1 > comment.stars" class="ion-ios-star-outline"></i>
+								<i ng-if="$index+1 <= comment.stars" class="ion-ios-star red-text"></i>
 							</span>
 						</span>
 					</div>
-					<div class="col-xs-12" ng-repeat="reply in comment.replies " style="border-top: solid 1px #bfbfbf;">
-						<div class="col-xs-1">
-							<img class="avatar-logued-user" ng-src="{{reply.person.url_avatar}}">
+				</div>
+				<div class="col-xs-12 pt-15 p-0" ng-repeat="reply in comment.replies " style="border-top: solid 1px #bfbfbf;">
+					<div class="col-xs-offset-2 col-md-offset-1">
+						<div class="col-xs-3 col-sm-2 col-md-1">
+							<img class="avatar-logued-user m-0" ng-src="{{reply.person.url_avatar}}" style="width: 41px; height: 41px;">
 						</div>
-						<div class="col-xs-11">
-							<div class="row">
-								<span ng-bind="reply.person.name"></span>
-								<span am-time-ago="reply.created_at.sec | amFromUnix"></span>
+						<div class="col-xs-8 col-sm-9 col-md-10">
+							<div class="row ml-0 mb-10">
+								<span ng-bind="reply.person.name" class="pr-10" style="font-weight: bold;"></span>
+								<span class="text-dark-grey font-sz-14" am-time-ago="reply.created_at.sec | amFromUnix"></span>
 							</div>
-							<span class="row">{{reply.text}}</span>
+							<div class="mb-10 ml-0 mb-5">
+								<span>{{reply.text}}</span>
+							</div>
 						</div>
 					</div>
+				</div>
+				<form class="col-xs-8 col-xs-offset-2 chat-send mb-10 mt-10" ng-if="comment.showReply">
+					<div class="col-xs-10">
+						<input class="col-xs-12 send-comment-input" type="text" ng-model="comment.newReply.text" translate-attr="{placeholder: 'product.detail.ADD_COMMENT'}" name="comment" required on-press-enter="detailProductCtrl.sendCommentReply(comment)">
 					</div>
-					<form class="col-xs-12 chat-send" ng-if="comment.showReply">
-						<div class="col-xs-9">
-							<input class="col-xs-12" type="text" ng-model="comment.newReply.text" translate-attr="{placeholder: 'product.detail.ADD_COMMENT'}" name="comment" required on-press-enter="detailProductCtrl.sendCommentReply(comment)">
-						</div>
-						<div class="col-xs-2">
-							<button class="col-xs-12 btn btn-small btn-red" ng-click="detailProductCtrl.sendCommentReply(comment)">>></button>
-						</div>
-					</form>
+					<div class="col-xs-2">
+						<button class="col-xs-12 send-comment-button" ng-click="detailProductCtrl.sendCommentReply(comment)"><img src="/imgs/plane.svg"></button>
+					</div>
+				</form>
+				</div>
 				</div>
 			</div>
-			<div class="col-xs-3" >
-					<span class="row" translate="product.detail.REVIEW_HELPFUL"></span>
-					<div class="row">
-						<a class="col-xs-6"><span translate="global.YES"></span></a><a class="col-xs-6 text-right"><span translate="global.NO"</span></a>
-					</div>
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<!-- Tab panes -->
-		<div class="tab-content product-description-content">
-			<div role="tabpanel" class="tab-pane work-description-wrapper" id="faqs">
-				<div class="container mt-20 mb-20">
-					<?php if (count($product->faqMapping) > 0) { ?>
-					<div class="work-profile-description-wrapper faq-wrapper">
-						<div class="title"><span translate="product.detail.WORK_FAQS"></span></div>
-						<?php foreach ($product->faqMapping as $faq) { ?>
-						<div class="q-a-wrapper">
-							<p class="question">
-								<span translate="product.detail.Q"></span>
-								<span class="important"><?= $faq->question?></span>
-							</p>
-							<p class="question">
-								<span translate="product.detail.A"></span>
-								<span><?= $faq->answer?></span>
-							</p>
+		</div> -->
+		<div class="container">
+			<!-- Tab panes -->
+			<div class="tab-content product-description-content">
+				<div role="tabpanel" class="tab-pane work-description-wrapper" id="faqs">
+					<div class="container mt-20 mb-20">
+						<?php if (count($product->faqMapping) > 0) { ?>
+						<div class="work-profile-description-wrapper faq-wrapper">
+							<div class="title"><span translate="product.detail.WORK_FAQS"></span></div>
+							<?php foreach ($product->faqMapping as $faq) { ?>
+							<div class="q-a-wrapper">
+								<p class="question">
+									<span translate="product.detail.Q"></span>
+									<span class="important"><?= $faq->question?></span>
+								</p>
+								<p class="question">
+									<span translate="product.detail.A"></span>
+									<span><?= $faq->answer?></span>
+								</p>
+							</div>
+							<?php } ?>
 						</div>
-						<?php } ?>
-					</div>
-					<?php } else { ?>
-					<div class="col-lg-12 centered-col">
-						<img class="happyface-black" src="/imgs/happy-face-black.svg" />
-						<span translate="product.detail.MORECONTENTCOMINGSOON"></span>
-					</div>
-					<?php } ?>
-
-				</div>
-			</div>
-			<div role="tabpanel" class="tab-pane work-description-wrapper" id="boxes">
-				<div class="container mt-20 mb-20">
-					<?php if ($boxes) { ?>
-					<?php foreach ($boxes as $box) {
-						$products = $box->getProductsPreview(); ?>
-						<div class="col-lg-4">
-							<a href="<?= $box->getViewLink()?>">
-								<figure class="showcase">
-									<div class="images-box">
-										<div class="bottom-top-images">
-											<div class="image-left">
-												<img src="<?=isset($products[0]) ? $products[0]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
-											</div>
-											<div class="image-right">
-												<img src="<?=isset($products[1]) ? $products[1]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
-											</div>
-										</div>
-										<div class="bottom-image">
-											<img src="<?=isset($products[2]) ? $products[2]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
-										</div>
-									</div>
-									<figcaption>
-										<div class="row no-mar">
-											<div class="col-md-8">
-												<span class="boxes-text align-left"><?=$box->name?></span>
-											</div>
-											<div class="col-md-4 no-padding">
-												<button class="btn btn-single-love btn-love-box">
-													<span class="number"><?=count($products)?></span>
-													<span class="heart-icon"></span>
-												</button>
-											</div>
-										</div>
-									</figcaption>
-								</figure>
-							</a>
-						</div>
-						<?php } ?>
 						<?php } else { ?>
 						<div class="col-lg-12 centered-col">
-							<button type="button" class="btn btn-red btn-hart" ng-click="detailProductCtrl.setBox()">
-								<span translate="product.detail.SAVE_IN_BOX"></span>
-							</button>
+							<img class="happyface-black" src="/imgs/happy-face-black.svg" />
+							<span translate="product.detail.MORECONTENTCOMINGSOON"></span>
 						</div>
 						<?php } ?>
+	
 					</div>
-						<?php /* 
-						<div class="reviews-wrapper">
-							<div class="title"><span translate="product.detail.USER_REVIEWS"></span></div>
-							<div class="review-rates">
-								<span class="score">
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star"></i>
-										<i class="ion-ios-star"></i>
-									</span>
-								<span class="number-score">(20)</span>
-								<div class="by-stars"><span>5 <span translate="product.detail.STARS"></span></span><span class="number-score">(15)</span></div>
-								<div class="by-stars"><span>4 <span translate="product.detail.STARS"></span></span><span class="number-score">(5)</span></div>
+				</div>
+				<div role="tabpanel" class="tab-pane work-description-wrapper" id="boxes">
+					<div class="container mt-20 mb-20">
+						<?php if ($boxes) { ?>
+						<?php foreach ($boxes as $box) {
+							$products = $box->getProductsPreview(); ?>
+							<div class="col-lg-4">
+								<a href="<?= $box->getViewLink()?>">
+									<figure class="showcase">
+										<div class="images-box">
+											<div class="bottom-top-images">
+												<div class="image-left">
+													<img src="<?=isset($products[0]) ? $products[0]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+												</div>
+												<div class="image-right">
+													<img src="<?=isset($products[1]) ? $products[1]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+												</div>
+											</div>
+											<div class="bottom-image">
+												<img src="<?=isset($products[2]) ? $products[2]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+											</div>
+										</div>
+										<figcaption>
+											<div class="row no-mar">
+												<div class="col-md-8">
+													<span class="boxes-text align-left"><?=$box->name?></span>
+												</div>
+												<div class="col-md-4 no-padding">
+													<button class="btn btn-single-love btn-love-box">
+														<span class="number"><?=count($products)?></span>
+														<span class="heart-icon"></span>
+													</button>
+												</div>
+											</div>
+										</figcaption>
+									</figure>
+								</a>
 							</div>
-							<div class="comment-wrapper">
-								<div class="col-sm-1">
+							<?php } ?>
+							<?php } else { ?>
+							<div class="col-lg-12 centered-col">
+								<button type="button" class="btn btn-red btn-hart" ng-click="detailProductCtrl.setBox()">
+									<span translate="product.detail.SAVE_IN_BOX"></span>
+								</button>
+							</div>
+							<?php } ?>
+						</div>
+							<?php /* 
+							<div class="reviews-wrapper">
+								<div class="title"><span translate="product.detail.USER_REVIEWS"></span></div>
+								<div class="review-rates">
+									<span class="score">
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+											<i class="ion-ios-star"></i>
+										</span>
+									<span class="number-score">(20)</span>
+									<div class="by-stars"><span>5 <span translate="product.detail.STARS"></span></span><span class="number-score">(15)</span></div>
+									<div class="by-stars"><span>4 <span translate="product.detail.STARS"></span></span><span class="number-score">(5)</span></div>
+								</div>
+								<div class="comment-wrapper">
+									<div class="col-sm-1">
+										<div class="avatar">
+											<img class="cover" src="/imgs/avatar-deviser.jpg">
+										</div>
+									</div>
+									<div class="col-sm-10">
+										<input type="text" class="form-control comment-input" id="exampleInputEmail1" placeholder="Add your comment">
+										<div class="rate-product">
+											<span translate="product.detail.RATE_PRODUCT"></span>
+											<span class="score">
+													<i class="ion-ios-star"></i>
+													<i class="ion-ios-star"></i>
+													<i class="ion-ios-star"></i>
+													<i class="ion-ios-star"></i>
+													<i class="ion-ios-star"></i>
+												</span>
+										</div>
+									</div>
+									<div class="col-sm-1">
+										<div class="arrow-btn">
+											<i class="ion-android-navigate"></i>
+										</div>
+									</div>
+								</div>
+								<div class="comment-user">
 									<div class="avatar">
 										<img class="cover" src="/imgs/avatar-deviser.jpg">
 									</div>
-								</div>
-								<div class="col-sm-10">
-									<input type="text" class="form-control comment-input" id="exampleInputEmail1" placeholder="Add your comment">
-									<div class="rate-product">
-										<span translate="product.detail.RATE_PRODUCT"></span>
-										<span class="score">
-												<i class="ion-ios-star"></i>
-												<i class="ion-ios-star"></i>
-												<i class="ion-ios-star"></i>
-												<i class="ion-ios-star"></i>
-												<i class="ion-ios-star"></i>
-											</span>
-									</div>
-								</div>
-								<div class="col-sm-1">
-									<div class="arrow-btn">
-										<i class="ion-android-navigate"></i>
-									</div>
-								</div>
-							</div>
-							<div class="comment-user">
-								<div class="avatar">
-									<img class="cover" src="/imgs/avatar-deviser.jpg">
-								</div>
-								<div class="comment">
-									<div class="name-date">
-										<span class="name">Alice Pierce</span>
-										<span class="date"><span>1</span><span translate="product.detail.DAY_AGO"></span>
-									</div>
-									<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
-									</div>
-									<div class="replay">
-										<span translate="product.detail.REPLY"></span>
-										<span class="score">
-												<i class="ion-ios-star"></i>
-												<i class="ion-ios-star"></i>
-												<i class="ion-ios-star"></i>
-												<i class="ion-ios-star"></i>
-												<i class="ion-ios-star"></i>
-											</span>
-										<span class="useful"><span>300</span><span translate="product.detail.MEMER_COMMENT_USEFUL"></span></span>
-									</div>
-								</div>
-								<div class="helpful">
-									<span translate="product.detail.REVIEW_HELPFUL"></span>
-									<div class="rounded-btn"><span translate="global.YES"></span></div>
-									<div class="rounded-btn"><span translate="global.NO"></span></div>
-								</div>
-							</div>
-							<div class="comment-user">
-								<div class="avatar">
-									<img class="cover" src="/imgs/avatar-deviser.jpg">
-								</div>
-								<div class="comment">
-									<div class="name-date">
-										<span class="name">Alice Pierce</span>
-										<span class="date">1 day ago</span>
-									</div>
-									<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
-									</div>
-									<div class="replay">
-										<span>Reply</span>
-										<span class="score">
-												<i class="ion-ios-star"></i>
-												<i class="ion-ios-star"></i>
-												<i class="ion-ios-star"></i>
-												<i class="ion-ios-star"></i>
-												<i class="ion-ios-star"></i>
-											</span>
-										<span class="useful">300  member found this comment useful</span>
-									</div>
-								</div>
-								<div class="helpful">
-									<span>Is this review helpful to you?</span>
-									<div class="rounded-btn">Yes</div>
-									<div class="rounded-btn">No</div>
-								</div>
-							</div>
-							<div class="comment-user response">
-								<div class="avatar">
-									<img class="cover" src="/imgs/avatar-deviser.jpg">
-								</div>
-								<div class="comment">
-									<div class="name-date">
-										<span class="name">Alice Pierce</span>
-										<span class="date">1 day ago</span>
-									</div>
-									<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget.
-									</div>
-								</div>
-								<div class="helpful">
-									<span>Is this review helpful to you ?</span>
-									<div class="rounded-btn">Yes</div>
-									<div class="rounded-btn">No</div>
-								</div>
-							</div>
-							<div class="comment-user">
-								<div class="avatar">
-									<img class="cover" src="/imgs/avatar-deviser.jpg">
-								</div>
-								<div class="comment">
-									<div class="name-date">
-										<span class="name">Alice Pierce</span>
-										<span class="date">1 day ago</span>
-									</div>
-									<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
-									</div>
-									<div class="replay">
-										<span>Reply</span>
-										<span class="score">
-												<i class="ion-ios-star"></i>
-												<i class="ion-ios-star"></i>
-												<i class="ion-ios-star"></i>
-												<i class="ion-ios-star"></i>
-												<i class="ion-ios-star"></i>
-											</span>
-										<span class="useful">300  member found this comment useful</span>
-									</div>
-								</div>
-								<div class="helpful">
-									<span>Is this review helpful to you ?</span>
-									<div class="rounded-btn">Yes</div>
-									<div class="rounded-btn">No</div>
-								</div>
-							</div>
-							<div class="load-wrapper">
-								<i class="ion-ios-arrow-down"></i>
-								<span class="green" translate="product.detail.LOAD_MORE"></span>
-								<span class="more"><span>24</span><span translate="product.detail.COMMENTS_MORE"></span></span>
-							</div>
-						</div>
-						*/ ?>
-					</div>
-					<?php /*if (count($videos)) { */?>
-					<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
-						<div class="container mt-20 mb-20">
-							<?php if (count($videos)) { ?>
-							<div class="video-container centered-col">
-								<?php foreach ($videos as $video) { ?>
-								<div class="col-sm-6">
-									<div class="video-wrapper">
-										<iframe width="560" height="315" src="<?= $video->getUrlEmbeddedYoutubePlayer() ?>" frameborder="0" allowfullscreen></iframe>
-									</div>
-								</div>
-								<?php }  ?>
-							</div>
-							<?php } else {?>
-							<div class="col-lg-12 centered-col">
-								<img class="happyface-black" src="/imgs/happy-face-black.svg" />
-								<span translate="product.detail.MORECONTENTCOMINGSOON"></span>
-							</div>
-							<?php }?>
-						</div>
-					</div>
-					<?php /*} */?>
-					<div role="tabpanel" class="tab-pane work-description-wrapper active" id="works">
-						<div class="container mt-20 mb-20" style="min-height:350px;">
-							<nav class="products-menu">
-								<ul>
-									<?php /* 
-									<li>
-										<a class="active" href="#">Pants</a>
-									</li>
-									<li>
-										<a href="#">Socks</a>
-									</li>
-									<li>
-										<a href="#">Belts</a>
-									</li>
-									*/ ?>
-								</ul>
-							</nav>
-							<div class="other-products-wrapper">
-								<div id="works-container" class="macy-container" data-columns="6">
-									<?php foreach ($personProducts as $i => $product) { ?>
-									<div class="menu-category list-group">
-										<div class="grid">
-											<figure class="effect-zoe">
-												<image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $product->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
-													<a href="<?= $product->getViewLink() ?>">
-														<img class="grid-image"
-														src="<?= $product->getImagePreview(400, 0) ?>">
-													</a>
-												</image-hover-buttons>
-												<a href="<?= $product->getViewLink() ?>">
-													<figcaption>
-														<p class="instauser">
-															<?= \yii\helpers\StringHelper::truncate($product->getName(), 18, '…') ?>
-															<!--<?= \yii\helpers\StringHelper::truncate(Utils::l($product->getName()), 18, '…') ?>-->
-														</p>
-														<p class="price">€ <?= $product->getMinimumPrice() ?></p>
-													</figcaption>
-												</a>
-											</figure>
+									<div class="comment">
+										<div class="name-date">
+											<span class="name">Alice Pierce</span>
+											<span class="date"><span>1</span><span translate="product.detail.DAY_AGO"></span>
+										</div>
+										<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
+										</div>
+										<div class="replay">
+											<span translate="product.detail.REPLY"></span>
+											<span class="score">
+													<i class="ion-ios-star"></i>
+													<i class="ion-ios-star"></i>
+													<i class="ion-ios-star"></i>
+													<i class="ion-ios-star"></i>
+													<i class="ion-ios-star"></i>
+												</span>
+											<span class="useful"><span>300</span><span translate="product.detail.MEMER_COMMENT_USEFUL"></span></span>
 										</div>
 									</div>
-									<?php } ?>
+									<div class="helpful">
+										<span translate="product.detail.REVIEW_HELPFUL"></span>
+										<div class="rounded-btn"><span translate="global.YES"></span></div>
+										<div class="rounded-btn"><span translate="global.NO"></span></div>
+									</div>
+								</div>
+								<div class="comment-user">
+									<div class="avatar">
+										<img class="cover" src="/imgs/avatar-deviser.jpg">
+									</div>
+									<div class="comment">
+										<div class="name-date">
+											<span class="name">Alice Pierce</span>
+											<span class="date">1 day ago</span>
+										</div>
+										<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
+										</div>
+										<div class="replay">
+											<span>Reply</span>
+											<span class="score">
+													<i class="ion-ios-star"></i>
+													<i class="ion-ios-star"></i>
+													<i class="ion-ios-star"></i>
+													<i class="ion-ios-star"></i>
+													<i class="ion-ios-star"></i>
+												</span>
+											<span class="useful">300  member found this comment useful</span>
+										</div>
+									</div>
+									<div class="helpful">
+										<span>Is this review helpful to you?</span>
+										<div class="rounded-btn">Yes</div>
+										<div class="rounded-btn">No</div>
+									</div>
+								</div>
+								<div class="comment-user response">
+									<div class="avatar">
+										<img class="cover" src="/imgs/avatar-deviser.jpg">
+									</div>
+									<div class="comment">
+										<div class="name-date">
+											<span class="name">Alice Pierce</span>
+											<span class="date">1 day ago</span>
+										</div>
+										<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget ultricies mauris mi, nec imperdiet quam facilisis eget.
+										</div>
+									</div>
+									<div class="helpful">
+										<span>Is this review helpful to you ?</span>
+										<div class="rounded-btn">Yes</div>
+										<div class="rounded-btn">No</div>
+									</div>
+								</div>
+								<div class="comment-user">
+									<div class="avatar">
+										<img class="cover" src="/imgs/avatar-deviser.jpg">
+									</div>
+									<div class="comment">
+										<div class="name-date">
+											<span class="name">Alice Pierce</span>
+											<span class="date">1 day ago</span>
+										</div>
+										<div class="comment-text">Vivamus ultricies mauris mi, nec imperdiet quam facilisis eget.
+										</div>
+										<div class="replay">
+											<span>Reply</span>
+											<span class="score">
+													<i class="ion-ios-star"></i>
+													<i class="ion-ios-star"></i>
+													<i class="ion-ios-star"></i>
+													<i class="ion-ios-star"></i>
+													<i class="ion-ios-star"></i>
+												</span>
+											<span class="useful">300  member found this comment useful</span>
+										</div>
+									</div>
+									<div class="helpful">
+										<span>Is this review helpful to you ?</span>
+										<div class="rounded-btn">Yes</div>
+										<div class="rounded-btn">No</div>
+									</div>
+								</div>
+								<div class="load-wrapper">
+									<i class="ion-ios-arrow-down"></i>
+									<span class="green" translate="product.detail.LOAD_MORE"></span>
+									<span class="more"><span>24</span><span translate="product.detail.COMMENTS_MORE"></span></span>
+								</div>
+							</div>
+							*/ ?>
+						</div>
+						<?php /*if (count($videos)) { */?>
+						<div role="tabpanel" class="tab-pane work-description-wrapper" id="videos">
+							<div class="container mt-20 mb-20">
+								<?php if (count($videos)) { ?>
+								<div class="video-container centered-col">
+									<?php foreach ($videos as $video) { ?>
+									<div class="col-sm-6">
+										<div class="video-wrapper">
+											<iframe width="560" height="315" src="<?= $video->getUrlEmbeddedYoutubePlayer() ?>" frameborder="0" allowfullscreen></iframe>
+										</div>
+									</div>
+									<?php }  ?>
+								</div>
+								<?php } else {?>
+								<div class="col-lg-12 centered-col">
+									<img class="happyface-black" src="/imgs/happy-face-black.svg" />
+									<span translate="product.detail.MORECONTENTCOMINGSOON"></span>
+								</div>
+								<?php }?>
+							</div>
+						</div>
+						<?php /*} */?>
+						<div role="tabpanel" class="tab-pane work-description-wrapper" id="works">
+							<div class="container mt-20 mb-20" style="min-height:350px;">
+								<nav class="products-menu">
+									<ul>
+										<?php /* 
+										<li>
+											<a class="active" href="#">Pants</a>
+										</li>
+										<li>
+											<a href="#">Socks</a>
+										</li>
+										<li>
+											<a href="#">Belts</a>
+										</li>
+										*/ ?>
+									</ul>
+								</nav>
+								<div class="other-products-wrapper">
+									<div id="works-container" class="macy-container" data-columns="6">
+										<?php foreach ($personProducts as $i => $product) { ?>
+										<div class="menu-category list-group">
+											<div class="grid">
+												<figure class="effect-zoe">
+													<image-hover-buttons product-id="{{'<?= $product->short_id ?>'}}" is-loved="{{'<?=$product->isLovedByCurrentUser() ? 1 : 0 ?>'}}" is-mine="{{'<?= $product->isWorkFromCurrentUser() ? 1 : 0 ?>'}}">
+														<a href="<?= $product->getViewLink() ?>">
+															<img class="grid-image"
+															src="<?= $product->getImagePreview(400, 0) ?>">
+														</a>
+													</image-hover-buttons>
+													<a href="<?= $product->getViewLink() ?>">
+														<figcaption>
+															<p class="instauser">
+																<?= \yii\helpers\StringHelper::truncate($product->getName(), 18, '…') ?>
+																<!--<?= \yii\helpers\StringHelper::truncate(Utils::l($product->getName()), 18, '…') ?>-->
+															</p>
+															<p class="price">€ <?= $product->getMinimumPrice() ?></p>
+														</figcaption>
+													</a>
+												</figure>
+											</div>
+										</div>
+										<?php } ?>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /PRODUCT COMMENTS -->
+						<div class="container tab-pane work-description-wrapper active px-md-40 px-lg-80" role="tabpanel" id="comments">
+							<div class="col-xs-12 mt-20 text-center mb-5">
+								<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
+									<i ng-if="$index+1 > detailProductCtrl.productStars" class="ion-ios-star-outline" style="font-size: 20px; letter-spacing: 2px;"></i>
+									<i ng-if="$index+1 <= detailProductCtrl.productStars" class="ion-ios-star red-text" style="font-size: 20px; letter-spacing: 2px;"></i>
+								</span>
+								<span class="review-average" ng-if="detailProductCtrl.productStars" ng-bind="detailProductCtrl.productStars"></span>
+							</div>
+							<div class="col-xs-12 text-center revier-stars" ng-if="detailProductCtrl.stars_counter.val5>0" ng-cloak>
+								5 <span translate="product.detail.STARS"></span> <span class="grey-link-set">({{detailProductCtrl.stars_counter.val5}})</span>
+							</div>
+							<div class="col-xs-12 text-center revier-stars" ng-if="detailProductCtrl.stars_counter.val4>0" ng-cloak>
+								4 <span translate="product.detail.STARS"></span> <span class="grey-link-set">({{detailProductCtrl.stars_counter.val4}})</span>
+							</div>
+							<div class="col-xs-12 text-center revier-stars" ng-if="detailProductCtrl.stars_counter.val3>0" ng-cloak>
+								3 <span translate="product.detail.STARS"></span> <span class="grey-link-set">({{detailProductCtrl.stars_counter.val3}})</span>
+							</div>
+							<div class="col-xs-12 text-center revier-stars" ng-if="detailProductCtrl.stars_counter.val2>0" ng-cloak>
+								2 <span translate="product.detail.STARS"></span> <span class="grey-link-set">({{detailProductCtrl.stars_counter.val2}})</span>
+							</div>
+							<div class="col-xs-12 text-center revier-stars" ng-if="detailProductCtrl.stars_counter.val1>0" ng-cloak>
+								1 <span translate="product.detail.STARS"></span> <span class="grey-link-set">({{detailProductCtrl.stars_counter.val1}})</span>
+							</div>
+							<div class="col-xs-12 mt-10 text-center mb-40 font-sz-16 p-0">
+								<form class="col-xs-12 chat-send p-0" >
+									<div class="col-xs-12 col-md-1 text-left p-0">
+										<label for="comment" class="m-0">
+											<img class="avatar-logued-user m-0" src="<?= $person->getProfileImage(50, 50) ?>" style="width: 70px; height: 70px;">
+										</label>
+									</div>
+									<div class="col-xs-10 mt-15 pl-0">
+										<input class="col-xs-12 send-comment-input" type="text" ng-model="detailProductCtrl.newComment.text" translate-attr="{placeholder: 'product.detail.ADD_COMMENT'}" name="comment" required on-press-enter="detailProductCtrl.sendComment()">
+										<div class="col-xs-12 text-left mt-10" style="font-size: 20px;">
+											<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
+												<a ng-click="detailProductCtrl.newComment.stars=$index+1">
+													<i ng-if="$index+1 > detailProductCtrl.newComment.stars" class="ion-ios-star-outline" style="letter-spacing: 2px;"></i>
+													<i ng-if="$index+1 <= detailProductCtrl.newComment.stars" class="ion-ios-star red-text" style="letter-spacing: 2px;"></i>
+												</a>
+											</span>
+										</div>
+									</div>
+									<div class="col-xs-2 col-md-1 mt-15 p-0">
+										<button class="col-xs-12 send-comment-button" ng-click="detailProductCtrl.sendComment()" style="float: right;"><img src="/imgs/plane.svg"></button>
+									</div>
+								</form>
+							</div>
+							<div class="col-xs-12 mt-5 mb-10 font-sz-16 pl-0 pr-0 mr-0" ng-repeat="comment in detailProductCtrl.product.comments" style="border-bottom: solid 1px #bfbfbf;">
+								<div class="col-xs-2 col-md-1 pl-0">
+									<img class="avatar-logued-user m-0" ng-src="{{comment.person.url_avatar}}" style="width: 41px; height: 41px;">
+								</div>
+								<div class="col-xs-10 col-md-11 pr-0 pl-0" >
+									<div class="row ml-0 mb-10">
+										<span ng-bind="comment.person.name" class="pr-10" style="font-weight: bold;"></span>
+										<span class="text-dark-grey font-sz-14" am-time-ago="comment.created_at.sec | amFromUnix"></span>
+									</div>
+									<div class="col-xs-12 p-0">
+										<div class="col-xs-8 p-0">
+											<span class="ml-0">{{comment.text}}</span>
+										</div>	
+										<div class="col-xs-2 col-xs-offset-2 p-0 font-sz-14 text-right">
+											<div class="col-xs-12 p-0 mb-10">
+												<div>
+													<span translate="product.detail.REVIEW_HELPFUL" style="width: 100%; display: block;"></span>
+													<div class="col-xs-12">
+														<span class="pr-5" ng-if="!detailProductCtrl.voted.includes(comment.id)"><a ng-click="detailProductCtrl.sendHelpfulComment(comment, 'yes')"><span class="helpful-red" translate="global.YES"></span></a> <span ng-if="comment.helpfuls.yes[0]">(<span ng-bind="comment.helpfuls.yes[0]"></span>)</span></span>
+														<span class="pr-5" ng-if="detailProductCtrl.voted.includes(comment.id)"><a><span class="helpful-black" translate="global.YES"></span></a> <span ng-if="comment.helpfuls.yes[0]">(<span ng-bind="comment.helpfuls.yes[0]"></span>)</span></span>
+														<span class="pl-5" ng-if="!detailProductCtrl.voted.includes(comment.id)"><a ng-click="detailProductCtrl.sendHelpfulComment(comment, 'no')"><span class="helpful-red" translate="global.NO"></span></a> <span ng-if="comment.helpfuls.no[0]">(<span ng-bind="comment.helpfuls.no[0]"></span>)</span></span>
+														<span class="pl-5" ng-if="detailProductCtrl.voted.includes(comment.id)"><a><span class="helpful-black" translate="global.NO"></span></a> <span ng-if="comment.helpfuls.no[0]">(<span ng-bind="comment.helpfuls.no[0]"></span>)</span></span>
+													</div>
+												</div>
+											</div>
+											<div class="col-xs-12 text-center">
+												<!-- <span class="pr-5" ng-if="!detailProductCtrl.voted.includes(comment.id)"><a ng-click="detailProductCtrl.sendHelpfulComment(comment, 'yes')"><span class="helpful-red" translate="global.YES"></span></a> <span ng-if="comment.helpfuls.yes[0]">(<span ng-bind="comment.helpfuls.yes[0]"></span>)</span></span>
+												<span class="pr-5" ng-if="detailProductCtrl.voted.includes(comment.id)"><a><span class="helpful-black" translate="global.YES"></span></a> <span ng-if="comment.helpfuls.yes[0]">(<span ng-bind="comment.helpfuls.yes[0]"></span>)</span></span>
+												<span class="pl-5" ng-if="!detailProductCtrl.voted.includes(comment.id)"><a ng-click="detailProductCtrl.sendHelpfulComment(comment, 'no')"><span class="helpful-red" translate="global.NO"></span></a> <span ng-if="comment.helpfuls.no[0]">(<span ng-bind="comment.helpfuls.no[0]"></span>)</span></span>
+												<span class="pl-5" ng-if="detailProductCtrl.voted.includes(comment.id)"><a><span class="helpful-black" translate="global.NO"></span></a> <span ng-if="comment.helpfuls.no[0]">(<span ng-bind="comment.helpfuls.no[0]"></span>)</span></span> -->
+											</div>
+										</div>
+									</div>
+									<div class="row mt-5 mb-10 ml-0 mr-0">
+										<a href="" ng-if="!comment.showReply" ng-click="detailProductCtrl.showReplyComment(comment)"><span class="pr-10 reply-red" translate="product.detail.REPLY"></span></a>
+										<span class="text-left" ng-if="comment.stars>0" ng-cloak>
+											<span ng-repeat="_ in ((_ = []) && (_.length=5) && _) track by $index">
+												<i ng-if="$index+1 > comment.stars" class="ion-ios-star-outline"></i>
+												<i ng-if="$index+1 <= comment.stars" class="ion-ios-star red-text"></i>
+											</span>
+										</span>
+									</div>
+								</div>
+								<div class="col-xs-12 pt-15 p-0" ng-repeat="reply in comment.replies" style="border-top: solid 1px #bfbfbf;">
+									<div class="col-xs-offset-2 col-md-offset-1">
+										<div class="col-xs-3 col-sm-2 col-md-1 pl-0">
+											<img class="avatar-logued-user m-0" ng-src="{{reply.person.url_avatar}}" style="width: 41px; height: 41px;">
+										</div>
+										<div class="col-xs-8 col-sm-9 col-md-10 pl-0">
+											<div class="row ml-0 mb-10">
+												<span ng-bind="reply.person.name" class="pr-10" style="font-weight: bold;"></span>
+												<span class="text-dark-grey font-sz-14" am-time-ago="reply.created_at.sec | amFromUnix"></span>
+											</div>
+											<div class="mb-10 ml-0 mb-5">
+												<span>{{reply.text}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<form class="col-xs-8 col-xs-offset-2 chat-send mb-10 mt-10" ng-if="comment.showReply">
+									<div class="col-xs-10">
+										<input class="col-xs-12 send-comment-input" type="text" ng-model="comment.newReply.text" translate-attr="{placeholder: 'product.detail.ADD_COMMENT'}" name="comment" required on-press-enter="detailProductCtrl.sendCommentReply(comment)">
+									</div>
+									<div class="col-xs-2">
+										<button class="col-xs-12 send-comment-button" ng-click="detailProductCtrl.sendCommentReply(comment)"><img src="/imgs/plane.svg"></button>
+									</div>
+								</form>
+								</div>
 								</div>
 							</div>
 						</div>

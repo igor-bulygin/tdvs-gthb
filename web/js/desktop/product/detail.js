@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    function controller(productDataService, tagDataService, cartDataService, lovedDataService, boxDataService,
+    function controller(productDataService, personDataService, tagDataService, cartDataService, lovedDataService, boxDataService,
         $location, toastr, UtilService, $window, $uibModal, localStorageUtilService, $timeout, $rootScope, cartEvents) {
         var vm = this;
         vm.quantity = 1;
@@ -23,6 +23,10 @@
         vm.newComment = { text: '', stars: 0 };
         vm.showReplyComment = showReplyComment;
         vm.sendCommentReply = sendCommentReply;
+        vm.tabDetailProduct = tabDetailProduct;
+        vm.tabComments = true;
+        vm.sendHelpfulComment = sendHelpfulComment;
+        vm.voted = [];
 
 
         function init() {
@@ -94,6 +98,7 @@
                 }
             });
             vm.productStars = vm.productStars / valorations_counter;
+            vm.productStars = Math.round( vm.productStars * 10 ) / 10;
         }
 
         function getTags() {
@@ -468,6 +473,11 @@
             } else {
                 function onSendCommentSuccess(data) {
                     vm.product.comments = data.comments;
+                    for(var i = 0; i < vm.product.comments.length; i++) {
+                        getPerson(i,vm.product.comments[i].person_id);
+                        vm.product.comments[i].helpfuls = data.comments[i].helpfuls;
+                        vm.product.comments[i].replies = data.comments[i].replies;
+                    }
                     if (vm.newComment.stars > 0) {
                         setProductValoration();
                     }
@@ -475,6 +485,17 @@
                 }
                 productDataService.sendProductComment({ text: vm.newComment.text, stars: vm.newComment.stars }, { idProduct: vm.product.id }, onSendCommentSuccess, UtilService.onError);
             }
+        }
+
+        function getPerson(comment_pos, person_id) {
+            function onGetProfileSuccess(data) {
+                vm.product.comments[comment_pos].person = angular.copy(data);
+                for (var i = 0; i < vm.product.comments[comment_pos].replies.length; i++){
+                    vm.product.comments[comment_pos].replies[i].person = angular.copy(data);
+                }
+            }
+
+            personDataService.getProfilePublic({ personId: person_id }, onGetProfileSuccess, UtilService.onError);
         }
 
         function showReplyComment(comment) {
@@ -493,9 +514,44 @@
                 function onSendReplySuccess(data) {
                     comment.newReply = { text: '' };
                     comment.showReply = false;
-                    vm.product.comments = data.comments;
+                    for(var i = 0; i < vm.product.comments.length; i++) {
+                        getPerson(i,vm.product.comments[i].person_id);
+                        vm.product.comments[i].replies = data.comments[i].replies;
+                    }
                 }
                 productDataService.sendCommentReply({ text: comment.newReply.text }, { idProduct: vm.product.id, idComment: comment.id }, onSendReplySuccess, UtilService.onError);
+            }
+        }
+
+        function tabDetailProduct(tab) {
+            if (tab == 'comments'){
+                vm.tabComments = true;
+            }
+            else{
+                vm.tabComments = false;
+            }
+        }
+
+        function sendHelpfulComment(comment, helpful){
+            if (!UtilService.getConnectedUser()) {
+                openSignUpModal();
+            } else {
+                if (vm.voted.length > 0){
+                    if (!vm.voted.includes(comment.id)){
+                        vm.voted.push(comment.id);
+                    }
+                }
+                else{
+                    vm.voted.push(comment.id);
+                }
+                function onSendHelpfulSuccess(data) {
+                    comment.helpfuls = { helpful: helpful };
+                    for(var i = 0; i < vm.product.comments.length; i++) {
+                        getPerson(i,vm.product.comments[i].person_id);
+                        vm.product.comments[i].helpfuls = data.comments[i].helpfuls;
+                    }
+                }
+                productDataService.sendHelpfulComment({ helpful: helpful }, { idProduct: vm.product.id, idComment: comment.id, helpful: helpful }, onSendHelpfulSuccess, UtilService.onError);
             }
         }
     }

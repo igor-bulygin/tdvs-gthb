@@ -50,7 +50,9 @@
 			"MANUFACTURING_INFO": "Información del cliente necesaria antes de fabricar este producto",
 			"IS_PREORDER": "Es necesario pre encargar el producto",
 			"PREORDER_END": "El plazo de pre encargo termina el",
-			"WHEN_SHIPPED": "El producto será enviado el"
+			"WHEN_SHIPPED": "El producto será enviado el",
+			"USER_REVIEWS": "Opiniones de los usuarios",
+			"WORKS_BY": "Trabajos de"
 		},
 		"creation_edition": {
 			"BACK_TO_PROFILE": " &lt volver al perfil",

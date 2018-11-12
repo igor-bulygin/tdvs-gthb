@@ -7,6 +7,7 @@ namespace app\models;
  * @property int stars
  * @property ProductComment[] $repliesInfo
  * @property \MongoDate created_at
+ * @property mixed $helpfulsInfo
  *
  * @method Product getParentObject()
  */
@@ -28,6 +29,7 @@ class ProductComment extends EmbedModel
 	protected static $retrieveExtraFields = [];
 
 	public $replies;
+	public $helpfuls;
 
 	public function attributes()
 	{
@@ -38,6 +40,7 @@ class ProductComment extends EmbedModel
 			'stars',
 			'created_at',
 			'replies',
+			'helpfuls',
 		];
 	}
 
@@ -51,9 +54,18 @@ class ProductComment extends EmbedModel
 		return $this->mapEmbeddedList('replies', ProductCommentReply::className(), array('unsetSource' => false));
 	}
 
+	public function embedHelpfulsInfo()
+	{
+		return $this->mapEmbeddedList('helpfuls', ProductCommentHelpful::className(), array('unsetSource' => false));
+	}
+
 	public function setParentOnEmbbedMappings()
 	{
 		foreach ($this->repliesInfo as $item) {
+			$item->setParentObject($this);
+		}
+
+		foreach ($this->helpfulsInfo as $item) {
 			$item->setParentObject($this);
 		}
 
@@ -67,6 +79,7 @@ class ProductComment extends EmbedModel
 				['text'], 'safe', 'on' => [
 					Product::SCENARIO_PRODUCT_COMMENT,
 					Product::SCENARIO_PRODUCT_COMMENT_REPLY,
+					Product::SCENARIO_PRODUCT_COMMENT_HELPFUL,
 				],
 			],
 			[
@@ -78,6 +91,7 @@ class ProductComment extends EmbedModel
 			['person_id', 'app\validators\PersonIdValidator'],
 			['stars', 'integer',  'min' => 0,  'max' => 5,],
 			['repliesInfo', 'app\validators\EmbedDocValidator'], // to apply rules
+			['helpfulsInfo', 'app\validators\EmbedDocValidator'] // to apply rules
 		];
 	}
 
@@ -110,6 +124,7 @@ class ProductComment extends EmbedModel
 			'text' => $this->text,
 			'stars' => $this->stars,
 			'replies' => $replies,
+			'helpfuls' => $this->helpfuls,
 			'created_at' => $this->created_at,
 
 		];

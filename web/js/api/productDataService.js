@@ -10,6 +10,7 @@
         //priv
         var Comment = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct/comments');
         var Reply = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct/comments/:idComment/replies');
+        var Helpful = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct/comments/:idComment/helpfuls');
 
         var ProductPriv = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct', {}, {
             'update': {
@@ -28,6 +29,7 @@
         this.deleteProductPriv = deleteProductPriv;
         this.sendProductComment = sendProductComment;
         this.sendCommentReply = sendCommentReply;
+        this.sendHelpfulComment = sendHelpfulComment;
 
         function getProducts(params, onSuccess, onError) {
             apiMethods.get(Products, params, onSuccess, onError);
@@ -67,6 +69,10 @@
 
         function sendCommentReply(data, params, onSuccess, onError) {
             apiMethods.create(Reply, data, params, onSuccess, onError);
+        }
+
+        function sendHelpfulComment(data, params, onSuccess, onError) {
+            apiMethods.create(Helpful, data, params, onSuccess, onError);
         }
 
 

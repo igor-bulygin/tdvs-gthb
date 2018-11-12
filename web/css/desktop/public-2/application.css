@@ -547,6 +547,16 @@ a, a:hover, a:focus {
 .align-right {
   text-align: right; }
 
+@media (max-width: 991px) {
+  .align-sm-left {
+    text-align: left; } }
+
+.font-sz-14 {
+  font-size: 14px !important; }
+
+.font-sz-16 {
+  font-size: 16px !important; }
+
 .mt-0 {
   margin-top: 0 !important; }
 
@@ -592,6 +602,9 @@ a, a:hover, a:focus {
 .mb-100 {
   margin-bottom: 100px; }
 
+.mb-5 {
+  margin-bottom: 5px !important; }
+
 .mb-10 {
   margin-bottom: 10px; }
 
@@ -622,6 +635,19 @@ a, a:hover, a:focus {
 .ml-30 {
   margin-left: 30px; }
 
+.p-0 {
+  padding: 0 !important; }
+
+@media (min-width: 1200px) {
+  .px-lg-80 {
+    padding-right: 100px !important;
+    padding-left: 80px !important; } }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .px-md-40 {
+    padding-right: 40px !important;
+    padding-left: 40px !important; } }
+
 .pt-0 {
   padding-top: 0 !important; }
 
@@ -638,10 +664,13 @@ a, a:hover, a:focus {
   padding-left: 5px !important; }
 
 .pl-10 {
-  padding-left: 10 !important; }
+  padding-left: 10px !important; }
 
 .pl-15 {
   padding-left: 15px !important; }
+
+.pl-20 {
+  padding-left: 20px !important; }
 
 .pl-30 {
   padding-left: 30px !important; }
@@ -652,6 +681,12 @@ a, a:hover, a:focus {
 @media (max-width: 767px) {
   .pl-xs-10 {
     padding-left: 10px !important; } }
+
+.pr-0 {
+  padding-right: 0px !important; }
+
+.pr-5 {
+  padding-right: 5px !important; }
 
 .pr-10 {
   padding-right: 10px !important; }
@@ -8438,6 +8473,56 @@ span.optional-text.pull-left {
   width: 49px;
   margin: 30px auto;
   display: block; }
+
+.send-comment-input {
+  border: solid 1px #bfbfbf;
+  border-radius: 40px;
+  height: 46px; }
+  .send-comment-input::placeholder {
+    color: #bfbfbf; }
+
+.send-comment-button {
+  padding-left: 13px;
+  padding-right: 13px;
+  height: 46px;
+  width: 46px;
+  border: 1px solid #bfbfbf;
+  border-radius: 40px;
+  background-color: #c91c39; }
+
+.reply-red {
+  color: #c91c39;
+  font-weight: bold; }
+
+.helpful-red {
+  color: #c91c39;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer; }
+
+.helpful-black {
+  color: #1C1919;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase; }
+
+.review-average {
+  font-size: 20px;
+  font-weight: 300;
+  font-stretch: condensed;
+  color: #9b9b9b; }
+
+.revier-stars {
+  font-size: 16px; }
+
+@media (max-width: 767px) {
+  .bb-xs-0 {
+    border-bottom: none; } }
+
+@media (max-width: 767px) {
+  .bb-xs-ddd li.active a {
+    border-bottom: 1px solid #ddd !important; } }
 
 #carousel-custom {
   margin: 20px auto; }
