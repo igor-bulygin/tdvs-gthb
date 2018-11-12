@@ -86,7 +86,7 @@
                     }
                 });
                 angular.forEach(vm.currentChat.members, function(member) {
-                    if (vm.person.id != member.person_id) {
+                    if (vm.person.id != '"'+member.person_id+'"') {
                         vm.personToChat.id = member.person_id;
                         vm.personToChat.name = member.person_info.name;
                         vm.personToChat.profile_image = member.person_info.profile_image;
@@ -134,8 +134,9 @@
         }
 
         function selectChat(chat) {
+            // No needed
             var baseLen = $location.absUrl().length - $location.url().length;
-            $location.path(chat.preview.url.substring(baseLen));
+            $location.url(chat.preview.url.substring(baseLen));
             getChat(chat.id)
         }
 
