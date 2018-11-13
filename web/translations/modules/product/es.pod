@@ -37,7 +37,7 @@
 			"DAY_AGO": " días hace",
 			"REPLY": "Contestar",
 			"MEMER_COMMENT_USEFUL": "  miembros encuentran útil este comentario",
-			"REVIEW_HELPFUL": "Te ha resultado útil ?",
+			"REVIEW_HELPFUL": "¿Te ha resultado útil?",
 			"LOAD_MORE": "VER MÁS",
 			"COMMENTS_MORE": " comentarios más",
 			"ADD_COMMENT":"Añade tu comentario",

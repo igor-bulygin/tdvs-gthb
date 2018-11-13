@@ -111,12 +111,14 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 								</div>
 								<div class="col-xs-9 col-sm-10">
 									<span class="col-xs-12 red-text chat-tit" ng-bind="msg.person_info.name" ng-if="msg.showOwner"></span>
-									<span class="col-xs-12 chat-text" ng-bind="msg.text"></span>
+
+									<span class="col-xs-12 chat-text" ng-bind="msg.text" ng-if="msg.isLast" style="margin-top:100px;"></span>
+									<span class="col-xs-12 chat-text" ng-bind="msg.text" ng-if="!msg.isLast"></span>
 									<span class="col-xs-12 text-right chat-time">
-										<span am-time-ago="chatCtrl.parseDate(msg.date.sec*1000)"></span>
+										<span am-time-ago="chatCtrl.parseDate(msg.date.sec*1000) | amUtc | amDateFormat:'YYYY-MM-DD\THH:mm:ss.000Z'"></span>
 									</span>
 								</div>
-								<div ng-if="msg.isLast" id="bottomChat" ng-cloak style="margin-top:100px;"></div>
+								<div ng-if="msg.isLast" id="bottomChat" ng-cloak></div>
 							</div>
 						</div>
 					</div>

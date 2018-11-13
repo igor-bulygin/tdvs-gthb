@@ -95,7 +95,7 @@
                 vm.loadingChat = false;
                 $location.hash('bottomChat');
                 $anchorScroll();
-                $location.hash('');
+                
             }
             if (id) {
                 chatDataService.getChat({ id: id }, onGetChatSuccess, UtilService.onError);
@@ -119,7 +119,6 @@
                     vm.newMsg = '';
                     $location.hash('bottomChat');
                     $anchorScroll();
-                    $location.hash('');
                     getChats();
                 }
                 chatDataService.sendMsg({ text: vm.newMsg }, { personId: vm.personToChat.id }, onSendMsgSuccess, UtilService.onError);
@@ -134,7 +133,6 @@
         }
 
         function selectChat(chat) {
-            // No needed
             var baseLen = $location.absUrl().length - $location.url().length;
             $location.url(chat.preview.url.substring(baseLen));
             getChat(chat.id)

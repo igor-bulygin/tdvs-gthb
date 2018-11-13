@@ -37,7 +37,7 @@
 			"DAY_AGO":" day ago",
 			"REPLY":"Reply",
 			"MEMBER_COMMENT_USEFUL":"  member found this comment useful",
-			"REVIEW_HELPFUL":"Is this review helpful to you ?",
+			"REVIEW_HELPFUL":"Is this review helpful to you?",
 			"LOAD_MORE":"LOAD MORE",
 			"COMMENTS_MORE": " comments more",
 			"ADD_COMMENT":"Add your comment",

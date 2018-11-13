@@ -970,26 +970,30 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 								</div>
 								<div class="col-xs-10 col-md-11 pr-0 pl-0" >
 									<div class="row ml-0 mb-10">
-										<span ng-bind="comment.person.name" class="pr-10" style="font-weight: bold;"></span>
-										<span class="text-dark-grey font-sz-14" am-time-ago="comment.created_at.sec | amFromUnix"></span>
-									</div>
-									<div class="col-xs-12 p-0">
 										<div class="col-xs-8 p-0">
-											<span class="ml-0">{{comment.text}}</span>
-										</div>	
-										<div class="col-xs-2 col-xs-offset-2 p-0 font-sz-14 text-right">
-											<div class="col-xs-12 p-0 mb-10">
+											<span ng-bind="comment.person.name" class="pr-10" style="font-weight: bold;"></span>
+											<span class="text-dark-grey font-sz-14" am-time-ago="comment.created_at.sec | amFromUnix"></span>
+										</div>
+										<div class="text-center col-xs-4 col-sm-3 col-sm-offset-1 p-0 font-sz-14">
+											<div class="col-xs-12 pl-0 mb-10">
 												<div>
-													<span translate="product.detail.REVIEW_HELPFUL" style="width: 100%; display: block;"></span>
-													<div class="col-xs-12">
-														<span class="pr-5" ng-if="!detailProductCtrl.voted.includes(comment.id)"><a ng-click="detailProductCtrl.sendHelpfulComment(comment, 'yes')"><span class="helpful-red" translate="global.YES"></span></a> <span ng-if="comment.helpfuls.yes[0]">(<span ng-bind="comment.helpfuls.yes[0]"></span>)</span></span>
-														<span class="pr-5" ng-if="detailProductCtrl.voted.includes(comment.id)"><a><span class="helpful-black" translate="global.YES"></span></a> <span ng-if="comment.helpfuls.yes[0]">(<span ng-bind="comment.helpfuls.yes[0]"></span>)</span></span>
-														<span class="pl-5" ng-if="!detailProductCtrl.voted.includes(comment.id)"><a ng-click="detailProductCtrl.sendHelpfulComment(comment, 'no')"><span class="helpful-red" translate="global.NO"></span></a> <span ng-if="comment.helpfuls.no[0]">(<span ng-bind="comment.helpfuls.no[0]"></span>)</span></span>
-														<span class="pl-5" ng-if="detailProductCtrl.voted.includes(comment.id)"><a><span class="helpful-black" translate="global.NO"></span></a> <span ng-if="comment.helpfuls.no[0]">(<span ng-bind="comment.helpfuls.no[0]"></span>)</span></span>
-													</div>
+													<span translate="product.detail.REVIEW_HELPFUL"></span>
 												</div>
 											</div>
 										</div>
+									</div>
+									<div class="col-xs-12 p-0">
+										<div class="col-xs-12 p-0">
+											<div class="col-xs-8 p-0">
+												<span class="ml-0">{{comment.text}}</span>
+											</div>
+											<div class="col-xs-4 col-sm-3 col-sm-offset-1 pl-10 pr-0 text-center mb-10">
+												<span class="pr-10" ng-if="comment.id ? !detailProductCtrl.voted.includes(comment.id) : !detailProductCtrl.voted.includes(comment.short_id)"><a ng-click="detailProductCtrl.sendHelpfulComment(comment, 'yes')"><span class="helpful-red" translate="global.YES"></span></a> <span class="text-light-grey"ng-if="comment.helpfuls.yes[0]">(<span ng-bind="comment.helpfuls.yes[0]"></span>)</span></span>
+												<span class="pr-10" ng-if="comment.id ? detailProductCtrl.voted.includes(comment.id) : detailProductCtrl.voted.includes(comment.short_id)"><a><span class="helpful-black" translate="global.YES"></span></a> <span class="text-light-grey"ng-if="comment.helpfuls.yes[0]">(<span ng-bind="comment.helpfuls.yes[0]"></span>)</span></span>
+												<span class="pl-10" ng-if="comment.id ? !detailProductCtrl.voted.includes(comment.id) : !detailProductCtrl.voted.includes(comment.short_id)"><a ng-click="detailProductCtrl.sendHelpfulComment(comment, 'no')"><span class="helpful-red" translate="global.NO"></span></a> <span class="text-light-grey"ng-if="comment.helpfuls.no[0]">(<span ng-bind="comment.helpfuls.no[0]"></span>)</span></span>
+												<span class="pl-10" ng-if="comment.id ? detailProductCtrl.voted.includes(comment.id) : detailProductCtrl.voted.includes(comment.short_id)"><a><span class="helpful-black" translate="global.NO"></span></a> <span class="text-light-grey"ng-if="comment.helpfuls.no[0]">(<span ng-bind="comment.helpfuls.no[0]"></span>)</span></span>
+											</div>
+										</div>	
 									</div>
 									<div class="row mt-5 mb-10 ml-0 mr-0">
 										<a href="" ng-if="!comment.showReply" ng-click="detailProductCtrl.showReplyComment(comment)"><span class="pr-10 reply-red" translate="product.detail.REPLY"></span></a>

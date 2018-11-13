@@ -27,6 +27,7 @@
         vm.tabComments = true;
         vm.sendHelpfulComment = sendHelpfulComment;
         vm.voted = [];
+        vm.getVoted = getVoted;
 
 
         function init() {
@@ -475,8 +476,6 @@
                     vm.product.comments = data.comments;
                     for(var i = 0; i < vm.product.comments.length; i++) {
                         getPerson(i,vm.product.comments[i].person_id);
-                        vm.product.comments[i].helpfuls = data.comments[i].helpfuls;
-                        vm.product.comments[i].replies = data.comments[i].replies;
                     }
                     if (vm.newComment.stars > 0) {
                         setProductValoration();
@@ -519,7 +518,14 @@
                         vm.product.comments[i].replies = data.comments[i].replies;
                     }
                 }
-                productDataService.sendCommentReply({ text: comment.newReply.text }, { idProduct: vm.product.id, idComment: comment.id }, onSendReplySuccess, UtilService.onError);
+                var comment_id;
+                if(comment.id){
+                    comment_id = comment.id;
+                }
+                else if(comment.short_id){
+                    comment_id = comment.short_id;
+                }
+                productDataService.sendCommentReply({ text: comment.newReply.text }, { idProduct: vm.product.id, idComment: comment_id }, onSendReplySuccess, UtilService.onError);
             }
         }
 
@@ -536,22 +542,39 @@
             if (!UtilService.getConnectedUser()) {
                 openSignUpModal();
             } else {
-                if (vm.voted.length > 0){
-                    if (!vm.voted.includes(comment.id)){
-                        vm.voted.push(comment.id);
-                    }
-                }
-                else{
-                    vm.voted.push(comment.id);
-                }
+                getVoted(comment);
                 function onSendHelpfulSuccess(data) {
-                    comment.helpfuls = { helpful: helpful };
                     for(var i = 0; i < vm.product.comments.length; i++) {
                         getPerson(i,vm.product.comments[i].person_id);
                         vm.product.comments[i].helpfuls = data.comments[i].helpfuls;
                     }
                 }
-                productDataService.sendHelpfulComment({ helpful: helpful }, { idProduct: vm.product.id, idComment: comment.id, helpful: helpful }, onSendHelpfulSuccess, UtilService.onError);
+                var comment_id;
+                if(comment.id){
+                    comment_id = comment.id;
+                }
+                else if(comment.short_id){
+                    comment_id = comment.short_id;
+                }
+                productDataService.sendHelpfulComment({ helpful: helpful }, { idProduct: vm.product.id, idComment: comment_id, helpful: helpful }, onSendHelpfulSuccess, UtilService.onError);
+            }
+        }
+
+        function getVoted(comment){
+            var comment_id;
+            if (comment.id){
+                comment_id = comment.id;
+            }
+            else if(comment.short_id){
+                comment_id = comment.short_id;
+            }
+            if (vm.voted.length > 0){
+                if (!vm.voted.includes(comment_id)){
+                    vm.voted.push(comment_id);
+                }
+            }
+            else{
+                vm.voted.push(comment_id);
             }
         }
     }
