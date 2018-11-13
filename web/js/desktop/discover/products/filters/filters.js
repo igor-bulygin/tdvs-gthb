@@ -17,8 +17,9 @@
 		vm.filters = {};
 		vm.search = search;
 		vm.clearAllFilters = clearAllFilters
-        vm.getProductSizesFilters = getProductSizesFilters;
+        vm.getProductFilters = getProductFilters;
 		vm.clearFilter = clearFilter;
+		vm.getFilterCategories = getFilterCategories;
 		vm.page = 1;
 
 		init();
@@ -64,11 +65,15 @@
         }
 
 
-		function getCategories() {
+        /**
+         * get All existing categories for retrieve information about product categories
+         * (see {scope="all"} in service parameters)
+         */
+        function getCategories() {
 			function onGetCategoriesSuccess(data) {
-				vm.categories = angular.copy(data);
+                vm.categories_all = angular.copy(data);
 			}
-			productDataService.getCategories({}, onGetCategoriesSuccess, UtilService.onError);
+			productDataService.getCategories({scope: 'all'}, onGetCategoriesSuccess, UtilService.onError);
 		}
 
 		function search(resetPage, resetFilters) {
@@ -108,7 +113,7 @@
                     vm.results.items = vm.results.items.concat(angular.copy(data.items));
                     vm.results.counter = angular.copy(data.meta.total_count);
                     if (resetFilters) {
-                        vm.getProductSizesFilters();
+                        vm.getProductFilters();
                 	}
 					vm.searching = false;
 				};
@@ -121,8 +126,15 @@
 			}
 		}
 
-		function getProductSizesFilters() {
+		function getProductFilters() {
 		    vm.sizes = [];
+            vm.categories = {};
+            vm.categories.items = [];
+            var cats = [];
+            // console.log(vm.results.items);
+            /**
+             * retrieve information about all product sizes in products found
+             */
             vm.results.items.forEach(function(product) {
                 if(typeof product.sizechart.values === 'object') {
                     product.sizechart.values.forEach(function (size) {
@@ -131,13 +143,80 @@
                         }
                     });
                 }
+                /**
+                 * retrieve information about categories IDs in products found
+                 */
+                cats = cats.concat(angular.copy(product.categories));
             });
+            /**
+             * Sort sizes. (see sort function in the bottom of file)
+             * First: sizes with numbers and letters (like "38 (XS)")
+             * Then: sizes with letters (like "M", "S" etc)
+             * Then: numbers ("40", "12", etc.)
+             */
             vm.sizes.sort(sortAlphaNum);
+
+            /**
+             * retrirve FULL information about categories in products found (filter all categories according to earlier found categories IDs)
+             */
+            var exists = [];
+            var product_categories = vm.categories_all.items.filter(function (item) {
+                if (exists.indexOf(item.short_id) === -1 && cats.indexOf(item.short_id) > -1) {
+                    exists.push(item.short_id);
+                    return true;
+                }
+                return false;
+            });
+            /**
+             * get categpries filters
+             */
+            vm.categories.items = vm.getFilterCategories(product_categories);
         }
 
+        /**
+         * 1. Search for root categories (Art, Fashion, etc)
+         * 2. If there's more than 1 root category - we return root categories for filters
+         * 3. If there's only 1 root category - we return only products subcategories for filters
+         * @param product_categories
+         * @return {*}
+         */
+        function getFilterCategories(product_categories) {
+            var exists = [];
+            var root_categories = product_categories.reduce(function (prev, cur, i, arr) {
+                /**
+                 * Get root category ID using "path" property of category info
+                 */
+                var root_id = cur.path.split('/')[1];
+
+                if(root_id === undefined || root_id.length === 0) {
+                    return prev;
+                }
+
+                if (exists.indexOf(root_id) === -1) {
+                    prev.push(
+                        vm.categories_all.items.find(function(item) {
+                            return (item !== undefined && item.short_id === root_id);
+                        })
+                    );
+                    exists.push(root_id);
+                }
+                return prev;
+            }, []);
+            if (root_categories.length > 1) {
+                return root_categories.filter (function(item) {
+                    return item !== undefined;
+                });
+            }
+            else {
+                return product_categories.filter (function(item) {
+                    return item !== undefined;
+                });
+
+            }
+        }
 
 		$scope.$on("changePage", function(evt,data){ 
-				vm.page=data;
+				vm.page = data;
 				search(false, true);
 		}, true);
 	}
