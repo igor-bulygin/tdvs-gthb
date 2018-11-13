@@ -7,15 +7,16 @@
 		vm.searchMore = searchMore;
 		vm.filters = {};
 		vm.maxResults=100;
-		vm.page=1;
-		vm.results={items: [] };
+		vm.page = 1;
+		vm.results = {items: [] };
 
 		init();
 
 		function init() {
 			if (!vm.searchdata) {
-				vm.searchdata = { hideHeader:false, key: ''};
+				vm.searchdata = { hideHeader: false, key: ''};
 			}
+			search(true);
 		}
 
 		function searchMore() {
@@ -23,7 +24,7 @@
 			search();
 		}
 
-		function search() {
+		function search(resetFilters) {
 			if (!vm.searching) {
 				vm.searching = true;
 				if (vm.search_key != vm.searchdata.key) {
@@ -37,9 +38,12 @@
 					page: vm.page
 				}
 				var onGetPeopleSuccess = function(data) {
-					vm.results.items=vm.results.items.concat(angular.copy(data.items));
+					vm.results.items = vm.results.items.concat(angular.copy(data.items));
 					vm.search_key = angular.copy(vm.searchdata.key);
-					vm.results_found=data.meta.total_count;
+					vm.results_found = data.meta.total_count;
+                    if (resetFilters === true) {
+                        $scope.$broadcast('setPersonFilters', vm.results.items);
+                    }
 					vm.searching = false;
 				}
 
@@ -67,17 +71,29 @@
 		}
 
 		//watches
-		$scope.$watch('discoverCtrl.filters', function (newValue, oldValue) {
-			vm.results={items: [] };
-			vm.page=1;
-			search();
-		}, true);
+		// $scope.$watch('discoverCtrl.filters', function (newValue, oldValue) {
+		//     console.log(vm.filters.length);
+		//     var reset = (vm.filters.length === 0);
+		// 	vm.results = {items: [] };
+		// 	vm.page = 1;
+		// 	search(true);
+		// }, true);
+
+        $scope.$on('emitSearch', function (evt, reset) {
+            vm.results = {items: [] };
+            vm.page = 1;
+            search(reset);
+        }, true);
+
 
         /**
          * Watch event generated in filters.js when categories filters are cleared
          */
 		$scope.$on("clearFiltersCategories", function(evt,data) {
             vm.filters.categories = {};
+            vm.results = {items: [] };
+            vm.page = 1;
+            search(false);
         }, true);
 
         /**
@@ -85,6 +101,9 @@
          */
         $scope.$on("clearFiltersCountries", function(evt,data) {
             vm.filters.countries = {};
+            vm.results = {items: [] };
+            vm.page = 1;
+            search(false);
         }, true);
 
 

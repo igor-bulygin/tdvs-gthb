@@ -5,7 +5,10 @@
 		var vm = this;
 		vm.seeMore = seeMore;
 		vm.show_countries = 10;
+		vm.categories_all = [];
         vm.emitClearFilters = emitClearFilters;
+        vm.setPersonFilters = setPersonFilters;
+        vm.emitSearch = emitSearch;
 
 		init();
 
@@ -16,7 +19,7 @@
 
 		function getCategories() {
 			function onGetCategoriesSuccess(data) {
-				vm.categories = angular.copy(data.items);
+				vm.categories_all = angular.copy(data.items);
 			}
 
 			var params = {
@@ -66,6 +69,42 @@
                     break;
             }
         }
+
+        function emitSearch(resetFilters) {
+            $scope.$emit('emitSearch', resetFilters);
+        }
+
+        function setPersonFilters(results) {
+            vm.categories = {};
+            vm.categories.items = [];
+            var cats = [];
+            // console.log(vm.results.items);
+
+            results.forEach(function(person) {
+                /**
+                 * retrieve information about categories IDs in persons found
+                 */
+                cats = cats.concat(angular.copy(person.categories));
+            });
+
+            /**
+             * retrieve FULL information about categories in products found (filter all categories according to earlier found categories IDs)
+             */
+            var exists = [];
+            vm.categories = vm.categories_all.filter(function (item) {
+                if (exists.indexOf(item.short_id) === -1 && cats.indexOf(item.short_id) > -1) {
+                    exists.push(item.short_id);
+                    return true;
+                }
+                return false;
+            });
+        }
+
+
+        $scope.$on("setPersonFilters", function(evt, data) {
+            vm.setPersonFilters(data);
+        }, true);
+
 
 	}
 
