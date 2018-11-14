@@ -760,6 +760,62 @@ class Product extends CActiveRecord {
             );
         }
 
+        // if seasons are specified
+        if ((array_key_exists("seasons", $criteria)) && (!empty($criteria["seasons"]))) {
+            $ids = [];
+            foreach ($criteria["seasons"] as $season) {
+                if ($season && strlen($season) > 0) {
+                    $ids[] = $season;
+                }
+            }
+            $query->andWhere(
+                ['options.b0bd5' =>
+                    ['$elemMatch' =>
+                        ['$elemMatch' =>
+                            ['$in' => $ids]
+                        ]
+                    ]
+                ]
+            );
+        }
+
+        // if techniques are specified
+        if ((array_key_exists("techniques", $criteria)) && (!empty($criteria["techniques"]))) {
+            $ids = [];
+            foreach ($criteria["techniques"] as $technique) {
+                if ($technique&& strlen($technique) > 0) {
+                    $ids[] = $technique;
+                }
+            }
+            $query->andWhere(
+                ['options.fb9eh' =>
+                    ['$elemMatch' =>
+                        ['$elemMatch' =>
+                            ['$in' => $ids]
+                        ]
+                    ]
+                ]
+            );
+        }
+
+        // if gemstones are specified
+        if ((array_key_exists("gemstones", $criteria)) && (!empty($criteria["gemstones"]))) {
+            $ids = [];
+            foreach ($criteria["gemstones"] as $gemstone) {
+                if ($gemstone&& strlen($gemstone) > 0) {
+                    $ids[] = $gemstone;
+                }
+            }
+            $query->andWhere(
+                ['options.2500m' =>
+                    ['$elemMatch' =>
+                        ['$elemMatch' =>
+                            ['$in' => $ids]
+                        ]
+                    ]
+                ]
+            );
+        }
 
 		// if product_state is specified
 		if ((array_key_exists("product_state", $criteria)) && (!empty($criteria["product_state"]))) {

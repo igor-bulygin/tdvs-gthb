@@ -9,6 +9,9 @@
         vm.show_colors      = 50;
         vm.show_materials   = 50;
         vm.show_occasions   = 50;
+        vm.show_seasons     = 50;
+        vm.show_techniques  = 50;
+        vm.show_gemstones   = 50;
 		vm.orderTypes=[
             {value: "relevant", name: 'discover.RELEVANT'},
 			{value: "new", name: 'discover.NEW'},
@@ -30,11 +33,14 @@
         vm.getFilterOccasions = getFilterOccasions;
         vm.getFilterSeasons = getFilterSeasons;
         vm.getFilterTechniques = getFilterTechniques;
+        vm.getFilterGemstones = getFilterGemstones;
 		vm.page = 1;
-		vm.colors = [];
-		vm.materials = [];
-		vm.occasions = [];
-		vm.seasons = [];
+		vm.colors       = [];
+		vm.materials    = [];
+		vm.occasions    = [];
+		vm.seasons      = [];
+        vm.techniques   = [];
+        vm.gemstones    = [];
 
 		init();
 
@@ -87,6 +93,13 @@
             else if (type === 'seasons') {
                 vm.filters.seasons = {};
             }
+            else if (type === 'techniques') {
+                vm.filters.techniques = {};
+            }
+            else if (type === 'gemstones') {
+                vm.filters.gemstones = {};
+            }
+
             search(true, false);
         }
 
@@ -158,6 +171,9 @@
             vm.getFilterColors();
             vm.getFilterMaterials();
             vm.getFilterOccasions();
+            vm.getFilterSeasons();
+            vm.getFilterTechniques();
+            vm.getFilterGemstones();
         }
 
         function getFilterCategories() {
@@ -365,13 +381,116 @@
             });
         }
         function getFilterSeasons() {
+            var exists = [];
 
+            vm.results.items.forEach(function(product) {
+                /**
+                 * retrieve information about avalaible materials in products found
+                 */
+                product.options.forEach(function(item) {
+                    if (item.name === 'Season') {
+                        item.values.forEach(function(obj) {
+                            if (isArray(obj.value)) {
+                                for (i = 0; i < obj.value.length; i++) {
+                                    // if (obj.value[i] == 'gold-18') console.log(product);
+                                    if (exists.indexOf(obj.value[i]) === -1) {
+                                        vm.seasons.push({
+                                            name: obj.text[i],
+                                            value: obj.value[i]
+                                        });
+                                        exists.push(obj.value[i]);
+                                    }
+                                }
+                            }
+                            else  {
+                                if (exists.indexOf(obj.value) === -1) {
+                                    vm.seasons.push({
+                                        name: obj.text,
+                                        value: obj.value
+                                    });
+                                    exists.push(obj.value);
+                                }
+                            }
+                        });
+                    }
+                });
+            });
         }
 
         function getFilterTechniques() {
+            var exists = [];
 
+            vm.results.items.forEach(function(product) {
+                /**
+                 * retrieve information about avalaible materials in products found
+                 */
+                product.options.forEach(function(item) {
+                    if (item.name === 'Technique') {
+                        item.values.forEach(function(obj) {
+                            if (isArray(obj.value)) {
+                                for (i = 0; i < obj.value.length; i++) {
+                                    // if (obj.value[i] == 'gold-18') console.log(product);
+                                    if (exists.indexOf(obj.value[i]) === -1) {
+                                        vm.techniques.push({
+                                            name: obj.text[i],
+                                            value: obj.value[i]
+                                        });
+                                        exists.push(obj.value[i]);
+                                    }
+                                }
+                            }
+                            else  {
+                                if (exists.indexOf(obj.value) === -1) {
+                                    vm.techniques.push({
+                                        name: obj.text,
+                                        value: obj.value
+                                    });
+                                    exists.push(obj.value);
+                                }
+                            }
+                        });
+                    }
+                });
+            });
         }
 
+        function getFilterGemstones() {
+            var exists = [];
+
+            vm.results.items.forEach(function(product) {
+                /**
+                 * retrieve information about avalaible materials in products found
+                 */
+                product.options.forEach(function(item) {
+                    if (item.name === 'Gemstone') {
+                        item.values.forEach(function(obj) {
+                            if (isArray(obj.value)) {
+                                for (i = 0; i < obj.value.length; i++) {
+                                    // if (obj.value[i] == 'gold-18') console.log(product);
+                                    if (exists.indexOf(obj.value[i]) === -1) {
+                                        vm.gemstones.push({
+                                            name: obj.text[i],
+                                            value: obj.value[i]
+                                        });
+                                        exists.push(obj.value[i]);
+                                    }
+                                }
+                            }
+                            else  {
+                                if (exists.indexOf(obj.value) === -1) {
+                                    vm.gemstones.push({
+                                        name: obj.text,
+                                        value: obj.value
+                                    });
+                                    exists.push(obj.value);
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        }
+        
 		$scope.$on("changePage", function(evt,data){ 
 				vm.page = data;
 				search(false, true);

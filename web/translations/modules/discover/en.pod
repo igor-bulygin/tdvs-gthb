@@ -14,6 +14,8 @@
 		"FILTER_BY_MATERIAL": "Material",
 		"FILTER_BY_SEASON": "Season",
 		"FILTER_BY_OCCASION": "Occasion",
+		"FILTER_BY_TECHNIQUE": "Technique",
+		"FILTER_BY_GEMSTONE": "Gemstone",
 		"CLEAR_ALL": "clear",
 		"FOLLOW": "Follow",
 		"UNFOLLOW": "Unfollow",

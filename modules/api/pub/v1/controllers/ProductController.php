@@ -50,6 +50,7 @@ class ProductController extends AppPublicController {
             "materials"             => Yii::$app->request->get("materials"),
             "occasions"             => Yii::$app->request->get("occasions"),
             "seasons"               => Yii::$app->request->get("seasons"),
+            "gemstones"             => Yii::$app->request->get("gemstones"),
 			"order_type"            => Yii::$app->request->get("order_type"),
 			"product_state"         => Product::PRODUCT_STATE_ACTIVE,
 			"only_active_persons"   => true,
