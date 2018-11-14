@@ -90,11 +90,13 @@ class ChatController extends AppPrivateController
 			$member = new ChatMember();
 			$member->person_id = $personId;
 			$member->person_type = $person->type;
+			$member->person_info = $member->getPersonInfo();
 			$members[] = $member;
 
 			$member = new ChatMember();
 			$member->person_id = $connectedPerson->short_id;
 			$member->person_type = $connectedPerson->type;
+			$member->person_info = $member->getPersonInfo();
 			$members[] = $member;
 
 			$chat = new Chat();

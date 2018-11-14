@@ -48,6 +48,7 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 											<a ng-click="chatCtrl.selectChat(chat)" class="col-xs-12" role="button">
 												<span class="col-xs-12">
 													<div class="col-xs-3 col-sm-2-5">
+														<span class="unread-chat" ng-if="chat.preview.unread"></span>
 														<img class="avatar-logued-user" ng-src="{{ chatCtrl.parseImage(chat.preview.image)}}">
 													</div>
 													<div class="col-xs-9 col-sm-9-5">
@@ -79,6 +80,7 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 								<a ng-click="chatCtrl.selectChat(chat)" class="col-xs-12" role="button">
 									<span class="col-xs-12">
 										<div class="col-xs-3 col-sm-2-5">
+											<span class="unread-chat" ng-if="chat.preview.unread"></span>
 											<img class="avatar-logued-user" ng-src="{{ chatCtrl.parseImage(chat.preview.image)}}">
 										</div>
 										<div class="col-xs-9 col-sm-9-5">

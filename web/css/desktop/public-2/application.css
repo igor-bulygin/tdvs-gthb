@@ -8510,6 +8510,12 @@ span.optional-text.pull-left {
   text-decoration: none;
   text-transform: uppercase; }
 
+.helpful-light-grey {
+  color: #bfbfbf;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase; }
+
 .review-average {
   font-size: 20px;
   font-weight: 300;
@@ -10144,6 +10150,28 @@ cart-panel .cart-panel-div {
         max-height: 300px; } }
   .chat-body .activeChat a {
     background-color: rgba(233, 233, 233, 0.5); }
+
+.unread-chat {
+  padding: 5px 5px;
+  opacity: 0.9;
+  background-color: #F7284B;
+  border-radius: 10px;
+  position: absolute; }
+  @media (min-width: 1200px) {
+    .unread-chat {
+      right: 50px; } }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .unread-chat {
+      right: 43px; } }
+  @media (min-width: 768px) and (max-width: 991px) {
+    .unread-chat {
+      right: 31px; } }
+  @media (max-width: 767px) {
+    .unread-chat {
+      padding: 0;
+      width: 10px;
+      height: 10px;
+      margin-left: -17px; } }
 
 .panel-billing-send .panel-heading h4 {
   margin: 0; }

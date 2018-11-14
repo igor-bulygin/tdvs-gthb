@@ -212,7 +212,6 @@
 
 		$scope.$watch('productPriceStockCtrl.product.price_stock', function(newValue, oldValue) {
 			parseTitles();
-			console.log(newValue);
 			if(newValue.length > 0 && newValue.price >= 1)
 				newValue.forEach(function(element) {
 					element.unlimited_stock = element.stock === null ? true : false;

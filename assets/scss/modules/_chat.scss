@@ -181,3 +181,25 @@
 		}
 	}
 }
+.unread-chat{
+	padding: 5px 5px;
+    opacity: 0.9;
+    background-color: #F7284B;
+    border-radius: 10px;
+	position: absolute;
+	@media (min-width:1200px) {
+		right: 50px;
+	}
+	@media (min-width:992px) and (max-width:1199px) {
+		right: 43px;
+	}
+	@media (min-width:768px) and (max-width:991px) {
+		right: 31px;
+	}
+	@media (max-width: 767px) {
+		padding: 0;
+		width: 10px;
+		height: 10px;
+		margin-left: -17px;
+	}
+}
