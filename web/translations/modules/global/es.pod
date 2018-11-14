@@ -39,7 +39,7 @@
 			"FIRST_NAME": "Nombre",
 			"LAST_NAME": "Apellidos",
 			"BRAND_NAME": "Nombre de la marca",
-			"VAT_NUMBER": "Número VAT",
+			"VAT_NUMBER": "Núm VAT",
 			"PHONE": "Teléfono",
 			"COUNTRY": "País",
 			"CITY": "Ciudad",

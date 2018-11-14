@@ -40,7 +40,7 @@
 								<div class="col-md-2">
 									<span class="col-md-12" style="color: #9D9D9D;" translate="global.DEVISER"></span>
 									<label  class="col-md-12" ng-bind="pack.deviser_info.name"></label>
-									<a class="btn btn-black-on-white" ng-href="{{pack.deviser_info.chat_link}}" translate="settings.orders.SEND_A_MESSAGE"></a>
+									<a class="btn-send-message" ng-href="{{pack.deviser_info.chat_link}}" translate="settings.orders.SEND_A_MESSAGE"></a>
 								</div>
 								<div class="col-md-2"  ng-if="pack.pack_state==='shipped'">
 									<span class="col-md-12" style="color: #9D9D9D;" translate="settings.orders.SHIPPING_DATE"></span>
@@ -71,7 +71,7 @@
 								</div>
 							</div>
 							<div class="row mt-10 mb-20">
-								<div class="col-md-2" ng-repeat="product in pack.products">
+								<div class="col-md-4" ng-repeat="product in pack.products">
 									<product-card product="product" classes="{column1Class: 'col-md-6', column2Class: 'col-md-6'}"></product-card>
 								</div>
 							</div>

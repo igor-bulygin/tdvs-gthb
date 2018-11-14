@@ -20,17 +20,15 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 <div ng-controller="editProductCtrl as editProductCtrl">
 	<div id="newProductHeader" class="new-product-header ng-class:{'purple': editProductCtrl.errors}" data-spy="affix" data-offset-top="120">
 		<div class="container relative">
-			<div class="pull-left">
+			<div class="hidden-sm-header pull-left">
 				<a class="back-link" ng-href="{{editProductCtrl.link_profile}}"><span translate="product.creation_edition.BACK_TO_PROFILE"></span></a>
 			</div>
 			<div class="avatar">
 				<img ng-src="{{editProductCtrl.profile}}">
 			</div>
-			<div class="text-center" ng-if="!editProductCtrl.errors"><h4 class="title"><span translate="product.creation_edition.EDIT_WORK"></span></h4></div>
-			<div class="text-center" ng-if="editProductCtrl.errors" ng-cloak><p><span translate="product.creation_edition.COMPLETE_REQUIRED_FIELDS"></span></p></div>
 			<div class="btns-group">
-				<button class="btn btn-transparent" ng-click="editProductCtrl.save()" ng-disabled="editProductCtrl.saving"><span translate="product.creation_edition.SAVE_PROGRESS"></span></button>
-				<button class="btn btn-default btn-red" ng-click="editProductCtrl.save('true')" ng-disabled="editProductCtrl.saving"><span translate="product.creation_edition.PUBLISH_WORK"></span></button>
+				<button class="btn btn-transparent btn-small btn-header-product" ng-click="editProductCtrl.save()" ng-disabled="editProductCtrl.saving"><span translate="product.creation_edition.SAVE_PROGRESS"></span></button>
+				<button class="btn btn-default btn-red btn-small btn-header-product" ng-click="editProductCtrl.save('true')" ng-disabled="editProductCtrl.saving"><span translate="product.creation_edition.PUBLISH_WORK"></span></button>
 			</div>
 		</div>
 	</div>
@@ -43,7 +41,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 				<product-price-stock ng-if="editProductCtrl.product.variationsLoaded" product="editProductCtrl.product" categories="editProductCtrl.allCategories" tags="editProductCtrl.tags" papertypes="editProductCtrl.papertypes" metric="editProductCtrl.metric" fromedit="editProductCtrl.from_edit"></product-price-stock>
 				<product-more-details product="editProductCtrl.product" languages="editProductCtrl.languages"></product-more-details>
 				<div class="text-center">
-					<button class="btn btn-default btn-red" ng-click="editProductCtrl.save('true')" ng-disabled="createProductCtrl.saving"><span translate="product.creation_edition.PUBLISH_WORK"></span></button>
+					<button class="btn btn-red btn-big btn-red" ng-click="editProductCtrl.save('true')" ng-disabled="createProductCtrl.saving"><span translate="product.creation_edition.PUBLISH_WORK"></span></button>
 				</div>
 			</div>
 			<div class="mt-20 tdvs-loading" ng-if="editProductCtrl.saving || !editProductCtrl.product">

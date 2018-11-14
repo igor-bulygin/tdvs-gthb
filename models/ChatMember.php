@@ -27,6 +27,7 @@ class ChatMember extends EmbedModel
 		return [
 			'person_id',
 			'person_type',
+			'person_info',
 		];
 	}
 

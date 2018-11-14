@@ -5,9 +5,11 @@
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.priceStockValuesValidation = priceStockValuesValidation;
+		vm.priceStockPriceValidation = priceStockPriceValidation;
 		vm.setUnlimitedStock = setUnlimitedStock;
 		vm.applyToAll = applyToAll;
 		vm.selected_language=_lang;
+		vm.priceStockError = false;
 
 		var set_original_artwork = false;
 
@@ -175,6 +177,11 @@
 			return UtilService.isZeroOrLess(value) && available && vm.form_submitted ? true : false;
 		}
 
+		function priceStockPriceValidation(value){
+			vm.priceStockError = UtilService.isLessThanOne(value) && vm.form_submitted ? true : false;
+			return vm.priceStockError;
+		}
+
 		//watches
 		$scope.$watch('productPriceStockCtrl.product.prints', function(newValue, oldValue) {
 			if(!vm.fromedit) {
@@ -205,7 +212,7 @@
 
 		$scope.$watch('productPriceStockCtrl.product.price_stock', function(newValue, oldValue) {
 			parseTitles();
-			if(newValue.length > 0)
+			if(newValue.length > 0 && newValue.price >= 1)
 				newValue.forEach(function(element) {
 					element.unlimited_stock = element.stock === null ? true : false;
 				});

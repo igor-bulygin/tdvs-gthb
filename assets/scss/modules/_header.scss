@@ -96,18 +96,7 @@
                     height: 20px;
                 }
             }
-            /*div{
-                float: right;
-            }*/
-            #mobIcons_center{
-                margin: auto;
-                width: 50%;
-                @media(max-width:575){
-                    width: 90%;
-                }
-            }
-            #mobIcons_right{
-                width: auto;
+            div{
                 float: right;
             }
         }
@@ -322,6 +311,13 @@
             font-size: 20px;
         }
     }
+}
+#separator_center{
+    padding-right: 7.5px;
+    border-right: 1px solid $grey;
+}
+#separator_right{
+    margin-left: 7.5px;
 }
 .main-menu{
     cursor: pointer;

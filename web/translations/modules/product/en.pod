@@ -37,7 +37,7 @@
 			"DAY_AGO":" day ago",
 			"REPLY":"Reply",
 			"MEMBER_COMMENT_USEFUL":"  member found this comment useful",
-			"REVIEW_HELPFUL":"Is this review helpful to you ?",
+			"REVIEW_HELPFUL":"Is this review helpful to you?",
 			"LOAD_MORE":"LOAD MORE",
 			"COMMENTS_MORE": " comments more",
 			"ADD_COMMENT":"Add your comment",
@@ -47,7 +47,9 @@
 			"MORECONTENTCOMINGSOON": "More content coming soon !",
 			"SELECTMANDATORYOPTIONS": "Please select the mandatory tags",
 			"IS_BESPOKED": "Bespoke product",
-			"MANUFACTURING_INFO": "Information needed from the customer before manufacturing this work"
+			"MANUFACTURING_INFO": "Information needed from the customer before manufacturing this work",
+			"USER_REVIEWS": "User reviews",
+			"WORKS_BY": "Works by"
 		},
 		"creation_edition": {
 			"BACK_TO_PROFILE":" &lt go back to your profile",
@@ -77,26 +79,28 @@
 			"DAYS":" Days",
 			"SPECIFY_RETURNS_DAYS":"You must specify the return days",
 			"PHOTOS":"Photos",
-			"ADD_PHOTOS":"+ Add photos",
+			"ADD_PHOTOS":"Add photos",
 			"MARK_AS_MAIN":"Mark one of the photos as 'main photo' by clicking the star icon.",
 			"MARKED_AS_MAIN":"Marked as main photo",
 			"UPLOAD_1_PHOTO":"Please upload at least 1 photo.",
 			"TAGS":"Tags",
 			"PLS_TRANSLATE": "Please translate each field into Spanish and English",
 			"NO_WARRANTY": "No warranty",
-			"NO_RETURNS": "No returns"
+			"NO_RETURNS": "No returns",
+			"UPLOAD_IMAGE": "Upload image"
 		},
 		"more_details": {
 			"TITLE":"More details about your work (optional)",
 			"PHOTOS_DESCRIPTION":"Description photos",
 			"ENRICH_DESCRIPTION":"Enrich your work description with photos that showcase its main features.",
-			"ADD_PHOTOS":"+ Add photos",
+			"ADD_PHOTOS":"Add photos",
 			"WORK_FAQS":"WORK FAQs",
 			"WRITE_FAQ":"Do you want to write FAQ question specific for this product?",
 			"DELETE_QUESTION":"Delete question",
 			"QUESTION":"Question",
 			"ANSWER":"Answer",
-			"ADD_QUESTION":"+ Add another question"
+			"ADD_QUESTION":"+ Add another question",
+			"UPLOAD_IMAGE": "Upload image"
 		},
 		"price_stock": {
 			"TITLE":"Price & Stock",
@@ -113,13 +117,13 @@
 			"PRICE":"Price",
 			"APPLY_ALL":"Apply to all",
 			"CURRENCY":"$ ",
-			"UNLIMITED_STOCK": "Unlimited stock"
+			"UNLIMITED_STOCK": "Unlimited stock",
+			"MINIMUM_PRODUCT_PRICE": "The minimum price per product must be {{priceProduct}}."
 		},
 		"variations": {
 			"TITLE":"Variations & Manufacturing",
 			"WORK_OPTIONS":"Work Options",
 			"OPTIONAL":"OPTIONAL",
-			"MANUFACTURING_INFO":"Manufacturing information",
 			"IS_PREORDER":"Is this product in pre-order?",
 			"PREORDER_END":"When will the pre-order period end?",
 			"REMINDER_STOCK":"When the pre-order is over, you will be reminded to update the stock of the product.",
@@ -130,6 +134,7 @@
 			"DAYS_GREATER_0":"Days value must be greater than 0",
 			"IS_BESPOKED":"Is this a bespoke product?",
 			"MANUFACTURING_INFO":"What information do you need from the customer before manufacturing this work?",
+			"MANUFACTURING_INFO":"Manufacturing information",
 			"SIZES":"Sizes",
 			"NEW_SIZECHART":"Create size chart",
 			"AVAILABLE_SIZES":"In which sizes is this work available?",

@@ -60,6 +60,7 @@ class Product extends CActiveRecord {
 	const SCENARIO_PRODUCT_PUBLIC = 'scenario-product-public';
 	const SCENARIO_PRODUCT_COMMENT = 'scenario-product-comment';
 	const SCENARIO_PRODUCT_COMMENT_REPLY = 'scenario-product-comment-reply';
+	const SCENARIO_PRODUCT_COMMENT_HELPFUL = 'scenario-product-comment-helpful';
 
 	/**
 	 * The attributes that should be serialized

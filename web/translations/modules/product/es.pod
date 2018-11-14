@@ -37,7 +37,7 @@
 			"DAY_AGO": " días hace",
 			"REPLY": "Contestar",
 			"MEMER_COMMENT_USEFUL": "  miembros encuentran útil este comentario",
-			"REVIEW_HELPFUL": "Te ha resultado útil ?",
+			"REVIEW_HELPFUL": "¿Te ha resultado útil?",
 			"LOAD_MORE": "VER MÁS",
 			"COMMENTS_MORE": " comentarios más",
 			"ADD_COMMENT":"Añade tu comentario",
@@ -50,7 +50,9 @@
 			"MANUFACTURING_INFO": "Información del cliente necesaria antes de fabricar este producto",
 			"IS_PREORDER": "Es necesario pre encargar el producto",
 			"PREORDER_END": "El plazo de pre encargo termina el",
-			"WHEN_SHIPPED": "El producto será enviado el"
+			"WHEN_SHIPPED": "El producto será enviado el",
+			"USER_REVIEWS": "Opiniones de los usuarios",
+			"WORKS_BY": "Trabajos de"
 		},
 		"creation_edition": {
 			"BACK_TO_PROFILE": " &lt volver al perfil",
@@ -80,26 +82,28 @@
 			"DAYS": " días",
 			"SPECIFY_RETURNS_DAYS": "Debe especificar los días para devolución",
 			"PHOTOS": "Fotos",
-			"ADD_PHOTOS": "+ Añadir fotos",
+			"ADD_PHOTOS": "Añadir fotos",
 			"MARK_AS_MAIN": "Marque una de las fotos como 'foto principal' pinchando en el icno de estrella.",
 			"MARKED_AS_MAIN": "Marcar como foto principal",
 			"UPLOAD_1_PHOTO": "Por favor suba al menos 1 foto.",
 			"TAGS": "Etiquetas",
 			"PLS_TRANSLATE": "Por favor, traduce cada campo a español y a inglés",
 			"NO_WARRANTY": "No tiene garantía",
-			"NO_RETURNS": "No se admiten devoluciones"
+			"NO_RETURNS": "No se admiten devoluciones",
+			"UPLOAD_IMAGE": "Subir imagen"
 		},
 		"more_details": {
 			"TITLE": "Más detalles sobre su trabajo (opcional)",
 			"PHOTOS_DESCRIPTION": "Fotos para la descripción",
 			"ENRICH_DESCRIPTION": "Enriquezca su descripión con fotos que muestran sus principales características.",
-			"ADD_PHOTOS": "+ Añadir fotos",
+			"ADD_PHOTOS": "Añadir fotos",
 			"WORK_FAQS": "FAQs de producto",
 			"WRITE_FAQ": "¿Quieres escribir FAQ específicas para este producto?",
 			"DELETE_QUESTION": "Eliminar pregunta",
 			"QUESTION": "Pregunta",
 			"ANSWER": "Respuesta",
-			"ADD_QUESTION": "+ Añadir pregunta"
+			"ADD_QUESTION": "+ Añadir pregunta",
+			"UPLOAD_IMAGE": "Subir imagen"
 		},
 		"price_stock": {
 			"TITLE": "Precio & Stock",
@@ -116,13 +120,13 @@
 			"PRICE": "Precio",
 			"APPLY_ALL": "Aplicar a todo",
 			"CURRENCY": "€ ",
-			"UNLIMITED_STOCK": "Stock ilimitado"
+			"UNLIMITED_STOCK": "Stock ilimitado",
+			"MINIMUM_PRODUCT_PRICE": "El precio mínimo por producto debe ser {{priceProduct}}."
 		},
 		"variations": {
 			"TITLE": "Variaciones & Manufactura",
 			"WORK_OPTIONS": "Opciones de producto",
 			"OPTIONAL": "OPcIONAL",
-			"MANUFACTURING_INFO": "Información sobre Manufactura",
 			"IS_PREORDER": "¿Es necesario pre encargar?",
 			"PREORDER_END": "¿Cuando termina el plazo de pre encargo?",
 			"REMINDER_STOCK": "Cuando el preencargo termine, te recordaremos que actualices el stock.",
@@ -133,6 +137,7 @@
 			"DAYS_GREATER_0": "EL valor días debe ser mayor que 0",
 			"IS_BESPOKED": "¿Es un producto hecho a medida?",
 			"MANUFACTURING_INFO": "¿Que información del cliente necesitas antes de fabricar este producto?",
+			"MANUFACTURING_INFO": "Información sobre Manufactura",
 			"SIZES": "Tallas",
 			"NEW_SIZECHART": "Crear tabla de tallas",
 			"AVAILABLE_SIZES": "¿En que tallas está disponible?",

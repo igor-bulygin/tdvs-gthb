@@ -21,15 +21,15 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 			<?php /*<button class="btn btn-green pull-right" ng-click="settingsHeaderCtrl.saveChanges()">Save changes</button>*/ ?>
 		</div>
 	</div>
-	<ul class="nav nav-tabs header-settings-tabs" style="justify-content: center; display: flex;">
-		<li role="presentation" class="<?= ($activeOption=='general') ? 'active' : ''?>">
-			<a href="<?= $person->getSettingsLink('general')?>" translate="settings.header.GENERAL"></a>
+	<ul class="nav nav-tabs header-settings-tabs no-border" style="justify-content: center; display: flex;">
+		<li role="presentation" class="<?= ($activeOption=='general') ? 'active' : ''?> no-border">
+			<a href="<?= $person->getSettingsLink('general')?>" class="height-100" translate="settings.header.GENERAL"></a>
 		</li>
-		<li role="presentation" class="<?= ($activeOption=='affiliates') ? 'active' : ''?>">
-			<a href="<?= $person->getSettingsLink('affiliates')?>" translate="settings.header.AFFILIATES_PROGRAM"></a>
+		<li role="presentation" class="<?= ($activeOption=='affiliates') ? 'active' : ''?> no-border">
+			<a href="<?= $person->getSettingsLink('affiliates')?>" class="height-100" translate="settings.header.AFFILIATES_PROGRAM"></a>
 		</li>
-		<li role="presentation" class="<?= ($activeOption=='orders') ? 'active' : '' ?>">
-			<a href="<?= $person->getSettingsLink('open-orders')?>" translate="settings.header.MY_ORDERS"></a>
+		<li role="presentation" class="<?= ($activeOption=='orders') ? 'active' : '' ?> no-border">
+			<a href="<?= $person->getSettingsLink('open-orders')?>" class="height-100" translate="settings.header.MY_ORDERS"></a>
 		</li>
 		<?php if ($person->isDeviser()) { ?>
 			<?php /* ?>
@@ -37,11 +37,11 @@ $activeOption = array_key_exists('settings_menu_active_option', $this->params) ?
 				<a href="<?= $person->getSettingsLink('stock')" translate="settings.header.STOCK_PRICE"></a>
 			</li>
 			*/ ?>
-			<li role="presentation" class="<?= ($activeOption=='billing') ? 'active' : '' ?>">
-				<a href="<?= $person->getSettingsLink('billing')?>" translate="settings.header.BILLING_PAYMENTS"></a>
+			<li role="presentation" class="<?= ($activeOption=='billing') ? 'active' : '' ?> no-border">
+				<a href="<?= $person->getSettingsLink('billing')?>" class="height-100" translate="settings.header.BILLING_PAYMENTS"></a>
 			</li>
-			<li role="presentation" class="<?= ($activeOption=='shipping') ? 'active' : '' ?>">
-				<a href="<?= $person->getSettingsLink('shipping')?>" translate="settings.header.SHIPPING"></a>
+			<li role="presentation" class="<?= ($activeOption=='shipping') ? 'active' : '' ?> no-border">
+				<a href="<?= $person->getSettingsLink('shipping')?>" class="height-100" translate="settings.header.SHIPPING"></a>
 			</li>
 		<?php } ?>
 	</ul>

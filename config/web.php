@@ -502,6 +502,7 @@ $config = [
 				'PUT api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/update',
 				'POST api3/priv/v1/products/<id:[^/.]*?>/comments' => 'api3/priv/v1/product/comment',
 				'POST api3/priv/v1/products/<product_id:[^/.]*?>/comments/<comment_id:[^/.]*?>/replies' => 'api3/priv/v1/product/comment-reply',
+				'POST api3/priv/v1/products/<product_id:[^/.]*?>/comments/<comment_id:[^/.]*?>/helpfuls' => 'api3/priv/v1/product/comment-helpful',
 				'DELETE api3/priv/v1/products/<id:[^/.]*?>' => 'api3/priv/v1/product/delete',
 
 				// Loved - public

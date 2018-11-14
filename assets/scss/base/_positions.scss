@@ -21,6 +21,17 @@
 .align-right{
 	text-align: right;
 }
+.align-sm-left{
+	@media (max-width: 991px) {
+		text-align: left;
+	}
+}
+.font-sz-14{
+	font-size: 14px !important;
+}
+.font-sz-16{
+	font-size: 16px !important;
+}
 .mt-0{
     margin-top: 0!important;
 }
@@ -29,6 +40,9 @@
 }
 .mt-10{
 	margin-top: 10px!important;
+}
+.mt-15{
+	margin-top: 15px!important;
 }
 .mt-20{
 	margin-top: 20px!important;
@@ -45,14 +59,35 @@
 .mt-50{
 	margin-top: 50px;
 }
+.mt-md-15p{
+	@media (min-width: 992px) {
+		margin-top: 15%;
+	}
+}
+.mt-xs-10 {
+	@media(max-width: 767px){
+		margin-top: 10px !important;
+	}
+}
+.mt-xs-40{
+	@media(max-width: 767px){
+		margin-top: 40px !important;
+	}
+}
+.mb-0{
+	margin-bottom: 0px !important;
+}
 .mb-100{
 	margin-bottom: 100px;
+}
+.mb-5{
+	margin-bottom: 5px !important;
 }
 .mb-10{
 	margin-bottom: 10px;
 }
 .mb-20{
-	margin-bottom: 20px;
+	margin-bottom: 20px !important;
 }
 .mb-40{
 	margin-bottom: 40px!important;
@@ -78,6 +113,21 @@
 .ml-30{
 	margin-left: 30px;
 }
+.p-0{
+	padding: 0 !important;
+}
+.px-lg-80{
+	@media (min-width: 1200px) {
+		padding-right: 100px !important;
+		padding-left: 80px!important;
+	}
+}
+.px-md-40{
+	@media (min-width: 992px) and (max-width: 1199px){
+		padding-right: 40px !important;
+		padding-left: 40px!important;
+	}
+}
 .pt-0{
 	padding-top:0!important;
 }
@@ -91,13 +141,41 @@
 	padding-left:0!important;
 }
 .pl-5{
-	padding-left:5!important;
+	padding-left:5px !important;
 }
 .pl-10{
-	padding-left:10!important;
+	padding-left:10px!important;
 }
 .pl-15{
 	padding-left:15px!important;
+}
+.pl-20{
+	padding-left: 20px !important;
+}
+.pl-30{
+	padding-left: 30px !important;
+}
+.pl-45{
+	padding-left: 45px !important;
+}
+.pl-xs-10{
+	@media (max-width: 767px) {
+		padding-left: 10px !important;
+	}
+}
+.pr-0{
+	padding-right: 0px !important;
+}
+.pr-5 {
+	padding-right: 5px !important;
+}
+.pr-10{
+	padding-right: 10px !important;
+}
+.pr-xs-10{
+	@media (max-width: 767px) {
+		padding-right: 10px !important;
+	}
 }
 .no-pad-r{
 	padding-right: 0!important;
@@ -110,4 +188,12 @@
 }
 .no-pad-left{
 	padding-left:0!important;
+}
+.no-pad-left-md {
+	@media(max-width: 991px) {
+		padding-left: 0px;
+	}
+}
+.height-100{
+	height: 100% !important;
 }

@@ -26,15 +26,15 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 <div class="our-devisers-wrapper" ng-controller="chatCtrl as chatCtrl">	
 	<div class="container">
 		
-		<div class="our-devisers-body chat-body" >
+		<div class="our-devisers-body chat-body mt-20 mb-20" >
 			<div class="hidden-sm hidden-md hidden-lg mt-20">
 				<div class="mt-20 mb-20" >
 				<div class="mt-40" ng-if="chatCtrl.loading" style="padding: 20px;" ng-cloak>
 					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 				</div>
 					<div ng-if="!chatCtrl.loading" ng-cloak>
-						<div class="col-xs-12 col-sm-4" ng-if="chatCtrl.currentChat">
-							<a class="col-xs-12 btn btn-medium btn-red auto-center" role="button" ng-click="chatCtrl.unselectChat()"><span translate="chat.BACK"></span></a>
+						<div class="col-xs-12 col-sm-4 pl-15" ng-if="chatCtrl.currentChat">
+							<a class="col-xs-4 btn btn-small btn-red auto-center" role="button" ng-click="chatCtrl.unselectChat()"><span translate="chat.BACK"></span></a>
 						</div>
 						<div class="col-xs-12 col-sm-4" ng-if="!chatCtrl.currentChat">
 							<uib-tabset active="chatCtrl.active">
@@ -48,6 +48,7 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 											<a ng-click="chatCtrl.selectChat(chat)" class="col-xs-12" role="button">
 												<span class="col-xs-12">
 													<div class="col-xs-3 col-sm-2-5">
+														<span class="unread-chat" ng-if="chat.preview.unread"></span>
 														<img class="avatar-logued-user" ng-src="{{ chatCtrl.parseImage(chat.preview.image)}}">
 													</div>
 													<div class="col-xs-9 col-sm-9-5">
@@ -79,6 +80,7 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 								<a ng-click="chatCtrl.selectChat(chat)" class="col-xs-12" role="button">
 									<span class="col-xs-12">
 										<div class="col-xs-3 col-sm-2-5">
+											<span class="unread-chat" ng-if="chat.preview.unread"></span>
 											<img class="avatar-logued-user" ng-src="{{ chatCtrl.parseImage(chat.preview.image)}}">
 										</div>
 										<div class="col-xs-9 col-sm-9-5">
@@ -111,20 +113,22 @@ $this->registerJs('var chat_id = ' .Json::encode($chatId), yii\web\View::POS_HEA
 								</div>
 								<div class="col-xs-9 col-sm-10">
 									<span class="col-xs-12 red-text chat-tit" ng-bind="msg.person_info.name" ng-if="msg.showOwner"></span>
-									<span class="col-xs-12 chat-text" ng-bind="msg.text"></span>
+
+									<span class="col-xs-12 chat-text" ng-bind="msg.text" ng-if="msg.isLast" style="margin-top:100px;"></span>
+									<span class="col-xs-12 chat-text" ng-bind="msg.text" ng-if="!msg.isLast"></span>
 									<span class="col-xs-12 text-right chat-time">
-										<span am-time-ago="chatCtrl.parseDate(msg.date.sec*1000)"></span>
+										<span am-time-ago="chatCtrl.parseDate(msg.date.sec*1000) | amUtc | amDateFormat:'YYYY-MM-DD\THH:mm:ss.000Z'"></span>
 									</span>
 								</div>
-								<div ng-if="msg.isLast" id="bottomChat" ng-cloak style="margin-top:100px;"></div>
+								<div ng-if="msg.isLast" id="bottomChat" ng-cloak></div>
 							</div>
 						</div>
 					</div>
 					<form class="col-xs-12 chat-send" >
-						<div class="col-xs-7 col-sm-8">
+						<div class="col-xs-7 col-sm-8" style="margin: 7.5px 0px;">
 							<input class="col-xs-12" type="text" ng-model="chatCtrl.newMsg" on-press-enter="chatCtrl.sendMsg()">
 						</div>
-						<div class="col-xs-5 col-sm-4">
+						<div class="col-xs-5 col-sm-4" style="margin: 7.5px 0px;">
 							<button class="col-xs-12 btn btn-small btn-red" ng-click="chatCtrl.sendMsg()" translate="chat.SEND"></button>
 						</div>
 					</form>

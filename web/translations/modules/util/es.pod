@@ -51,7 +51,7 @@
 		"modal_signup_loved": {
 			"MUST_BE_A_MEMBER":"Debería ser miembro de Todevise para ",
 			"A_PRODUCT":" un producto.",
-			"ALREADY_MEMBER":"Ya es miembro",
+			"ALREADY_MEMBER":"¿Ya eres miembro? Inicia Sesión",
 			"BECOME_MEMBER":"Conviértase en miembro de Todevise (es 100% gratuito)",
 			"SIGN_UP":"Registrarse"
 		},

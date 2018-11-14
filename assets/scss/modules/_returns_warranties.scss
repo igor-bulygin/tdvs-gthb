@@ -4,34 +4,6 @@
 .returns-warranties-wrapper{
 	background-color: $white;
 	padding-bottom: 20px;
-	.returns-header{
-		margin: -20px 0 2em 0;
-		padding: 0;
-		height: 491px;
-		background: url(/imgs/banner-returns.jpg) center #000 no-repeat;
-		background-size: cover;
-		.returns-header-text {
-			padding-top: 200px;
-		}
-		@media (max-width: 991px){
-			height: 391px;
-			.returns-header-text {
-				padding-top: 175px;
-			}
-		}
-		@media(max-width: 767px){
-			height: 291px;
-			.returns-header-text {
-				padding-top: 150px;
-			}
-		}
-		@media(max-width: 480px){
-			height: 191px;
-			.returns-header-text {
-				padding-top: 90px;
-			}
-		}
-	}
 	.row{
 		display: flex;
 		width: 100%;
@@ -73,22 +45,18 @@
 		}
 	}
 	h1 {
-		//text-align: center;
+		text-align: center;
 		font-weight: bold;
-		font-size: 4em; //90px
-		background:$white;
-		width: fit-content;
-		margin: auto;
-		padding: 0.2em 0.75em;
+		font-size: 90px;
 		@media (max-width: 991px){
-			font-size: 3em;//60px;
+			font-size: 60px;
 		}
 		@media (max-width: 767px){
-			font-size: 1.7em;//50px;
+			font-size: 50px;
 		}
 		@media (max-width: 320px){
-			font-size: 1em;//30px;
-			//margin: 15px auto;
+			font-size: 30px;
+			margin: 15px auto;
 		}
 	}
 	hr{

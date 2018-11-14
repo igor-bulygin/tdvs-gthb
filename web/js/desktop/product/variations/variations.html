@@ -1,16 +1,16 @@
-<div class="card">
-	<span class="title" translate="product.variations.TITLE"></span>
+<div class="card mb-0">
+	<span class="title title-bold" translate="product.variations.TITLE"></span>
 	<form name="productVariationsCtrl.newSizechartForm" novalidate>
-		<div class="row">
-			<div class="col-md-6">
-				<label><span translate="product.variations.WORK_OPTIONS"></span></label>
+		<div class="row mb-0">
+			<div class="col-md-6 col-xs-12 pl-15">
+				<label class="col-md-12 pl-0"><span class="title-bold" translate="product.variations.WORK_OPTIONS"></span></label>
 				<div ng-repeat="tag in productVariationsCtrl.tags_for_work | orderBy:[productVariationsCtrl.tagComparator]">
-					<div class="row items-row" ng-if="tag.n_options > 0" ng-cloak>
+					<div class="row items-row pl-10" ng-if="tag.n_options > 0" ng-cloak>
 						<div class="col-xs-12">
-							<label class="col-xs-12" data-ng-for="{{tag.name}}" ng-bind="tag.name"></label>
+							<label class="title-bold pl-5" data-ng-for="{{tag.name}}" ng-bind="tag.name"></label>
 							<span class="optional-text" ng-if="!tag.required" translate="product.variations.OPTIONAL" ng-cloak></span>
 						</div>
-						<div class="mb-20 col-md-6" ng-repeat="(itemIndex,item) in productVariationsCtrl.product.options[tag.id] track by itemIndex">
+						<div class="mb-20 col-xs-12" ng-repeat="(itemIndex,item) in productVariationsCtrl.product.options[tag.id] track by itemIndex">
 							<span class="col-xs-1">{{itemIndex+1}}&nbsp;</span>
 							<ol class="nya-bs-select mw-200 btn-group bootstrap-select form-control product-select col-xs-10 ng-class:{'error-input': productVariationsCtrl.optionValidation(productVariationsCtrl.product.options[tag.id][itemIndex],tag.required)} " ng-model="productVariationsCtrl.product.options[tag.id][itemIndex]" multiple>
 								<li nya-bs-option="option in tag.options" data-value="option.value" deep-watch="true" class="ng-class:{'disabled': productVariationsCtrl.product.options[tag.id][itemIndex].length >= tag.n_options && productVariationsCtrl.product.options[tag.id][itemIndex].indexOf(option.value) < 0}">
@@ -25,14 +25,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-6">
-				<label><span class="text-left" translate="product.variations.MANUFACTURING_INFO"></span></label>
-				<div class="form-group col-md-12">
-					<div class="row col-md-12" id="preorder">
-						<div class="col-md-4 pad-about">
+			<div class="col-md-6 col-xs-12 pl-15">
+				<label class="col-xs-12 pl-0"><span class="text-left title-bold" translate="product.variations.MANUFACTURING_INFO"></span></label>
+				<div class="form-group col-xs-12 mt-20 pl-15">
+					<div class="row col-xs-12" id="preorder">
+						<div class="col-xs-6 pad-about">
 							<span translate="product.variations.IS_PREORDER"></span>
 						</div>
-						<div class="col-md-8 pad-about">
+						<div class="col-xs-6 pad-about">
 							<div class="radio radio-inline ml-30">
 								<input type="radio" name="preorder_selected" id="preorder_selected" ng-model="productVariationsCtrl.preorder_selected" ng-value="true" ng-change="productVariationsCtrl.setPreorder(productVariationsCtrl.preorder_selected)">
 								<label for="preorder_selected"><span translate="global.YES"></span></label>
@@ -42,13 +42,13 @@
 								<label for="preorder_unselected"><span translate="global.NO"></span></label>
 							</div>
 						</div>
-						<div class="mt-50" ng-if="productVariationsCtrl.preorder_selected" ng-cloak>
-							<div class="row mt-20">
-								<div class="col-md-6">
+						<div class="mt-50 col-xs-12 pl-15" ng-if="productVariationsCtrl.preorder_selected" ng-cloak>
+							<div class="row mt-20 col-xs-12">
+								<div class="col-xs-6">
 									<p class="manufacturing-question"><span translate="product.variations.PREORDER_END"></span></p>
 									<p class="manufacturing-answer"><span translate="product.variations.REMINDER_STOCK"></span></p>
 								</div>
-								<div class="col-md-6">
+								<div class="col-xs-6 pl-45">
 									<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.end" ng-cloak>
 										<a href="#" data-target="#" class="calendar-icon dropdown-toggle-preorder ng-class:{'error-input': !productVariationsCtrl.preorder_end_data && productVariationsCtrl.required_preorder}" id="preorderEnd" role="button" data-toggle="dropdown">
 											<i class="fa fa-calendar" aria-hidden="true"></i>
@@ -68,11 +68,11 @@
 									</div>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-md-6">
+							<div class="row col-xs-12">
+								<div class="col-xs-6">
 									<p class="manufacturing-question"><span translate="product.variations.WHEN_SHIPPED"></span></p>
 								</div>
-								<div class="col-md-6">
+								<div class="col-xs-6 pl-45">
 									<div class="dropdown" ng-if="!productVariationsCtrl.product.preorder.ship" ng-cloak>
 										<a href="#" data-target="#" class="calendar-icon dropdown-toggle-preorder-ship ng-class:{'error-input': !productVariationsCtrl.preorder_ship_data && productVariationsCtrl.required_preorder}" id="preorderShip" role="button" data-toggle="dropdown">
 											<i class="fa fa-calendar" aria-hidden="true"></i>
@@ -96,11 +96,11 @@
 							</div>
 						</div>
 					</div>
-				<div class="row col-md-12" id="madetoorder">
-					<div class="col-md-4 pad-about">
+				<div class="row col-xs-12" id="madetoorder">
+					<div class="col-xs-6 pad-about">
 						<span translate="product.variations.IS_MADE_TO_ORDER"></span>
 					</div>
-					<div class="col-md-8 pad-about">
+					<div class="col-xs-6 pad-about">
 						<div class="radio radio-inline ml-30">
 							<input type="radio" name="made_to_order_selected" id="made_to_order_selected" ng-model="productVariationsCtrl.made_to_order_selected" ng-value="true" ng-change="productVariationsCtrl.setMadeToOrder(productVariationsCtrl.made_to_order_selected)">
 							<label for="made_to_order_selected"><span translate="global.YES"></span></label>
@@ -110,7 +110,7 @@
 							<label for="made_to_order_unselected"><span translate="global.NO"></span></label>
 						</div>
 					</div>
-					<div class="mt-50" ng-if="productVariationsCtrl.made_to_order_selected" ng-cloak>
+					<div class="mt-50 col-xs-12 mb-20" ng-if="productVariationsCtrl.made_to_order_selected" ng-cloak>
 						<div class="col-xs-3">
 							<input type="number" name="madetoorder" class="form-control rounded-number-input col-md-1 ng-class:{'error-input': !productVariationsCtrl.product['madetoorder'].value && productVariationsCtrl.required_madetoorder}" ng-model="productVariationsCtrl.product['madetoorder'].value" ng-min="0" ng-required="true">							
 						</div>
@@ -118,11 +118,11 @@
 					</div>
 					<span ng-if="!productVariationsCtrl.product['madetoorder'].value&&productVariationsCtrl.required_madetoorder" class="error-text" translate="product.variations.DAYS_GREATER_0" ng-cloak></span>
 				</div>
-				<div class="row col-md-12" id="bespoke">
-					<div class="col-md-4 pad-about">
+				<div class="row col-xs-12" id="bespoke">
+					<div class="col-xs-6 pad-about">
 						<span translate="product.variations.IS_BESPOKED"></span>
 					</div>
-					<div class="col-md-8 pad-about">
+					<div class="col-xs-6 pad-about">
 						<div class="radio radio-inline ml-30">
 							<input type="radio" name="bespoke_selected" id="bespoke_selected" value="bespoke_selected" ng-model="productVariationsCtrl.bespoke_selected" ng-value="true" ng-change="productVariationsCtrl.setBespoke(productVariationsCtrl.bespoke_selected)">
 							<label for="bespoke_selected"><span translate="global.YES"></span></label>
@@ -132,155 +132,163 @@
 							<label for="bespoke_unselected"><span translate="global.NO"></span></label>
 						</div>
 					</div>
-					<div class="mt-50 bespoke-wraper col-md-12" ng-if="productVariationsCtrl.bespoke_selected" ng-cloak>
+					<div class="mt-50 col-xs-12" ng-if="productVariationsCtrl.bespoke_selected" ng-cloak>
 						<p class="col-xs-12"><span translate="product.variations.MANUFACTURING_INFO"></span></p>
-						<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control manufacturing-textarea col-md-10 ng-class:{'error-input': productVariationsCtrl.required_bespoke}" ng-model="productVariationsCtrl.product.bespoke.value[productVariationsCtrl.bespoke_language]"></textarea>
-						<ol class="nya-bs-select btn-group bootstrap-select form-control product-select about-edit-select title-lang-btn manufacturing-lang col-md-2" ng-model="productVariationsCtrl.bespoke_language">
-							<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
-								<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
-							</li>
-						</ol>
+						<div class="col-xs-12">
+							<textarea name="bespoke_text" id="bespoke_text" cols="30" rows="10" class="form-control manufacturing-textarea col-xs-10 ng-class:{'error-input': productVariationsCtrl.required_bespoke}" ng-model="productVariationsCtrl.product.bespoke.value[productVariationsCtrl.bespoke_language]" style="width: 83.33%;"></textarea>
+							<ol class="col-xs-2 about-edit-select title-lang-btn nya-bs-select pl-15" ng-model="productVariationsCtrl.bespoke_language">
+								<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
+									<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+								</li>
+							</ol>
+						</div>
 					</div>
-					<div class="col-md-10 text-right error-text" ng-if="productVariationsCtrl.required_bespoke"><span translate="product.variations.FIELD_LANGS_MANDATORY" translate-values='{ languageList: productVariationsCtrl.mandatory_langs_names}'></span></div>
+					<div class="col-xs-10 text-right error-text" ng-if="productVariationsCtrl.required_bespoke"><span translate="product.variations.FIELD_LANGS_MANDATORY" translate-values='{ languageList: productVariationsCtrl.mandatory_langs_names}'></span></div>
 				</div>
 				</div>
 			</div>
 		</div>
 	</form>
-	<hr style="height: 2px; color: black">
 	<div class="mt-20 tdvs-loading" ng-if="productVariationsCtrl.savingSizechart" ng-cloak>
 		<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 	</div>
 	<div class="row items-row" ng-if="!productVariationsCtrl.savingSizechart" ng-cloak>
-		<div class="col-md-10 col-md-offset-1 mb-20" id="newSizechart" ng-if="productVariationsCtrl.showNewSizechart" ng-cloak>
-			<form class="mb-20" name="productVariationsCtrl.newSizechartForm">
-				<label class="col-xs-12 text-center mb-20"><span translate="product.variations.NEW_SIZECHART"></span></label>
-				<div class="col-md-12 mb-20">
-					<label class="col-md-2" for="sizechartName"><span translate="product.variations.SZ_NAME"></span></label>
-					<div class="col-md-8">
-						<input class="mb-10 form-control ng-class:{'error-input': productVariationsCtrl.invalidSizechartName}" type="text" ng-model="productVariationsCtrl.newSizechart.name[productVariationsCtrl.name_language]">
-					</div>
-					<ol class="col-md-2 about-edit-select title-lang-btn nya-bs-select btn-group bootstrap-select form-control product-select mb-10" ng-model="productVariationsCtrl.name_language">
-						<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
-							<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
-						</li>
-					</ol>
-					<div class="col-md-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidSizechartName" ng-cloak><span translate="product.variations.SIZECHART_NAME_MANDATORY" translate-values='{ languageList: productVariationsCtrl.mandatory_langs_names}'></span></div>
-				</div>
-				<div class="col-md-12 mb-20">
-					<label class="col-md-2" for="sizechartMetricUnit"><span translate="product.variations.SZ_METRIC_UNIT"></span></label>
-					<div class="col-md-8">
-						<ol class="nya-bs-select btn-group bootstrap-select form-control categories-select ng-class:{'error-input': !productVariationsCtrl.newSizechart.metric_unit&& productVariationsCtrl.invalidNewSizechart}" ng-model="productVariationsCtrl.newSizechart.metric_unit">
-							<li nya-bs-option="size in productVariationsCtrl.metric.size">
-								<a><span ng-bind="size"></span></a>
-							</li>
-						</ol>
+		<div class="col-md-12">
+			<div ng-if="productVariationsCtrl.show_sizecharts" ng-cloak id="sizechart_values">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="col-xs-5 separator-size"></div>
+						<label class="col-xs-2 text-center title-bold mb-0 mt-0"><span translate="product.variations.SIZES"></span></label>
+						<div class="col-xs-5 separator-size"></div>
 					</div>
 				</div>
-				<div class="col-md-12 mb-20" ng-if="productVariationsCtrl.newSizechartAvailableCountries" ngt-cloak>
-					<label class="col-md-2" for="sizechartCountries"><span translate="product.variations.SZ_COUNTRIES"></span></label>
-					<ol class="nya-bs-select btn-group bootstrap-select form-control categories-select col-md-10" ng-model="productVariationsCtrl.newSizechart.countries" multiple>
-						<li nya-bs-option="country in productVariationsCtrl.newSizechartAvailableCountries" data-value="country.id" deep-watch="true" class="">
-							<a href="#" ng-click="productVariationsCtrl.addTableValues();productVariationsCtrl.invalidSizechartCountries=false"><span ng-bind="country.country_name"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
-						</li>
-					</ol>
-					<div class="col-md-10 col-md-offset-2 error-text text-right" ng-if="productVariationsCtrl.invalidSizechartCountries" ng-cloak><span translate="product.variations.SZ_ONE_COUNTRY_MANDATORY"></span></div>
-				</div>
-				<div>
-					<div class="col-md-6 col-md-offset-3 mb-20" ng-if="productVariationsCtrl.addingColumn" ng-cloak>
-						<label class="col-xs-12 text-center mb-20"><span translate="product.variations.NEW_COLUMN"></span></label>
-						<div class="col-md-12 mb-20">
-							<label class="col-md-3"><span translate="product.variations.SZ_COLUMN_NAME"></span></label>
-							<div class="col-md-6">
-								<input class="mb-10 form-control" type="text" ng-model="productVariationsCtrl.newColumn[productVariationsCtrl.name_language]">
+				<div class="col-md-10 col-xs-12 col-md-offset-1 mb-20" id="newSizechart" ng-if="productVariationsCtrl.showNewSizechart" ng-cloak>
+					<form class="mb-20" name="productVariationsCtrl.newSizechartForm">
+						<label class="col-xs-12 text-center mb-20 title-bold"><span translate="product.variations.NEW_SIZECHART"></span></label>
+						<div class="col-xs-12 mb-20" id="lang-name">
+							<label class="col-xs-12 mb-10 title-bold" for="sizechartName"><span translate="product.variations.SZ_NAME"></span></label>
+							<div class="col-xs-10">
+								<input class="mb-10 form-control ng-class:{'error-input': productVariationsCtrl.invalidSizechartName}" type="text" ng-model="productVariationsCtrl.newSizechart.name[productVariationsCtrl.name_language]">
 							</div>
-							<div class="col-md-3">
-								<ol class="col-md-12 about-edit-select title-lang-btn nya-bs-select" ng-model="productVariationsCtrl.name_language">
-									<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
-										<a href=""><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+							<ol class="col-xs-2 about-edit-select title-lang-btn nya-bs-select ng-binding" ng-model="productVariationsCtrl.name_language">
+								<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
+									<a href="#"><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+								</li>
+							</ol>
+							<div class="col-xs-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidSizechartName" ng-cloak><span translate="product.variations.SIZECHART_NAME_MANDATORY" translate-values='{ languageList: productVariationsCtrl.mandatory_langs_names}'></span></div>
+						</div>
+						<div class="col-xs-12 mb-20">
+							<label class="col-xs-12 mb-10 title-bold" for="sizechartMetricUnit"><span translate="product.variations.SZ_METRIC_UNIT"></span></label>
+							<div class="col-xs-10">
+								<ol class="col-xs-2 nya-bs-select btn-group bootstrap-select form-control categories-select ng-class:{'error-input': !productVariationsCtrl.newSizechart.metric_unit&& productVariationsCtrl.invalidNewSizechart}" ng-model="productVariationsCtrl.newSizechart.metric_unit">
+									<li nya-bs-option="size in productVariationsCtrl.metric.size">
+										<a><span ng-bind="size"></span></a>
 									</li>
 								</ol>
 							</div>
-							<div class="col-md-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidColumnName" ng-cloak><span translate="product.variations.SIZECHART_COLUMNNAME_MANDATORY" translate-values='{ languageList: productVariationsCtrl.mandatory_langs_names}'></span></div>
 						</div>
-						<button class="col-md-3 col-md-offset-9 mb-20 btn btn-default btn-green " ng-click="productVariationsCtrl.new_column(productVariationsCtrl.newColumn)"><span translate="product.variations.ADD_NEW_COLUMN"></span></button>
-					</div>
-					<div class="col-md-12 mb-20" ng-if="!productVariationsCtrl.addingColumn" ng-cloak>
-						<div class="col-md-2">
-							<label><span translate="product.variations.SZ_COLUMNS"></span></label>
-							<div class="col-md-12">
-								<a class="pointer fs-upper funiv " ng-click="productVariationsCtrl.addingColumn=true">
+						<div class="col-xs-12 mb-20" ng-if="productVariationsCtrl.newSizechartAvailableCountries" ngt-cloak>
+							<label class="col-xs-12 mb-10 title-bold" for="sizechartCountries"><span translate="product.variations.SZ_COUNTRIES"></span></label>
+							<div class="col-xs-10">
+								<ol class="col-xs-2 nya-bs-select btn-group bootstrap-select form-control categories-select" ng-model="productVariationsCtrl.newSizechart.countries" multiple>
+									<li nya-bs-option="country in productVariationsCtrl.newSizechartAvailableCountries" data-value="country.id" deep-watch="true" class="">
+										<a href="#" ng-click="productVariationsCtrl.addTableValues();productVariationsCtrl.invalidSizechartCountries=false"><span ng-bind="country.country_name"></span><span class="glyphicon glyphicon-ok check-mark"></span></a>
+									</li>
+								</ol>
+							</div>
+							<div class="col-xs-10 col-md-offset-2 error-text text-right" ng-if="productVariationsCtrl.invalidSizechartCountries" ng-cloak><span translate="product.variations.SZ_ONE_COUNTRY_MANDATORY"></span></div>
+						</div>
+						<div class="col-xs-12">
+							<div class="col-xs-12 mb-20 no-pad" id="lang-col" ng-if="productVariationsCtrl.addingColumn" ng-cloak>
+								<label class="col-xs-12 text-center title-bold"><span translate="product.variations.NEW_COLUMN"></span></label>
+								<div class="col-xs-12 mb-20 pl-0">
+									<label class="col-xs-12 title-bold"><span translate="product.variations.SZ_COLUMN_NAME"></span></label>
+									<div class="col-xs-10">
+										<input class="mb-10 form-control" type="text" ng-model="productVariationsCtrl.newColumn[productVariationsCtrl.name_language]">
+									</div>
+									<div class="col-xs-2">
+										<ol class="col-xs-12 about-edit-select title-lang-btn nya-bs-select ng-binding" ng-model="productVariationsCtrl.name_language">
+											<li nya-bs-option="language in productVariationsCtrl.languages" data-value="language.code" deep-watch="true">
+												<a href="#"><span ng-bind="language.name"></span> <span class="glyphicon glyphicon-ok check-mark"></span></a>
+											</li>
+										</ol>
+									</div>
+									<div class="col-xs-12 error-text text-right mb-10" ng-if="productVariationsCtrl.invalidColumnName" ng-cloak><span translate="product.variations.SIZECHART_COLUMNNAME_MANDATORY" translate-values='{ languageList: productVariationsCtrl.mandatory_langs_names}'></span></div>
+								</div>
+								<button class="col-sm-3 col-xs-4 col-sm-offset-9 col-xs-offset-8 mb-20 btn btn-default btn-green" ng-click="productVariationsCtrl.new_column(productVariationsCtrl.newColumn)" style="padding: 6px 12px;"><span style="white-space: normal;" translate="product.variations.ADD_NEW_COLUMN"></span></button>
+							</div>
+							<div class="col-xs-12 mb-20 mt-10" ng-if="!productVariationsCtrl.addingColumn" ng-cloak>
+								<div class="col-xs-4 col-sm-2 pl-0">
+									<label class="title-bold m-0"><span translate="product.variations.SZ_COLUMNS"></span></label>
+									<div class="col-xs-12">
+										<a class="pointer fs-upper funiv " ng-click="productVariationsCtrl.addingColumn=true">
+											<span translate="product.variations.ADD_NEW"></span>
+										</a>
+									</div>
+								</div>
+								<div class="col-xs-8 col-sm-10">
+									<div class="no-gutter sortable-container" sv-root sv-part="productVariationsCtrl.newSizechart.columns" sv-on-sort="productVariationsCtrl.move_column($indexFrom, $indexTo)">
+										<div ng-cloak class="col-xs-2 country pull-left funiv fs1" sv-element ng-repeat="column in productVariationsCtrl.newSizechart.columns track by $index">
+											<!-- todo:sorting columns <span class="glyphicon glyphicon-menu-hamburger pointer fc-68" sv-handle></span> -->
+											<span ng-bind="column[productVariationsCtrl.name_language]"></span>
+											<div class="pull-right">
+												<span class="glyphicon glyphicon-trash pointer fc-68" ng-click="productVariationsCtrl.delete_column($index)"></span>
+											</div>
+										</div>
+									</div>
+									<div class="error-text  text-right" ng-if="productVariationsCtrl.invalidSizechartColumns" ng-cloak><span translate="product.variations.SZ_ONE_COLUMN_MANDATORY"></span></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12 mb-20">
+							<label class="col-xs-12 title-bold"><span translate="product.variations.SZ_ROWS"></span></label>
+							<div class="col-xs-12">
+								<a class="pointer fs-upper funiv col-xs-12" ng-click="productVariationsCtrl.new_row()">
 									<span translate="product.variations.ADD_NEW"></span>
 								</a>
 							</div>
 						</div>
-						<div class="col-md-10">
-							<div class="no-gutter sortable-container" sv-root sv-part="productVariationsCtrl.newSizechart.columns" sv-on-sort="productVariationsCtrl.move_column($indexFrom, $indexTo)">
-								<div ng-cloak class="col-xs-2 country pull-left funiv fs1" sv-element ng-repeat="column in productVariationsCtrl.newSizechart.columns track by $index">
-									<!-- todo:sorting columns <span class="glyphicon glyphicon-menu-hamburger pointer fc-68" sv-handle></span> -->
-									<span ng-bind="column[productVariationsCtrl.name_language]"></span>
-									<div class="pull-right">
-										<span class="glyphicon glyphicon-trash pointer fc-68" ng-click="productVariationsCtrl.delete_column($index)"></span>
-									</div>
-								</div>
+						<div class="col-xs-12 error-text  text-right" ng-if="productVariationsCtrl.invalidSizechartValues" ng-cloak><span translate="product.variations.SZ_ONE_ROW_MANDATORY"></span></div>
+						<div class="col-xs-12 mb-20">
+							<div class="row-same-height no-gutter" ng-show="productVariationsCtrl.newSizechart.values.length > 0">
+								<table class="fs1-071 fnormal table-size-generated">
+									<thead>
+										<tr>
+											<th class="funiv fc-d6 fs0-857 fnormal text-center"></th>
+											<th class="funiv fc-d6 fs0-857 fnormal text-center" ng-cloak ng-repeat="header in productVariationsCtrl.table_header track by $index">{{ header }}</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-cloak ng-repeat="row in productVariationsCtrl.newSizechart.values track by $index">
+											<td><span class="ion-android-close close-row-sizes" ng-click="productVariationsCtrl.removeRow($index)"></span></td>
+											<td ng-repeat="cell in productVariationsCtrl.newSizechart.values[$index] track by $index">
+												<input class="form-control" ng-if="$index < productVariationsCtrl.newSizechart.countries.length" ng-model="productVariationsCtrl.newSizechart.values[$parent.$parent.$index][$index]" placeholder="0" ng-cloak/>
+												<input class="form-control" ng-if="$index >= productVariationsCtrl.newSizechart.countries.length" ng-model="productVariationsCtrl.newSizechart.values[$parent.$parent.$index][$index]" placeholder="0" type="number" ng-cloak/>
+											</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
-							<div class="error-text  text-right" ng-if="productVariationsCtrl.invalidSizechartColumns" ng-cloak><span translate="product.variations.SZ_ONE_COLUMN_MANDATORY"></span></div>
 						</div>
-					</div>
+						<div class="col-xs-12 mb-20">
+							<button class="btn btn-default btn-green " type="submit" ng-click="productVariationsCtrl.saveDeviserSizechart()"><span translate="product.variations.SAVE_NEW_SIZECHART"></span></button>
+						</div>
+					</form>
 				</div>
-				<div class="col-md-12 mb-20">
-					<label class="col-md-12"><span translate="product.variations.SZ_ROWS"></span></label>
-					<div class="col-md-12">
-						<a class="pointer fs-upper funiv col-md-12" ng-click="productVariationsCtrl.new_row()">
-							<span translate="product.variations.ADD_NEW"></span>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-12 error-text  text-right" ng-if="productVariationsCtrl.invalidSizechartValues" ng-cloak><span translate="product.variations.SZ_ONE_ROW_MANDATORY"></span></div>
-				<div class="col-md-12 mb-20">
-					<div class="row-same-height no-gutter" ng-show="productVariationsCtrl.newSizechart.values.length > 0">
-						<table class="fs1-071 fnormal table-size-generated">
-							<thead>
-								<tr>
-									<th class="funiv fc-d6 fs0-857 fnormal text-center"></th>
-									<th class="funiv fc-d6 fs0-857 fnormal text-center" ng-cloak ng-repeat="header in productVariationsCtrl.table_header track by $index">{{ header }}</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr ng-cloak ng-repeat="row in productVariationsCtrl.newSizechart.values track by $index">
-									<td><span class="ion-android-close close-row-sizes" ng-click="productVariationsCtrl.removeRow($index)"></span></td>
-									<td ng-repeat="cell in productVariationsCtrl.newSizechart.values[$index] track by $index">
-										<input ng-if="$index < productVariationsCtrl.newSizechart.countries.length" ng-model="productVariationsCtrl.newSizechart.values[$parent.$parent.$index][$index]" placeholder="0" ng-cloak/>
-										<input ng-if="$index >= productVariationsCtrl.newSizechart.countries.length" ng-model="productVariationsCtrl.newSizechart.values[$parent.$parent.$index][$index]" placeholder="0" type="number" ng-cloak/>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="col-md-12 mb-20">
-					<button class="btn btn-default btn-green " type="submit" ng-click="productVariationsCtrl.saveDeviserSizechart()"><span translate="product.variations.SAVE_NEW_SIZECHART"></span></button>
-				</div>
-			</form>
-			<hr style="height: 2px; color: black">
-		</div>
-		<div class="col-md-12">
-			<div ng-if="productVariationsCtrl.show_sizecharts" ng-cloak id="sizechart_values">
-				<label class="col-xs-12 text-center"><span translate="product.variations.SIZES"></span></label>
 				<div class ="row">
-					<div class="col-md-2">
+					<div class="col-xs-12 pl-15">
 						<a class="link-red" style="cursor:pointer;"><span translate="product.variations.NEW_SIZECHART" ng-click="productVariationsCtrl.showNewSizechartForm()"></span></a>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-3">
+					<div class="col-sm-3 col-xs-12 mb-10">
 						<ol class="nya-bs-select btn-group bootstrap-select form-control categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart}" ng-model="productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.countriesSelect(productVariationsCtrl.selected_sizechart)">
 							<li nya-bs-option="sizechart in productVariationsCtrl.sizechart_helper" data-value="sizechart">
 								<a><span ng-bind="sizechart.name[productVariationsCtrl.selected_language]"></span></a>
 							</li>
 						</ol>
 					</div>
-					<div class="col-md-3 pad-about">
+					<div class="col-sm-3 pad-about col-xs-12 mb-10">
 						<ol class="nya-bs-select btn-group bootstrap-select form-control categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart_country}" ng-model="productVariationsCtrl.selected_sizechart_country" ng-if="productVariationsCtrl.countriesAvailable.length > 0 && productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.selected_sizechart, productVariationsCtrl.selected_sizechart_country)" ng-cloak>
 							<li nya-bs-option="country in productVariationsCtrl.countriesAvailable" data-value="country">
 								<a><span ng-bind="country"></span></a>
@@ -288,24 +296,26 @@
 						</ol>
 					</div>
 					<div ng-if="productVariationsCtrl.selected_sizechart_country" ng-cloak>
-						<div class="col-md-3">
+						<div class="col-sm-3 col-xs-12 mb-10">
 							<span translate="product.variations.AVAILABLE_SIZES"></span>
 						</div>
-						<div class="col-md-3 pad-about">
-							<ol class="nya-bs-select btn-group bootstrap-select form-control product-select col-md-12" ng-model="productVariationsCtrl.size_to_add">
+						<div class="col-sm-3 pad-about col-xs-12">
+							<ol class="nya-bs-select btn-group bootstrap-select form-control product-select col-xs-12" ng-model="productVariationsCtrl.size_to_add">
 								<li nya-bs-option="size in productVariationsCtrl.sizechart_empty.values" data-value="$index">
-									<a href="#" ng-if="productVariationsCtrl.sizechart_available_values[$index]" ng-cloak><span ng-bind="size[0]"></span></a>
+									<a href="#" ng-if="productVariationsCtrl.sizechart_available_values[$index]" ng-cloak>
+										<span ng-bind="size[0]"></span>
+									</a>
 								</li>
 							</ol>
-							<a href="#" ng-if="productVariationsCtrl.size_to_add!=null" ng-cloak ng-click="productVariationsCtrl.addSizeToSizechart(productVariationsCtrl.size_to_add)" class="red-text col-md-12" ng-disabled="productVariationsCtrl.size_to_add == null"><span translate="product.variations.ADD_SIZE"></span></a>
+							<a href="#" ng-if="productVariationsCtrl.size_to_add!=null" ng-cloak ng-click="productVariationsCtrl.addSizeToSizechart(productVariationsCtrl.size_to_add)" class="link-red col-xs-12 mt-10 pl-0" ng-disabled="productVariationsCtrl.size_to_add == null"><span style="font-size: 14px;" translate="product.variations.ADD_SIZE"></span></a>
 						</div>
 					</div>
 				</div>
 				<div class="row" ng-if="productVariationsCtrl.product.sizechart" ng-cloak>
-					<div class="col-md-1">
+					<div class="col-xs-2 col-sm-1">
 						<span translate="product.variations.SCALE"></span>
 					</div>
-					<div class="col-md-1 pad-about">
+					<div class="col-sm-1 col-xs-4 pad-about">
 						<ol class="nya-bs-select btn-group bootstrap-select form-control categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.product.sizechart['metric_unit']}" ng-model="productVariationsCtrl.product.sizechart['metric_unit']">
 							<li nya-bs-option="size in productVariationsCtrl.metric.size">
 								<a><span ng-bind="size"></span></a>
@@ -313,28 +323,30 @@
 						</ol>
 					</div>
 				</div>
-				<table class="table table-striped product-table">
-					<thead>
-						<tr>
-							<th><span ng-bind="productVariationsCtrl.product.sizechart.country"></span></th>
-							<th ng-repeat="column in productVariationsCtrl.product.sizechart.columns"><span ng-bind="column[productVariationsCtrl.name_language]"></span></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="line in productVariationsCtrl.product.sizechart.values track by $index" >
-							<td ng-repeat="value in line track by $index">
-								<span ng-if="$first" ng-bind="value" class="editable-fix" ng-cloak></span>
-								<span ng-if="!$first" xeditable-select ng-cloak>
-									<a href="#" editable-number="line[$index]" buttons="no" e-min="0" blur="submit" class="ng-class:{'purple-text': productVariationsCtrl.sizechartValuesValidation(value)}">{{line[$index]}}</a>
-									&nbsp;<span ng-if="productVariationsCtrl.product.sizechart.metric_unit" ng-bind="productVariationsCtrl.product.sizechart.metric_unit" ng-cloak></span>
-								</span>
-							</td>
-							<td class="col-md-1">
-								<span class="ion-android-close close-row-sizes" ng-click="productVariationsCtrl.deleteSizeFromSizechart($index)"></span>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				<div style="overflow-x:auto;">
+					<table class="table table-striped product-table">
+						<thead>
+							<tr>
+								<th><span ng-bind="productVariationsCtrl.product.sizechart.country"></span></th>
+								<th ng-repeat="column in productVariationsCtrl.product.sizechart.columns"><span ng-bind="column[productVariationsCtrl.name_language]"></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="line in productVariationsCtrl.product.sizechart.values track by $index" >
+								<td ng-repeat="value in line track by $index">
+									<span ng-if="$first" ng-bind="value" class="editable-fix" ng-cloak></span>
+									<span ng-if="!$first" xeditable-select ng-cloak>
+										<a href="#" editable-number="line[$index]" buttons="no" e-min="0" blur="submit" class="ng-class:{'purple-text': productVariationsCtrl.sizechartValuesValidation(value)}">{{line[$index]}}</a>
+										&nbsp;<span ng-if="productVariationsCtrl.product.sizechart.metric_unit" ng-bind="productVariationsCtrl.product.sizechart.metric_unit" ng-cloak></span>
+									</span>
+								</td>
+								<td class="col-md-1">
+									<span class="ion-android-close close-row-sizes" ng-click="productVariationsCtrl.deleteSizeFromSizechart($index)"></span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 			<div class="col-md-12" ng-if="productVariationsCtrl.prints" ng-cloak>
 				<div class="row">

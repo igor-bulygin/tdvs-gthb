@@ -164,11 +164,16 @@
 }
 */
 .optional-input{
-   color: #9a9a9a;
+    color: #9a9a9a;
     text-transform: uppercase;
     font-size: 10px;
-	margin-left: 10px;
+    margin-left: 10px;
 }
+.optional-input-vat {
+    color: #9a9a9a;
+    text-transform: uppercase;
+    font-size: 10px;
+ }
 .ok-sent-mesg-wrapper{
     max-width: 300px;
     margin: 0 auto;

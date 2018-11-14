@@ -20,7 +20,7 @@ Yii::$app->opengraph->title = $this->title;
 <div ng-controller="timelineCtrl as timelineCtrl">
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-12 col-md-3"><nav class="menu-store"><ul>
+			<div class="col-xs-12 col-md-3"><nav class="timeline-menu"><ul>
 				<li ng-class="{'active': !timelineCtrl.selectedPersonType}">
 					<a style="cursor:pointer;" ng-class="{'active': !timelineCtrl.selectedPersonType}" ng-click="timelineCtrl.resetFilter()" translate="person.ALL"></a>
 				</li>
@@ -28,7 +28,7 @@ Yii::$app->opengraph->title = $this->title;
 					<a style="cursor:pointer;" ng-class="{'active': timelineCtrl.selectedPersonType === personType.value }" translate="{{personType.name}}" ng-click="timelineCtrl.selectedPersonType = personType.value"></a>
 				</li>
 			</ul></nav></div>
-			<div class="col-xs-12 col-md-8 col-lg-7">
+			<div class="col-xs-12 col-md-8 col-lg-7 tl-pad">
 				<div class="timeline-wrapper">
 					<div class="col-xs-10 col-xs-offset-1 mt-40 mb-40" ng-if="(timelineCtrl.timeline | filter:{ person: {person_type:timelineCtrl.selectedPersonType}}).length < 1" ng-cloak>
 						<span translate="person.timeline.EMPTY_TIMELINE"></span>
@@ -44,7 +44,9 @@ Yii::$app->opengraph->title = $this->title;
 										<span class="timeline-time" am-time-ago="timeline.date | amUtc"></span>
 									</div>
 									<div class="row timeline-img">
-										<img class="col-xs-12 grid-image responsive" ng-src="{{timeline.photo}}">
+										<a ng-href="{{ timeline.link }}">
+											<img class="col-xs-12 grid-image responsive" ng-src="{{timeline.photo}}">
+										</a>
 									</div>
 									<div class="row text-right">
 										<span class="timeline-loved" ng-bind="timeline.loveds"></span>

@@ -59,8 +59,7 @@
 	}
 	.timeline-description{
 		-webkit-box-orient: vertical;
-		line-height: 1.1em;
-		max-height: 2.2em;
+		max-height: 2.8em;
 		text-overflow: ellipsis;
 		overflow: hidden;
 		-webkit-line-clamp: 2;
@@ -93,5 +92,10 @@
 		font-size: 18px;
     	font-weight: normal;
    		margin-bottom: 25px;
+	}
+}
+.tl-pad{
+	@media(max-width: 991px){
+		padding: 0 20px;
 	}
 }

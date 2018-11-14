@@ -184,6 +184,8 @@
 				}
 			}
 
+			console.log(vm.product);
+
 			vm.disable_save_buttons = true;
 			var required = [];
 			if(publish)

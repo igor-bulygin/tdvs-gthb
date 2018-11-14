@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    function controller(UtilService, chatDataService, $window, $location, $scope, $anchorScroll) {
+    function controller(UtilService, chatDataService, $window, $location, $scope, $anchorScroll, $interval) {
         var vm = this;
         vm.getChats = getChats;
         vm.sendMsg = sendMsg;
@@ -14,6 +14,7 @@
         vm.loading = true;
         vm.loadingChat = true;
         vm.unselectChat = unselectChat;
+        vm.timerChats;
         if (person) {
             vm.person = { id: UtilService.getConnectedUser(), name: angular.copy(person.name), profile_image: person.profile_image };
         } else {
@@ -64,6 +65,8 @@
                 vm.loading = false;
                 vm.loadingChat = false;
                 vm.firstCharge = false;
+                $location.hash('bottomChat');
+                $anchorScroll();
             }
             chatDataService.getChats({ person_type: vm.filterId }, onGetChatsSuccess, UtilService.onError);
         }
@@ -86,7 +89,7 @@
                     }
                 });
                 angular.forEach(vm.currentChat.members, function(member) {
-                    if (vm.person.id != member.person_id) {
+                    if (vm.person.id != '"'+member.person_id+'"') {
                         vm.personToChat.id = member.person_id;
                         vm.personToChat.name = member.person_info.name;
                         vm.personToChat.profile_image = member.person_info.profile_image;
@@ -95,7 +98,7 @@
                 vm.loadingChat = false;
                 $location.hash('bottomChat');
                 $anchorScroll();
-                $location.hash('');
+                
             }
             if (id) {
                 chatDataService.getChat({ id: id }, onGetChatSuccess, UtilService.onError);
@@ -113,14 +116,61 @@
         function sendMsg() {
             if (vm.newMsg && vm.newMsg.length > 0) {
                 function onSendMsgSuccess(data) {
+                    var lastOwner;
+                    var OldPersonalInfo = vm.currentChat.messages;
+                    var firstPersonInfo;
+                    var secondPersonInfo;
+
                     vm.currentChat.messages = data.messages;
                     vm.currentChat.messages[vm.currentChat.messages.length - 1].isLast = true;
-                    vm.currentChat.messages[vm.currentChat.messages.length - 1].person_info = { name: vm.person.name, profile_image: vm.person.profile_image };
+                    if (OldPersonalInfo[0]){
+                        firstPersonInfo = OldPersonalInfo[0].person_info;
+                        for(var j = 0; j < data.messages.length; j++){
+                            if (data.messages[j].person_id != firstPersonInfo.id){
+                                for (var u = 0; u < data.members.length; u++){
+                                    if(data.messages[j].person_id == data.members[u].person_id){
+                                        vm.currentChat.messages[j].person_info = data.members[u].person_info
+                                        secondPersonInfo = data.members[u].person_info;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        for (var i = 0; i < data.members.length; i++){
+                            if (data.messages[0].person_id == data.members[i].person_id){
+                                firstPersonInfo = data.members[i].person_info;
+                            }
+                        }
+                    }
+                    for(var i = 0; i < OldPersonalInfo.length; i++){
+                        vm.currentChat.messages[i].person_info = OldPersonalInfo[i].person_info;
+                        if (OldPersonalInfo[i].person_id != firstPersonInfo.id){
+                            for (var u = 0; u < data.members.length; u++){
+                                if(OldPersonalInfo[i].person_id == data.members[u].person_id){
+                                    secondPersonInfo = data.members[u].person_info;
+                                }
+                            }
+                        }
+                    }
+                    angular.forEach(vm.currentChat.messages, function(msg) {
+                        if (lastOwner && lastOwner === msg.person_id) {
+                            msg.showOwner = false;
+                        } else {
+                            lastOwner = msg.person_id;
+                            msg.showOwner = true;
+                        }
+                        if (firstPersonInfo && msg.person_id == firstPersonInfo.id){
+                            msg.person_info = firstPersonInfo;
+                        }
+                        else if(secondPersonInfo && msg.person_id == secondPersonInfo.id){
+                            msg.person_info = secondPersonInfo;
+                        }
+                    });
                     vm.newMsg = '';
+                    getChats();
                     $location.hash('bottomChat');
                     $anchorScroll();
-                    $location.hash('');
-                    getChats();
                 }
                 chatDataService.sendMsg({ text: vm.newMsg }, { personId: vm.personToChat.id }, onSendMsgSuccess, UtilService.onError);
             }
@@ -134,9 +184,52 @@
         }
 
         function selectChat(chat) {
+            if (vm.timerChats){
+                $interval.cancel(vm.timerChats);
+            }
             var baseLen = $location.absUrl().length - $location.url().length;
-            $location.path(chat.preview.url.substring(baseLen));
-            getChat(chat.id)
+            $location.url(chat.preview.url.substring(baseLen));
+            getChat(chat.id);
+             vm.timerChats = $interval(function() {
+                function onGetChatSuccess(data) {
+                    vm.currentChat = angular.copy(data);
+                    var lastOwner;
+                    if (vm.currentChat.messages.length > 0) {
+                        vm.currentChat.messages[vm.currentChat.messages.length - 1].isLast = true;
+                    }
+                    angular.forEach(vm.currentChat.messages, function(msg) {
+                        if (lastOwner && lastOwner === msg.person_id) {
+                            msg.showOwner = false;
+                        } else {
+                            lastOwner = msg.person_id;
+                            msg.showOwner = true;
+                        }
+                    });
+                    angular.forEach(vm.currentChat.members, function(member) {
+                        if (vm.person.id != '"'+member.person_id+'"') {
+                            vm.personToChat.id = member.person_id;
+                            vm.personToChat.name = member.person_info.name;
+                            vm.personToChat.profile_image = member.person_info.profile_image;
+                        }
+                    });
+                    getChats();
+                    $location.hash('bottomChat');
+                    $anchorScroll();
+                }
+                if (chat.id) {
+                    chatDataService.getChat({ id: chat.id }, onGetChatSuccess, UtilService.onError)
+                } else {
+                    createChat();
+                }
+            }, 60000);
+            function onSetChatReadSuccess(data){
+                angular.forEach(vm.chats, function(chat){
+                    if (chat.id == data.id){
+                        chat.preview.unread = false;
+                    }
+                });
+            }
+            chatDataService.setChatRead({ chatId: chat.id }, { chatId: chat.id }, onSetChatReadSuccess, UtilService.onError)
         }
 
         function parseImage(image) {

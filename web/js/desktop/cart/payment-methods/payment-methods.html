@@ -35,10 +35,9 @@
 						</div>
 					</div>
 					<div class="form-group form-personal-info">
-						<label for="vat_id" class="col-md-3"><span translate="cart.VAT_NUMBER"></span></label>
+						<label for="vat_id" class="col-md-3"><span translate="cart.VAT_NUMBER"></span> <span class="optional-input-vat" translate="global.OPTIONAL"></span></label>
 						<div class="col-md-9">
-							<input type="text" name="vat_id" ng-model="paymentMethodsCtrl.cart.billing_address.vat_id" class="form-control ng-class:{'error-input': paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.vat_id)}" required>
-							<form-errors field="paymentMethodsCtrl.billingForm.vat_id" condition="paymentMethodsCtrl.has_error(paymentMethodsCtrl.billingForm, paymentMethodsCtrl.billingForm.vat_id)"></form-errors>
+							<input type="text" name="vat_id" ng-model="paymentMethodsCtrl.cart.billing_address.vat_id" class="form-control">
 						</div>
 					</div>
 					<div class="form-group form-personal-info">
