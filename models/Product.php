@@ -741,6 +741,25 @@ class Product extends CActiveRecord {
             );
         }
 
+        // if occasions are specified
+        if ((array_key_exists("occasions", $criteria)) && (!empty($criteria["occasions"]))) {
+            $ids = [];
+            foreach ($criteria["occasions"] as $occasion) {
+                if ($occasion && strlen($occasion) > 0) {
+                    $ids[] = $occasion;
+                }
+            }
+            $query->andWhere(
+                ['options.22eb6' =>
+                    ['$elemMatch' =>
+                        ['$elemMatch' =>
+                            ['$in' => $ids]
+                        ]
+                    ]
+                ]
+            );
+        }
+
 
 		// if product_state is specified
 		if ((array_key_exists("product_state", $criteria)) && (!empty($criteria["product_state"]))) {

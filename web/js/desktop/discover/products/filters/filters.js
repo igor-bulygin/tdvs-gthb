@@ -8,6 +8,7 @@
         vm.show_sizes       = 50;
         vm.show_colors      = 50;
         vm.show_materials   = 50;
+        vm.show_occasions   = 50;
 		vm.orderTypes=[
             {value: "relevant", name: 'discover.RELEVANT'},
 			{value: "new", name: 'discover.NEW'},
@@ -32,6 +33,8 @@
 		vm.page = 1;
 		vm.colors = [];
 		vm.materials = [];
+		vm.occasions = [];
+		vm.seasons = [];
 
 		init();
 
@@ -77,6 +80,12 @@
             }
             else if (type === 'materials') {
                 vm.filters.materials = {};
+            }
+            else if (type === 'occasions') {
+                vm.filters.occasions = {};
+            }
+            else if (type === 'seasons') {
+                vm.filters.seasons = {};
             }
             search(true, false);
         }
@@ -148,6 +157,7 @@
             vm.getFilterSizes();
             vm.getFilterColors();
             vm.getFilterMaterials();
+            vm.getFilterOccasions();
         }
 
         function getFilterCategories() {
@@ -319,7 +329,40 @@
         }
 
         function getFilterOccasions() {
+            var exists = [];
 
+            vm.results.items.forEach(function(product) {
+                /**
+                 * retrieve information about avalaible materials in products found
+                 */
+                product.options.forEach(function(item) {
+                    if (item.name === 'Occasion') {
+                        item.values.forEach(function(obj) {
+                            if (isArray(obj.value)) {
+                                for (i = 0; i < obj.value.length; i++) {
+                                    // if (obj.value[i] == 'gold-18') console.log(product);
+                                    if (exists.indexOf(obj.value[i]) === -1) {
+                                        vm.occasions.push({
+                                            name: obj.text[i],
+                                            value: obj.value[i]
+                                        });
+                                        exists.push(obj.value[i]);
+                                    }
+                                }
+                            }
+                            else  {
+                                if (exists.indexOf(obj.value) === -1) {
+                                    vm.occasions.push({
+                                        name: obj.text,
+                                        value: obj.value
+                                    });
+                                    exists.push(obj.value);
+                                }
+                            }
+                        });
+                    }
+                });
+            });
         }
         function getFilterSeasons() {
 

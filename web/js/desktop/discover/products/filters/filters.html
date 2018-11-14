@@ -80,6 +80,28 @@
             <div class="clearfix"></div>
             <!--<span class="more-btn" ng-click="exploreProductsFiltersCtrl.seeMore('categories')" ng-if="exploreProductsFiltersCtrl.show_categories < exploreProductsFiltersCtrl.categories.meta.total_count" ng-cloak translate="discover.SEE_MORE"></span>-->
 
+            <div class="clearfix" style="height: 15px"></div>
+
+            <span class="filter-title" translate="discover.FILTER_BY_OCCASION"></span>
+            <span class="filter-clear" translate="discover.CLEAR_ALL" ng-click="exploreProductsFiltersCtrl.clearFilter('occasions')"></span>
+            <div class="clearfix" style="height: 5px"></div>
+            <div class="checkbox checkbox-red one-col" ng-repeat="occasion in exploreProductsFiltersCtrl.occasions" ng-if="$index < exploreProductsFiltersCtrl.show_occasions">
+                <input ng-attr-id="{{'checkbox'+($index+30000)}}"
+                       type="checkbox"
+                       name="occasions"
+                       ng-model="exploreProductsFiltersCtrl.filters.occasions[occasion.value]"
+                       class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.occasions[occasion.value]}"
+                       ng-disabled="exploreProductsFiltersCtrl.searching"
+                       ng-change="exploreProductsFiltersCtrl.search(true, false)"
+                />
+                <label ng-attr-for="{{'checkbox'+($index+30000)}}">
+                    <span ng-bind="occasion.name"></span>
+                </label>
+            </div>
+            <div class="clearfix"></div>
+            <!--<span class="more-btn" ng-click="exploreProductsFiltersCtrl.seeMore('categories')" ng-if="exploreProductsFiltersCtrl.show_categories < exploreProductsFiltersCtrl.categories.meta.total_count" ng-cloak translate="discover.SEE_MORE"></span>-->
+
+
 
 
 		</form>

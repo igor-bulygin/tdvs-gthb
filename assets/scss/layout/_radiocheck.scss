@@ -38,6 +38,16 @@
             text-transform: uppercase;
         }
     }
+    &.one-col {
+        font-size: 12px;
+        margin-top: 5px !important;
+        margin-bottom: 5px !important;
+        label {
+            color: $dark_grey;
+            font-size: 13px;
+            padding-left: 2px;
+        }
+    }
 }
 .checkbox label {
   font-size: 15px;
