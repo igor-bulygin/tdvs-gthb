@@ -710,9 +710,36 @@ class Product extends CActiveRecord {
                     ]
                 ]
             );
-
         }
 
+        // if materials are specified
+        if ((array_key_exists("materials", $criteria)) && (!empty($criteria["materials"]))) {
+            $ids = [];
+            foreach ($criteria["materials"] as $material) {
+                if ($material && strlen($material) > 0) {
+                    $ids[] = $material;
+                }
+            }
+            $query->andWhere(
+                ['or',
+                    ['options.d0e2g' =>
+                        ['$elemMatch' =>
+                            ['$elemMatch' =>
+                            ['$in' => $ids]
+                            ]
+                        ]
+                    ],
+                    ['options.f6b97' =>
+                        ['$elemMatch' =>
+                            ['$elemMatch' =>
+                                ['$in' => $ids]
+                            ]
+                        ]
+                    ]
+
+                ]
+            );
+        }
 
 
 		// if product_state is specified

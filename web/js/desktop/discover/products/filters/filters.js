@@ -4,9 +4,10 @@
 	function controller(UtilService, locationDataService, productDataService, $location, $scope) {
 		var vm = this;
 		vm.seeMore = seeMore;
-		vm.show_categories = 10;
-        vm.show_sizes = 50;
-        vm.show_colors = 50;
+		vm.show_categories  = 10;
+        vm.show_sizes       = 50;
+        vm.show_colors      = 50;
+        vm.show_materials   = 50;
 		vm.orderTypes=[
             {value: "relevant", name: 'discover.RELEVANT'},
 			{value: "new", name: 'discover.NEW'},
@@ -24,8 +25,13 @@
 		vm.getFilterSizes = getFilterSizes;
         vm.getFilterCategories = getFilterCategories;
         vm.getFilterColors = getFilterColors;
+        vm.getFilterMaterials = getFilterMaterials;
+        vm.getFilterOccasions = getFilterOccasions;
+        vm.getFilterSeasons = getFilterSeasons;
+        vm.getFilterTechniques = getFilterTechniques;
 		vm.page = 1;
 		vm.colors = [];
+		vm.materials = [];
 
 		init();
 
@@ -68,6 +74,9 @@
 			}
             else if (type === 'colors') {
                 vm.filters.colors = {};
+            }
+            else if (type === 'materials') {
+                vm.filters.materials = {};
             }
             search(true, false);
         }
@@ -138,6 +147,7 @@
             vm.getFilterCategories();
             vm.getFilterSizes();
             vm.getFilterColors();
+            vm.getFilterMaterials();
         }
 
         function getFilterCategories() {
@@ -269,6 +279,54 @@
                     }
                 });
             });
+        }
+
+        function getFilterMaterials() {
+            var exists = [];
+
+            vm.results.items.forEach(function(product) {
+                /**
+                 * retrieve information about avalaible materials in products found
+                 */
+                product.options.forEach(function(item) {
+                    if (item.name === 'Material') {
+                        item.values.forEach(function(obj) {
+                            if (isArray(obj.value)) {
+                                for (i = 0; i < obj.value.length; i++) {
+                                    // if (obj.value[i] == 'gold-18') console.log(product);
+                                    if (exists.indexOf(obj.value[i]) === -1) {
+                                        vm.materials.push({
+                                            name: obj.text[i],
+                                            value: obj.value[i]
+                                        });
+                                        exists.push(obj.value[i]);
+                                    }
+                                }
+                            }
+                            else  {
+                                if (exists.indexOf(obj.value) === -1) {
+                                    vm.materials.push({
+                                        name: obj.text,
+                                        value: obj.value
+                                    });
+                                    exists.push(obj.value);
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        }
+
+        function getFilterOccasions() {
+
+        }
+        function getFilterSeasons() {
+
+        }
+
+        function getFilterTechniques() {
+
         }
 
 		$scope.$on("changePage", function(evt,data){ 
