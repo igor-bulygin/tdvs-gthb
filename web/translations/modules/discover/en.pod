@@ -10,6 +10,7 @@
 		"SEE_MORE": "See more",
 		"FILTER_BY_THEME": "Filter by category",
 		"FILTER_BY_SIZE": "Size",
+		"FILTER_BY_COLOR": "Color",
 		"CLEAR_ALL": "clear",
 		"FOLLOW": "Follow",
 		"UNFOLLOW": "Unfollow",

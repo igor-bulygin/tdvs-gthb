@@ -9,6 +9,7 @@
 		"SEE_MORE": "Ver más",
 		"FILTER_BY_THEME": "Filtrar por categoría",
 		"FILTER_BY_SIZE": "Sizes",
+		"FILTER_BY_COLOR": "Color",
 		"CLEAR_ALL": "clear",
 		"FOLLOW": "Seguir",
 		"UNFOLLOW": "Siguiendo",

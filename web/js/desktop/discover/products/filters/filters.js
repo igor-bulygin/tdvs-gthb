@@ -6,6 +6,7 @@
 		vm.seeMore = seeMore;
 		vm.show_categories = 10;
         vm.show_sizes = 50;
+        vm.show_colors = 50;
 		vm.orderTypes=[
             {value: "relevant", name: 'discover.RELEVANT'},
 			{value: "new", name: 'discover.NEW'},
@@ -19,8 +20,12 @@
 		vm.clearAllFilters = clearAllFilters
         vm.getProductFilters = getProductFilters;
 		vm.clearFilter = clearFilter;
-		vm.getFilterCategories = getFilterCategories;
+		// vm.getFilterCategories = getFilterCategories;
+		vm.getFilterSizes = getFilterSizes;
+        vm.getFilterCategories = getFilterCategories;
+        vm.getFilterColors = getFilterColors;
 		vm.page = 1;
+		vm.colors = [];
 
 		init();
 
@@ -61,6 +66,9 @@
 			else if (type === 'sizes') {
                 vm.filters.sizes = {};
 			}
+            else if (type === 'colors') {
+                vm.filters.colors = {};
+            }
             search(true, false);
         }
 
@@ -127,34 +135,22 @@
 		}
 
 		function getProductFilters() {
-		    vm.sizes = [];
+            vm.getFilterCategories();
+            vm.getFilterSizes();
+            vm.getFilterColors();
+        }
+
+        function getFilterCategories() {
             vm.categories = {};
             vm.categories.items = [];
             var cats = [];
-            // console.log(vm.results.items);
+
             /**
-             * retrieve information about all product sizes in products found
+             * retrieve information about categories IDs in products found
              */
             vm.results.items.forEach(function(product) {
-                if(typeof product.sizechart.values === 'object') {
-                    product.sizechart.values.forEach(function (size) {
-                        if (vm.sizes.indexOf(size[0]) == -1) {
-                            vm.sizes.push(size[0]);
-                        }
-                    });
-                }
-                /**
-                 * retrieve information about categories IDs in products found
-                 */
                 cats = cats.concat(angular.copy(product.categories));
             });
-            /**
-             * Sort sizes. (see sort function in the bottom of file)
-             * First: sizes with numbers and letters (like "38 (XS)")
-             * Then: sizes with letters (like "M", "S" etc)
-             * Then: numbers ("40", "12", etc.)
-             */
-            vm.sizes.sort(sortAlphaNum);
 
             /**
              * retrirve FULL information about categories in products found (filter all categories according to earlier found categories IDs)
@@ -167,21 +163,16 @@
                 }
                 return false;
             });
-            /**
-             * get categpries filters
-             */
-            vm.categories.items = vm.getFilterCategories(product_categories);
-        }
 
-        /**
-         * 1. Search for root categories (Art, Fashion, etc)
-         * 2. If there's more than 1 root category - we return root categories for filters
-         * 3. If there's only 1 root category - we return only products subcategories for filters
-         * @param product_categories
-         * @return {*}
-         */
-        function getFilterCategories(product_categories) {
-            var exists = [];
+
+            /**
+             * 1. Search for root categories (Art, Fashion, etc)
+             * 2. If there's more than 1 root category - we return root categories for filters
+             * 3. If there's only 1 root category - we return only products subcategories for filters
+             * @param product_categories
+             * @return {*}
+             */
+            exists = [];
             var root_categories = product_categories.reduce(function (prev, cur, i, arr) {
                 /**
                  * Get root category ID using "path" property of category info
@@ -202,17 +193,82 @@
                 }
                 return prev;
             }, []);
+            /**
+             * get categories filters
+             */
             if (root_categories.length > 1) {
-                return root_categories.filter (function(item) {
+                vm.categories.items = root_categories.filter (function(item) {
                     return item !== undefined;
                 });
             }
             else {
-                return product_categories.filter (function(item) {
+                vm.categories.items = product_categories.filter (function(item) {
                     return item !== undefined;
                 });
 
             }
+        }
+
+        function getFilterSizes() {
+            vm.sizes = [];
+            /**
+             * retrieve information about all product sizes in products found
+             */
+            vm.results.items.forEach(function(product) {
+                if(typeof product.sizechart.values === 'object') {
+                    product.sizechart.values.forEach(function (size) {
+                        if (vm.sizes.indexOf(size[0]) == -1) {
+                            vm.sizes.push(size[0]);
+                        }
+                    });
+                }
+            });
+            /**
+             * Sort sizes. (see sort function in the bottom of file)
+             * First: sizes with numbers and letters (like "38 (XS)")
+             * Then: sizes with letters (like "M", "S" etc)
+             * Then: numbers ("40", "12", etc.)
+             */
+            vm.sizes.sort(sortAlphaNum);
+        }
+
+        function getFilterColors() {
+            var colors_exists = [];
+
+            vm.results.items.forEach(function(product) {
+                /**
+                 * retrieve information about avalaible colors in products found
+                 */
+                product.options.forEach(function(item) {
+                    if (item.name === 'Color') {
+                        item.values.forEach(function(obj) {
+                            if (obj.colors.length > 1) {
+                                for (i = 0; i < obj.colors.length; i++) {
+                                    if (colors_exists.indexOf(obj.value[i]) === -1) {
+                                        vm.colors.push({
+                                            color: obj.colors[i][0],
+                                            name: obj.text[i],
+                                            value: obj.value[i]
+                                        });
+                                        colors_exists.push(obj.value[i]);
+                                    }
+                                }
+                            }
+                            else if (obj.colors.length === 1) {
+                                if (colors_exists.indexOf(obj.value) === -1) {
+                                    // console.log('1', obj.value, obj.colors[0])
+                                    vm.colors.push({
+                                        color: obj.colors[0],
+                                        name: obj.text,
+                                        value: obj.value
+                                    });
+                                    colors_exists.push(obj.value);
+                                }
+                            }
+                        });
+                    }
+                });
+            });
         }
 
 		$scope.$on("changePage", function(evt,data){ 

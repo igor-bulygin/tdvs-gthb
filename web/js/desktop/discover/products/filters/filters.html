@@ -33,12 +33,32 @@
             <span class="filter-clear" translate="discover.CLEAR_ALL" ng-click="exploreProductsFiltersCtrl.clearFilter('sizes')"></span>
             <div class="clearfix" style="height: 5px"></div>
             <div class="checkbox checkbox-red two-cols" ng-repeat="size in exploreProductsFiltersCtrl.sizes" ng-if="$index < exploreProductsFiltersCtrl.show_sizes">
-                <input ng-attr-id="{{'checkbox'+($index+10+exploreProductsFiltersCtrl.categories.items.length)}}" type="checkbox" name="sizes" ng-model="exploreProductsFiltersCtrl.filters.sizes[size]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.sizes[size]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search(true, false)">
+                <input ng-attr-id="{{'checkbox'+($index+10+exploreProductsFiltersCtrl.categories.items.length)}}" type="checkbox" name="sizes" ng-model="exploreProductsFiltersCtrl.filters.sizes[size]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.sizes[size]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search(true, false)" />
                 <label ng-attr-for="{{'checkbox'+($index+10+exploreProductsFiltersCtrl.categories.items.length)}}">
                     <span ng-bind="size"></span>
                 </label>
             </div>
+            <div class="clearfix"></div>
             <!--<span class="more-btn" ng-click="exploreProductsFiltersCtrl.seeMore('categories')" ng-if="exploreProductsFiltersCtrl.show_categories < exploreProductsFiltersCtrl.categories.meta.total_count" ng-cloak translate="discover.SEE_MORE"></span>-->
+
+			<div class="clearfix" style="height: 15px;"></div>
+
+			<span class="filter-title" translate="discover.FILTER_BY_COLOR"></span>
+			<span class="filter-clear" translate="discover.CLEAR_ALL" ng-click="exploreProductsFiltersCtrl.clearFilter('colors')"></span>
+			<div class="clearfix" style="height: 5px"></div>
+			<div class="checkbox checkbox-red colors-filters" ng-repeat="color in exploreProductsFiltersCtrl.colors" ng-if="$index < exploreProductsFiltersCtrl.show_colors">
+				<input ng-attr-id="{{'checkbox'+($index+10000)}}" type="checkbox" name="colors" ng-model="exploreProductsFiltersCtrl.filters.colors[color.value]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.colors[color.value]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search(true, false)">
+				<label ng-attr-for="{{'checkbox'+($index+10000)}}">
+					<span ng-bind="color.name"></span>
+				</label>
+                <div
+                        ng-class="['color-label', color.value ]"
+                >
+                        <!--ng-style="{ 'background-color': color.color.length > 0 ? color.color : '' }"-->
+                </div>
+			</div>
+			<!--<span class="more-btn" ng-click="exploreProductsFiltersCtrl.seeMore('categories')" ng-if="exploreProductsFiltersCtrl.show_categories < exploreProductsFiltersCtrl.categories.meta.total_count" ng-cloak translate="discover.SEE_MORE"></span>-->
+
 
 		</form>
 	</div>

@@ -693,6 +693,27 @@ class Product extends CActiveRecord {
 
         }
 
+        // if colors are specified
+        if ((array_key_exists("colors", $criteria)) && (!empty($criteria["colors"]))) {
+            $ids = [];
+            foreach ($criteria["colors"] as $color) {
+                if ($color && strlen($color) > 0) {
+                    $ids[] = $color;
+                }
+            }
+            $query->andWhere(
+                ['options.731ct' =>
+                    ['$elemMatch' =>
+                        ['$elemMatch' =>
+                            ['$in' => $ids]
+                        ]
+                    ]
+                ]
+            );
+
+        }
+
+
 
 		// if product_state is specified
 		if ((array_key_exists("product_state", $criteria)) && (!empty($criteria["product_state"]))) {

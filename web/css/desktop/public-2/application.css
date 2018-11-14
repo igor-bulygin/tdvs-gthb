@@ -1726,7 +1726,21 @@ textarea {
     .checkbox.two-cols label {
       color: #939393;
       text-transform: uppercase;
-      font-size: 13px; }
+      font-size: 13px;
+      padding-left: 2px; }
+  .checkbox.colors-filters {
+    font-size: 12px;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important; }
+    .checkbox.colors-filters label {
+      color: #939393;
+      font-size: 13px;
+      padding-left: 2px; }
+    .checkbox.colors-filters .color-label {
+      width: 14px;
+      height: 14px;
+      float: right;
+      border-radius: 3px; }
 
 .checkbox label {
   font-size: 15px;

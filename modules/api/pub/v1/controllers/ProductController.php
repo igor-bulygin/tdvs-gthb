@@ -46,6 +46,7 @@ class ProductController extends AppPublicController {
 			"deviser_id"            => Yii::$app->request->get("deviser"),
 			"categories"            => Yii::$app->request->get("categories"),
             "sizes"                 => Yii::$app->request->get("sizes"),
+            "colors"                => Yii::$app->request->get("colors"),
 			"order_type"            => Yii::$app->request->get("order_type"),
 			"product_state"         => Product::PRODUCT_STATE_ACTIVE,
 			"only_active_persons"   => true,
@@ -74,14 +75,16 @@ class ProductController extends AppPublicController {
         Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_COUNT);
 
         $query = Product::findSerialized([
-            "id" => Yii::$app->request->get("id"),
-            "name" => Yii::$app->request->get("name"), // search only in name attribute
-            "text" => Yii::$app->request->get("q"), // search in name, description, and more
-            "deviser_id" => Yii::$app->request->get("deviser"),
-            "categories" => Yii::$app->request->get("categories"),
-            "order_type" => Yii::$app->request->get("order_type"),
-            "product_state" => Product::PRODUCT_STATE_ACTIVE,
-            "only_active_persons" => true,
+            "id"                    => Yii::$app->request->get("id"),
+            "name"                  => Yii::$app->request->get("name"), // search only in name attribute
+            "text"                  => Yii::$app->request->get("q"), // search in name, description, and more
+            "deviser_id"            => Yii::$app->request->get("deviser"),
+            "categories"            => Yii::$app->request->get("categories"),
+//            "sizes"                 => Yii::$app->request->get("sizes"),
+//            "colors"                => Yii::$app->request->get("colors"),
+            "order_type"            => Yii::$app->request->get("order_type"),
+            "product_state"         => Product::PRODUCT_STATE_ACTIVE,
+            "only_active_persons"   => true,
         ]);
         $count = Product::$countItemsFound;
         return [
