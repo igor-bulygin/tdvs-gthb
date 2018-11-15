@@ -41,6 +41,9 @@
 					vm.results.items = vm.results.items.concat(angular.copy(data.items));
 					vm.search_key = angular.copy(vm.searchdata.key);
 					vm.results_found = data.meta.total_count;
+                    /**
+                     * if it's a new search - reset filters on the left side by emitting event for child filters controller (discoverFiltersCtrl)
+                     */
                     if (resetFilters === true) {
                         $scope.$broadcast('setPersonFilters', vm.results.items);
                     }
@@ -79,6 +82,9 @@
 		// 	search(true);
 		// }, true);
 
+        /**
+         * event is called from HTML (filters.html) onChange event on checkbox. $watch doesn't work because now we have to pass parameter into search function
+         */
         $scope.$on('emitSearch', function (evt, reset) {
             vm.results = {items: [] };
             vm.page = 1;

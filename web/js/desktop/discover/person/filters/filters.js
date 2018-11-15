@@ -38,6 +38,9 @@
 			productDataService.getCategories(params, onGetCategoriesSuccess, UtilService.onError);
 		}
 
+        /**
+         * get all countries. If they're loaded and if there's search results loaded - call function fot make filters
+         */
 		function getCountries() {
 			function onGetCountriesSuccess(data) {
 				vm.countries_all = angular.copy(data);
@@ -54,7 +57,12 @@
 			locationDataService.getCountry(params, onGetCountriesSuccess, UtilService.onError);
 		}
 
-		function seeMore(value) {
+        /**
+         * disabled because of short list of countries, CSS is enough
+         * @param value
+         */
+		/*
+        function seeMore(value) {
 			switch (value) {
 				case 'countries':
 					if (vm.show_countries < vm.countries.meta.total_count) {
@@ -65,8 +73,14 @@
 					break;
 			}
 		}
+		*/
 
-        function expandFilter(filter, expand) {
+        /**
+         * Finction that increases/decreases height of block with filters
+         * @param filter - name of filters set ('categories', 'countries', etc)
+         * @param expand - if true - size of block increases, if false - decreases
+         */
+		function expandFilter(filter, expand) {
             if (expand) {
                 if (vm.expandedFilters.indexOf(filter) === -1) {
                     vm.expandedFilters.push(filter);
@@ -96,10 +110,17 @@
             }
         }
 
+        /**
+         * function that emits event for new search in parent controller (discoverCtrl). Is called from HTML (filters.html) on checkbox change
+         * @param resetFilters
+         */
         function emitSearch(resetFilters) {
             $scope.$emit('emitSearch', resetFilters);
         }
 
+        /**
+         * Function mnakes arrays for filters.
+         */
         function setPersonFilters() {
             if (vm.countries_loaded) {
                 vm.setCategoriesFilters();
@@ -108,6 +129,9 @@
             }
         }
 
+        /**
+         * makes Categories filters.
+         */
         function setCategoriesFilters() {
             vm.categories = {};
             vm.categories.items = [];
