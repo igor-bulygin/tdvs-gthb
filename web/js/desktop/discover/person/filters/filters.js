@@ -61,7 +61,6 @@
          * disabled because of short list of countries, CSS is enough
          * @param value
          */
-		/*
         function seeMore(value) {
 			switch (value) {
 				case 'countries':
@@ -73,7 +72,6 @@
 					break;
 			}
 		}
-		*/
 
         /**
          * Finction that increases/decreases height of block with filters
