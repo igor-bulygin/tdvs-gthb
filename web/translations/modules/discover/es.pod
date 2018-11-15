@@ -26,6 +26,7 @@
 		"PRICE_HIGH_TO_LOW": "Precio de más alto a bajo",
 		"RELEVANT": "Lo más relevante",
 		"SEE_MORE": "Ver más",
+		"HIDE_MORE": "Hide",
 		"PRODUCTS": "Productos",
 		"DEVISERS": "Devisers",
 		"INFLUENCERS": "Influencers",

@@ -3,15 +3,22 @@
 
 	function controller(UtilService, locationDataService, productDataService, $location, $scope) {
 		var vm = this;
-		vm.seeMore = seeMore;
-		vm.show_categories  = 10;
-        vm.show_sizes       = 50;
-        vm.show_colors      = 50;
-        vm.show_materials   = 50;
-        vm.show_occasions   = 50;
-        vm.show_seasons     = 50;
-        vm.show_techniques  = 50;
-        vm.show_gemstones   = 50;
+
+		vm.show_categories  = 2;
+        vm.show_sizes       = 4;
+        vm.show_colors      = 2;
+        vm.show_materials   = 2;
+        vm.show_occasions   = 2;
+        vm.show_seasons     = 4;
+        vm.show_techniques  = 2;
+        vm.show_gemstones   = 2;
+        vm.page             = 1;
+        vm.colors           = [];
+        vm.materials        = [];
+        vm.occasions        = [];
+        vm.seasons          = [];
+        vm.techniques       = [];
+        vm.gemstones        = [];
 		vm.orderTypes=[
             {value: "relevant", name: 'discover.RELEVANT'},
 			{value: "new", name: 'discover.NEW'},
@@ -21,7 +28,10 @@
         ];
 		vm.orderFilter={value: "", name: 'discover.ORDER_BY'};
 		vm.filters = {};
-		vm.search = search;
+		vm.expandedFilters = []; // filters that are expanded
+
+        vm.seeMore = seeMore;
+        vm.search = search;
 		vm.clearAllFilters = clearAllFilters
         vm.getProductFilters = getProductFilters;
 		vm.clearFilter = clearFilter;
@@ -34,13 +44,8 @@
         vm.getFilterSeasons = getFilterSeasons;
         vm.getFilterTechniques = getFilterTechniques;
         vm.getFilterGemstones = getFilterGemstones;
-		vm.page = 1;
-		vm.colors       = [];
-		vm.materials    = [];
-		vm.occasions    = [];
-		vm.seasons      = [];
-        vm.techniques   = [];
-        vm.gemstones    = [];
+
+        vm.expandFilter = expandFilter;
 
 		init();
 
@@ -101,6 +106,18 @@
             }
 
             search(true, false);
+        }
+
+        function expandFilter(filter, expand) {
+            if (expand) {
+                if (vm.expandedFilters.indexOf(filter) === -1) {
+                    vm.expandedFilters.push(filter);
+                }
+            }
+            else {
+                var index = vm.expandedFilters.indexOf(filter);
+                vm.expandedFilters.splice(index, 1);
+            }
         }
 
 
