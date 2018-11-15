@@ -8,6 +8,8 @@
         vm.show_categories  = 4;
 		vm.categories_all   = [];
         vm.expandedFilters  = []; // filters that are expanded
+        vm.countries_loaded = false;
+        vm.filters_loaded   = false;
 
 
         vm.emitClearFilters = emitClearFilters;
@@ -39,6 +41,10 @@
 		function getCountries() {
 			function onGetCountriesSuccess(data) {
 				vm.countries_all = angular.copy(data);
+				vm.countries_loaded = true;
+				if (vm.results !== undefined) {
+				    vm.setPersonFilters();
+                }
 			}
 
 			var params = {
@@ -94,18 +100,21 @@
             $scope.$emit('emitSearch', resetFilters);
         }
 
-        function setPersonFilters(results) {
-            vm.setCategoriesFilters(results);
-            vm.setLocationsFilters(results);
+        function setPersonFilters() {
+            if (vm.countries_loaded) {
+                vm.setCategoriesFilters();
+                vm.setLocationsFilters();
+                vm.filters_loaded = true;
+            }
         }
 
-        function setCategoriesFilters(results) {
+        function setCategoriesFilters() {
             vm.categories = {};
             vm.categories.items = [];
             var cats = [];
-            // console.log(vm.results.items);
+            // console.log(vm.results);
 
-            results.forEach(function(person) {
+            vm.results.forEach(function(person) {
                 /**
                  * retrieve information about categories IDs in persons found
                  */
@@ -125,12 +134,12 @@
             });
         }
 
-        function setLocationsFilters(results) {
+        function setLocationsFilters() {
             vm.locations = {};
             vm.locations.items = [];
             var locs = [];
 
-            results.forEach(function(person) {
+            vm.results.forEach(function(person) {
                 /**
                  * retrieve information about countries IDs in persons found
                  */
@@ -152,7 +161,8 @@
 
 
         $scope.$on("setPersonFilters", function(evt, data) {
-            vm.setPersonFilters(data);
+            vm.results = data;
+            vm.setPersonFilters();
         }, true);
 
 
