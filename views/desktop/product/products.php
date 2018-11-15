@@ -56,6 +56,15 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 
             <explore-person searchdata="mainSearcherCtrl.searchdata" hideHeader="mainSearcherCtrl.hideHeader" ng-if="mainSearcherCtrl.currentSearchType.id == 4"></explore-person>
             <explore-person searchdata="mainSearcherCtrl.searchdata" hideHeader="mainSearcherCtrl.hideHeader" ng-if="mainSearcherCtrl.currentSearchType.id == 100 && mainSearcherCtrl.firstExistingSearchType.id == 4"></explore-person>
+
+            <explore-person searchdata="mainSearcherCtrl.searchdata" hideHeader="mainSearcherCtrl.hideHeader" ng-if="mainSearcherCtrl.currentSearchType.id == 5"></explore-person>
+            <explore-person searchdata="mainSearcherCtrl.searchdata" hideHeader="mainSearcherCtrl.hideHeader" ng-if="mainSearcherCtrl.currentSearchType.id == 100 && mainSearcherCtrl.firstExistingSearchType.id == 5"></explore-person>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 40px 0;" ng-if="mainSearcherCtrl.currentSearchType.id == 100 && mainSearcherCtrl.firstExistingSearchType.id === undefined" ng-cloak>
+                <p class="text-center" translate="discover.NOTHING_FOUND"></p>
+            </div>
+
+
 		</div>
 	</div>
 </div>

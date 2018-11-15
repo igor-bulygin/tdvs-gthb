@@ -20,6 +20,7 @@
 		"FOLLOW": "Follow",
 		"UNFOLLOW": "Unfollow",
 		"NO_PRODUCTS_FOUND": "No products found with the specified search criteria.",
+		"NOTHING_FOUND": "Nothing was found with the specified search criteria.",
 		"ORDER_BY": "Order by",
 		"NEW": "New",
 		"OLD": "Old",
@@ -31,6 +32,7 @@
 		"PRODUCTS": "Products",
 		"DEVISERS": "Devisers",
 		"INFLUENCERS": "Influencers",
+		"MEMBERS": "Members",
 		"BOXES_NAME": "Boxes",
 		"ALL": "All",
 		"boxes": {

@@ -4,11 +4,18 @@
 	function controller(UtilService, productDataService, locationDataService, $scope) {
 		var vm = this;
 		vm.seeMore = seeMore;
-		vm.show_countries = 10;
-		vm.categories_all = [];
+		vm.show_countries   = 4;
+        vm.show_categories  = 4;
+		vm.categories_all   = [];
+        vm.expandedFilters  = []; // filters that are expanded
+
+
         vm.emitClearFilters = emitClearFilters;
         vm.setPersonFilters = setPersonFilters;
+        vm.setCategoriesFilters = setCategoriesFilters;
+        vm.setLocationsFilters = setLocationsFilters;
         vm.emitSearch = emitSearch;
+        vm.expandFilter = expandFilter;
 
 		init();
 
@@ -31,7 +38,7 @@
 
 		function getCountries() {
 			function onGetCountriesSuccess(data) {
-				vm.countries = angular.copy(data);
+				vm.countries_all = angular.copy(data);
 			}
 
 			var params = {
@@ -52,6 +59,19 @@
 					break;
 			}
 		}
+
+        function expandFilter(filter, expand) {
+            if (expand) {
+                if (vm.expandedFilters.indexOf(filter) === -1) {
+                    vm.expandedFilters.push(filter);
+                }
+            }
+            else {
+                var index = vm.expandedFilters.indexOf(filter);
+                vm.expandedFilters.splice(index, 1);
+            }
+        }
+
 
         /**
          * Emit event for discoverCtrl.js to clear filters depending on type: clear Theme filters or Country filters
@@ -75,6 +95,11 @@
         }
 
         function setPersonFilters(results) {
+            vm.setCategoriesFilters(results);
+            vm.setLocationsFilters(results);
+        }
+
+        function setCategoriesFilters(results) {
             vm.categories = {};
             vm.categories.items = [];
             var cats = [];
@@ -94,6 +119,31 @@
             vm.categories = vm.categories_all.filter(function (item) {
                 if (exists.indexOf(item.short_id) === -1 && cats.indexOf(item.short_id) > -1) {
                     exists.push(item.short_id);
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        function setLocationsFilters(results) {
+            vm.locations = {};
+            vm.locations.items = [];
+            var locs = [];
+
+            results.forEach(function(person) {
+                /**
+                 * retrieve information about countries IDs in persons found
+                 */
+                locs.push(person.country);
+            });
+
+            /**
+             * retrieve FULL information about country in persons found (filter all countries according to earlier found countries IDs)
+             */
+            var exists = [];
+            vm.countries = vm.countries_all.items.filter(function (item) {
+                if (exists.indexOf(item.id) === -1 && locs.indexOf(item.id) > -1) {
+                    exists.push(item.id);
                     return true;
                 }
                 return false;

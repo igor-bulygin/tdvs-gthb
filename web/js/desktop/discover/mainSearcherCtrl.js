@@ -1,7 +1,7 @@
 (function () {
-	"use strict";
+	'use strict';
 
-	function controller(UtilService, productDataService, boxDataService, personDataService) {
+	function controller(UtilService, productDataService, boxDataService, personDataService, $scope) {
 		var vm = this;
 		vm.searchTypes = UtilService.getSearchTypes(); // source of searchTypes is moved to UtilService because it's needed also in header to make select
         // vm.searchTypes = [{name:'discover.PRODUCTS', id:1}, {name:'discover.BOXES_NAME', id:2}, {name:'discover.DEVISERS', id:3, type: 2}, {name:'discover.INFLUENCERS', id:4, type:3} ];
@@ -96,18 +96,20 @@
                 var boxesCount = boxDataService.getBoxesCount(params);
                 var devisersCount = personDataService.getPersonsCount(Object.assign({}, params, {type: 2}));
                 var influencersCount = personDataService.getPersonsCount(Object.assign({}, params, {type: 3}));
+                var membersCount = personDataService.getPersonsCount(Object.assign({}, params, {type: 1}));
                 /**
                  * Resolve all promises and write number of items found in searchTypes array
                  */
-                Promise.all([productCount, boxesCount, devisersCount, influencersCount]).then(function (values) {
+                Promise.all([productCount, boxesCount, devisersCount, influencersCount, membersCount]).then(function (values) {
                     values.forEach(function (item, i) {
                         var index = vm.searchTypes.findIndex(function(type) {
-                           return type.id == (i+1);
+                           return type.id === (i+1);
                         });
                         vm.searchTypes[index].num = item.count;
                     });
                     vm.firstExistingSearchType = vm.getFirstExistingSearchType();
                     vm.counted = true;
+                    $scope.$apply(); // force refresh DOM
                 });
             }
         }

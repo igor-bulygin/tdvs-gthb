@@ -29,7 +29,7 @@
 				vm.searching = true;
 				if (vm.search_key != vm.searchdata.key) {
 					vm.results={items: [] };
-					vm.page=1;
+					vm.page = 1;
 				}
 				var params = {
 					type: vm.searchdata.personType,

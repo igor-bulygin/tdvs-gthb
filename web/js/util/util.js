@@ -238,6 +238,11 @@
                     type: 3
                 },
                 {
+                    name: 'discover.MEMBERS',
+                    id: 5,
+                    type: 1
+                },
+                {
                     name: 'discover.ALL',
                     id: 100
                 }

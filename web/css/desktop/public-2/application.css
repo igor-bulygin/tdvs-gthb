@@ -10134,6 +10134,8 @@ footer {
   max-height: 120px;
   overflow: hidden;
   transition: all 0.3s ease; }
+  .filter-checkboxes-wrapper.extended {
+    max-height: 180px; }
   .filter-checkboxes-wrapper.expanded {
     height: auto;
     max-height: 1000px;
