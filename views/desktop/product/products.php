@@ -22,16 +22,47 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 ?>
 
 <style>
-#product-results_A { __width: 930px; margin: 0 auto; __column-count: 5; __column-gap: 10px; __-webkit-column-count: 5; __-webkit-column-gap: 10px; __-moz-column-count: 5; __-moz-column-gap: 10px; }
-.product-result-item_A { display: inline-block; margin-bottom: 0px; __width: 100%; padding: 0 !important; }
-.product-result-item_A figure, .product-result-item figcaption { padding: 0 !important; }
-.search-loading {text-align: center; padding-bottom: 20px;}
+    #product-results_A { __width: 930px; margin: 0 auto; __column-count: 5; __column-gap: 10px; __-webkit-column-count: 5; __-webkit-column-gap: 10px; __-moz-column-count: 5; __-moz-column-gap: 10px; }
+    .product-result-item_A { display: inline-block; margin-bottom: 0px; __width: 100%; padding: 0 !important; }
+    .product-result-item_A figure, .product-result-item figcaption { padding: 0 !important; }
+    .search-loading {text-align: center; padding-bottom: 20px;}
 </style>
 <div ng-controller="mainSearcherCtrl as mainSearcherCtrl">
 	<div class="results-wrapper" style="padding-top:20px;">
 		<div id="categoryFilter" class="container store" ng-if="mainSearcherCtrl.counted">
+            <div class="results-header">
+                <div class="items-count"
+                     ng-if="mainSearcherCtrl.searchParam && mainSearcherCtrl.totalItemsCount > 0"
+                     translate="discover.FOUND_X_RESULTS_WITH_KEY"
+                     translate-values="{ counter: mainSearcherCtrl.totalItemsCount, keys: mainSearcherCtrl.searchParam }"
+                ></div>
+                <div class="items-count"
+                     ng-if="!mainSearcherCtrl.searchParam && mainSearcherCtrl.totalItemsCount > 0"
+                     translate="discover.FOUND_X_RESULTS"
+                     translate-values="{ counter: mainSearcherCtrl.totalItemsCount }"
+                ></div>
+                <div class="products-order" ng-if="(mainSearcherCtrl.currentSearchType.id === 1) || (mainSearcherCtrl.currentSearchType.id === 100 && mainSearcherCtrl.firstExistingSearchType.id == 1)">
+                    <ol class="nya-bs-select" title="Sort by" ng-model="mainSearcherCtrl.orderFilter" ng-change="mainSearcherCtrl.orderProducts()" ng-cloak>
+                        <li nya-bs-option="type in mainSearcherCtrl.orderTypes">
+                            <a href="#"><span>{{ type.name | translate }}</span></a>
+                        </li>
+                    </ol>
+                </div>
+                <div class="clearfix"></div>
+            </div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="mainSearcherCtrl.searchTypeId == 100">
-				<a style="color:#1C1919; cursor:pointer;"><span ng-repeat="searchType in mainSearcherCtrl.searchTypes" class="col-xs-3 col-sm-3 col-md-1-5 col-lg-1-5 text-center" ng-if="searchType.num > 0" ng-click="mainSearcherCtrl.selectSearchType(searchType)" ng-class="mainSearcherCtrl.searchTypeClass(searchType.id)" ng-cloak>{{ searchType.name | translate}} ({{ searchType.num }})</span></a>
+				<a style="color:#1C1919; cursor:pointer;">
+                    <span
+                            ng-repeat="searchType in mainSearcherCtrl.searchTypes"
+                            class="col-xs-3 col-sm-3 col-md-1-5 col-lg-1-5 text-center"
+                            ng-if="searchType.num > 0"
+                            ng-click="mainSearcherCtrl.selectSearchType(searchType)"
+                            ng-class="mainSearcherCtrl.searchTypeClass(searchType.id)"
+                            ng-cloak
+                    >
+                        {{ searchType.name | translate}} ({{ searchType.num }})
+                    </span>
+                </a>
 			</div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="mainSearcherCtrl.searchTypeId != 100" ng-cloak>
                 <h4>Search in &laquo;{{ mainSearcherCtrl.currentSearchType.name | translate }}&raquo;</h4>

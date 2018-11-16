@@ -19,14 +19,20 @@
         vm.seasons          = [];
         vm.techniques       = [];
         vm.gemstones        = [];
-		vm.orderTypes=[
+        /**
+         * order types are moved to parent controller mainSearcherController
+         */
+        vm.orderTypes = [
             {value: "relevant", name: 'discover.RELEVANT'},
 			{value: "new", name: 'discover.NEW'},
             // {value: "old", name: 'discover.OLD'},
             {value: "cheapest", name: 'discover.PRICE_LOW_TO_HIGH'},
             {value: "expensive", name: 'discover.PRICE_HIGH_TO_LOW'}
         ];
-		vm.orderFilter={value: "", name: 'discover.ORDER_BY'};
+		vm.orderFilter = {
+		    value: "",
+            name: 'discover.ORDER_BY'
+		};
 		vm.filters = {};
 		vm.expandedFilters = []; // filters that are expanded
 
@@ -55,6 +61,7 @@
 			if (!angular.isUndefined(searchParam) && searchParam.length > 0) {
 				vm.searchParam = angular.copy(searchParam);
 			}
+			search(true, true);
 			getCategories();
 		}
 
@@ -139,9 +146,9 @@
 		}
 
 		function search(resetPage, resetFilters) {
-			if (!vm.searching) {
+            if (!vm.searching) {
 				vm.searching = true;
-				if (vm.search_key != vm.key || resetPage) {
+				if (vm.search_key !== vm.key || resetPage) {
 					vm.results={items:[], counter:0};
 					vm.page = 1;
 					$scope.$emit('resetPage');
@@ -520,6 +527,12 @@
 				vm.page = data;
 				search(false, true);
 		}, true);
+
+        $scope.$on("orderProducts", function(evt, data) {
+            vm.orderFilter = data;
+            search(true, true);
+        }, true);
+
 	}
 
 	

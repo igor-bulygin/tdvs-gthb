@@ -10,6 +10,8 @@
 		vm.setCurrentSearchType = setCurrentSearchType;
 		vm.countItems = countItems;
 		vm.getFirstExistingSearchType = getFirstExistingSearchType;
+		vm.orderProducts = orderProducts;
+
 		vm.hideHeader = true;
 		vm.searchParam = searchParam;
         /**
@@ -34,6 +36,18 @@
          * @type {boolean}
          */
         vm.counted = false;
+        vm.totalItemsCount = 0;
+        vm.orderTypes = [
+            {value: "relevant", name: 'discover.RELEVANT'},
+            {value: "new", name: 'discover.NEW'},
+            // {value: "old", name: 'discover.OLD'},
+            {value: "cheapest", name: 'discover.PRICE_LOW_TO_HIGH'},
+            {value: "expensive", name: 'discover.PRICE_HIGH_TO_LOW'}
+        ];
+        vm.orderFilter = {
+            value: "",
+            name: 'discover.ORDER_BY'
+        };
 
         init();
 
@@ -106,6 +120,7 @@
                            return type.id === (i+1);
                         });
                         vm.searchTypes[index].num = item.count;
+                        vm.totalItemsCount += item.count;
                     });
                     vm.firstExistingSearchType = vm.getFirstExistingSearchType();
                     vm.counted = true;
@@ -124,6 +139,10 @@
                     return item;
                 }
             });
+        }
+
+        function orderProducts() {
+            $scope.$broadcast('orderProducts', vm.orderFilter);
         }
 
 	}

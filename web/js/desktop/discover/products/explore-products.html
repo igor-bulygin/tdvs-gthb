@@ -14,7 +14,7 @@
 					<explore-products-filters searching="exploreProductsCtrl.searching" results="exploreProductsCtrl.results" limit="exploreProductsCtrl.limit" ></explore-products-filters>
 				</div>
 				<div>
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-if="exploreProductsCtrl.results.items.length === 0 && !exploreProductsCtrl.searching" ng-cloak>
+					<div class="products-not-found" ng-if="exploreProductsCtrl.results.items.length === 0 && !exploreProductsCtrl.searching" ng-cloak>
 						<p class="text-center" translate="discover.NO_PRODUCTS_FOUND"></p>
 					</div>
 					<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">

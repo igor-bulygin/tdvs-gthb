@@ -5,6 +5,8 @@
 		"SEARCHING": "Buscando...",
 		"WE_FOUND_X_RESULTS_WITH_KEY": "Hemos encontrado {{ counter }} resultados con las palabras clave \"<span class='key'>{{keys}}</span>\"",
 		"WE_FOUND_X_RESULTS": "Hemos encontrado {{ counter }} resultados",
+		"FOUND_X_RESULTS_WITH_KEY": "{{ counter }} resultados con \"<span class='key'>{{keys}}</span>\"",
+		"FOUND_X_RESULTS": "{{ counter }} resultados",
 		"FILTER_BY_COUNTRY": "Filtrar por ubicación",
 		"SEE_MORE": "Ver más",
 		"FILTER_BY_THEME": "Filtrar por categoría",

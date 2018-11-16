@@ -1,19 +1,32 @@
 
 <div>
 	<row>
-	<div class="col-sm-12 mb-20 mt-10" _style="padding-left:0 !important; padding-right: 0 !important;">
-		<div class="found-header col-xs-7 col-sm-7 col-md-5 col-md-offset-2" ng-if="!exploreProductsFiltersCtrl.searching" ng-cloak>
-			<div ng-if="exploreProductsFiltersCtrl.searchParam" translate="discover.WE_FOUND_X_RESULTS_WITH_KEY" style="padding:10px;" translate-values="{ counter: exploreProductsFiltersCtrl.results.counter, keys: exploreProductsFiltersCtrl.searchParam }"></div>
-			<div ng-if="!exploreProductsFiltersCtrl.searchParam" translate="discover.WE_FOUND_X_RESULTS" style="padding:10px;" translate-values="{ counter: exploreProductsFiltersCtrl.results.counter }"></div>
-		</div>
-		<div class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;">
-			<ol class="nya-bs-select" ng-model="exploreProductsFiltersCtrl.orderFilter" ng-change="exploreProductsFiltersCtrl.search(true, true)">
-				<li nya-bs-option="type in exploreProductsFiltersCtrl.orderTypes">
-					<a href="#"><span>{{ type.name | translate }}</span></a>
-				</li>
-			</ol>
-		</div>
-	</div>
+        <div class="col-sm-12 mb-20 mt-10" _style="padding-left:0 !important; padding-right: 0 !important;">
+            <div class="found-header col-xs-7 col-sm-7 col-md-5 col-md-offset-2"
+                 ng-if="!exploreProductsFiltersCtrl.searching && exploreProductsFiltersCtrl.results.counter > 0"
+                 ng-cloak
+            >
+                <div
+                        ng-if="exploreProductsFiltersCtrl.searchParam"
+                        translate="discover.WE_FOUND_X_RESULTS_WITH_KEY"
+                        style="padding:10px;"
+                        translate-values="{ counter: exploreProductsFiltersCtrl.results.counter, keys: exploreProductsFiltersCtrl.searchParam }"
+                ></div>
+                <div
+                        ng-if="!exploreProductsFiltersCtrl.searchParam"
+                        translate="discover.WE_FOUND_X_RESULTS"
+                        style="padding:10px;"
+                        translate-values="{ counter: exploreProductsFiltersCtrl.results.counter }"
+                ></div>
+            </div>
+            <!--<div class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;">-->
+                <!--<ol class="nya-bs-select" ng-model="exploreProductsFiltersCtrl.orderFilter" ng-change="exploreProductsFiltersCtrl.search(true, true)">-->
+                    <!--<li nya-bs-option="type in exploreProductsFiltersCtrl.orderTypes">-->
+                        <!--<a href="#"><span>{{ type.name | translate }}</span></a>-->
+                    <!--</li>-->
+                <!--</ol>-->
+            <!--</div>-->
+        </div>
 	</row>
 	<div class="col-xs-12 col-sm-2">
 		<form name="exploreProductsFiltersCtrl.form">
