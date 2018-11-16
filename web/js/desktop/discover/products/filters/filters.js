@@ -30,6 +30,8 @@
 		vm.filters = {};
 		vm.expandedFilters = []; // filters that are expanded
 
+        vm.categorieds_loaded = false;
+
         vm.seeMore = seeMore;
         vm.search = search;
 		vm.clearAllFilters = clearAllFilters
@@ -128,6 +130,10 @@
         function getCategories() {
 			function onGetCategoriesSuccess(data) {
                 vm.categories_all = angular.copy(data);
+                vm.categorieds_loaded = true;
+                if (vm.results !== undefined) {
+                    vm.getProductFilters();
+                }
 			}
 			productDataService.getCategories({scope: 'all'}, onGetCategoriesSuccess, UtilService.onError);
 		}
@@ -183,14 +189,16 @@
 		}
 
 		function getProductFilters() {
-            vm.getFilterCategories();
-            vm.getFilterSizes();
-            vm.getFilterColors();
-            vm.getFilterMaterials();
-            vm.getFilterOccasions();
-            vm.getFilterSeasons();
-            vm.getFilterTechniques();
-            vm.getFilterGemstones();
+            if (vm.categorieds_loaded === true && vm.results !== undefined) {
+                vm.getFilterCategories();
+                vm.getFilterSizes();
+                vm.getFilterColors();
+                vm.getFilterMaterials();
+                vm.getFilterOccasions();
+                vm.getFilterSeasons();
+                vm.getFilterTechniques();
+                vm.getFilterGemstones();
+            }
         }
 
         function getFilterCategories() {
