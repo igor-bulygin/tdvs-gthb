@@ -7648,6 +7648,13 @@ span.optional-text.pull-left {
     color: #1C1919; }
     #categoryFilter a > span {
       white-space: nowrap; }
+      @media (max-width: 767px) {
+        #categoryFilter a > span {
+          width: 20%; } }
+      @media (max-width: 500px) {
+        #categoryFilter a > span {
+          width: auto;
+          padding-bottom: 10px; } }
   @media (max-width: 767px) {
     #categoryFilter {
       text-align: center;
@@ -7668,7 +7675,7 @@ span.optional-text.pull-left {
   .results-header .products-order {
     display: inline-block;
     margin-left: 40px; }
-    @media (max-width: 500px) {
+    @media (max-width: 767px) {
       .results-header .products-order {
         display: block;
         float: right; } }

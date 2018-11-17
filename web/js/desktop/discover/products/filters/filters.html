@@ -2,7 +2,7 @@
 <div>
 	<row>
         <div class="col-sm-12 mb-20 mt-10" _style="padding-left:0 !important; padding-right: 0 !important;">
-            <div class="found-header col-xs-7 col-sm-7 col-md-5 col-md-offset-2"
+            <div class="found-header col-xs-12 col-sm-7 col-md-5 col-md-offset-2 col-sm-offset-0"
                  ng-if="!exploreProductsFiltersCtrl.searching && exploreProductsFiltersCtrl.results.counter > 0"
                  ng-cloak
             >
@@ -19,6 +19,7 @@
                         translate-values="{ counter: exploreProductsFiltersCtrl.results.counter }"
                 ></div>
             </div>
+            <div class="clearfix"></div>
             <!--<div class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;">-->
                 <!--<ol class="nya-bs-select" ng-model="exploreProductsFiltersCtrl.orderFilter" ng-change="exploreProductsFiltersCtrl.search(true, true)">-->
                     <!--<li nya-bs-option="type in exploreProductsFiltersCtrl.orderTypes">-->

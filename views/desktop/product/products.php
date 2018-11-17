@@ -54,7 +54,7 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
 				<a style="color:#1C1919; cursor:pointer;">
                     <span
                             ng-repeat="searchType in mainSearcherCtrl.searchTypes"
-                            class="col-xs-3 col-sm-3 col-md-1-5 col-lg-1-5 text-center"
+                            class="col-xs-2 col-sm-2 col-md-1-5 col-lg-1-5 text-center"
                             ng-if="searchType.num > 0"
                             ng-click="mainSearcherCtrl.selectSearchType(searchType)"
                             ng-class="mainSearcherCtrl.searchTypeClass(searchType.id)"

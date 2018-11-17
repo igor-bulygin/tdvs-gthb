@@ -350,6 +350,14 @@
         color: $black;
         & > span {
             white-space: nowrap;
+            @media(max-width:767px) {
+                width: 20%;
+                //padding-bottom: 10px;
+            }
+            @media(max-width: 500px) {
+                width: auto;
+                padding-bottom: 10px;
+            }
         }
     }
     @media(max-width:767px) {
@@ -375,7 +383,7 @@
     .products-order {
         display: inline-block;
         margin-left: 40px;
-        @media (max-width: 500px) {
+        @media (max-width: 767px) {
             display: block;
             float: right;
         }
