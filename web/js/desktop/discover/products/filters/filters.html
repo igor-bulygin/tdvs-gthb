@@ -1,35 +1,4 @@
-
-<div>
-	<row>
-        <div class="col-sm-12 mb-20 mt-10" _style="padding-left:0 !important; padding-right: 0 !important;">
-            <div class="found-header col-xs-12 col-sm-7 col-md-5 col-md-offset-2 col-sm-offset-0"
-                 ng-if="!exploreProductsFiltersCtrl.searching && exploreProductsFiltersCtrl.results.counter > 0"
-                 ng-cloak
-            >
-                <div
-                        ng-if="exploreProductsFiltersCtrl.searchParam"
-                        translate="discover.WE_FOUND_X_RESULTS_WITH_KEY"
-                        style="padding:10px;"
-                        translate-values="{ counter: exploreProductsFiltersCtrl.results.counter, keys: exploreProductsFiltersCtrl.searchParam }"
-                ></div>
-                <div
-                        ng-if="!exploreProductsFiltersCtrl.searchParam"
-                        translate="discover.WE_FOUND_X_RESULTS"
-                        style="padding:10px;"
-                        translate-values="{ counter: exploreProductsFiltersCtrl.results.counter }"
-                ></div>
-            </div>
-            <div class="clearfix"></div>
-            <!--<div class="col-xs-5 col-sm-5 col-md-5" style="text-align: right;">-->
-                <!--<ol class="nya-bs-select" ng-model="exploreProductsFiltersCtrl.orderFilter" ng-change="exploreProductsFiltersCtrl.search(true, true)">-->
-                    <!--<li nya-bs-option="type in exploreProductsFiltersCtrl.orderTypes">-->
-                        <!--<a href="#"><span>{{ type.name | translate }}</span></a>-->
-                    <!--</li>-->
-                <!--</ol>-->
-            <!--</div>-->
-        </div>
-	</row>
-	<div class="col-xs-12 col-sm-2">
+    <div class="filter-wrapper">
 		<form name="exploreProductsFiltersCtrl.form">
 
             <div ng-if="exploreProductsFiltersCtrl.categories.items.length > 0" class="filter-block">
@@ -37,8 +6,16 @@
                 <span class="filter-clear" translate="discover.CLEAR_ALL" ng-click="exploreProductsFiltersCtrl.clearFilter('categories')"></span>
                 <div class="filter-checkboxes-wrapper" ng-class="{'expanded': exploreProductsFiltersCtrl.expandedFilters.indexOf('categories') > -1}">
                     <div class="checkbox checkbox-red one-col" ng-repeat="category in exploreProductsFiltersCtrl.categories.items | orderBy: 'category.name'">
-                        <input ng-attr-id="{{'checkbox'+($index+10)}}" type="checkbox" name="categories" ng-model="exploreProductsFiltersCtrl.filters.categories[category.id]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.categories[category.id]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search(true, false)">
-                        <label ng-attr-for="{{'checkbox'+($index+10)}}">
+                        <input
+                                ng-attr-id="{{ 'checkbox_categories' + exploreProductsFiltersCtrl.mode + ($index+10) }}"
+                                type="checkbox"
+                                name="categories"
+                                ng-model="exploreProductsFiltersCtrl.filters.categories[category.id]"
+                                class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.categories[category_id]}"
+                                ng-disabled="exploreProductsFiltersCtrl.searching"
+                                ng-change="exploreProductsFiltersCtrl.search(true, false)"
+                        />
+                        <label ng-attr-for="{{ 'checkbox_categories' + exploreProductsFiltersCtrl.mode + ($index+10) }}">
                             <span ng-bind="category.name"></span>
                         </label>
                     </div>
@@ -63,7 +40,14 @@
                 <div class="clearfix" style="height: 5px"></div>
                 <div class="filter-checkboxes-wrapper" ng-class="{'expanded': exploreProductsFiltersCtrl.expandedFilters.indexOf('sizes') > -1}">
                     <div class="checkbox checkbox-red two-cols sizes-filters" ng-repeat="size in exploreProductsFiltersCtrl.sizes">
-                        <input ng-attr-id="{{'checkbox'+($index+10+exploreProductsFiltersCtrl.categories.items.length)}}" type="checkbox" name="sizes" ng-model="exploreProductsFiltersCtrl.filters.sizes[size]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.sizes[size]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search(true, false)" />
+                        <input
+                                ng-attr-id="{{'checkbox'+($index+10+exploreProductsFiltersCtrl.categories.items.length)}}"
+                                type="checkbox" name="sizes"
+                                ng-model="exploreProductsFiltersCtrl.filters.sizes[size]"
+                                class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.sizes[size]}"
+                                ng-disabled="exploreProductsFiltersCtrl.searching"
+                                ng-change="exploreProductsFiltersCtrl.search(true, false)"
+                        />
                         <label ng-attr-for="{{'checkbox'+($index+10+exploreProductsFiltersCtrl.categories.items.length)}}">
                             <span ng-bind="size"></span>
                         </label>
@@ -299,4 +283,3 @@
 
         </form>
 	</div>
-</div>

@@ -1,3 +1,8 @@
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both; }
+
 .srt {
   border: 0;
   clip: rect(0 0 0 0);
@@ -10125,6 +10130,7 @@ footer {
     width: 14px;
     height: 14px;
     float: right;
+    border: solid 1px #e9e9e9;
     border-radius: 3px; }
 .checkbox.sizes-filters label {
   text-transform: uppercase;

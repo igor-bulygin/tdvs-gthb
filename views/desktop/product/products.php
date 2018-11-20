@@ -28,7 +28,7 @@ $this->registerJs("var searchParam = '".$text."'", yii\web\View::POS_HEAD, 'prod
     .search-loading {text-align: center; padding-bottom: 20px;}
 </style>
 <div ng-controller="mainSearcherCtrl as mainSearcherCtrl">
-	<div class="results-wrapper" style="padding-top:20px;">
+	<div style="padding-top:20px;">
 		<div id="categoryFilter" class="container store" ng-if="mainSearcherCtrl.counted">
             <div class="results-header">
                 <div class="items-count"

@@ -316,6 +316,7 @@
 }
 .results-wrapper{
 	background-color: $white;
+    //margin-bottom: 100px;
     .nya-bs-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn){
         @media(max-width:767px){
             min-width: 1px !important;

@@ -3,8 +3,8 @@
 
 	function controller(UtilService, productDataService, $scope) {
 		var vm = this;
-		vm.results={items:[]};
-		vm.limit=99;
+		vm.results = {items:[]};
+		vm.limit = 99;
 		vm.searchMore = searchMore;
 		vm.page = 1;
 		vm.isMobile = true;
@@ -16,10 +16,10 @@
 
 		$scope.$watch(angular.element("#filters-xs-container").is(':visible'), function(newValue, oldValue) {
 			if (angular.element("#filters-xs-container").is(':visible')) {
-				vm.isMobile=true;
+				vm.isMobile = true;
 			}
 			else {
-				vm.isMobile=false;
+				vm.isMobile = false;
 			}
 		}, true);
 
@@ -28,6 +28,12 @@
 		$scope.$on('resetPage', function(evt){
 				vm.page = 1;
 		}, true);
+
+        $scope.$on('updateSearchData', function(evt, data){
+            vm.results_found = data.counter;
+            vm.search_key = data.search_key;
+        }, true);
+
 	}
 
 	var component = {

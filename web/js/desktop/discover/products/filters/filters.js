@@ -184,6 +184,10 @@
                     if (resetFilters) {
                         vm.getProductFilters();
                 	}
+                    $scope.$emit('updateSearchData', {
+                        counter: vm.results.counter,
+                        search_key: vm.searchParam
+                    });
 					vm.searching = false;
 				};
 
@@ -544,7 +548,8 @@
 		bindings: {
 			searching:'=',
 			results: '=',
-			limit:'<'
+			limit:'<',
+            mode: '@'
 		}
 	}
 
