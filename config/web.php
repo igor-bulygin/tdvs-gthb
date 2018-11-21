@@ -287,8 +287,8 @@ $config = [
 
 				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/social' => 'person/social',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/connect-instagram' => 'person/connect-instagram',
-				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/follow' => 'person/follow',
-				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/followers' => 'person/followers',
+				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/follow' => 'person/follow',
+				'/<person_type:(deviser|influencer|client)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/followers' => 'person/followers',
 
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/stories' => 'person/stories',
 				'/<person_type:(deviser|influencer)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/stories/create' => 'person/story-create',
@@ -556,7 +556,7 @@ $config = [
 				// Timeline - private
 				'GET api3/priv/v1/timeline' => 'api3/priv/v1/timeline/index',
 
-				
+
 				// Banner - private
 				'GET api3/priv/v1/banner' => 'api3/priv/v1/banner/index',
 				'GET api3/priv/v1/banner/<bannerId:[^/.]*?>' => 'api3/priv/v1/banner/view',
