@@ -29,7 +29,7 @@ class ProductController extends AppPublicController {
 
 	public function actionIndex()
 	{
-		// show only fields needed in this scenario
+	    // show only fields needed in this scenario
 		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 
 		// set pagination values
@@ -40,16 +40,23 @@ class ProductController extends AppPublicController {
 		$offset = ($limit * ($page - 1));
 
 		$products = Product::findSerialized([
-			"id" => Yii::$app->request->get("id"),
-			"name" => Yii::$app->request->get("name"), // search only in name attribute
-			"text" => Yii::$app->request->get("q"), // search in name, description, and more
-			"deviser_id" => Yii::$app->request->get("deviser"),
-			"categories" => Yii::$app->request->get("categories"),
-			"order_type" => Yii::$app->request->get("order_type"),
-			"product_state" => Product::PRODUCT_STATE_ACTIVE,
-			"only_active_persons" => true,
-			"limit" => $limit,
-			"offset" => $offset,
+			"id"                    => Yii::$app->request->get("id"),
+			"name"                  => Yii::$app->request->get("name"), // search only in name attribute
+			"text"                  => Yii::$app->request->get("q"), // search in name, description, and more
+			"deviser_id"            => Yii::$app->request->get("deviser"),
+			"categories"            => Yii::$app->request->get("categories"),
+            "sizes"                 => Yii::$app->request->get("sizes"),
+            "colors"                => Yii::$app->request->get("colors"),
+            "materials"             => Yii::$app->request->get("materials"),
+            "occasions"             => Yii::$app->request->get("occasions"),
+            "seasons"               => Yii::$app->request->get("seasons"),
+            "techniques"            => Yii::$app->request->get("techniques"),
+            "gemstones"             => Yii::$app->request->get("gemstones"),
+			"order_type"            => Yii::$app->request->get("order_type"),
+			"product_state"         => Product::PRODUCT_STATE_ACTIVE,
+			"only_active_persons"   => true,
+			"limit"                 => $limit,
+			"offset"                => $offset,
 		]);
 
 		return [
@@ -61,6 +68,35 @@ class ProductController extends AppPublicController {
 			]
 		];
 	}
+
+    /**
+     * @return array
+     * @throws \Exception
+     * Function returns number of products based on request params and type of response ("products")
+     */
+    public function actionCount()
+    {
+        // show only fields needed in this scenario
+        Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_COUNT);
+
+        $query = Product::findSerialized([
+            "id"                    => Yii::$app->request->get("id"),
+            "name"                  => Yii::$app->request->get("name"), // search only in name attribute
+            "text"                  => Yii::$app->request->get("q"), // search in name, description, and more
+            "deviser_id"            => Yii::$app->request->get("deviser"),
+            "categories"            => Yii::$app->request->get("categories"),
+//            "sizes"                 => Yii::$app->request->get("sizes"),
+//            "colors"                => Yii::$app->request->get("colors"),
+            "order_type"            => Yii::$app->request->get("order_type"),
+            "product_state"         => Product::PRODUCT_STATE_ACTIVE,
+            "only_active_persons"   => true,
+        ]);
+        $count = Product::$countItemsFound;
+        return [
+            'type'  => 'product',
+            'count' => $count
+        ];
+    }
 
 }
 

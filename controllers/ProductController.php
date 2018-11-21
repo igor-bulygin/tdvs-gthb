@@ -51,6 +51,7 @@ class ProductController extends CController
 		$offset = ($limit * ($page - 1));
 
 		$text = Yii::$app->request->get("q"); // search in name, description, and more
+        $searchTypeId = Yii::$app->request->get("searchTypeId"); // search in name, description, and more
 		$products = Product::findSerialized([
 				"id" => Yii::$app->request->get("id"),
 				"name" => Yii::$app->request->get("name"), // search only in name attribute
@@ -65,19 +66,20 @@ class ProductController extends CController
 		$total = Product::$countItemsFound;
 		$more = $total > ($page * $limit) ? 1 : 0;
 
-		$htmlWorks = $this->renderPartial("more-products", [
-				'total' => $total,
-				'products' => $products,
-		]);
+//		$htmlWorks = $this->renderPartial("more-products", [
+//				'total' => $total,
+//				'products' => $products,
+//		]);
 
 		$this->layout = '/desktop/public-2.php';
 		return $this->render("products", [
-				'htmlWorks' => $htmlWorks,
-				'text' => $text,
-				'total' => $total,
-				'products' => $products,
-				'more' => $more,
-				'page' => $page + 1,
+//				'htmlWorks' => $htmlWorks,
+				'text'          => $text,
+				'searchTypeId'  => $searchTypeId,
+				'total'         => $total,
+				'products'      => $products,
+				'more'          => $more,
+				'page'          => $page + 1,
 		]);
 	}
 

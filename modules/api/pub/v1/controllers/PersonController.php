@@ -169,6 +169,35 @@ class PersonController extends AppPublicController
 		}
 	}
 
+    /**
+     * @return array
+     * @throws \Exception
+     * Function returns number of person based on request params and type of response ("devisers" or "influencers")
+     */
+	public function actionCount()
+    {
+        // show only fields needed in this scenario
+        Person::setSerializeScenario(Person::SERIALIZE_SCENARIO_COUNT);
+
+        $type = Yii::$app->request->get("type");
+
+        $query = Person::findSerialized([
+            "id" => Yii::$app->request->get("id"),
+            "name" => Yii::$app->request->get("name"), // search only in name attribute
+            "text" => Yii::$app->request->get("q"), // search in name, description, and more
+            "type" => $type,
+            "categories" => Yii::$app->request->get("categories"),
+            "countries" => Yii::$app->request->get("countries"),
+            "account_state" => Person::ACCOUNT_STATE_ACTIVE,
+        ]);
+        $count = Person::$countItemsFound;
+        return [
+            "type"  => ($type == 2) ? 'devisers' : (($type == 3) ? 'influencers' : ''),
+            "count" => $count,
+        ];
+    }
+
+
 	/**
 	 * Get validation scenario from request param
 	 *

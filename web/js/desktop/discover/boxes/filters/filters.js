@@ -1,10 +1,11 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, locationDataService) {
+	function controller(UtilService, locationDataService, $scope) {
 		var vm = this;
 		vm.seeMore = seeMore;
 		vm.show_countries = 10;
+		vm.emitClearFilters = emitClearFilters;
 
 		init();
 
@@ -34,6 +35,13 @@
 					break;
 			}
 		}
+
+        /**
+         * Emit event for explore-products.js to clear filters
+         */
+        function emitClearFilters() {
+            $scope.$emit('clearAllFilters');
+        }
 	}
 
 	var component = {

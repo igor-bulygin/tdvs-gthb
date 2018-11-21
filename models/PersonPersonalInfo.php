@@ -60,7 +60,7 @@ class PersonPersonalInfo extends EmbedModel
 			'phone_number_prefix',
 			'phone_number',
 			'zip',
-      'iban',
+      'iban'
 		];
 	}
 

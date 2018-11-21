@@ -45,6 +45,7 @@ use yii2tech\ar\position\PositionBehavior;
  * @property int loveds
  * @property int boxes
  * @property array prints
+ * @property int sold_num
  * @property MongoDate created_at
  * @property MongoDate updated_at
  * @property int enabled
@@ -61,6 +62,7 @@ class Product extends CActiveRecord {
 	const SCENARIO_PRODUCT_COMMENT = 'scenario-product-comment';
 	const SCENARIO_PRODUCT_COMMENT_REPLY = 'scenario-product-comment-reply';
 	const SCENARIO_PRODUCT_COMMENT_HELPFUL = 'scenario-product-comment-helpful';
+	const SCENARIO_PRODUCT_COUNT = 'scenario-product-count';
 
 	/**
 	 * The attributes that should be serialized
@@ -112,6 +114,7 @@ class Product extends CActiveRecord {
 			'loveds',
 			'boxes',
 			'prints',
+            'sold_num',
 			'created_at',
 			'updated_at',
 		];
@@ -157,6 +160,7 @@ class Product extends CActiveRecord {
 		$this->position = 0;
 		$this->loveds = 0;
 		$this->boxes = 0;
+		$this->sold_num = 0; // number of product sales. Incremented (according to product quantity in pack) when order with this product is paid
 
 		$this->faq = [];
 		$this->comments = [];
@@ -607,6 +611,15 @@ class Product extends CActiveRecord {
 				];
 				static::$translateFields = false;
 				break;
+            case self::SERIALIZE_SCENARIO_COUNT: // used for count items, so we take only ids
+                static::$serializeFields = [
+                    'id' => 'short_id',
+                ];
+                static::$retrieveExtraFields = [];
+
+                static::$translateFields = false;
+                break;
+
 			default:
 				// now available for this Model
 				static::$serializeFields = [];
@@ -680,6 +693,150 @@ class Product extends CActiveRecord {
 			$query->andWhere(["categories" => $ids]);
 		}
 
+        // if sizes are specified
+        if ((array_key_exists("sizes", $criteria)) && (!empty($criteria["sizes"]))) {
+            $ids = [];
+            foreach ($criteria["sizes"] as $size) {
+                if ($size && strlen($size) > 0) {
+                    $ids[] = $size;
+                }
+            }
+            $query->andWhere(
+                ['sizechart.values' =>
+                    ['$elemMatch' =>
+                        ['$elemMatch' =>
+                            ['$in' => $ids]
+                        ]
+                    ]
+                ]
+            );
+
+        }
+
+        // if colors are specified
+        if ((array_key_exists("colors", $criteria)) && (!empty($criteria["colors"]))) {
+            $ids = [];
+            foreach ($criteria["colors"] as $color) {
+                if ($color && strlen($color) > 0) {
+                    $ids[] = $color;
+                }
+            }
+            $query->andWhere(
+                ['options.731ct' =>
+                    ['$elemMatch' =>
+                        ['$elemMatch' =>
+                            ['$in' => $ids]
+                        ]
+                    ]
+                ]
+            );
+        }
+
+        // if materials are specified
+        if ((array_key_exists("materials", $criteria)) && (!empty($criteria["materials"]))) {
+            $ids = [];
+            foreach ($criteria["materials"] as $material) {
+                if ($material && strlen($material) > 0) {
+                    $ids[] = $material;
+                }
+            }
+            $query->andWhere(
+                ['or',
+                    ['options.d0e2g' =>
+                        ['$elemMatch' =>
+                            ['$elemMatch' =>
+                            ['$in' => $ids]
+                            ]
+                        ]
+                    ],
+                    ['options.f6b97' =>
+                        ['$elemMatch' =>
+                            ['$elemMatch' =>
+                                ['$in' => $ids]
+                            ]
+                        ]
+                    ]
+
+                ]
+            );
+        }
+
+        // if occasions are specified
+        if ((array_key_exists("occasions", $criteria)) && (!empty($criteria["occasions"]))) {
+            $ids = [];
+            foreach ($criteria["occasions"] as $occasion) {
+                if ($occasion && strlen($occasion) > 0) {
+                    $ids[] = $occasion;
+                }
+            }
+            $query->andWhere(
+                ['options.22eb6' =>
+                    ['$elemMatch' =>
+                        ['$elemMatch' =>
+                            ['$in' => $ids]
+                        ]
+                    ]
+                ]
+            );
+        }
+
+        // if seasons are specified
+        if ((array_key_exists("seasons", $criteria)) && (!empty($criteria["seasons"]))) {
+            $ids = [];
+            foreach ($criteria["seasons"] as $season) {
+                if ($season && strlen($season) > 0) {
+                    $ids[] = $season;
+                }
+            }
+            $query->andWhere(
+                ['options.b0bd5' =>
+                    ['$elemMatch' =>
+                        ['$elemMatch' =>
+                            ['$in' => $ids]
+                        ]
+                    ]
+                ]
+            );
+        }
+
+        // if techniques are specified
+        if ((array_key_exists("techniques", $criteria)) && (!empty($criteria["techniques"]))) {
+            $ids = [];
+            foreach ($criteria["techniques"] as $technique) {
+                if ($technique&& strlen($technique) > 0) {
+                    $ids[] = $technique;
+                }
+            }
+            $query->andWhere(
+                ['options.fb9eh' =>
+                    ['$elemMatch' =>
+                        ['$elemMatch' =>
+                            ['$in' => $ids]
+                        ]
+                    ]
+                ]
+            );
+        }
+
+        // if gemstones are specified
+        if ((array_key_exists("gemstones", $criteria)) && (!empty($criteria["gemstones"]))) {
+            $ids = [];
+            foreach ($criteria["gemstones"] as $gemstone) {
+                if ($gemstone&& strlen($gemstone) > 0) {
+                    $ids[] = $gemstone;
+                }
+            }
+            $query->andWhere(
+                ['options.2500m' =>
+                    ['$elemMatch' =>
+                        ['$elemMatch' =>
+                            ['$in' => $ids]
+                        ]
+                    ]
+                ]
+            );
+        }
+
 		// if product_state is specified
 		if ((array_key_exists("product_state", $criteria)) && (!empty($criteria["product_state"]))) {
 			$query->andWhere(["product_state" => $criteria["product_state"]]);
@@ -738,6 +895,10 @@ class Product extends CActiveRecord {
 					$criteria['order_col'] = 'created_at';
 					$criteria['order_dir'] = 'asc';
 					break;
+                case 'relevant':
+                    $criteria['order_col'] = 'sold_num';
+                    $criteria['order_dir'] = 'desc';
+                    break;
 				case 'cheapest':
 					$criteria['order_col'] = 'price_stock.price';
 					$criteria['order_dir'] = 'asc';
@@ -755,7 +916,14 @@ class Product extends CActiveRecord {
 				$criteria["order_col"] => $criteria["order_dir"] == 'desc' ? SORT_DESC : SORT_ASC,
 			]);
 		} else {
-			$query->orderBy("deviser_id, position");
+//			$query->orderBy("deviser_id, position");
+            $query->orderBy(
+                array(
+                    "sold_num"      => SORT_DESC,
+                    "deviser_id"    => SORT_ASC,
+                    "position"      => SORT_ASC
+                )
+            );
 		}
 
 		$products = $query->all();
@@ -766,6 +934,93 @@ class Product extends CActiveRecord {
 		}
 		return $products;
 	}
+
+    /**
+     * Get a number of entities serialized, according to serialization configuration
+     *
+     * @param array $criteria
+     * @return Product[]
+     * @throws Exception
+     */
+    public static function findDocumentsCount($criteria = [])
+    {
+
+        // Products query
+        $query = new ActiveQuery(static::className());
+
+        // Retrieve only fields that gonna be used
+        $query->select(self::getSelectFields());
+
+        // if product id is specified
+        if ((array_key_exists("id", $criteria)) && (!empty($criteria["id"]))) {
+            $query->andWhere(["short_id" => $criteria["id"]]);
+        }
+
+        // if deviser id is specified
+        if ((array_key_exists("deviser_id", $criteria)) && (!empty($criteria["deviser_id"]))) {
+            $query->andWhere(["deviser_id" => $criteria["deviser_id"]]);
+        }
+
+        // if categories are specified
+        if ((array_key_exists("categories", $criteria)) && (!empty($criteria["categories"]))) {
+            if (is_array($criteria["categories"])) {
+                $ids = [];
+                foreach ($criteria["categories"] as $categoryId) {
+                    $category = Category::findOne(["short_id" => $categoryId]);
+                    if ($category) {
+                        $ids = array_merge($ids, $category->getShortIds());
+                    }
+                }
+            } else {
+                $ids = [];
+                $category = Category::findOne(["short_id" => $criteria["categories"]]);
+                if ($category) {
+                    $ids = array_merge($ids, $category->getShortIds());
+                }
+            }
+            $query->andWhere(["categories" => $ids]);
+        }
+
+        // if product_state is specified
+        if ((array_key_exists("product_state", $criteria)) && (!empty($criteria["product_state"]))) {
+            $query->andWhere(["product_state" => $criteria["product_state"]]);
+        }
+        // if only_active_persons are specified
+        if ((array_key_exists("only_active_persons", $criteria)) && (!empty($criteria["only_active_persons"]))) {
+
+            // Get different person_ids available by country
+            $queryPerson= new ActiveQuery(Person::className());
+            $queryPerson->andWhere(["account_state" => Person::ACCOUNT_STATE_ACTIVE]);
+            $idsPerson = $queryPerson->distinct("short_id");
+
+            if ($idsPerson) {
+                $query->andFilterWhere(["in", "deviser_id", $idsPerson]);
+            } else {
+                $query->andFilterWhere(["in", "deviser_id", "dummy_person"]); // Force no results if there are no boxes
+            }
+        }
+
+        // if name is specified
+        if ((array_key_exists("name", $criteria)) && (!empty($criteria["name"]))) {
+//			// search the word in all available languages
+            $query->andFilterWhere(Utils::getFilterForTranslatableField("name", $criteria["name"]));
+        }
+
+        // if text is specified
+        if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
+//			// search the word in all available languages
+            $parts = explode(' ', $criteria['text']);
+            foreach ($parts as $part) {
+                $query->andFilterWhere(static::getFilterForText(static::$textFilterAttributes, $part));
+            }
+        }
+
+        // Count how many items are with those conditions, before limit them for pagination
+        $count = static::$countItemsFound = $query->count();
+
+        return $count;
+    }
+
 
 	public function deletePhotos() {
 		$product_path = Utils::join_paths(Yii::getAlias("@product"), $this->short_id);

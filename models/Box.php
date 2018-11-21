@@ -25,6 +25,7 @@ class Box extends CActiveRecord
 	const SCENARIO_BOX_CREATE = 'scenario-box-create';
 	const SCENARIO_BOX_UPDATE = 'scenario-box-update';
 	const SCENARIO_BOX_ADD_PRODUCT= 'scenario-box-add-product';
+    const SCENARIO_BOX_COUNT = 'scenario-box-count';
 
 	/**
 	 * The attributes that should be serialized
@@ -228,6 +229,16 @@ class Box extends CActiveRecord
 				static::$translateFields = false;
 
 				break;
+
+            case self::SERIALIZE_SCENARIO_COUNT: // used for count items, so we take only ids
+                static::$serializeFields = [
+                    'id' => 'short_id',
+                ];
+                static::$retrieveExtraFields = [];
+
+                static::$translateFields = false;
+                break;
+
 			default:
 				// now available for this Model
 				static::$serializeFields = [];

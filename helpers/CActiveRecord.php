@@ -19,6 +19,7 @@ class CActiveRecord extends ActiveRecord
 	const SERIALIZE_SCENARIO_PUBLIC = 'serialize_scenario_public';
 	const SERIALIZE_SCENARIO_OWNER = 'serialize_scenario_owner';
 	const SERIALIZE_SCENARIO_ADMIN = 'serialize_scenario_admin';
+    const SERIALIZE_SCENARIO_COUNT = 'serialize_scenario_count';
 
 	/**
 	 * The attributes that should be serialized

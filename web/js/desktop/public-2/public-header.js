@@ -1,20 +1,20 @@
 (function() {
     "use strict";
 
+  	function config($translatePartialLoaderProvider) {
+  		  $translatePartialLoaderProvider.addPart('header');
+  	}
 
-
-    function config($translatePartialLoaderProvider) {
-        $translatePartialLoaderProvider.addPart('header');
-    }
-
-    function controller(personDataService, $window, UtilService, localStorageUtilService, cartDataService, cartService, $scope, cartEvents, chatDataService, $interval) {
-        var vm = this;
-        vm.logout = logout;
-        vm.cartQuantity = 0;
-        vm.msgQuantity = 0;
-        vm.openMenu = false;
-        vm.selectedCategory = _selectedCategoryId;
-        init();
+  	function controller(personDataService, $window, UtilService, localStorageUtilService, cartDataService, cartService,$scope, cartEvents, chatDataService, $interval) {
+    		var vm = this;
+    		vm.logout = logout;
+    		vm.cartQuantity=0;
+    		vm.msgQuantity=0;
+    		vm.openMenu=false;
+    		vm.selectedCategory = _selectedCategoryId;
+    		vm.selectedSearchTypeId = _searchTypeId; // taken from global @var _searchTypeId defined in /components/views/PublicHeader2/PublicHeader2.php  (from GET request)
+        vm.searchTypes = UtilService.getSearchTypes(); // taken from UtilService to get search types in select in search block
+		    init();
 
         function init() {
             getMsgQuantity();

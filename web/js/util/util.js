@@ -28,6 +28,7 @@
         this.isConnectedUser = isConnectedUser;
         this.getConnectedUser = getConnectedUser;
         this.logout = logout;
+        this.getSearchTypes = getSearchTypes;
 
         //regex from: https://gist.github.com/dperini/729294
         //added "?" after (?:(?:https?|ftp):\/\/) for urls like www.google.es
@@ -195,7 +196,7 @@
         }
 
         function onError(err) {
-            console.log(err);
+            // console.log(err);
         }
 
         function setLeavingModal(value) {
@@ -232,7 +233,39 @@
             return array.map(function(element, index) {
                 element.position = index + 1;
                 return element;
-            })
+            });
+        }
+
+        function getSearchTypes() {
+            return [
+                {
+                    name:'discover.PRODUCTS',
+                    id: 1
+                },
+                {
+                    name:'discover.BOXES_NAME',
+                    id: 2
+                },
+                {
+                    name:'discover.DEVISERS',
+                    id:3,
+                    type: 2
+                },
+                {
+                    name: 'discover.INFLUENCERS',
+                    id: 4,
+                    type: 3
+                },
+                {
+                    name: 'discover.MEMBERS',
+                    id: 5,
+                    type: 1
+                },
+                {
+                    name: 'discover.ALL',
+                    id: 100
+                }
+            ];
         }
 
     }
@@ -242,6 +275,7 @@
             .setPrefix('todevise-')
             .setStorageType('localStorage');
         $translatePartialLoaderProvider.addPart('util');
+        $translatePartialLoaderProvider.addPart('discover');
     }
 
     function capitalize() {

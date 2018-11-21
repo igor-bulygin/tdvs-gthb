@@ -201,9 +201,9 @@
     .navbar-form{
         background-color: transparent;
         .input-group{
-            .form-control{
-                width: calc(100% - 34px) !important;
-            }
+            //.form-control{
+            //    width: calc(100% - 34px) !important;
+            //}
         }
     }
     .dropdown{
@@ -248,32 +248,47 @@
     form{
         width: 100%;
     }
-    .searcher-header{
+    .searcher-header {
         display: block;
+        @include border-radius(6px,6px,6px,6px);
+        background-color: #e9e9e9;
         @media (max-width: 991px){
-                    padding: 0;//0 20px;
-                }
-        input{
-				font-family: $font-family--regular;
-				margin: 0;//0 0 0 30px;
-                //min-width: 780px;//600px;
-                //max-width: 794px;
-                color: $dark_grey;
-				letter-spacing: 0.4px;
-                background-color: $background_grey;
-                @extend %input-border-none;
-                @include border-radius(6px,6px,6px,6px);
-                &:focus{
-                    border-right: 0;
-                }
-                @media (max-width: 1200px){
-                    min-width: 0;
-                }
-                @media (min-width: 992px) and (max-width: 1200px) { 
-                    //min-width: 580px;//380px;
-                    //max-width: 570px
-                }
+            padding: 0;//0 20px;
+        }
+        input {
+            font-family: $font-family--regular;
+            margin: 0;//0 0 0 30px;
+            //min-width: 780px;//600px;
+            //max-width: 794px;
+            color: $dark_grey;
+            letter-spacing: 0.4px;
+            background-color: $background_grey;
+            @extend %input-border-none;
+            &:focus{
+                border-right: 0;
             }
+            @media (max-width: 1200px){
+                min-width: 0;
+            }
+            @media (min-width: 992px) and (max-width: 1200px) {
+                //min-width: 580px;//380px;
+                //max-width: 570px
+            }
+            &.form-control{
+                width: calc(100% - 140px) !important;
+            }
+        }
+        select {
+            display: inline-block;
+            width: 82px;
+            text-transform: capitalize;
+            border: none;
+            background: transparent;
+            //@include appearance(none);
+        }
+        .input-group-btn {
+            display: inline-block;
+        }
         .btn-send{
             color: $black;
             background-color: $background_grey;

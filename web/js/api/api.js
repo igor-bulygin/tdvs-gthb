@@ -15,7 +15,7 @@
 		}
 		return {
 			request: requestInterceptor
-		}
+		};
 	}
 
 	function methods() {
@@ -24,6 +24,7 @@
 		this.deleteItem = deleteItem;
 		this.create = create;
 		this.update = update;
+		this.getUnresolved = getUnresolved;
 
 		function parseInfo(resource, data) {
 			var o = new resource;
@@ -51,6 +52,16 @@
 			var newResource = parseInfo(resource, data);
 			newResource.$update(params).then(function(returnData) { onSuccess(returnData); }, function(err) { onError(err); });
 		}
+
+        /**
+         * @param resource
+         * @param params - GET params
+         * @return Promise for use in Promise.all
+         */
+		function getUnresolved(resource, params) {
+            return resource.get(params).$promise;
+        }
+
 	}
 
 	angular.module('api', ['ngResource', 'util', 'ngFileUpload'])

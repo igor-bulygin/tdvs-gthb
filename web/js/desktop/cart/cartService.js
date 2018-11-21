@@ -2,7 +2,7 @@
 	"use strict";
 
 	function roundToTwo(num) {
-    return +(Math.round(num + "e+2")  + "e-2");
+    return +(Math.round(num + 'e+2')  + 'e-2');
 	}
 
 	function service(UtilService) {
@@ -53,8 +53,8 @@
 							}
 						}
 					}
-				})
-			})
+				});
+			});
 		}
 
 		function setTotalItems(cart) {

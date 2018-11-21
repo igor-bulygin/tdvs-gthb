@@ -17,8 +17,9 @@
 
 		$scope.$watch('exploreProductsResultsCtrl.results', function(newValue, oldValue) {
 			if(angular.isObject(newValue)) {
-				if(newValue.length > 0)
-					vm.results_infinite = newValue.slice(0, show_items);
+				if(newValue.length > 0) {
+                    vm.results_infinite = newValue.slice(0, show_items);
+                }
 				else {
 					vm.results_infinite = [];
 				}

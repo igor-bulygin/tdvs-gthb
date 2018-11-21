@@ -12,13 +12,18 @@
         var Reply = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct/comments/:idComment/replies');
         var Helpful = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct/comments/:idComment/helpfuls');
 
-        var ProductPriv = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct', {}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
+        /**
+         * endpoint to count products based on GET params
+         */
+        var ProductsCount = $resource(apiConfig.baseUrl + 'pub/' + apiConfig.version + 'products/count');
 
-        //functions		
+    		var ProductPriv = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'products/:idProduct', {}, {
+    			'update': {
+    				method: 'PUT'
+    			}
+    		});
+
+        //functions
         this.getProducts = getProducts;
         this.getProductPub = getProductPub;
         this.getPaperType = getPaperType;
@@ -30,6 +35,7 @@
         this.sendProductComment = sendProductComment;
         this.sendCommentReply = sendCommentReply;
         this.sendHelpfulComment = sendHelpfulComment;
+        this.getProductsCount = getProductsCount;
 
         function getProducts(params, onSuccess, onError) {
             apiMethods.get(Products, params, onSuccess, onError);
@@ -75,6 +81,13 @@
             apiMethods.create(Helpful, data, params, onSuccess, onError);
         }
 
+        /**
+         * @param params - GET params
+         * @returns Promise for use in Promise.all
+         */
+        function getProductsCount(params) {
+            return apiMethods.getUnresolved(ProductsCount, params);
+        }
 
     }
 

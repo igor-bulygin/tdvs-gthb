@@ -7,6 +7,7 @@ use app\models\OrderPack;
 use app\models\OrderProduct;
 use app\models\Person;
 use app\models\PaymentErrors;
+use app\models\Product;
 use Stripe\Stripe;
 use Yii;
 use yii\web\BadRequestHttpException;
@@ -727,6 +728,11 @@ class CartController extends AppPublicController
 			$order = Order::findOneSerialized($cartId);
 			$order->setSubDocumentsForSerialize();
 
+            /**
+             * Update number of sales of products included in packs
+             */
+			$this->updateProductsSoldNumber($packs);
+
 			return $order;
 		} catch (\Exception $e) {
 			$message = sprintf("Error in receive-token: " . $e->getMessage());
@@ -739,4 +745,20 @@ class CartController extends AppPublicController
 			throw $e;
 		}
 	}
+
+    /**
+     * Function increases number of sales of products that were ordered and paid
+     * @param $packs - array of ordered products
+     */
+	private function updateProductsSoldNumber($packs)
+    {
+        foreach ($packs as $pack) {
+            $products = $pack->getProducts();
+            foreach ($products as $item) {
+                $product = $item->getProduct();
+                $product->setAttributes(array('sold_num' => $product->sold_num + $item->quantity), false);
+                $product->save(false);
+            }
+        }
+    }
 }

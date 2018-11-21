@@ -470,6 +470,7 @@ $config = [
 
 				// Person - public
 				'GET api3/pub/v1/person' => 'api3/pub/v1/person/index',
+                'GET api3/pub/v1/person/count' => 'api3/pub/v1/person/count',
 				'GET api3/pub/v1/person/<personId:[^/.]*?>' => 'api3/pub/v1/person/view',
 				'POST api3/pub/v1/person' => 'api3/pub/v1/person/create',
 
@@ -492,6 +493,7 @@ $config = [
 
 
 				// Product - public
+                'GET api3/pub/v1/products/count' => 'api3/pub/v1/product/count',
 				'GET api3/pub/v1/products/<id:[^/.]*?>' => 'api3/pub/v1/product/view',
 				'GET api3/pub/v1/products' => 'api3/pub/v1/product/index',
 				// Product - private
@@ -519,6 +521,7 @@ $config = [
 				'DELETE api3/priv/v1/loved/timeline/<timelineId:[^/.]*?>' => 'api3/priv/v1/loved/delete-timeline',
 
 				// Box - public
+                'GET api3/pub/v1/box/count' => 'api3/pub/v1/box/count',
 				'GET api3/pub/v1/box/<boxId:[^/.]*?>' => 'api3/pub/v1/box/view',
 				'GET api3/pub/v1/box' => 'api3/pub/v1/box/index',
 				// Box - private

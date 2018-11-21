@@ -1,33 +1,39 @@
 (function() {
 	"use strict";
 
-	function controller(UtilService, productDataService,$scope) {
+	function controller(UtilService, productDataService, $scope) {
 		var vm = this;
-		vm.results={items:[]};
-		vm.limit=99;
-		vm.searchMore=searchMore;
-		vm.page=1;
+		vm.results = {items:[]};
+		vm.limit = 99;
+		vm.searchMore = searchMore;
+		vm.page = 1;
 		vm.isMobile = true;
 
 		function searchMore() {
-			vm.page=vm.page + 1;
+			vm.page = vm.page + 1;
 			$scope.$broadcast("changePage",vm.page); 
 		}
 
 		$scope.$watch(angular.element("#filters-xs-container").is(':visible'), function(newValue, oldValue) {
 			if (angular.element("#filters-xs-container").is(':visible')) {
-				vm.isMobile=true;
+				vm.isMobile = true;
 			}
 			else {
-				vm.isMobile=false;
+				vm.isMobile = false;
 			}
 		}, true);
 
 
 
-		$scope.$on("resetPage", function(evt){ 
-				vm.page=1;
+		$scope.$on('resetPage', function(evt){
+				vm.page = 1;
 		}, true);
+
+        $scope.$on('updateSearchData', function(evt, data){
+            vm.results_found = data.counter;
+            vm.search_key = data.search_key;
+        }, true);
+
 	}
 
 	var component = {
