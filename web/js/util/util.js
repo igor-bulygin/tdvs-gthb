@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    function UtilService($location, localStorageService, $window, $cookies, personDataService, localStorageUtilService) {
+    function UtilService($location, localStorageService, $window, $cookieStore, personDataService, localStorageUtilService) {
         this.isObject = isObject;
         this.isEmpty = isEmpty;
         this.diff = diff;
@@ -38,7 +38,7 @@
 
 
         function isConnectedUser(person_id) {
-            var session_id = $cookies.get("sesion_id");
+            var session_id = $cookieStore.get("sesion_id");
             if (!angular.isUndefined(person_id) && person_id === session_id) {
                 return true;
             }
@@ -46,14 +46,14 @@
         }
 
         function getConnectedUser() {
-            return $cookies.get("sesion_id");
+            return $cookieStore.get("sesion_id");
         }
 
         function logout() {
             function onLogoutSuccess(data) {
                 localStorageUtilService.removeLocalStorage('access_token');
                 localStorageUtilService.removeLocalStorage('cart_id');
-                $cookies.remove("sesion_id");
+                $cookieStore.remove("sesion_id");
                 $window.location.href = currentHost();
             }
 
