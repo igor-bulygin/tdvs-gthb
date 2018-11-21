@@ -41,14 +41,14 @@
                 <div class="filter-checkboxes-wrapper" ng-class="{'expanded': exploreProductsFiltersCtrl.expandedFilters.indexOf('sizes') > -1}">
                     <div class="checkbox checkbox-red two-cols sizes-filters" ng-repeat="size in exploreProductsFiltersCtrl.sizes">
                         <input
-                                ng-attr-id="{{'checkbox'+($index+10+exploreProductsFiltersCtrl.categories.items.length)}}"
+                                ng-attr-id="{{'checkbox_sizes' + exploreProductsFiltersCtrl.mode + ($index+10+exploreProductsFiltersCtrl.categories.items.length)}}"
                                 type="checkbox" name="sizes"
                                 ng-model="exploreProductsFiltersCtrl.filters.sizes[size]"
                                 class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.sizes[size]}"
                                 ng-disabled="exploreProductsFiltersCtrl.searching"
                                 ng-change="exploreProductsFiltersCtrl.search(true, false)"
                         />
-                        <label ng-attr-for="{{'checkbox'+($index+10+exploreProductsFiltersCtrl.categories.items.length)}}">
+                        <label ng-attr-for="{{'checkbox_sizes'+ exploreProductsFiltersCtrl.mode + ($index+10+exploreProductsFiltersCtrl.categories.items.length)}}">
                             <span ng-bind="size"></span>
                         </label>
                     </div>
@@ -79,8 +79,8 @@
                 <div class="clearfix" style="height: 5px"></div>
                 <div class="filter-checkboxes-wrapper" ng-class="{'expanded': exploreProductsFiltersCtrl.expandedFilters.indexOf('colors') > -1}">
                     <div class="checkbox checkbox-red colors-filters" ng-repeat="color in exploreProductsFiltersCtrl.colors">
-                        <input ng-attr-id="{{'checkbox'+($index+10000)}}" type="checkbox" name="colors" ng-model="exploreProductsFiltersCtrl.filters.colors[color.value]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.colors[color.value]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search(true, false)">
-                        <label ng-attr-for="{{'checkbox'+($index+10000)}}">
+                        <input ng-attr-id="{{'checkbox_colors' + exploreProductsFiltersCtrl.mode + ($index+10000)}}" type="checkbox" name="colors" ng-model="exploreProductsFiltersCtrl.filters.colors[color.value]" class="ng-class:{'checked': exploreProductsFiltersCtrl.filters.colors[color.value]}" ng-disabled="exploreProductsFiltersCtrl.searching" ng-change="exploreProductsFiltersCtrl.search(true, false)">
+                        <label ng-attr-for="{{'checkbox_colors' + exploreProductsFiltersCtrl.mode + ($index+10000)}}">
                             <span ng-bind="color.name"></span>
                         </label>
                         <div
@@ -113,7 +113,7 @@
                 <div class="clearfix" style="height: 5px"></div>
                 <div class="filter-checkboxes-wrapper" ng-class="{'expanded': exploreProductsFiltersCtrl.expandedFilters.indexOf('materials') > -1}">
                     <div class="checkbox checkbox-red one-col" ng-repeat="material in exploreProductsFiltersCtrl.materials">
-                        <input ng-attr-id="{{'checkbox'+($index+20000)}}"
+                        <input ng-attr-id="{{'checkbox_materials' + exploreProductsFiltersCtrl.mode + ($index+20000)}}"
                                type="checkbox"
                                name="materials"
                                ng-model="exploreProductsFiltersCtrl.filters.materials[material.value]"
@@ -121,7 +121,7 @@
                                ng-disabled="exploreProductsFiltersCtrl.searching"
                                ng-change="exploreProductsFiltersCtrl.search(true, false)"
                         />
-                        <label ng-attr-for="{{'checkbox'+($index+20000)}}">
+                        <label ng-attr-for="{{'checkbox_materials' + exploreProductsFiltersCtrl.mode + ($index+20000)}}">
                             <span ng-bind="material.name"></span>
                         </label>
                     </div>
@@ -149,7 +149,7 @@
                 <div class="clearfix" style="height: 5px"></div>
                 <div class="filter-checkboxes-wrapper" ng-class="{'expanded': exploreProductsFiltersCtrl.expandedFilters.indexOf('occasions') > -1}">
                     <div class="checkbox checkbox-red one-col" ng-repeat="occasion in exploreProductsFiltersCtrl.occasions">
-                        <input ng-attr-id="{{'checkbox'+($index+30000)}}"
+                        <input ng-attr-id="{{'checkbox_occasions' + exploreProductsFiltersCtrl.mode + ($index+30000)}}"
                                type="checkbox"
                                name="occasions"
                                ng-model="exploreProductsFiltersCtrl.filters.occasions[occasion.value]"
@@ -157,7 +157,7 @@
                                ng-disabled="exploreProductsFiltersCtrl.searching"
                                ng-change="exploreProductsFiltersCtrl.search(true, false)"
                         />
-                        <label ng-attr-for="{{'checkbox'+($index+30000)}}">
+                        <label ng-attr-for="{{'checkbox_occasions' + exploreProductsFiltersCtrl.mode + ($index+30000)}}">
                             <span ng-bind="occasion.name"></span>
                         </label>
                     </div>
@@ -183,7 +183,7 @@
                 <div class="clearfix" style="height: 5px"></div>
                 <div class="filter-checkboxes-wrapper" ng-class="{'expanded': exploreProductsFiltersCtrl.expandedFilters.indexOf('seasons') > -1}">
                     <div class="checkbox checkbox-red two-cols" ng-repeat="season in exploreProductsFiltersCtrl.seasons">
-                        <input ng-attr-id="{{'checkbox'+($index+40000)}}"
+                        <input ng-attr-id="{{'checkbox_seasons' + exploreProductsFiltersCtrl.mode + ($index+40000)}}"
                                type="checkbox"
                                name="seasons"
                                ng-model="exploreProductsFiltersCtrl.filters.seasons[season.value]"
@@ -191,7 +191,7 @@
                                ng-disabled="exploreProductsFiltersCtrl.searching"
                                ng-change="exploreProductsFiltersCtrl.search(true, false)"
                         />
-                        <label ng-attr-for="{{'checkbox'+($index+40000)}}">
+                        <label ng-attr-for="{{'checkbox_seasons' + exploreProductsFiltersCtrl.mode + ($index+40000)}}">
                             <span ng-bind="season.name"></span>
                         </label>
                     </div>
@@ -217,7 +217,7 @@
                 <div class="clearfix" style="height: 5px"></div>
                 <div class="filter-checkboxes-wrapper" ng-class="{'expanded': exploreProductsFiltersCtrl.expandedFilters.indexOf('techniques') > -1}">
                     <div class="checkbox checkbox-red one-col" ng-repeat="technique in exploreProductsFiltersCtrl.techniques">
-                        <input ng-attr-id="{{'checkbox'+($index+50000)}}"
+                        <input ng-attr-id="{{'checkbox_techniques' + exploreProductsFiltersCtrl.mode + ($index+50000)}}"
                                type="checkbox"
                                name="techniques"
                                ng-model="exploreProductsFiltersCtrl.filters.techniques[technique.value]"
@@ -225,7 +225,7 @@
                                ng-disabled="exploreProductsFiltersCtrl.searching"
                                ng-change="exploreProductsFiltersCtrl.search(true, false)"
                         />
-                        <label ng-attr-for="{{'checkbox'+($index+50000)}}">
+                        <label ng-attr-for="{{'checkbox_techniques' + exploreProductsFiltersCtrl.mode + ($index+50000)}}">
                             <span ng-bind="technique.name"></span>
                         </label>
                     </div>
@@ -252,7 +252,7 @@
                 <div class="clearfix" style="height: 5px"></div>
                 <div class="filter-checkboxes-wrapper" ng-class="{'expanded': exploreProductsFiltersCtrl.expandedFilters.indexOf('gemstones') > -1}">
                     <div class="checkbox checkbox-red one-col" ng-repeat="gemstone in exploreProductsFiltersCtrl.gemstones">
-                        <input ng-attr-id="{{'checkbox'+($index+60000)}}"
+                        <input ng-attr-id="{{'checkbox_gemstones' + exploreProductsFiltersCtrl.mode + ($index+60000)}}"
                                type="checkbox"
                                name="gemstones"
                                ng-model="exploreProductsFiltersCtrl.filters.gemstones[gemstone.value]"
@@ -260,7 +260,7 @@
                                ng-disabled="exploreProductsFiltersCtrl.searching"
                                ng-change="exploreProductsFiltersCtrl.search(true, false)"
                         />
-                        <label ng-attr-for="{{'checkbox'+($index+60000)}}">
+                        <label ng-attr-for="{{'checkbox_gemstones' + exploreProductsFiltersCtrl.mode + ($index+60000)}}">
                             <span ng-bind="gemstone.name"></span>
                         </label>
                     </div>
