@@ -14,8 +14,8 @@
 			$scope.$broadcast("changePage",vm.page); 
 		}
 
-		$scope.$watch(angular.element("#filters-xs-container").is(':visible'), function(newValue, oldValue) {
-			if (angular.element("#filters-xs-container").is(':visible')) {
+		$scope.$watch(angular.element('#filters-xs-container').is(':visible'), function(newValue, oldValue) {
+			if (angular.element('#filters-xs-container').is(':visible')) {
 				vm.isMobile = true;
 			}
 			else {

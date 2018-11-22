@@ -179,7 +179,8 @@
 
 				var onGetProductsSuccess = function(data) {
                     vm.search_key = angular.copy(vm.key);
-                    vm.results.items = vm.results.items.concat(angular.copy(data.items));
+                    // vm.results.items = vm.results.items.concat(angular.copy(data.items));
+                    vm.results.items = angular.copy(data.items);
                     vm.results.counter = angular.copy(data.meta.total_count);
                     if (resetFilters) {
                         vm.getProductFilters();

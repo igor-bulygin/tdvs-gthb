@@ -125,6 +125,7 @@
                     vm.firstExistingSearchType = vm.getFirstExistingSearchType();
                     vm.counted = true;
                     $scope.$apply(); // force refresh DOM
+                    // TODO: search() function in products/filters.js is called 2 times because of the DOM refresh. Need to fix it.
                 });
             }
         }

@@ -7,7 +7,7 @@
 		vm.truncateString = UtilService.truncateString;
 		vm.addMoreItems = addMoreItems;
 		vm.results_infinite = [];
-		vm.searchPage=1;
+		vm.searchPage = 1;
 		addMoreItems();
 
 		function addMoreItems() {
@@ -17,8 +17,8 @@
 
 		$scope.$watch('exploreProductsResultsCtrl.results', function(newValue, oldValue) {
 			if(angular.isObject(newValue)) {
-				if(newValue.length > 0) {
-                    vm.results_infinite = newValue.slice(0, show_items);
+				if(newValue.items.length > 0) {
+                    vm.results_infinite = newValue.items.slice(0, show_items);
                 }
 				else {
 					vm.results_infinite = [];
