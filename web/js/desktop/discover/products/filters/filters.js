@@ -324,7 +324,7 @@
                     if (item.name === 'Color') {
                         item.values.forEach(function(obj) {
                             if (obj.colors.length > 1) {
-                                for (i = 0; i < obj.colors.length; i++) {
+                                for (var i = 0; i < obj.colors.length; i++) {
                                     if (colors_exists.indexOf(obj.value[i]) === -1) {
                                         vm.colors.push({
                                             color: obj.colors[i][0],
@@ -535,8 +535,8 @@
                 });
             });
         }
-        
-		$scope.$on("changePage", function(evt,data){ 
+
+		$scope.$on("changePage", function(evt,data){
 				vm.page = data;
 				search(false, true);
 		}, true);
@@ -547,7 +547,7 @@
         }, true);
 	}
 
-	
+
 
 	var component = {
 		templateUrl: currentHost() + '/js/desktop/discover/products/filters/filters.html',
