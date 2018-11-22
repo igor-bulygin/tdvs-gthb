@@ -7,6 +7,7 @@
 		"WE_FOUND_X_RESULTS": "Hemos encontrado {{ counter }} resultados",
 		"FOUND_X_RESULTS_WITH_KEY": "{{ counter }} resultados para \"<span class='key'>{{keys}}</span>\"",
 		"FOUND_X_RESULTS": "{{ counter }} resultados",
+		"FILTER": "Filtrar",
 		"FILTER_BY_COUNTRY": "Filtrar por ubicación",
 		"SEE_MORE": "Ver más",
 		"FILTER_BY_THEME": "Filtrar por categoría",
