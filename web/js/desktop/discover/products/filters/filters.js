@@ -37,6 +37,7 @@
 		vm.expandedFilters = []; // filters that are expanded
 
         vm.categorieds_loaded = false;
+        vm.counted = false;
 
         vm.seeMore = seeMore;
         vm.search = search;
@@ -544,7 +545,6 @@
             vm.orderFilter = data;
             search(true, true);
         }, true);
-
 	}
 
 	
