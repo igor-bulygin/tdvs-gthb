@@ -362,8 +362,8 @@
                 product.options.forEach(function(item) {
                     if (item.name === 'Material') {
                         item.values.forEach(function(obj) {
-                            if (Array.isArray(obj.value)) {
-                                for (i = 0; i < obj.value.length; i++) {
+                            if (angular.isArray(obj.value)) {
+                                for (var i = 0; i < obj.value.length; i++) {
                                     // if (obj.value[i] == 'gold-18') console.log(product);
                                     if (exists.indexOf(obj.value[i]) === -1) {
                                         vm.materials.push({
@@ -399,8 +399,8 @@
                 product.options.forEach(function(item) {
                     if (item.name === 'Occasion') {
                         item.values.forEach(function(obj) {
-                            if (Array.isArray(obj.value)) {
-                                for (i = 0; i < obj.value.length; i++) {
+                            if (angular.isArray(obj.value)) {
+                                for (var i = 0; i < obj.value.length; i++) {
                                     // if (obj.value[i] == 'gold-18') console.log(product);
                                     if (exists.indexOf(obj.value[i]) === -1) {
                                         vm.occasions.push({
@@ -435,8 +435,8 @@
                 product.options.forEach(function(item) {
                     if (item.name === 'Season') {
                         item.values.forEach(function(obj) {
-                            if (Array.isArray(obj.value)) {
-                                for (i = 0; i < obj.value.length; i++) {
+                            if (angular.isArray(obj.value)) {
+                                for (var i = 0; i < obj.value.length; i++) {
                                     // if (obj.value[i] == 'gold-18') console.log(product);
                                     if (exists.indexOf(obj.value[i]) === -1) {
                                         vm.seasons.push({
@@ -472,8 +472,8 @@
                 product.options.forEach(function(item) {
                     if (item.name === 'Technique') {
                         item.values.forEach(function(obj) {
-                            if (Array.isArray(obj.value)) {
-                                for (i = 0; i < obj.value.length; i++) {
+                            if (angular.isArray(obj.value)) {
+                                for (var i = 0; i < obj.value.length; i++) {
                                     // if (obj.value[i] == 'gold-18') console.log(product);
                                     if (exists.indexOf(obj.value[i]) === -1) {
                                         vm.techniques.push({
@@ -509,8 +509,8 @@
                 product.options.forEach(function(item) {
                     if (item.name === 'Gemstone') {
                         item.values.forEach(function(obj) {
-                            if (Array.isArray(obj.value)) {
-                                for (i = 0; i < obj.value.length; i++) {
+                            if (angular.isArray(obj.value)) {
+                                for (var i = 0; i < obj.value.length; i++) {
                                     // if (obj.value[i] == 'gold-18') console.log(product);
                                     if (exists.indexOf(obj.value[i]) === -1) {
                                         vm.gemstones.push({
