@@ -2577,13 +2577,7 @@ class Person extends CActiveRecord implements IdentityInterface
 
 	public function getFollowers() {
 
-		/** @var Collection $collection */
-		$collection = Yii::$app->mongodb->getCollection('person');
-		$persons  =	$collection->find(
-			[
-				'follow' => $this->short_id
-			]
-		);
+		$persons = Person::find()->select(self::getSelectFields())->where(["follow" => $this->short_id])->all();
 
 		$ids = [];
 		foreach ($persons as $item) {
