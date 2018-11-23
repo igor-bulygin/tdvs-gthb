@@ -7,7 +7,7 @@ if ($text) {
 		'WORKS_SEARCH_PARAM',
 		['search_param' => $text]
 	);
-	
+
 } else {
 	$this->title = Yii::t('app/public', 'WORKS');
 }
