@@ -34,9 +34,9 @@
 		"PRODUCTS": "Productos",
 		"DEVISERS": "Devisers",
 		"INFLUENCERS": "Influencers",
-		"MEMBERS": "Members",
+		"MEMBERS": "Miembros",
 		"BOXES_NAME": "Boxes",
-		"ALL": "All",
+		"ALL": "Todos",
 		"boxes": {
 			"DISCOVER_LATEST_TRENDS": "Es el momento de descubrir las últimas tendencias",
 			"NO_BOXES_FOUND": "No se han encontrado cajas con el criterio de búsqueda especificado."

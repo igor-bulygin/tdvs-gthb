@@ -210,7 +210,7 @@
         height: 50px;
         &:hover{
             .dropdown-shop{
-                display: block;        
+                display: block;
             }
         }
     }
@@ -222,7 +222,7 @@
     }*/
     .dropdown-shop{
         &:hover{
-            display: block;     
+            display: block;
         }
     }
     .menu-title{
@@ -280,11 +280,14 @@
         }
         select {
             display: inline-block;
-            width: 82px;
+            width: 100px;
             text-transform: capitalize;
             border: none;
             background: transparent;
+            height: 34px;
             //@include appearance(none);
+            appearance: menulist !important;
+            -webkit-appearance: menulist !important;
         }
         .input-group-btn {
             display: inline-block;
@@ -372,12 +375,12 @@
     span{
         padding-top: 14px;
         padding-bottom: 14px;
-        display:block; 
+        display:block;
 		//color: $white;
     }
     a{
-        @extend %link-red; 
-        padding: 15px 5px!important; 
+        @extend %link-red;
+        padding: 15px 5px!important;
 		font-weight: bold;
     }
     .logued-text{
@@ -418,12 +421,12 @@
             padding-left:0;
             padding-right:0;
         }
-        li{ 
+        li{
             list-style:none;
             @media (max-width: 991px){
                 padding: 0 20px 0 24px;
             }
-            a{ 
+            a{
                 color: $black;
                 text-decoration:none;
                 text-transform: uppercase;
@@ -479,7 +482,7 @@
                 &:hover{
                     background-color: transparent;
                     color:$red;
-                }   
+                }
             }
             &.minibanner{
                 a{
@@ -633,7 +636,7 @@
 #header_logo {
     width: 110px;
 }
-.cart-icon{  
+.cart-icon{
     @extend %cart-white-icon;//background: url('/imgs/cart-white.svg') 0 0 no-repeat transparent;
     @extend %header-icon;
     //display: block;
@@ -646,7 +649,7 @@
         @extend %cart-red-icon;//background: url('/imgs/cart-red.svg') 0 0 no-repeat transparent;
     }
 }
-.cart-icon-black{  
+.cart-icon-black{
     @extend %cart-black-icon;//background: url('/imgs/cart-black.svg') 0 0 no-repeat transparent;
     @extend %header-icon;
     //display: block;
@@ -656,14 +659,14 @@
     //padding-bottom: 15px;
     //@include border-radius(0,0,0,0);
 }
-.chat-icon{  
+.chat-icon{
     @extend %chat-white-icon;
     @extend %header-icon;
     &:hover{
         @extend %chat-red-icon;
     }
 }
-.chat-icon-black{  
+.chat-icon-black{
     @extend %chat-black-icon;
     @extend %header-icon;
 }

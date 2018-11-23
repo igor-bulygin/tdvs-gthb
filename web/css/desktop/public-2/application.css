@@ -3412,10 +3412,13 @@ h3 {
         width: calc(100% - 140px) !important; }
     .navbar .searcher-header select {
       display: inline-block;
-      width: 82px;
+      width: 100px;
       text-transform: capitalize;
       border: none;
-      background: transparent; }
+      background: transparent;
+      height: 34px;
+      appearance: menulist !important;
+      -webkit-appearance: menulist !important; }
     .navbar .searcher-header .input-group-btn {
       display: inline-block; }
     .navbar .searcher-header .btn-send {
