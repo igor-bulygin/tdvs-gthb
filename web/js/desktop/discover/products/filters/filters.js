@@ -362,7 +362,7 @@
                 product.options.forEach(function(item) {
                     if (item.name === 'Material') {
                         item.values.forEach(function(obj) {
-                            if (isArray(obj.value)) {
+                            if (Array.isArray(obj.value)) {
                                 for (i = 0; i < obj.value.length; i++) {
                                     // if (obj.value[i] == 'gold-18') console.log(product);
                                     if (exists.indexOf(obj.value[i]) === -1) {
@@ -399,7 +399,7 @@
                 product.options.forEach(function(item) {
                     if (item.name === 'Occasion') {
                         item.values.forEach(function(obj) {
-                            if (isArray(obj.value)) {
+                            if (Array.isArray(obj.value)) {
                                 for (i = 0; i < obj.value.length; i++) {
                                     // if (obj.value[i] == 'gold-18') console.log(product);
                                     if (exists.indexOf(obj.value[i]) === -1) {
@@ -435,7 +435,7 @@
                 product.options.forEach(function(item) {
                     if (item.name === 'Season') {
                         item.values.forEach(function(obj) {
-                            if (isArray(obj.value)) {
+                            if (Array.isArray(obj.value)) {
                                 for (i = 0; i < obj.value.length; i++) {
                                     // if (obj.value[i] == 'gold-18') console.log(product);
                                     if (exists.indexOf(obj.value[i]) === -1) {
@@ -472,7 +472,7 @@
                 product.options.forEach(function(item) {
                     if (item.name === 'Technique') {
                         item.values.forEach(function(obj) {
-                            if (isArray(obj.value)) {
+                            if (Array.isArray(obj.value)) {
                                 for (i = 0; i < obj.value.length; i++) {
                                     // if (obj.value[i] == 'gold-18') console.log(product);
                                     if (exists.indexOf(obj.value[i]) === -1) {
@@ -509,7 +509,7 @@
                 product.options.forEach(function(item) {
                     if (item.name === 'Gemstone') {
                         item.values.forEach(function(obj) {
-                            if (isArray(obj.value)) {
+                            if (Array.isArray(obj.value)) {
                                 for (i = 0; i < obj.value.length; i++) {
                                     // if (obj.value[i] == 'gold-18') console.log(product);
                                     if (exists.indexOf(obj.value[i]) === -1) {
