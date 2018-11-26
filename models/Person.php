@@ -317,7 +317,10 @@ class Person extends CActiveRecord implements IdentityInterface
 		// if text is specified
 		if ((array_key_exists("text", $criteria)) && (!empty($criteria["text"]))) {
 //			// search the word in all available languages
-			$query->andFilterWhere(static::getFilterForText(static::$textFilterAttributes, $criteria["text"]));
+			$array_texts = explode(' ', $criteria["text"]);
+			foreach ($array_texts as $key_text => $value_text) {
+				$query->andFilterWhere(static::getFilterForText(static::$textFilterAttributes, $value_text));
+			}
 		}
 
 		// Count how many items are with those conditions, before limit them for pagination
