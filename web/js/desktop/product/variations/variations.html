@@ -336,7 +336,7 @@
 								<td ng-repeat="value in line track by $index">
 									<span ng-if="$first" ng-bind="value" class="editable-fix" ng-cloak></span>
 									<span ng-if="!$first" xeditable-select ng-cloak>
-										<a href="#" editable-number="line[$index]" buttons="no" e-min="0" blur="submit" class="ng-class:{'purple-text': productVariationsCtrl.sizechartValuesValidation(value)}">{{line[$index]}}</a>
+										<a href="#" editable-number="line[$index]" buttons="no" e-min="0" blur="submit" class="ng-class:{'purple-text': productVariationsCtrl.sizechartValuesValidation(value)}">{{line[$index] || '-'}}</a>
 										&nbsp;<span ng-if="productVariationsCtrl.product.sizechart.metric_unit" ng-bind="productVariationsCtrl.product.sizechart.metric_unit" ng-cloak></span>
 									</span>
 								</td>
