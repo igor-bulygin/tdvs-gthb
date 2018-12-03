@@ -121,13 +121,14 @@
 			}
 			//sizecharts
 			if(angular.isObject(product.sizechart) && !UtilService.isEmpty(product.sizechart) && !UtilService.isEmpty(product.sizechart.values)) {
-				if(!product.sizechart.metric_unit)
-					required.push('metric_unit');
+				if(!product.sizechart.metric_unit) {
+                    required.push('metric_unit');
+                }
 				product.sizechart.values.forEach(function(element) {
 					if(element.indexOf(0) > -1) {
 						required.push('sizechart_values');
 					}
-				})
+				});
 			}
 
 			//weight_unit
@@ -180,7 +181,7 @@
 
 		function tagChangesStockAndPrice(tags, key) {
 			var tag = tags.find(function(element) {
-				return angular.equals(element.id, key)
+				return angular.equals(element.id, key);
 			});
 			if(tag) {
 				return tag.stock_and_price;
@@ -198,8 +199,9 @@
 						var original_artwork_element = oldPriceStock.find(function(element) {
 							return element.original_artwork;
 						});
-						if(original_artwork_element)
-							copyProductProperties(original_artwork_element, new_price_stock_element);
+						if(original_artwork_element) {
+                            copyProductProperties(original_artwork_element, new_price_stock_element);
+                        }
 					} else //all_other_cases
 					{
 						oldPriceStock.forEach(function(old_price_stock_element) {

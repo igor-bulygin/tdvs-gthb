@@ -162,8 +162,9 @@
 		}
 
 		function limitTagOption(limit, array) {
-			if(array.length > limit)
-				array.splice(1, array.length-1);
+			if(array.length > limit) {
+                array.splice(1, array.length - 1);
+            }
 		}
 
 		function deleteOption(tag, index) {
