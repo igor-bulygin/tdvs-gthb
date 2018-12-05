@@ -23,8 +23,9 @@
 				}
 				if(UtilService.isObject(element.options) && element.options['size']){
 					if(angular.isObject(element.options['size'])) {
-						if(element.options.size.width && element.options.size.length && element.options.size.metric_unit)
-							title.push(element.options.size.width + ' x ' + element.options.size.length + element.options.size.metric_unit);
+						if(element.options.size.width && element.options.size.length && element.options.size.metric_unit) {
+                            title.push(element.options.size.width + ' x ' + element.options.size.length + element.options.size.metric_unit);
+                        }
 					} else {
 						title.push(element.options.size);
 					}
@@ -44,17 +45,18 @@
 								if(element.options[key].indexOf(option.value) > -1) {
 									title.push(option.text[vm.selected_language]);
 								}
-							})
+							});
 						}
 					}
 				}
 				vm.titles.push(title.join(", "));
-			})
+			});
 		}
 
 		function product(args) {
-			if(!args.length)
-				return [[]];
+			if(!args.length) {
+                return [[]];
+            }
 			var prod = product(args.slice(1)), r = [];
 			args[0].forEach(function(x) {
 				prod.forEach(function(p) {
@@ -79,8 +81,9 @@
 			var object = {};
 			for (var key in options) {
 				if(productService.tagChangesStockAndPrice(vm.tags, key)){
-					if(options[key].length > 0 && options[key][0].length > 0)
-						object[key] = options[key];
+					if(options[key].length > 0 && options[key][0].length > 0) {
+                        object[key] = options[key];
+                    }
 				}
 			}
 			if(angular.isObject(prints) && !UtilService.isEmpty(prints)) {
@@ -117,10 +120,15 @@
 						available: true
 					});
 				}
-				if((set_original_artwork && !UtilService.isEmpty(vm.product.prints)) || (!set_original_artwork)) {
+				// if((set_original_artwork && !UtilService.isEmpty(vm.product.prints)) || (!set_original_artwork)) {
+				if (
+				    (set_original_artwork && !UtilService.isEmpty(vm.product.prints)) ||
+                    (set_original_artwork && !UtilService.isEmpty(vm.product.options['f0853'])) ||
+                    (!set_original_artwork))
+				{
 					if(!UtilService.isEmpty(cartesian[0])) {
 						for (var i = 0; i < cartesian.length; i++) {
-							addEmptyPriceStock(cartesian[i])
+							addEmptyPriceStock(cartesian[i]);
 						}
 					} else {
 						addEmptyPriceStock([]);
@@ -212,10 +220,11 @@
 
 		$scope.$watch('productPriceStockCtrl.product.price_stock', function(newValue, oldValue) {
 			parseTitles();
-			if(newValue.length > 0 && newValue.price >= 1)
-				newValue.forEach(function(element) {
-					element.unlimited_stock = element.stock === null ? true : false;
-				});
+			if(newValue.length > 0 && newValue.price >= 1) {
+                newValue.forEach(function (element) {
+                    element.unlimited_stock = element.stock === null ? true : false;
+                });
+            }
 			if(vm.fromedit) {
 				delete vm.fromedit;
 			} 
@@ -232,8 +241,9 @@
 					}
 				}
 				//if we do have prints, set original artwork to true
-				if(values[0])
-					set_original_artwork = true;
+				if(values[0]) {
+                    set_original_artwork = true;
+                }
 				else {
 					set_original_artwork = false;
 				}

@@ -162,8 +162,9 @@
 		}
 
 		function limitTagOption(limit, array) {
-			if(array.length > limit)
-				array.splice(1, array.length-1);
+			if(array.length > limit) {
+                array.splice(1, array.length - 1);
+            }
 		}
 
 		function deleteOption(tag, index) {
@@ -259,7 +260,7 @@
 				angular.forEach(vm.selected_categories, function (category) {
 					vm.newSizechart.categories.push(category);
 				});				
-				function onSaveSizechartSuccess(data) {
+				var onSaveSizechartSuccess = function(data) {
 					vm.sizechart_helper.push(data);
 					vm.showNewSizechart=false;
 					vm.savingSizechart=false;
