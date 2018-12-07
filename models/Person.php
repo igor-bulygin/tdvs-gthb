@@ -2647,7 +2647,7 @@ class Person extends CActiveRecord implements IdentityInterface
       if(isset($this->earnings_by_user[$affiliate->short_id])) {
         foreach($this->earnings_by_user[$affiliate->short_id]['earnings_by_order'] as $earningOrder) {
           if(isset($affiliatesAux[$affiliate->short_id]['totalEarning']))
-            $affiliatesAux[$affiliate->short_id]['totalEarning'] = (float)$affiliatesAux[$affiliate->short_id]['totalEarning'] + $earningOrder;
+            $affiliatesAux[$affiliate->short_id]['totalEarning'] = (float)$affiliatesAux[$affiliate->short_id]['totalEarning'] + (float)$earningOrder;
           else
             $affiliatesAux[$affiliate->short_id]['totalEarning'] = (float)$earningOrder;
         }
