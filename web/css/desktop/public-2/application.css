@@ -13,6 +13,9 @@
   position: absolute;
   width: 1px; }
 
+.overflow-hidden {
+  overflow: hidden; }
+
 /* mixin for multiline */
 html {
   font-family: sans-serif;
@@ -5827,6 +5830,25 @@ h3 {
       .banner-deviser .cover {
         max-height: 183px;
         position: absolute; } }
+  .banner-deviser .banner-deviser-image-wrap {
+    width: 100%;
+    overflow: hidden; }
+    @media (max-width: 575px) {
+      .banner-deviser .banner-deviser-image-wrap {
+        max-height: 183px;
+        position: absolute; } }
+    .banner-deviser .banner-deviser-image-wrap img {
+      height: 100%;
+      width: auto;
+      margin: auto; }
+      @media (max-width: 992px) {
+        .banner-deviser .banner-deviser-image-wrap img {
+          margin-left: -20%; } }
+      @media (max-width: 575px) {
+        .banner-deviser .banner-deviser-image-wrap img {
+          margin-left: 0;
+          width: 100%;
+          height: auto; } }
   @media (max-width: 575px) {
     .banner-deviser .divProfileCover {
       height: 183px;
@@ -6074,7 +6096,7 @@ h3 {
   left: 55px; }
   @media (max-width: 575px) {
     .type-of-user {
-      top: 53px;
+      top: 58px;
       color: #1C1919; } }
 
 .icon-deviser img {

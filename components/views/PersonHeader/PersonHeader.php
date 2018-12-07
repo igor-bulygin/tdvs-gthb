@@ -20,7 +20,9 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 			<img class="imgProfileCover" ng-src="{{personHeaderCtrl.person.header_image}}">
 		</div>
 		*/ ?>
-		<img class="cover" ng-src="{{personHeaderCtrl.person.header_image}}">
+        <div class="banner-deviser-image-wrap">
+		    <img ng-src="{{personHeaderCtrl.person.header_image}}">
+        </div>
 		<div class="banner-deviser-content">
 			<div class="grey-overlay"></div>
 			<div class="container">

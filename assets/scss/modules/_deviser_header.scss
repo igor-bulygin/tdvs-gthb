@@ -1,7 +1,7 @@
 // ==========================================================================
 // Deviser Header
 // ==========================================================================
-.banner-deviser{
+.banner-deviser {
 	position: relative;	//background-color: $background_grey;
 	min-height: 388px;	//overflow-x: hidden;
 	margin: auto;
@@ -19,6 +19,27 @@
 		}
 		//@media(max-width:991px){			//width: auto;			//left: 50%;			//margin-left: -256.203px;		//}
 	}
+    .banner-deviser-image-wrap {
+        width: 100%;
+        overflow: hidden;
+        @media (max-width: 575px) {
+            max-height: 183px;
+            position: absolute;
+        }
+        img {
+            height: 100%;
+            width: auto;
+            margin: auto;
+            @media (max-width: 992px) {
+                margin-left: -20%;
+            }
+            @media (max-width: 575px) {
+                margin-left: 0;
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
 	.divProfileCover { 
 		@media(max-width:575px) {
 			height: 183px;
