@@ -65,11 +65,18 @@
 		top: 0;
 		margin: 0;
 	}
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+
 	.grey-overlay{
 		@extend %absolut-bottom;
 		@include size(100%,200px);
 		background-color: $almost_black;
-		@include opacity(0.45)
+		@include opacity(0.45);
+        @media (max-width: 575px){
+            display: none;
+        }
 	}
 	.deviser-profile{
 		position: relative;
@@ -252,9 +259,19 @@
   left: 14px;
 }
 .edit-profile-btn-right {
-  position: absolute;
-  right: 17px;
-  bottom: 10px;
+    position: absolute;
+    right: 17px;
+    bottom: 10px;
+    @media(max-width:575px) {
+        right: 15px;
+    }
+}
+.btn-follow-header {
+    @media(max-width:575px) {
+        height: auto;
+        min-width: 120px;
+        margin-right: 3px;
+    }
 }
 .powered-google{
 	width:100px;
@@ -270,6 +287,10 @@
 	position: absolute;
 	top: 43px;
 	left: 55px;
+    @media (max-width: 575px) {
+        top: 58px;
+        color: $black
+    }
 }
 .icon-deviser{
 	img{
@@ -277,7 +298,7 @@
 		width: 23px!important;
 		position: absolute;
 		top: -62px;
-		@media (max-width: 575px){
+		@media (max-width: 575px) {
 			position: absolute;
 			left: calc(50% - 60px);
 		}
@@ -295,9 +316,15 @@
 	line-height: 1.5em;
 	&.position-followers{
 		right: 110px;
+        @media (max-width: 575px) {
+            right: 80px;
+        }
 	}
 	&.position-following{
 		right: 16px;
+        @media (max-width: 575px) {
+            right: 5px;
+        }
 	}
 	p {
 		text-align: center;
@@ -307,10 +334,20 @@
 	.num {
 		font-size: 1.6em;//1.8em;
 		line-height: 1em;//1.2em;
+        @media (max-width: 575px) {
+            color: $black;
+        }
 	}
-	a{
+	a {
 		color: $white;
+        @media (max-width: 575px) {
+            color: $black;
+        }
 	}
+    @media (max-width: 575px) {
+        color: $black;
+        font-size: 12px;
+    }
 }
 .more-options{
 	position: absolute;
