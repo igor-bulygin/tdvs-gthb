@@ -43,7 +43,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						<div class="type-of-user hidden-xs" ng-if="personHeaderCtrl.person.type.indexOf(3)>=0" ng-cloak>
 							<span translate="global.INFLUENCER"></span>
 						</div>
-						<div class="edit-profile-btn-left hidden-xs">
+						<div class="edit-profile-btn-left">
 							<?php if (!$person->isConnectedUser() && !$person->isPersonEditable()) { ?>
 								<a class="btn btn-default all-caps btn-black-on-white btn-header" href="<?= $person->getChatLink()?>"><span translate="person.header.CHAT"></span></a>
 							<?php } elseif ($person->isPersonEditable() && $person->isPublic()) {?>

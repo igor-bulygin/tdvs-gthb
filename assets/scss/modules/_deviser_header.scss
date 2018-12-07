@@ -121,7 +121,7 @@
 				@media(max-width:991px){
 					margin-left: 0;
 				}
-				@media (max-width: 575px){
+				@media (max-width: 575px) {
 					max-height: 100px;
 					width: auto;
 					margin: auto;
@@ -169,12 +169,15 @@
 }
 .deviser-data-edit{
 	position: absolute;
-	width: 350px;
+	width: 300px;
 	bottom: 0px;
 	left: 190px;
 	background-color: $background_grey;
 	padding: 0 20px 20px;
 	@include border-radius(6px,6px,6px,6px);
+    @media (max-width: 575px) {
+        left: 170px;
+    }
 	input{
 		@include border-radius(90px,90px,90px,90px);
 	}

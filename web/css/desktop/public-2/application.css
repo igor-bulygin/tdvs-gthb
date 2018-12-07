@@ -5961,7 +5961,7 @@ h3 {
 
 .deviser-data-edit {
   position: absolute;
-  width: 350px;
+  width: 300px;
   bottom: 0px;
   left: 190px;
   background-color: #e9e9e9;
@@ -5969,6 +5969,9 @@ h3 {
   border-radius: 6px 6px 6px 6px !important;
   -webkit-border-radius: 6px 6px 6px 6px !important;
   -moz-border-radius: 6px 6px 6px 6px !important; }
+  @media (max-width: 575px) {
+    .deviser-data-edit {
+      left: 170px; } }
   .deviser-data-edit input {
     border-radius: 90px 90px 90px 90px !important;
     -webkit-border-radius: 90px 90px 90px 90px !important;
@@ -6609,6 +6612,9 @@ h3 {
   text-align: center;
   top: 20px;
   right: 10px; }
+  @media (max-width: 575px) {
+    .edit-cover-icon {
+      left: 10px; } }
   .edit-cover-icon.photo {
     font-size: 30px;
     text-align: center;
@@ -6642,9 +6648,16 @@ h3 {
   border-radius: 90px 90px 90px 90px !important;
   -webkit-border-radius: 90px 90px 90px 90px !important;
   -moz-border-radius: 90px 90px 90px 90px !important; }
+  @media (max-width: 575px) {
+    .edit-avatar-photo-icon {
+      top: 7px;
+      left: 66px; } }
   .edit-avatar-photo-icon.two {
     left: 32px;
     text-align: center; }
+    @media (max-width: 575px) {
+      .edit-avatar-photo-icon.two {
+        top: 0; } }
 
 .crop-avatar-photo-icon {
   color: #ffffff;
