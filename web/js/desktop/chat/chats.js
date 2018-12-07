@@ -1,5 +1,5 @@
 (function() {
-    "use strict";
+    'use strict';
 
     function controller(UtilService, chatDataService, $window, $location, $scope, $anchorScroll, $interval) {
         var vm = this;
@@ -108,7 +108,7 @@
         }
 
         function createChat() {
-            vm.currentChat = { "preview": { "title": vm.personToChat.name, "image": vm.personToChat.profile_image }, messages: [] };
+            vm.currentChat = { 'preview': { 'title': vm.personToChat.name, 'image': vm.personToChat.profile_image }, messages: [] };
             vm.chats.unshift(vm.currentChat);
             vm.loadingChat = false;
         }
@@ -217,11 +217,11 @@
                     $anchorScroll();
                 }
                 if (chat.id) {
-                    chatDataService.getChat({ id: chat.id }, onGetChatSuccess, UtilService.onError)
+                    chatDataService.getChat({ id: chat.id }, onGetChatSuccess, UtilService.onError);
                 } else {
                     createChat();
                 }
-            }, 60000);
+            }, 2000);
             function onSetChatReadSuccess(data){
                 angular.forEach(vm.chats, function(chat){
                     if (chat.id == data.id){
@@ -229,7 +229,7 @@
                     }
                 });
             }
-            chatDataService.setChatRead({ chatId: chat.id }, { chatId: chat.id }, onSetChatReadSuccess, UtilService.onError)
+            chatDataService.setChatRead({ chatId: chat.id }, { chatId: chat.id }, onSetChatReadSuccess, UtilService.onError);
         }
 
         function parseImage(image) {
