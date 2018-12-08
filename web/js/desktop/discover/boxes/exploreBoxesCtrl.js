@@ -52,9 +52,9 @@
 				})
 
 				var onGetBoxesSuccess = function(data) {
-					vm.results_found=data.meta.total_count;
+					vm.results_found = data.meta.total_count;
 					vm.search_key = angular.copy(vm.searchdata.key);
-					vm.results.items=vm.results.items.concat(angular.copy(data.items));
+					vm.results.items = vm.results.items.concat(angular.copy(data.items));
 					vm.searching= false;
 				}
 
