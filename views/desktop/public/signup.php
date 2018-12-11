@@ -8,7 +8,7 @@ $this->title = Yii::t('app/public', 'SIGNUP');
 Yii::$app->opengraph->title = $this->title;
 
 ?>
-HOLAAAAAAA
+ADEUUUUUUUUU
 <div class="create-deviser-account-wrapper">
 	<div class="logo">
 		<a class="image-create-account" href="/">
