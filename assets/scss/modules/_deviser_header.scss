@@ -251,6 +251,9 @@
 .btn-header{
 	width: 140px;
 	font-weight: bold;
+    @media(max-width: 500px) {
+        width: 120px;
+    }
 }
 .header-edit-btns{
 	.btn-header{
@@ -278,15 +281,23 @@
 	bottom: 10px;
 }
 .edit-profile-btn-left {
-  position: absolute;
-  top: 115px;
-  left: 14px;
+    position: absolute;
+    top: 115px;
+    left: 14px;
+    @media(max-width: 500px) {
+        top: auto;
+        bottom: 52px;
+        left: -8px;
+    }
 }
 .edit-profile-btn-right {
     position: absolute;
     right: 17px;
     bottom: 10px;
-    @media(max-width:575px) {
+    @media(max-width: 500px) {
+        bottom: 50px;
+    }
+    @media(max-width: 575px) {
         right: 15px;
     }
 }
@@ -312,7 +323,14 @@
 	top: 43px;
 	left: 55px;
     @media (max-width: 575px) {
-        top: 58px;
+        top: auto;
+        bottom: 50px;
+        color: $black
+    }
+    @media (max-width: 500px) {
+        top: auto;
+        bottom: 85px;
+        left: 25px;
         color: $black
     }
 }
@@ -338,6 +356,9 @@
 	color: $white;
 	text-transform: uppercase;
 	line-height: 1.5em;
+	@media (max-width: 500px) {
+		bottom: 100px;
+	}
 	&.position-followers{
 		right: 110px;
         @media (max-width: 575px) {

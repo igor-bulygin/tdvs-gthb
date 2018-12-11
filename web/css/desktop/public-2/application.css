@@ -6041,6 +6041,9 @@ h3 {
 .btn-header {
   width: 140px;
   font-weight: bold; }
+  @media (max-width: 500px) {
+    .btn-header {
+      width: 120px; } }
 
 .header-edit-btns .btn-header {
   margin-top: 20px !important; }
@@ -6068,11 +6071,19 @@ h3 {
   position: absolute;
   top: 115px;
   left: 14px; }
+  @media (max-width: 500px) {
+    .edit-profile-btn-left {
+      top: auto;
+      bottom: 52px;
+      left: -8px; } }
 
 .edit-profile-btn-right {
   position: absolute;
   right: 17px;
   bottom: 10px; }
+  @media (max-width: 500px) {
+    .edit-profile-btn-right {
+      bottom: 50px; } }
   @media (max-width: 575px) {
     .edit-profile-btn-right {
       right: 15px; } }
@@ -6099,7 +6110,14 @@ h3 {
   left: 55px; }
   @media (max-width: 575px) {
     .type-of-user {
-      top: 58px;
+      top: auto;
+      bottom: 50px;
+      color: #1C1919; } }
+  @media (max-width: 500px) {
+    .type-of-user {
+      top: auto;
+      bottom: 85px;
+      left: 25px;
       color: #1C1919; } }
 
 .icon-deviser img {
@@ -6119,6 +6137,9 @@ h3 {
   color: #ffffff;
   text-transform: uppercase;
   line-height: 1.5em; }
+  @media (max-width: 500px) {
+    .deviser-followers {
+      bottom: 100px; } }
   .deviser-followers.position-followers {
     right: 110px; }
     @media (max-width: 575px) {
