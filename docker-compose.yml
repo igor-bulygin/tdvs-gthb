@@ -16,6 +16,7 @@ services:
             - "8080:8080"
         volumes:
             - .:/var/www/html/
+            # ONLY SERVER AFTER CAP DEPLOY - ./shared/system/vendor/:/var/www/html/vendor/
         networks:
             - new
         depends_on:

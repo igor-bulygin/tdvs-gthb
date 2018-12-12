@@ -51,12 +51,12 @@
 			"yii\\composer\\Installer::postCreateProject"
 		],
 		"post-install-cmd": [
-			"rm -rf /tmp/tmp_npm_install || true",
-			"mkdir /tmp/tmp_npm_install",
+			"rm -Rf /tmp/tmp_npm_install || true",
+			"mkdir /tmp/tmp_npm_install || true",
 			"cp package.json /tmp/tmp_npm_install/",
 			"cd /tmp/tmp_npm_install && npm install",
 			"rsync -a /tmp/tmp_npm_install/node_modules/ vendor/npm/ 2> /dev/null || true",
-			"rm -rf /tmp/tmp_npm_install",
+			"rm -Rf /tmp/tmp_npm_install || true",
 			"mkdir web/assets || true",
 			"echo 'Done'"
 		],

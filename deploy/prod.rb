@@ -3,7 +3,7 @@ task :prod do
         set :user, "todeviseapp"
         server "todevise.com", :app, :web, :primary => true
         set :deploy_to, "/var/www/todevise/web"
-        after "deploy", "linkprod","composerprod", "npmprod", "assetsprod", "symlink","restartphp"
+        after "deploy", "linkprod","composerprod", "npmprod", "assetsprod", "symlinkprod","restartphpprod"
 end
 task :composerprod do
     transaction do
@@ -31,18 +31,15 @@ task :linkprod do
       run "ln -nfs #{shared_path}/.env #{releases_path}/#{release_name}/.env"
     end
 end
-task :symlink do
+task :symlinkprod do
   transaction do
     run "ln -nfs #{current_release} #{deploy_to}/#{current_dir}"
   end
 end
 
-task :restartphp do
+task :restartphpprod do
     transaction do
         run "sudo /usr/sbin/service php5-fpm restart"
         run "chmod 775 #{deploy_to}/#{current_dir}/web/assets"
     end
 end
-
-
-

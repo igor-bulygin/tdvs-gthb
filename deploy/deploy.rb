@@ -1,6 +1,7 @@
-# todevise 
+# todevise
 
-set :application, "todevise20"
+#set :application, "todevise20" # OLD
+set :application, "todevise"
 set :repository,  "git@github.com:jordioliu/todevise20.git"
 set :stages, ["develop", "prod"]
 set :default_stage, "develop"
@@ -14,7 +15,7 @@ namespace :deploy do
   task :update do
     transaction do
       update_code
-      # cleanup
+      #cleanup
     end
   end
   task :finalize_update do

@@ -43,6 +43,3 @@ task :restartphp do
         run "chmod 775 #{deploy_to}/#{current_dir}/web/assets"
     end
 end
-
-
-
