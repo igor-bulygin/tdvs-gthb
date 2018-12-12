@@ -13,13 +13,16 @@ end
 task :composerdev do
     transaction do
       run "ln -nfs #{shared_path}/system/vendor #{releases_path}/#{release_name}/vendor"
+      run "ln -nfs #{shared_path}/public/images/uploads #{releases_path}/#{release_name}/web/uploads"
+      run "ln -nfs #{shared_path}/public/thumbor_cache #{releases_path}/#{release_name}/thumbor_cache"
+      run "ln -nfs #{shared_path}/public/thumbor_resized #{releases_path}/#{release_name}/thumbor_resized"
 
       # run "cd #{releases_path}/#{release_name} ; composer -q global require \"fxp/composer-asset-plugin:~1.1.1\"" # OLD
       # run "cd #{releases_path}/#{release_name} ; composer -q install" # OLD
       # run "cd #{releases_path}/#{release_name} ; ./yii mongodb-migrate --interactive=0" # OLD
 
       run "ln -nfs #{current_release} #{deploy_to}/#{current_dir}"
-      run "cd /home/coditramuntana/todevise/web ; docker-compose -q restart"
+      run "cd /home/coditramuntana/todevise/web ; docker-compose restart"
 
       run "docker exec -i web_nginx_1 composer -q global require fxp/composer-asset-plugin:~1.1.1"
       run "docker exec -i web_nginx_1 bash -c \"cd /var/www/html && composer -q install\""
