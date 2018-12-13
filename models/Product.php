@@ -481,6 +481,7 @@ class Product extends CActiveRecord {
 					'isLoved' => 'isLoved',
 					'isMine' => 'isMine',
 					'min_price' => 'minimumPrice',
+                    'loveds',
 				];
 				static::$retrieveExtraFields = [
 					'deviser_id',
@@ -1486,6 +1487,7 @@ class Product extends CActiveRecord {
 			'slug' => $this->slug,
 			'name' => $this->name,
 			'media' => $this->media,
+            'loveds' => $this->loveds,
 			'deviser' => $this->getDeviserPreview(),
 			'main_photo' => $this->getMainImage(),
 			'main_photo_128' => $this->getImagePreview128(),

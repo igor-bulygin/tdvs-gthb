@@ -1,7 +1,7 @@
 // ==========================================================================
 // Deviser Header
 // ==========================================================================
-.banner-deviser{
+.banner-deviser {
 	position: relative;	//background-color: $background_grey;
 	min-height: 388px;	//overflow-x: hidden;
 	margin: auto;
@@ -19,6 +19,27 @@
 		}
 		//@media(max-width:991px){			//width: auto;			//left: 50%;			//margin-left: -256.203px;		//}
 	}
+    .banner-deviser-image-wrap {
+        width: 100%;
+        overflow: hidden;
+        @media (max-width: 575px) {
+            max-height: 183px;
+            position: absolute;
+        }
+        img {
+            height: 100%;
+            width: auto;
+            margin: auto;
+            @media (max-width: 992px) {
+                margin-left: -20%;
+            }
+            @media (max-width: 575px) {
+                margin-left: 0;
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
 	.divProfileCover { 
 		@media(max-width:575px) {
 			height: 183px;
@@ -65,11 +86,18 @@
 		top: 0;
 		margin: 0;
 	}
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+
 	.grey-overlay{
 		@extend %absolut-bottom;
 		@include size(100%,200px);
 		background-color: $almost_black;
-		@include opacity(0.45)
+		@include opacity(0.45);
+        @media (max-width: 575px){
+            display: none;
+        }
 	}
 	.deviser-profile{
 		position: relative;
@@ -93,7 +121,7 @@
 				@media(max-width:991px){
 					margin-left: 0;
 				}
-				@media (max-width: 575px){
+				@media (max-width: 575px) {
 					max-height: 100px;
 					width: auto;
 					margin: auto;
@@ -141,12 +169,15 @@
 }
 .deviser-data-edit{
 	position: absolute;
-	width: 350px;
+	width: 300px;
 	bottom: 0px;
 	left: 190px;
 	background-color: $background_grey;
 	padding: 0 20px 20px;
 	@include border-radius(6px,6px,6px,6px);
+    @media (max-width: 575px) {
+        left: 170px;
+    }
 	input{
 		@include border-radius(90px,90px,90px,90px);
 	}
@@ -220,6 +251,9 @@
 .btn-header{
 	width: 140px;
 	font-weight: bold;
+    @media(max-width: 500px) {
+        width: 120px;
+    }
 }
 .header-edit-btns{
 	.btn-header{
@@ -247,14 +281,32 @@
 	bottom: 10px;
 }
 .edit-profile-btn-left {
-  position: absolute;
-  top: 115px;
-  left: 14px;
+    position: absolute;
+    top: 115px;
+    left: 14px;
+    @media(max-width: 500px) {
+        top: auto;
+        bottom: 52px;
+        left: -8px;
+    }
 }
 .edit-profile-btn-right {
-  position: absolute;
-  right: 17px;
-  bottom: 10px;
+    position: absolute;
+    right: 17px;
+    bottom: 10px;
+    @media(max-width: 500px) {
+        bottom: 50px;
+    }
+    @media(max-width: 575px) {
+        right: 15px;
+    }
+}
+.btn-follow-header {
+    @media(max-width:575px) {
+        height: auto;
+        min-width: 120px;
+        margin-right: 3px;
+    }
 }
 .powered-google{
 	width:100px;
@@ -270,6 +322,17 @@
 	position: absolute;
 	top: 43px;
 	left: 55px;
+    @media (max-width: 575px) {
+        top: auto;
+        bottom: 50px;
+        color: $black
+    }
+    @media (max-width: 500px) {
+        top: auto;
+        bottom: 85px;
+        left: 25px;
+        color: $black
+    }
 }
 .icon-deviser{
 	img{
@@ -277,7 +340,7 @@
 		width: 23px!important;
 		position: absolute;
 		top: -62px;
-		@media (max-width: 575px){
+		@media (max-width: 575px) {
 			position: absolute;
 			left: calc(50% - 60px);
 		}
@@ -293,11 +356,20 @@
 	color: $white;
 	text-transform: uppercase;
 	line-height: 1.5em;
+	@media (max-width: 500px) {
+		bottom: 100px;
+	}
 	&.position-followers{
 		right: 110px;
+        @media (max-width: 575px) {
+            right: 80px;
+        }
 	}
 	&.position-following{
 		right: 16px;
+        @media (max-width: 575px) {
+            right: 5px;
+        }
 	}
 	p {
 		text-align: center;
@@ -307,10 +379,20 @@
 	.num {
 		font-size: 1.6em;//1.8em;
 		line-height: 1em;//1.2em;
+        @media (max-width: 575px) {
+            color: $black;
+        }
 	}
-	a{
+	a {
 		color: $white;
+        @media (max-width: 575px) {
+            color: $black;
+        }
 	}
+    @media (max-width: 575px) {
+        color: $black;
+        font-size: 12px;
+    }
 }
 .more-options{
 	position: absolute;

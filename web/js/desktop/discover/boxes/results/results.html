@@ -23,7 +23,8 @@
 							</div>
 							<div class="col-xs-5 col-sm-5 col-md-4 no-padding">
 								<button class="btn btn-single-love btn-love-box">
-									<span class="number"><span ng-bind="box.products.length" class="ng-binding"></span></span>
+									<!--<span class="number"><span ng-bind="box.products.length" class="ng-binding"></span></span>-->
+									<span class="number">{{ exploreBoxesResultsCtrl.countLoved(box.products) }}</span>
 									<span class="heart-icon"></span>
 								</button>
 							</div>

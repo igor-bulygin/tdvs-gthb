@@ -20,9 +20,11 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 			<img class="imgProfileCover" ng-src="{{personHeaderCtrl.person.header_image}}">
 		</div>
 		*/ ?>
-		<img class="cover" ng-src="{{personHeaderCtrl.person.header_image}}">
+        <div class="banner-deviser-image-wrap">
+		    <img ng-src="{{personHeaderCtrl.person.header_image}}">
+        </div>
 		<div class="banner-deviser-content">
-			<div class="grey-overlay hidden-xs"></div>
+			<div class="grey-overlay"></div>
 			<div class="container">
 				<div class="deviser-profile">
 					<div class="avatar-btn-profile">
@@ -35,13 +37,13 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							</div>
 							<img class="cover" ng-src="{{personHeaderCtrl.person.profile_image}}">
 						</div>
-						<div class="type-of-user hidden-xs" ng-if="personHeaderCtrl.person.type.indexOf(2)>=0" ng-cloak>
+						<div class="type-of-user" ng-if="personHeaderCtrl.person.type.indexOf(2)>=0" ng-cloak>
 							<span translate="global.DEVISER"></span>
 						</div>
 						<div class="type-of-user hidden-xs" ng-if="personHeaderCtrl.person.type.indexOf(3)>=0" ng-cloak>
 							<span translate="global.INFLUENCER"></span>
 						</div>
-						<div class="edit-profile-btn-left hidden-xs">
+						<div class="edit-profile-btn-left">
 							<?php if (!$person->isConnectedUser() && !$person->isPersonEditable()) { ?>
 								<a class="btn btn-default all-caps btn-black-on-white btn-header" href="<?= $person->getChatLink()?>"><span translate="person.header.CHAT"></span></a>
 							<?php } elseif ($person->isPersonEditable() && $person->isPublic()) {?>
@@ -61,7 +63,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 						</div>
 					</div>
 				</div>
-				<div class="edit-profile-btn-right hidden-xs">
+				<div class="edit-profile-btn-right">
 					<?php if ($person->isPersonEditable()) { ?>
 						<?php if ($person->isDeviserEditable() && $person->isPublic()) {?>
 							<a class="btn btn-follow-header btn-auto btn-red" href="<?= $person->getCreateWorkLink()?>"><span translate="person.header.ADD_WORK"></span></a>
@@ -88,7 +90,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 				</span>
  				*/ ?>
 
-				<div class="hidden-xs deviser-followers position-followers">
+				<div class="deviser-followers position-followers">
 					<p>Followers</p>
 					<p class="num">
 						<a href="<?=$person->getFollowersLink()?>">
@@ -97,7 +99,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					</p>
 				</div>
 
-				<div class="hidden-xs deviser-followers position-following">
+				<div class="deviser-followers position-following">
 					<p>Following</p>
 					<p class="num">
 						<a href="<?=$person->getFollowLink()?>">

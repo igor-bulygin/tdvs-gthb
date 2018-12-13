@@ -299,6 +299,9 @@
     //bottom: 0;
     //margin: auto;
     right: 10px;
+    @media (max-width: 575px) {
+        left: 10px;
+    }
 	&.photo{
 		font-size: 30px;//40px;
 		text-align: center;
@@ -324,7 +327,7 @@
         margin-right: auto; 
     }
 }
-.edit-avatar-photo-icon{
+.edit-avatar-photo-icon {
     color: $black;//$white;
     font-size: 30px;//24px;
     position: absolute;
@@ -337,9 +340,16 @@
     //width: 40px;
     padding: 0;//2px 0 0 11px;
     @include border-radius(90px,90px,90px,90px);
-    &.two{
-        left:32px;
+    @media (max-width: 575px) {
+        top: 7px;
+        left: 66px;
+    }
+    &.two {
+        left: 32px;
         text-align: center;
+        @media (max-width: 575px) {
+            top: 0;
+        }
     }
 }
 .crop-avatar-photo-icon{

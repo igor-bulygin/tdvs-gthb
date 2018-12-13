@@ -4,6 +4,7 @@
 	function controller($scope) {
 		var vm = this;
 		vm.addMoreItems = addMoreItems;
+        vm.countLoved = countLoved;
 		var show_items = 6;
 
 		function addMoreItems() {
@@ -22,6 +23,14 @@
 			}
 		}, true);
 	}
+
+	function countLoved(products) {
+	    return products.reduce(function (prev, cur) {
+            return parseInt((cur.loveds || 0)) + prev;
+        }, 0);
+    }
+
+
 
 	var component = {
 		templateUrl: currentHost() + '/js/desktop/discover/boxes/results/results.html',

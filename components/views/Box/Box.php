@@ -4,7 +4,12 @@
 
 use yii\helpers\StringHelper;
 
-$products = $box->getProductsPreview(); ?>
+$products = $box->getProductsPreview();
+$loveds = 0;
+foreach ($products as $p) {
+    $loveds += $p['loveds'];
+}
+?>
 
 <a href="<?= $box->getViewLink()?>">
 	<figure class="showcase">
@@ -28,7 +33,8 @@ $products = $box->getProductsPreview(); ?>
 				</div>
 				<div class="col-xs-5 col-sm-5 col-md-4 no-padding">
 					<button class="btn btn-single-love btn-love-box">
-						<span class="number"><?=count($products)?></span>
+<!--						<span class="number">--><?//=count($products)?><!--</span>-->
+                        <span class="number"><?=$loveds?></span>
 						<span class="heart-icon"></span>
 					</button>
 				</div>
