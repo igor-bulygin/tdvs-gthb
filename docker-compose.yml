@@ -10,13 +10,19 @@ services:
             DOMAIN: "todevise.com"
             GIT_EMAIL: "alexandernst@gmail.com"
             WEBROOT: "/var/www/html/web"
-        command: bash -c "cd /var/www/html && cp docker_nginx/env_file .env && ./yii mongodb-migrate --interactive=0 && /start.sh"
+        command: bash -c "cd /var/www/html && ./yii mongodb-migrate --interactive=0 && /start.sh"
         ports:
             - "8443:8443"
             - "8080:8080"
         volumes:
             - .:/var/www/html/
             # ONLY SERVER AFTER CAP DEPLOY - ./shared/system/vendor/:/var/www/html/vendor/
+            # ONLY SERVER AFTER CAP DEPLOY - ./shared/system/runtime/:/var/www/html/runtime/
+            # ONLY SERVER AFTER CAP DEPLOY - ./shared/public/web/assets/:/var/www/html/web/assets/
+            # ONLY SERVER AFTER CAP DEPLOY - ./shared/public/images/uploads/:/var/www/html/web/uploads/
+            # ONLY SERVER AFTER CAP DEPLOY - ./shared/public/thumbor_cache/:/var/www/html/thumbor_cache/
+            # ONLY SERVER AFTER CAP DEPLOY - ./shared/public/thumbor_resized/:/var/www/html/thumbor_resized/
+            # ONLY SERVER AFTER CAP DEPLOY - ./shared/.env:/var/www/html/.env
         networks:
             - new
         depends_on:

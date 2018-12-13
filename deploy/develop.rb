@@ -12,10 +12,14 @@ task :develop do
 end
 task :composerdev do
     transaction do
+      run "ln -nfs #{shared_path}/.env #{releases_path}/#{release_name}/.env"
+
       run "ln -nfs #{shared_path}/system/vendor #{releases_path}/#{release_name}/vendor"
+      run "ln -nfs #{shared_path}/system/runtime #{releases_path}/#{release_name}/runtime"
+      run "ln -nfs #{shared_path}/system/web/assets #{releases_path}/#{release_name}/web/assets"
       run "ln -nfs #{shared_path}/public/images/uploads #{releases_path}/#{release_name}/web/uploads"
-      run "ln -nfs #{shared_path}/public/thumbor_cache #{releases_path}/#{release_name}/thumbor_cache"
-      run "ln -nfs #{shared_path}/public/thumbor_resized #{releases_path}/#{release_name}/thumbor_resized"
+      #run "ln -nfs #{shared_path}/public/thumbor_cache #{releases_path}/#{release_name}/thumbor_cache"
+      #run "ln -nfs #{shared_path}/public/thumbor_resized #{releases_path}/#{release_name}/thumbor_resized"
 
       # run "cd #{releases_path}/#{release_name} ; composer -q global require \"fxp/composer-asset-plugin:~1.1.1\"" # OLD
       # run "cd #{releases_path}/#{release_name} ; composer -q install" # OLD
@@ -28,9 +32,11 @@ task :composerdev do
       #run "docker exec -i web_nginx_1 bash -c \"cd /var/www/html && composer -q install\""
       #run "docker exec -i web_nginx_1 bash -c \"cd /var/www/html && ./yii mongodb-migrate --interactive=0\""
 
-      run "docker exec -i web_nginx_1 chmod -R 775 /var/www/html/vendor"
-      run "docker exec -i web_nginx_1 chmod -R 775 /var/www/html/web"
-      #run "docker exec -i web_nginx_1 chown -R 1101:999 /var/www/html/web"
+
+      run "docker exec -i web_nginx_1 chown -R 1101:999 /var/www/html/vendor"
+      run "docker exec -i web_nginx_1 chown -R 1101:999 /var/www/html/web"
+      run "docker exec -i web_nginx_1 chown -R 1101:999 /var/www/html/runtime"
+      run "docker exec -i web_nginx_1 chown -R 1101:999 /var/www/html/.env"
 
     end
 end
