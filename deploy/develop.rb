@@ -24,11 +24,14 @@ task :composerdev do
       run "ln -nfs #{current_release} #{deploy_to}/#{current_dir}"
       run "cd /home/coditramuntana/todevise/web ; docker-compose restart"
 
-      run "docker exec -i web_nginx_1 composer -q global require fxp/composer-asset-plugin:~1.1.1"
-      run "docker exec -i web_nginx_1 bash -c \"cd /var/www/html && composer -q install\""
-      run "docker exec -i web_nginx_1 bash -c \"cd /var/www/html && ./yii mongodb-migrate --interactive=0\""
+      #run "docker exec -i web_nginx_1 composer -q global require fxp/composer-asset-plugin:~1.1.1"
+      #run "docker exec -i web_nginx_1 bash -c \"cd /var/www/html && composer -q install\""
+      #run "docker exec -i web_nginx_1 bash -c \"cd /var/www/html && ./yii mongodb-migrate --interactive=0\""
 
-      run "chmod -R 775 #{releases_path}/#{release_name}/vendor"
+      run "docker exec -i web_nginx_1 chmod -R 775 /var/www/html/vendor"
+      run "docker exec -i web_nginx_1 chmod -R 775 /var/www/html/web"
+      #run "docker exec -i web_nginx_1 chown -R 1101:999 /var/www/html/web"
+
     end
 end
 task :npmdev do
@@ -58,6 +61,5 @@ end
 task :restartphpdev do
     transaction do
         #run "sudo /usr/sbin/service php5-fpm restart" # OLD
-        #run "chmod 775 #{deploy_to}/#{current_dir}/web/assets" # OLD
     end
 end
