@@ -198,7 +198,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										</div>
 									</form>
 								</div>
-								<?php /* 
+								<?php /*
 								<div class="row-size">
 									<form class="form-horizontal" name="detailProductCtrl.selectorForm">
 										<div class="form-group" ng-repeat="option in detailProductCtrl.product.options | orderBy:[detailProductCtrl.selectComparator]">
@@ -358,7 +358,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										</div>
 									</div>
 								</div>
-								<div class="full-width mt-20">	
+								<div class="full-width mt-20">
 									<div class="bs-example">
 										<p class="btn accordion-btn no-pointer">
 											<span translate="product.detail.SHIPPING&POLICIES"></span>
@@ -386,7 +386,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 									<div class="returns-row" ng-if="detailProductCtrl.product.bespoke && detailProductCtrl.product.bespoke.value && detailProductCtrl.product.bespoke.type==1">
 										<p translate="product.detail.IS_BESPOKED"></p>
 										<p><span translate="product.detail.MANUFACTURING_INFO"></span>: <span class="bold" ng-bind="detailProductCtrl.product.bespoke.value[detailProductCtrl.selected_language]"></span></p>
-									</div>									
+									</div>
 									<div class="returns-row" ng-if="detailProductCtrl.product.madetoorder && detailProductCtrl.product.madetoorder.value && detailProductCtrl.product.madetoorder.type==1">
 										<p>
 											<span class="btn-black btn-small" translate="product.variations.MADE_TO_ORDER"></span>
@@ -569,7 +569,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 					<div class="col-xs-12 p-0">
 						<div class="col-xs-8 p-0">
 							<span class="ml-0">{{comment.text}}</span>
-						</div>	
+						</div>
 						<div class="col-xs-4 text-center p-0 font-sz-14">
 							<div class="col-xs-12 p-0 mb-10">
 								<span translate="product.detail.REVIEW_HELPFUL"></span>
@@ -647,7 +647,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							<span translate="product.detail.MORECONTENTCOMINGSOON"></span>
 						</div>
 						<?php } ?>
-	
+
 					</div>
 				</div>
 				<div role="tabpanel" class="tab-pane work-description-wrapper" id="boxes">
@@ -661,14 +661,14 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 										<div class="images-box">
 											<div class="bottom-top-images">
 												<div class="image-left">
-													<img src="<?=isset($products[0]) ? $products[0]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+													<img src="<?=isset($products[0]) ? $products[0]['main_photo'] : '/imgs/img-default.jpg'?>" class="showcase-image">
 												</div>
 												<div class="image-right">
-													<img src="<?=isset($products[1]) ? $products[1]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+													<img src="<?=isset($products[1]) ? $products[1]['main_photo'] : '/imgs/img-default.jpg'?>" class="showcase-image">
 												</div>
 											</div>
 											<div class="bottom-image">
-												<img src="<?=isset($products[2]) ? $products[2]['main_photo'] : 'imgs/img-default.jpg'?>" class="showcase-image">
+												<img src="<?=isset($products[2]) ? $products[2]['main_photo'] : '/imgs/img-default.jpg'?>" class="showcase-image">
 											</div>
 										</div>
 										<figcaption>
@@ -696,7 +696,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							</div>
 							<?php } ?>
 						</div>
-							<?php /* 
+							<?php /*
 							<div class="reviews-wrapper">
 								<div class="title"><span translate="product.detail.USER_REVIEWS"></span></div>
 								<div class="review-rates">
@@ -875,7 +875,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 							<div class="container mt-20 mb-20" style="min-height:350px;">
 								<nav class="products-menu">
 									<ul>
-										<?php /* 
+										<?php /*
 										<li>
 											<a class="active" href="#">Pants</a>
 										</li>
@@ -993,7 +993,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 												<span class="pl-10" ng-if="comment.id ? !detailProductCtrl.voted.includes(comment.id) : !detailProductCtrl.voted.includes(comment.short_id)"><a ng-click="detailProductCtrl.sendHelpfulComment(comment, 'no')"><span class="helpful-red" translate="global.NO"></span></a> <span class="text-light-grey"ng-if="comment.helpfuls.no[0]">(<span ng-bind="comment.helpfuls.no[0]"></span>)</span></span>
 												<span class="pl-10" ng-if="comment.id ? detailProductCtrl.voted.includes(comment.id) : detailProductCtrl.voted.includes(comment.short_id)"><a><span class="helpful-light-grey" translate="global.NO"></span></a> <span class="text-light-grey"ng-if="comment.helpfuls.no[0]">(<span ng-bind="comment.helpfuls.no[0]"></span>)</span></span>
 											</div>
-										</div>	
+										</div>
 									</div>
 									<div class="row mt-5 mb-10 ml-0 mr-0">
 										<a href="" ng-if="!comment.showReply" ng-click="detailProductCtrl.showReplyComment(comment)"><span class="pr-10 reply-red" translate="product.detail.REPLY"></span></a>
@@ -1038,7 +1038,7 @@ $this->registerJs("var product = ".Json::encode($product), yii\web\View::POS_HEA
 			</div>
 		</div>
 	</div>
-	
+
 
 	<div class="modal full-modal fade" id="carouselModal">
 		<div class="modal-dialog modal-lg">
