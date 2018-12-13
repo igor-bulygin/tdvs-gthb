@@ -14,7 +14,6 @@ services:
         ports:
             - "8443:8443"
             - "8080:8080"
-        # ONLY SERVER DEV: user: "1101:999"
         volumes:
             - .:/var/www/html/
             # ONLY SERVER AFTER CAP DEPLOY - ./shared/system/vendor/:/var/www/html/vendor/

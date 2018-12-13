@@ -27,6 +27,8 @@ task :composerdev do
       run "docker exec -i web_nginx_1 composer -q global require fxp/composer-asset-plugin:~1.1.1"
       run "docker exec -i web_nginx_1 bash -c \"cd /var/www/html && composer -q install\""
       run "docker exec -i web_nginx_1 bash -c \"cd /var/www/html && ./yii mongodb-migrate --interactive=0\""
+
+      run "chmod -R 775 #{releases_path}/#{release_name}/vendor"
     end
 end
 task :npmdev do
