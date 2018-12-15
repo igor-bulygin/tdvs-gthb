@@ -6044,6 +6044,11 @@ h3 {
   @media (max-width: 500px) {
     .btn-header {
       width: 120px; } }
+  @media (max-width: 480px) {
+    .btn-header {
+      height: 28px;
+      font-size: 1em;
+      padding: 3px 0 !important; } }
 
 .header-edit-btns .btn-header {
   margin-top: 20px !important; }
@@ -6076,18 +6081,31 @@ h3 {
       top: auto;
       bottom: 52px;
       left: -8px; } }
+  @media (max-width: 500px) {
+    .edit-profile-btn-left {
+      bottom: 63px; } }
 
 .edit-profile-btn-right {
   position: absolute;
   right: 17px;
   bottom: 10px; }
-  @media (max-width: 500px) {
-    .edit-profile-btn-right {
-      bottom: 50px; } }
   @media (max-width: 575px) {
     .edit-profile-btn-right {
       right: 15px; } }
+  @media (max-width: 500px) {
+    .edit-profile-btn-right {
+      bottom: 50px; } }
+  @media (max-width: 480px) {
+    .edit-profile-btn-right {
+      bottom: 60px; } }
 
+@media (max-width: 480px) {
+  .btn-follow-header {
+    height: 30px;
+    min-width: 120px;
+    margin-right: 3px;
+    font-size: 1em;
+    padding: 4px 0 !important; } }
 @media (max-width: 575px) {
   .btn-follow-header {
     height: auto;
