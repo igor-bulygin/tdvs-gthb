@@ -254,6 +254,11 @@
     @media(max-width: 500px) {
         width: 120px;
     }
+    @media(max-width: 480px) {
+        height: 28px;
+        font-size: 1em;
+        padding: 3px 0 !important;
+    }
 }
 .header-edit-btns{
 	.btn-header{
@@ -289,19 +294,32 @@
         bottom: 52px;
         left: -8px;
     }
+    @media(max-width: 500px) {
+        bottom: 63px;
+    }
 }
 .edit-profile-btn-right {
     position: absolute;
     right: 17px;
     bottom: 10px;
-    @media(max-width: 500px) {
-        bottom: 50px;
-    }
     @media(max-width: 575px) {
         right: 15px;
     }
+    @media(max-width: 500px) {
+        bottom: 50px;
+    }
+    @media(max-width: 480px) {
+        bottom: 60px;
+    }
 }
 .btn-follow-header {
+    @media(max-width:480px) {
+        height: 30px;
+        min-width: 120px;
+        margin-right: 3px;
+        font-size: 1em;
+        padding: 4px 0 !important;
+    }
     @media(max-width:575px) {
         height: auto;
         min-width: 120px;
