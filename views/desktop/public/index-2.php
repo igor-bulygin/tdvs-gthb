@@ -188,12 +188,15 @@ Yii::$app->opengraph->title = $this->title;
 		<div id="works-container" class="grid-margin">
 			<form id="formPagination">
 				<input type="hidden" id="category_id" name="category_id" value="<?=$category_id?>" />
+				<input type="hidden" id="product_ids" name="product_ids" value="" />
 			</form>
 			<?=\app\components\ProductsGrid::widget(['products' => $works, 'css_class' => 'col-xs-6 col-sm-4 col-md-2']) ?>
 		</div>
 	</div>
 	<div class="text-center mt-30">
-		<button class="btn btn-small btn-black-line" type="button" id="btnMoreWorks"><?=Yii::t('app/public', 'SEE_MORE')?></button>
+		<?php if(count($works) == 48) { ?>
+			<button class="btn btn-small btn-black-line" type="button" id="btnMoreWorks"><?=Yii::t('app/public', 'SEE_MORE')?></button>
+		<?php } ?>
 	</div>
 </section>
 
@@ -202,3 +205,7 @@ Yii::$app->opengraph->title = $this->title;
 		background-color: white;
 	}
 </style>
+
+<script>
+
+</script>

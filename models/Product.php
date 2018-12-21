@@ -1609,7 +1609,7 @@ class Product extends CActiveRecord {
 	 * @param array $categories
 	 * @return Product[]
 	 */
-	public static function getRandomWorks($limit, $categories = [])
+	public static function getRandomWorks($limit, $categories = [], $product_ids = "")
 	{
 		// Exclude drafts
 		$conditions[] =
@@ -1632,6 +1632,19 @@ class Product extends CActiveRecord {
 							]
 					];
 		}
+
+		// Filter by no repeated products
+		//if (!empty($product_ids)) {
+			$product_ids = explode(',', trim($product_ids));
+			$conditions[] =
+					[
+							'$match' => [
+									"short_id" => [
+											'$nin' => $product_ids
+									]
+							]
+					];
+		//}
 
 
 		// Of active persons

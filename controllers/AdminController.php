@@ -18,6 +18,7 @@ use app\models\PostmanEmail;
 use app\models\SizeChart;
 use app\models\Tag;
 use app\models\PaymentErrors;
+use app\models\Product;
 use DateInterval;
 use DateTime;
 use Yii;
@@ -1014,5 +1015,27 @@ class AdminController extends CController {
 
     return Yii::$app->request->isAjax ? $this->renderPartial("stripe-payment-errors", $data) : $this->render("stripe-payment-errors", $data);
   }
+
+	public function actionListProductsByDeviser()
+	{
+		$result = "";
+		$activeDevisers = Person::findSerialized(['account_state' => Person::ACCOUNT_STATE_ACTIVE, 'type' => 2]);
+		foreach($activeDevisers as $deviser) {
+			$result .= "Name: " . $deviser->personal_info['name'] . " / Last Name: " . $deviser->personal_info['last_name'] . " / Brand Name: " . $deviser->personal_info['brand_name'] . "<br>";
+
+			$products = Product::findSerialized(['deviser_id' => $deviser->short_id, 'product_state' => 'product_state_active']);
+			foreach($products as $product) {
+				$result .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Product Name: " . $product->name . "<br>";
+				$result .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Currency: ". $product->currency . "<br>";
+				$result .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Prices: ";
+				foreach($product->price_stock as $price_stock) {
+					$result .= $price_stock['price'] . ", ";
+				}
+				$result = substr($result, 0, -2);
+				$result .= "<br>";
+			}
+		}
+		return print_r($result);
+	}
 
 }

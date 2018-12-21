@@ -228,6 +228,7 @@ class PublicController extends CController
 		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_PUBLIC);
 
 		$category_id = Yii::$app->request->get('category_id', null);
+		$product_ids = Yii::$app->request->get('product_ids', null);
 
 		if ($category_id) {
 			$category = Category::findOneSerialized($category_id);
@@ -237,7 +238,7 @@ class PublicController extends CController
 			$categoryShortIds = [];
 		}
 
-		$works = Product::getRandomWorks(48, $categoryShortIds);
+		$works = Product::getRandomWorks(48, $categoryShortIds, $product_ids);
 
 		$html = ProductsGrid::widget([
 			'products' => $works,
@@ -246,6 +247,7 @@ class PublicController extends CController
 
 		return json_encode([
 			'html' => $html,
+			'num_works' => count($works) ? count($works) : 0,
 			"category_id" => $category_id,
 		]);
 	}
