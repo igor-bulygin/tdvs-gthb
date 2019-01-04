@@ -53,6 +53,7 @@ $this->params['person_menu_store_categories'] = $categories;
 				<div class="content-store">
 					<?php if ($person->isPersonEditable()) { ?>
 						<div class="mt-20"><a href="<?= $person->getStoreEditLink()?>" class="red-link-btn"><span translate="person.store.EDIT_DELETE_WORKS"></span></a></div>
+                        <div class="mt-20"><a href="<?= $person->getStoreImportLink()?>" class="red-link-btn"><span translate="person.store.IMPORT_WORKS"></span></a></div>
 					<?php } ?>
 					<div class="store-grid">
 						<nav class="products-menu">

@@ -21,9 +21,11 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 ?>
 
 <div class="container">
-    <div class="card mb-0">
-        <span class="title"><span class="title-bold">Import works</span></span>
-        <div class="product-import-form">
+    <div class="card mb-0 text-center">
+
+        <div class="fs3-857 funiv_thin fs-upper fc-6d">Import works</div>
+
+        <div class="product-import-form text-left">
             <form action="/deviser/<?= $person->slug ?>/<?= $person->short_id ?>/works/import" method="post" enctype="multipart/form-data" class="form">
                 <div class="form-group">
                     <label for="source">Import source</label>

@@ -1738,6 +1738,26 @@ class Person extends CActiveRecord implements IdentityInterface
 		return null;
 	}
 
+    public function getStoreImportLink($params = [])
+    {
+        if ($this->isDeviser()) {
+            $params = array_merge(
+                [
+                    "/product/import-form",
+                    "slug" => $this->getSlug(),
+                    'person_id' => $this->short_id,
+                    "person_type" => $this->getPersonTypeForUrl(),
+                ],
+                $params
+            );
+
+            return Url::to($params, true);
+        }
+
+        return null;
+    }
+
+
 	public function getCompleteProfileLink()
 	{
 		return Url::to([

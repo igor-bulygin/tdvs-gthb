@@ -8,9 +8,31 @@ use app\helpers\Utils;
 
 class ImportHelper {
 
-    private $person; // deviser data
+    /**
+     * @var $person
+     * Person object
+     * Information about deviser
+     */
+    private $person;
+    /**
+     * @var $post
+     * $_POST data from form
+     */
     private $post; // POST data from form
-    private $csv; // CSV file uploaded
+    /**
+     * @var $csv
+     * pat to uploaded CSV file
+     */
+    private $csv;
+    /**
+     * @var string $image_prefix
+     * prefix for images files downloaded from source store
+     */
+    private $image_prefix;
+    /**
+     * @var array
+     * allowed image mime types. All other will not be copied frm source store
+     */
     private $allowed_types = [
         'image/png',
         'image/jpeg',

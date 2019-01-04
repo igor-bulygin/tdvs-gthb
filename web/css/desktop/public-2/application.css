@@ -6290,6 +6290,11 @@ h3 {
     font-size: 18px;
     line-height: 38px; }
 
+.product-import-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding-bottom: 30px; }
+
 .loader-post {
   width: 100%;
   height: 250px;
