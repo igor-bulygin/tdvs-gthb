@@ -15,6 +15,8 @@ use yii\mongodb\Collection;
 use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
+use yii\web\UploadedFile;
+use app\helpers\ImportHelper;
 
 class ProductController extends CController
 {
@@ -243,6 +245,71 @@ class ProductController extends CController
 			'person' => $person,
 		]);
 	}
+
+    public function actionImportForm($slug, $person_id)
+    {
+        /** @var Person $person */
+        $person = Person::findOneSerialized($person_id);
+
+        if (!$person) {
+            throw new NotFoundHttpException();
+        }
+
+        if (!$person->isDeviserEditable()) {
+            throw new UnauthorizedHttpException();
+        }
+
+        $this->layout = '/desktop/public-2.php';
+        return $this->render("product-import", [
+            'person' => $person,
+        ]);
+    }
+
+    public function actionImport($slug, $person_id)
+    {
+        /** @var Person $person */
+        $person = Person::findOneSerialized($person_id);
+
+        if (!$person) {
+            throw new NotFoundHttpException();
+        }
+
+        if (!$person->isDeviserEditable()) {
+            throw new UnauthorizedHttpException();
+        }
+
+        $csv_file = UploadedFile::getInstanceByName('csv');
+        if (!$csv_file || $csv_file === null) {
+            throw new \Exception('File not uploaded correctly');
+        }
+
+        $importHelper = new ImportHelper($csv_file->tempName, Yii::$app->request->post(), $person);
+
+        $product_arr = $importHelper->import();
+
+       // print_r($product_arr);
+       // die();
+
+        foreach ($product_arr as $data) {
+            Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
+            $product = new Product();
+
+            $product->setScenario(Product::SCENARIO_PRODUCT_DRAFT);
+
+            if ($product->load(json_decode(json_encode($data), true), '')) {
+                $product->save(false);
+            }
+        }
+
+        $this->redirect('/deviser/'.$person->slug.'/'.$person->short_id.'/store/edit?product_state=product_state_draft');
+
+
+
+
+        // print_r($product_arr);
+    }
+
+
 
 	public function actionEdit($slug, $person_id, $product_id)
 	{

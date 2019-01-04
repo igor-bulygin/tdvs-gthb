@@ -304,6 +304,8 @@ $config = [
 
 				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/works/create' => 'product/create',
 				'/<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/works/<product_id:[^/.]*?>/edit' => 'product/edit',
+                'GET /<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/works/import' => 'product/import-form',
+                'POST /<person_type:(deviser)>/<slug:[^/.]*?>/<person_id:[^/.]*?>/works/import' => 'product/import',
 
 				'/work/<slug:[^/.]*?>/<product_id:[^/.]*?>' => 'product/detail',
 

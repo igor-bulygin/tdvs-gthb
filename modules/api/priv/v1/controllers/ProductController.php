@@ -61,7 +61,7 @@ class ProductController extends AppPrivateController
 
 	public function actionCreate()
 	{
-		Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
+	    Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
 		$product = new Product();
 
 		$product->setScenario($this->getScenarioFromRequest($product));
