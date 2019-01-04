@@ -125,14 +125,14 @@ class ModelUtils {
 	public static function getProductCategoriesNames($product) {
 		//This is possible because the categories are stored the same
 		//name in the products as they are stored in the devisers.
-		return ModelUtils::getDeviserCategoriesNames($product);
+		return self::getDeviserCategoriesNames($product);
 	}
 
 	public static function getDeviserCategoriesNames($deviser) {
 		$categories = [];
 		if (isset($deviser['categories']) && count($deviser['categories']) > 0) {
 			foreach ($deviser['categories'] as $key => $category_id) {
-				$category = ModelUtils::getCategory($category_id);
+				$category = self::getCategory($category_id);
 				$categories[] = Utils::l($category['name']);
 			}
 		}
