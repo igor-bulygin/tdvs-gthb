@@ -88,6 +88,7 @@ class ImportHelper {
                     $categories         = $this->getCategoryByName($row[4], $lang); // retrieve categories short_id by 'Type' field in CSV
                     $options            = new \stdClass();
                     $price_stock        = array();
+                    $tags               = new \stdClass();
                     if (isset($row[8]) && strlen($row[8]) > 0 && $row[8] !== 'Default title') {
                         $price_stock_line   = new \stdClass();
                         $price_stock_line->options = new \stdClass();
@@ -95,6 +96,13 @@ class ImportHelper {
                     else {
                         $price_stock_line = null;
                     }
+                    if (isset($row[5]) && strlen($row[5]) > 0) {
+                        $tags->$lang = explode(', ', $row[5]);
+                    }
+                    else {
+                        $tags = null;
+                    }
+
                     $media = new \stdClass();
                     $media->photos = array();
                     $media->description_photos = array();
@@ -150,6 +158,9 @@ class ImportHelper {
                     $result[$row[0]]->categories    = $categories;
                     $result[$row[0]]->options       = $options;
                     $result[$row[0]]->price_stock   = $price_stock;
+                    if ($tags) {
+                        $result[$row[0]]->tags = $tags;
+                    }
                     $result[$row[0]]->avalaible     = 1;
                 }
                 else {

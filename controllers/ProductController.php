@@ -287,8 +287,8 @@ class ProductController extends CController
 
         $product_arr = $importHelper->import();
 
-       // print_r($product_arr);
-       // die();
+//        print_r($product_arr);
+//        die();
 
         foreach ($product_arr as $data) {
             Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
