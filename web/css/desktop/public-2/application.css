@@ -7849,14 +7849,19 @@ span.optional-text.pull-left {
     .create-deviser-account-wrapper.inverse .logo img {
       margin-bottom: 0; }
     .create-deviser-account-wrapper.inverse > div:nth-child(2) > div:nth-child(1) form {
-      float: right;
-      margin-right: 100px; }
+      text-align: center; }
     .create-deviser-account-wrapper.inverse > div:nth-child(2) > div:nth-child(2) {
       border-left: 1px solid #939393;
       margin-top: 110px; }
+      @media (max-width: 991px) {
+        .create-deviser-account-wrapper.inverse > div:nth-child(2) > div:nth-child(2) {
+          border-left: 0;
+          margin-top: 85px;
+          border-top: 1px solid #939393;
+          padding-top: 110px; } }
       .create-deviser-account-wrapper.inverse > div:nth-child(2) > div:nth-child(2) form {
-        float: left;
-        margin-left: 100px; }
+        text-align: center;
+        margin-bottom: 50px; }
       .create-deviser-account-wrapper.inverse > div:nth-child(2) > div:nth-child(2) .login-title {
         margin-top: -30px; }
   .create-deviser-account-wrapper .logo {

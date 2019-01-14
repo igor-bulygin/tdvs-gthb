@@ -148,7 +148,7 @@
             vm.files = images
             vm.errFiles = errImages;
             //upload photos
-            angularach(vm.files, function(file) {
+            angular.forEach(vm.files, function(file) {
                 var data = {
                     type: 'banner-image',
                     file: file

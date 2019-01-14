@@ -16,7 +16,7 @@
 			"ALREADY_USER": "¿Ya tienes cuenta? Identifícate",
 			"REMEMBER": "Recordarme",
 			"NOT_VALID": "El email o la contraseña no son válidos",
-			"NEW_SIGN": "Nuevo en todevise? Regístrate"
+			"NEW_SIGN": "¿Nuevo en todevise? Regístrate"
 		},
 		"become_deviser": {
 			"EXPRESS": "Express",
@@ -66,7 +66,7 @@
 			"SELLER_TOOLS": "Herramientas de venta",
 			"ADVANCED_ANALYTICS": "Obtén análisis avanzados y administra tus ventas y relaciones con los clientes, todo en un solo lugar.",
 			"AFFILIATE_PROGRAM": "Red social",
-			"GROW_SALES": "Más que un e-commerce, Todevise también es una red social. Crea una comunidad alrededor de tu marca y establece una comunicación directa con tus clientes e influencers. ", 
+			"GROW_SALES": "Más que un e-commerce, Todevise también es una red social. Crea una comunidad alrededor de tu marca y establece una comunicación directa con tus clientes e influencers. ",
 			"CURRENCY": "€",
 			"ENJOY_FEATURES": "Tener un perfil en Todevise es gratuito y sin límite de productos. Paga sólo cuando vendes, un 14.5% (sistema de afiliados incluido).",
 			"GROW_BRAND": "Haz crecer tu marca",
