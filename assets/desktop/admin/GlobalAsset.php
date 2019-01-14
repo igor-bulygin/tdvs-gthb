@@ -14,11 +14,13 @@ class GlobalAsset extends AssetBundle {
 		'js/global.js',
 		'js/desktop/global.js',
 		'js/desktop/admin/global.js',
+		'js/desktop/todevise.module.js',
 	];
 	public $depends = [
 		'app\assets\AppAsset',
 		'app\assets\api\ApiAsset',
 		'app\assets\libs\angularToastrAsset',
 		'app\assets\libs\underscoreAsset',
+		'app\assets\libs\angularCookiesAsset',
 	];
 }

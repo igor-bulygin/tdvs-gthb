@@ -21,7 +21,7 @@ $this->title = 'Todevise: Login/Sign up';
 		<span class="sr-only" translate="global.LOADING"></span>
 	</div>
 	<div ng-if="!authenticationRequiredCtrl.loading" ng-cloak>
-		<div class="col-md-6">
+		<div class="col-sm-12 col-md-6">
 			<form name="authenticationRequiredCtrl.loginForm">
 				<span class="login-title" translate="todevise.authentication_required.ALREADY_USER"></span>
 				<div class="create-deviser-account-container">
@@ -39,7 +39,7 @@ $this->title = 'Todevise: Login/Sign up';
 							<input id="checkbox7" name="remember" ng-model="authenticationRequiredCtrl.login_user.rememberMe" class="styled" type="checkbox" value="1">
 							<label for="checkbox7" translate="todevise.authentication_required.REMEMBER"></label>
 						</div>
-					</div>		
+					</div>
 					<div class="alert alert-danger" ng-if="authenticationRequiredCtrl.errors" ng-cloak translate="todevise.authentication_required.NOT_VALID" ></div>
 					<div class="row">
 						<button type="submit" class="btn full-size-btn btn-red" ng-click="authenticationRequiredCtrl.login(authenticationRequiredCtrl.loginForm)">
@@ -49,7 +49,7 @@ $this->title = 'Todevise: Login/Sign up';
 				</div>
 			</form>
 		</div>
-		<div class="col-md-6">
+		<div class="col-sm-12 col-md-6">
 			<form name="authenticationRequiredCtrl.signForm">
 				<span class="login-title" translate="todevise.authentication_required.NEW_SIGN"></span>
 				<div class="create-deviser-account-container">

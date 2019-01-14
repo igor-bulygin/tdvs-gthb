@@ -17,16 +17,21 @@
         > div:nth-child(2) {
             > div:nth-child(1){
                 form{
-                    float: right;
-                    margin-right: 100px;
+                  	text-align: center;
                 }
             }
             > div:nth-child(2){
                 border-left: 1px solid $dark_grey;
                 margin-top: 110px;
+								@media (max-width: 991px){
+									border-left: 0;
+									margin-top: 85px;
+									border-top: 1px solid $dark_grey;
+							    padding-top: 110px;
+								}
                 form{
-                    float: left;
-                    margin-left: 100px;
+                  	text-align: center;
+								    margin-bottom: 50px
                 }
                 .login-title{
                     margin-top: -30px;
@@ -47,24 +52,24 @@
         }
 
         :-moz-placeholder { /* Firefox 18- */
-            color: $light_grey; 
+            color: $light_grey;
             font-size: 12px;
         }
 
         ::-moz-placeholder {  /* Firefox 19+ */
-            color: $light_grey;  
+            color: $light_grey;
             font-size: 12px;
         }
 
-        :-ms-input-placeholder {  
-            color: $light_grey;  
+        :-ms-input-placeholder {
+            color: $light_grey;
             font-size: 12px;
         }
         .send-btn{
             margin-top: 40px !important;
         }
         .full-size-btn{
-            margin-top: 40px !important;   
+            margin-top: 40px !important;
         }
     }
 }
