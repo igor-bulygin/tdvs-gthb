@@ -373,8 +373,8 @@ a, a:hover, a:focus {
     top: 70px; } }
 
 .form-control {
-  -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0); }
+  -webkit-box-shadow: 0 0 0 transparent;
+  box-shadow: 0 0 0 transparent; }
 
 .btn-default:hover {
   background-color: #cecece; }
@@ -6360,10 +6360,27 @@ h3 {
 
 .images-box {
   width: 100%;
-  height: 240px;
   max-height: 240px;
   overflow: hidden;
   position: relative; }
+  @media (min-width: 1200px) {
+    .images-box {
+      height: 240px; } }
+  @media (max-width: 1199px) and (min-width: 992px) {
+    .images-box {
+      height: 210px; } }
+  @media (max-width: 991px) and (min-width: 601px) {
+    .images-box {
+      height: 190px; } }
+  @media (max-width: 600px) and (min-width: 530px) {
+    .images-box {
+      height: 160px; } }
+  @media (max-width: 529px) and (min-width: 400px) {
+    .images-box {
+      height: 130px; } }
+  @media (max-width: 399px) {
+    .images-box {
+      height: 110px; } }
   .images-box img {
     position: absolute;
     left: 0;
@@ -6443,8 +6460,8 @@ h3 {
   overflow: hidden;
   overflow: hidden;
   position: relative;
-  line-height: 1.42857143em;
-  max-height: 55.71428577em;
+  line-height: 1.42857em;
+  max-height: 55.71429em;
   /*text-align: justify;
   margin-right: -1em;
   padding-right: 1em;
