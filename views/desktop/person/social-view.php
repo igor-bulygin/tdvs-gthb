@@ -48,7 +48,7 @@ $this->params['person_links_target'] = 'public_view';
 					<div id="content-posts" class="col-xs-4" ng-repeat="post in socialManagerCtrl.posts" ng-cloak>
 						<figure class="showcase" ng-click="socialManagerCtrl.openPostDetailsModal(post)">
 							<div class="images-box">
-								<img class="col-xs-12 grid-image" style="height: 100%" ng-src="{{post.photo_url}}">
+								<img class="col-xs-12 grid-image" style="width: 100%; height: 100%; padding: 0; object-fit: cover;" ng-src="{{post.photo_url}}">
 							</div>
 						</figure>
 					</div>
@@ -100,7 +100,7 @@ $this->params['person_links_target'] = 'public_view';
 							</div>
 							<div class="col-xs-8 no-margin no-padding">
 									<div text-angular ng-model="socialManagerCtrl.newPost.text[socialManagerCtrl.newPost.selected_language]" ta-toolbar="[]" translate-attr="{placeholder: 'person.posts.DESCRIPTION'}" ta-paste="socialManagerCtrl.stripHTMLTags($html)" placeholder="Description"></div>
-							</div>								
+							</div>
 						</form>
 					</div>
 				</div>
@@ -115,5 +115,3 @@ $this->params['person_links_target'] = 'public_view';
 	</div>
 </script>
 </div>
-
-
