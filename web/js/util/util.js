@@ -39,7 +39,7 @@
 
         function isConnectedUser(person_id) {
             var session_id = $cookies.get("sesion_id");
-            if (!angular.isUndefined(person_id) && person_id === session_id) {
+            if (!angular.isUndefined(person_id) && person_id.replace(/['"]+/g,'') === session_id.replace(/['"]+/g,'')) {
                 return true;
             }
             return false;
