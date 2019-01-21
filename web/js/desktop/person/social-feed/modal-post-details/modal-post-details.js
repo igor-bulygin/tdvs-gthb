@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    function controller(UtilService, lovedDataService) {
+    function controller(UtilService, lovedDataService, $uibModal) {
         var vm = this;
         vm.ok = ok;
         vm.dismiss = dismiss;
@@ -23,11 +23,9 @@
         }
 
         function lovePost(post) {
-          console.log(post);
-          console.log("hola");
             var connectedUser = UtilService.getConnectedUser();
             if (!connectedUser) {
-                modalLogin($uibModal, "person.SOCIAL");
+                modalLogin();
             }
             if (post.person_id === connectedUser || post.isLoved) {
                 return;
@@ -68,6 +66,23 @@
                 UtilService.onError(err);
             }
             lovedDataService.deleteLovedPost({ postId: post.id }, onUnLovePostSuccess, onUnLovePostError);
+        }
+
+        function modalLogin() {
+            var modalInstance = $uibModal.open({
+                component: 'modalSignUpLoved',
+                size: 'sm',
+                resolve: {
+                    icon: function() {
+                        return component;
+                    }
+                }
+            });
+            modalInstance.result.then(function(data) {
+                return data;
+            }, function(err) {
+                UtilService.onError(err);
+            });
         }
     }
 
