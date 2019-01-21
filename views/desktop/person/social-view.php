@@ -49,7 +49,7 @@ $this->params['person_links_target'] = 'public_view';
 					<div id="content-posts" class="col-xs-4" ng-repeat="post in socialManagerCtrl.posts" ng-cloak>
 						<figure class="showcase" ng-click="socialManagerCtrl.openPostDetailsModal(post)">
 							<div class="images-box">
-								<img class="col-xs-12 grid-image" style="width: 100%; height: 100%; padding: 0; object-fit: cover;" ng-src="<?= Utils::thumborize('{{post.photo_url}}')->resize(410, 410) ?>">
+								<img class="col-xs-12 grid-image" style="width: 100%; height: 100%; padding: 0; object-fit: cover;" src="<?= Utils::url_scheme() ?><?= Utils::thumborize('{{post.photo_url}}')->resize(300, 0) ?>">
 							</div>
 						</figure>
 					</div>
