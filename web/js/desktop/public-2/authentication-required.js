@@ -1,11 +1,12 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, personDataService, $window, localStorageUtilService, $cookieStore) {
+	function controller(UtilService, personDataService, $window, localStorageUtilService, $cookieStore, $location, $anchorScroll) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.login = login;
 		vm.signUp = signUp;
+		vm.goToLogin = goToLogin;
 
 		function onLoginSuccess(data) {
 			if(data.access_token) {
@@ -56,7 +57,10 @@
 			}
 		}
 
-
+		function goToLogin() {
+			$location.hash('already-user-login');
+            $anchorScroll();
+		}
 	}
 
 	angular

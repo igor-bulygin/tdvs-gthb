@@ -83,6 +83,21 @@ label{
 		color:$black !important;
 	}
 }
+.already-user-mobile{
+  display: none;
+  color:$dark_red!important;
+  &:hover{
+    cursor: pointer;
+    color:$red!important;
+    text-decoration: none;
+    @include transition-property(color);
+    @include transition-duration(0.3s);
+    @include transition-timing-function(ease-out);
+  }
+  @media (max-width: 991px){
+    display: inline;
+  }
+}
 .white-rounded-input{
 	margin-bottom: 15px;
 	height: 40px;
