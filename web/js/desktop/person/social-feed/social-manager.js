@@ -308,7 +308,7 @@
 
         function modalLogin() {
             var modalInstance = $uibModal.open({
-                component: 'modalSignUpLoved',
+                component: 'modalLovePost',
                 resolve: {
                     text: function() {
                         return "person.SOCIAL";

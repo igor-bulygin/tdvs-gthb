@@ -70,7 +70,7 @@
 
         function modalLogin() {
             var modalInstance = $uibModal.open({
-                component: 'modalSignUpLoved',
+                component: 'modalLovePost',
                 size: 'sm',
                 resolve: {
                     icon: function() {
