@@ -25,7 +25,7 @@ $this->title = 'Todevise: Login/Sign up';
 			<form name="authenticationRequiredCtrl.signForm">
 				<span class="login-title" translate="todevise.authentication_required.NEW_SIGN"></span>
 				<span class="already-user-mobile" translate="todevise.authentication_required.ALREADY_USER" ng-click="authenticationRequiredCtrl.goToLogin()"></span>
-				<div class="create-deviser-account-container">
+				<div class="create-deviser-account-container text-left">
 					<div class="row">
 						<label for="name" translate="global.user.FIRST_NAME"></label>
 						<input type="text" name="name" ng-model="authenticationRequiredCtrl.user.name" class="form-control grey-input ng-class:{'error-input': authenticationRequiredCtrl.has_error(authenticationRequiredCtrl.signForm, authenticationRequiredCtrl.signForm.name)}" required>
@@ -79,7 +79,7 @@ $this->title = 'Todevise: Login/Sign up';
 		<div id="already-user-login" class="col-sm-12 col-md-6">
 			<form name="authenticationRequiredCtrl.loginForm">
 				<span class="login-title" translate="todevise.authentication_required.ALREADY_USER"></span>
-				<div class="create-deviser-account-container">
+				<div class="create-deviser-account-container text-left">
 					<div class="row">
 						<label for="email" translate="global.user.EMAIL"></label>
 						<input type="email" id="email" name="email" ng-model="authenticationRequiredCtrl.login_user.email" class="form-control grey-input" required />
