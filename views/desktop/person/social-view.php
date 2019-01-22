@@ -4,6 +4,8 @@ use app\assets\desktop\deviser\IndexStoryAsset;
 use app\components\PersonHeader;
 use app\components\PersonMenu;
 use app\models\Person;
+use app\helpers\Utils;
+use Thumbor\Url\Builder;
 
 IndexStoryAsset::register($this);
 
@@ -45,13 +47,15 @@ $this->params['person_links_target'] = 'public_view';
 					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mb-20 text-center" ng-if="socialManagerCtrl.viewingConnectedUser()" ng-cloak>
 						<button class="btn btn-red btn-add-box" ng-click="socialManagerCtrl.showNewPost()"><span translate="person.posts.ADD_POST"></span></button>
 					</div>
-					<div id="content-posts" class="col-xs-4" ng-repeat="post in socialManagerCtrl.posts" ng-cloak>
+					<?php foreach ($person->getPosts() as $index=>$post) { ?>
+					<div id="content-posts" class="col-xs-4" ng-repeat="post in socialManagerCtrl.posts" ng-cloak ng-if="post.id == '<?= $post->short_id; ?>'">
 						<figure class="showcase" ng-click="socialManagerCtrl.openPostDetailsModal(post)">
 							<div class="images-box">
-								<img class="col-xs-12 grid-image" style="width: 100%; height: 100%; padding: 0; object-fit: cover;" ng-src="{{post.photo_url}}">
+								<img class="col-xs-12 grid-image" style="width: 100%; height: 100%; padding: 0; object-fit: cover;" src="<?= Utils::url_scheme() ?><?= Utils::thumborize('/uploads/deviser/'.$person->short_id.'/'.$post->photo)->resize(300, 0) ?>">
 							</div>
 						</figure>
 					</div>
+					<?php } ?>
 				</div>
 			</div>
 		</div>
