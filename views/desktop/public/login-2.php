@@ -14,8 +14,8 @@ Yii::$app->opengraph->title = $this->title;
 
 <div class="create-deviser-account-wrapper pt-0" ng-controller="loginCtrl as loginCtrl">
 	<form name="loginCtrl.form">
-		<span class="login-title" translate="todevise.login.LOGIN_TITLE" ng-if="!loginCtrl.loading" ng-cloak></span>
-		<div class="create-deviser-account-container black-form" ng-if="!loginCtrl.loading" ng-cloak>
+		<span class="title-create-account login-title" translate="todevise.login.LOGIN_TITLE" ng-if="!loginCtrl.loading" ng-cloak></span>
+		<div class="create-deviser-account-container grey-input" ng-if="!loginCtrl.loading" ng-cloak>
 			<div class="row no-mar">
 				<label for="email" translate="global.user.EMAIL"></label>
 				<input type="email" id="email" name="email" ng-model="loginCtrl.user.email" class="form-control grey-input" />

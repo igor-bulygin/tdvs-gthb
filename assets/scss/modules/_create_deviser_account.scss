@@ -3,7 +3,7 @@
 // ==========================================================================
 .create-deviser-account-wrapper{
 	padding: 20px;
-	background-color: $black;
+	background-color: $white;
 	float: left;
     width: 100%;
     &.inverse{
@@ -94,6 +94,16 @@
 		}
     }
 }
+.remember-me-black{
+    label{
+        text-transform: none;
+        font-size: 14px;
+		a{
+			text-decoration: underline;
+			color: $black;
+		}
+    }
+}
 .remember-me label::before{
     background-color: transparent;
     border:1px solid $dark_grey;
@@ -101,8 +111,15 @@
 .remember-me label::after{
     color: $red;
 }
+.remember-me-black label::before{
+    background-color: transparent;
+    border:1px solid $dark_grey;
+}
+.remember-me-black label::after{
+    color: $red;
+}
 .title-create-account{
-    color: $background_grey;//$white;
+    color: $black !important;
     .first-title{
         width: 100%;
         font-size: 72px;//24px;
