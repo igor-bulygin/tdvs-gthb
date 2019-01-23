@@ -51,6 +51,11 @@ label{
 		  }
     }
 }
+.error-prom-code {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: $error;
+}
 .optional-info-input-right {
 	float: right;
 	font-size: 12px;

@@ -32,18 +32,20 @@
 		}
 
 		function signUp(form) {
-			vm.loading = true;
 			function onCreatePersonSuccess(data) {
 				personDataService.login(vm.user, null, onLoginSuccess, UtilService.onError);
 			}
-
+			
 			function onCreatePersonError(err) {
 				vm.loading = false;
-				console.log(err);
+				if(err.status === 406) {
+					vm.validCode = "util.errors.PROMO_CODE_NOT_VALID";
+					vm.error_message = "util.errors.PROMO_CODE_NOT_VALID";
+				}
 				if(err.status === 409)
-					vm.error_message = "This account already exists.";
+				vm.error_message = "This account already exists.";
 			}
-
+			
 			if(form.password_confirm.$error.same) {
 				vm.loading = false;
 				form.$setValidity('password_confirm', false);
@@ -53,6 +55,8 @@
 			}
 			form.$setSubmitted();
 			if(form.$valid) {
+				vm.validCode = "";
+				vm.loading = true;
 				personDataService.createClient(vm.user, null, onCreatePersonSuccess, onCreatePersonError);
 			}
 		}

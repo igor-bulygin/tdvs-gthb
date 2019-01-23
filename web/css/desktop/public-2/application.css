@@ -1704,6 +1704,11 @@ label {
     padding: 20px;
     height: 100px; }
 
+.error-prom-code {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #e06a7f; }
+
 .optional-info-input-right {
   float: right;
   font-size: 12px;

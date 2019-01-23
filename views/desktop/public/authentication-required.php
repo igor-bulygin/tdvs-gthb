@@ -56,7 +56,10 @@ $this->title = 'Todevise: Login/Sign up';
 					<div class="row">
 						<label for="promo_code"><span translate="global.user.PROMO_CODE"></span></label><span class="optional-info-input" translate="global.user.OPTIONAL"></span>
 						<div class="input-check-wrapper">
-							<input type="text" id="promo_code" class="form-control grey-input" name="promo_code" ng-model="authenticationRequiredCtrl.user.parent_affiliate_id">
+							<input type="text" id="promo_code" class="form-control grey-input" name="promo_code" ng-model="authenticationRequiredCtrl.user.parent_affiliate_id" ng-class="{true: 'error-input', false: ''}[authenticationRequiredCtrl.validCode == 'util.errors.PROMO_CODE_NOT_VALID']">
+						</div>
+						<div class="error-prom-code" ng-if="authenticationRequiredCtrl.validCode">
+							<span translate="util.errors.PROMO_CODE_NOT_VALID"></span>
 						</div>
 					</div>
 					<div class="row">
