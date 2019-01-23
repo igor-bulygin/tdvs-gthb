@@ -23,10 +23,9 @@
 				console.log(err);
 			}
 
-			vm.loading = true;
-
 			form.$setSubmitted();
 			if(form.$valid) {
+				vm.loading = true;
 				personDataService.login(vm.login_user, null, onLoginSuccess, onLoginError);
 			}
 		}
