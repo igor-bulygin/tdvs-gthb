@@ -98,7 +98,7 @@ $this->title = 'Todevise: Login/Sign up';
 							<label for="checkbox7" translate="todevise.authentication_required.REMEMBER"></label>
 						</div>
 					</div>
-					<div class="alert alert-danger" ng-if="authenticationRequiredCtrl.errors" ng-cloak translate="todevise.authentication_required.NOT_VALID" ></div>
+					<div class="alert alert-danger row" ng-if="authenticationRequiredCtrl.errorLogin" ng-cloak translate="todevise.login.NOT_VALID"></div>
 					<div class="row">
 						<button type="submit" class="btn full-size-btn btn-red" ng-click="authenticationRequiredCtrl.login(authenticationRequiredCtrl.loginForm)">
 							<span translate="global.user.SIGN_IN"></span>

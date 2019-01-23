@@ -20,11 +20,13 @@
 		function login(form) {
 			function onLoginError(err) {
 				vm.loading=false;
+				vm.errorLogin = true;
 				console.log(err);
 			}
 
 			form.$setSubmitted();
 			if(form.$valid) {
+				vm.errorLogin = false;
 				vm.loading = true;
 				personDataService.login(vm.login_user, null, onLoginSuccess, onLoginError);
 			}
