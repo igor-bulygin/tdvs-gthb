@@ -139,6 +139,17 @@
 			}
 	}
 }
+.mw-100{
+	max-width: 100% !important;
+}
+.img-round{
+	border-radius: 50%;
+}
+.img-fit{
+	width: auto !important;
+    padding: 0;
+    object-fit: cover;
+}
 .carousel-devisers-container{
 	max-width: 900px;
 	margin: 0 auto;

@@ -48,7 +48,7 @@ $this->params['person_links_target'] = 'public_view';
 						</ul>
 					</nav>
 					<?php foreach ($persons as $person) { ?>
-						<div class="col-md-4 person person-<?=$person->getPersonTypeForUrl()?>">
+						<div class="col-xs-12 col-sm-6 person person-<?=$person->getPersonTypeForUrl()?>">
 							<?=\app\components\Person::widget(['person' => $person]) ?>
 						</div>
 					<?php } ?>

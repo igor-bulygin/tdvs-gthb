@@ -1134,6 +1134,9 @@ class Person extends CActiveRecord implements IdentityInterface
 		if ($image) {
 			$url = Utils::url_scheme() . Utils::thumborize($image)->resize($width, $height);
 		}
+		else{
+			$url = Utils::url_scheme() . Utils::thumborize($url)->resize($width, $height);
+		}
 
 		return $url;
 	}

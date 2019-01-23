@@ -12,6 +12,12 @@
 	width: 100%;
 	float: left;
 }
+.ft-right{
+	float: right;
+}
+.ft-left{
+	float: left;
+}
 .relativize-me{
 	position: relative;
 }
@@ -31,6 +37,9 @@
 }
 .font-sz-16{
 	font-size: 16px !important;
+}
+.m-5{
+	margin: 5px!important;
 }
 .mt-0{
     margin-top: 0!important;
@@ -113,8 +122,16 @@
 .ml-30{
 	margin-left: 30px;
 }
+.ml-xs-90{
+	@media (max-width: 767px) {
+		margin-left: 90px !important;
+	}
+}
 .p-0{
 	padding: 0 !important;
+}
+.p-20{
+	padding: 20px !important;
 }
 .px-lg-80{
 	@media (min-width: 1200px) {
@@ -161,6 +178,11 @@
 .pl-xs-10{
 	@media (max-width: 767px) {
 		padding-left: 10px !important;
+	}
+}
+.pl-xs-5{
+	@media (max-width: 767px) {
+		padding-left: 5px !important;
 	}
 }
 .pr-0{
