@@ -1,11 +1,12 @@
 (function () {
 	"use strict";
 
-	function controller(UtilService, personDataService, $window, localStorageUtilService, $cookieStore) {
+	function controller(UtilService, personDataService, $window, localStorageUtilService, $cookieStore, $location, $anchorScroll) {
 		var vm = this;
 		vm.has_error = UtilService.has_error;
 		vm.login = login;
 		vm.signUp = signUp;
+		vm.goToLogin = goToLogin;
 
 		function onLoginSuccess(data) {
 			if(data.access_token) {
@@ -19,30 +20,33 @@
 		function login(form) {
 			function onLoginError(err) {
 				vm.loading=false;
+				vm.errorLogin = true;
 				console.log(err);
 			}
 
-			vm.loading = true;
-
 			form.$setSubmitted();
 			if(form.$valid) {
+				vm.errorLogin = false;
+				vm.loading = true;
 				personDataService.login(vm.login_user, null, onLoginSuccess, onLoginError);
 			}
 		}
 
 		function signUp(form) {
-			vm.loading = true;
 			function onCreatePersonSuccess(data) {
 				personDataService.login(vm.user, null, onLoginSuccess, UtilService.onError);
 			}
-
+			
 			function onCreatePersonError(err) {
 				vm.loading = false;
-				console.log(err);
+				if(err.status === 406) {
+					vm.validCode = "util.errors.PROMO_CODE_NOT_VALID";
+					vm.error_message = "util.errors.PROMO_CODE_NOT_VALID";
+				}
 				if(err.status === 409)
-					vm.error_message = "This account already exists.";
+				vm.error_message = "This account already exists.";
 			}
-
+			
 			if(form.password_confirm.$error.same) {
 				vm.loading = false;
 				form.$setValidity('password_confirm', false);
@@ -52,11 +56,16 @@
 			}
 			form.$setSubmitted();
 			if(form.$valid) {
+				vm.validCode = "";
+				vm.loading = true;
 				personDataService.createClient(vm.user, null, onCreatePersonSuccess, onCreatePersonError);
 			}
 		}
 
-
+		function goToLogin() {
+			$location.hash('already-user-login');
+            $anchorScroll();
+		}
 	}
 
 	angular

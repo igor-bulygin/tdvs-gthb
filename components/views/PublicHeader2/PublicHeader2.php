@@ -191,7 +191,7 @@ app\components\assets\PublicHeader2Asset::register($this);
 					<li id="mobile-iconset" class="hidden-md hidden-lg col-xs-10 col-sm-10" >
 						<div id="separator_right">
 							<?php if (Yii::$app->user->isGuest) { ?>
-							<a href="<?=Url::to('/login')?>"><img src="/imgs/login-red.svg" /></a>
+							<a href="<?=Url::to('/authentication-required')?>"><img src="/imgs/login-red.svg" /></a>
 							<?php } else {
 								$person = Yii::$app->user->identity; /* @var \app\models\Person $person */?>
 								<span class="dropdown">

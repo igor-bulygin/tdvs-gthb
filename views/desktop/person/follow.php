@@ -33,7 +33,7 @@ $this->params['person_links_target'] = 'public_view';
 
 <div class="store">
 	<div class="container">
-		<div class="row">
+		<div class="row mb-40">
 			<div class="col-md-2">
 				<?= PersonMenu::widget() ?>
 			</div>
