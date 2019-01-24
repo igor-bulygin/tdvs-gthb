@@ -4286,7 +4286,8 @@ h3 {
   max-width: 100% !important; }
 
 .img-round {
-  border-radius: 50%; }
+  border-radius: 50%;
+  border: 1px solid #CCCCCC; }
 
 .img-fit {
   width: auto !important;

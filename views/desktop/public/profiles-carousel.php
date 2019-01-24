@@ -9,18 +9,20 @@ $idCarousel = 'carousel-'.$id;
 <!-- carousel sm md lg -->
 <div class="hidden-xs carusel-container"><!--1-->
 	<?php if ($totalPersons > 4) { ?>
-		<a class="prev" href="#<?=$idCarousel?>" role="button" data-slide="prev">
-			<i class="ion-ios-arrow-left"></i>
-		</a>
+		<div class="col-sm-1" style="float: left;">
+			<a class="prev" href="#<?=$idCarousel?>" role="button" data-slide="prev">
+				<i class="ion-ios-arrow-left"></i>
+			</a>
+		</div>
 	<?php } ?>
-		<div style="height: 320px" class="carousel-devisers-container <?= $totalPersons > 3 ? 'carousel slide' : ''?>" id="<?=$idCarousel?>" data-ride="carousel" data-interval="false"><!--2-->
-			<div class="<?= $totalPersons > 4 ? 'carousel-inner' : ''?>" role="listbox"><!--3-->
+		<div style="height: 320px; float: left;" class="col-sm-10 carousel-devisers-container <?= $totalPersons > 3 ? 'carousel slide' : ''?>" id="<?=$idCarousel?>" data-ride="carousel" data-interval="false"><!--2-->
+			<div class="col-sm-12 <?= $totalPersons > 4 ? 'carousel-inner' : ''?>" role="listbox"><!--3-->
 				<?php foreach ($persons as $i => $person) { ?>
 					<?php if ($i % 4 === 0) { ?>
-						<div class="item <?= ($i==0) ? 'active' : '' ?>"><!--4-->
+						<div class="col-sm-12 item <?= ($i==0) ? 'active' : '' ?>"><!--4-->
 					<?php } ?>
 
-					<div class="col-md-6 col-sm-6 pad-showcase">
+					<div class="col-sm-6" style="text-align: center;">
 						<?=\app\components\Person::widget(['person' => $person]) ?>
 					</div>
 
@@ -31,26 +33,30 @@ $idCarousel = 'carousel-'.$id;
 			</div><!--3-->
 		</div><!--2-->
 	<?php if ($totalPersons > 4) { ?>
-		<a class="next" href="#<?=$idCarousel?>" role="button" data-slide="next">
-			<i class="ion-ios-arrow-right"></i>
-		</a>
+		<div class="col-sm-1" style="float: left;">
+			<a class="next" href="#<?=$idCarousel?>" role="button" data-slide="next">
+				<i class="ion-ios-arrow-right"></i>
+			</a>
+		</div>
 	<?php } ?>
 </div><!--1-->
 <!-- carousel xs -->
 <div class="hidden-sm hidden-md hidden-lg carusel-container">
 	<?php if ($totalPersons > 2) { ?>
-		<a class="col-xs-0-5 prev" href="#<?=$idCarousel?>-xs" role="button" data-slide="prev">
-			<i class="ion-ios-arrow-left"></i>
-		</a>
+		<div class="col-xs-1" style="float: left;">
+			<a class="prev" href="#<?=$idCarousel?>-xs" role="button" data-slide="prev">
+				<i class="ion-ios-arrow-left"></i>
+			</a>
+		</div>
 	<?php } ?>
-		<div style="height: 320px" class="col-xs-11 carousel-devisers-container <?= $totalPersons > 2 ? 'carousel slide' : ''?>" id="<?=$idCarousel?>-xs" data-ride="carousel" data-interval="false">
+		<div style="height: 320px; float: left;" class="col-xs-10 carousel-devisers-container <?= $totalPersons > 2 ? 'carousel slide' : ''?>" id="<?=$idCarousel?>-xs" data-ride="carousel" data-interval="false">
 			<div class="<?= $totalPersons > 2 ? 'carousel-inner' : ''?>" role="listbox">
 				<?php foreach ($persons as $i => $person) { ?>
 					<?php if ($i % 2 === 0) { ?>
 						<div class="item <?= ($i==0) ? 'active' : '' ?>"><!--4-->
 					<?php } ?>
 
-					<div class="col-xs-12 pad-showcase">
+					<div class="" style="text-align: center;">
 						<?=\app\components\Person::widget(['person' => $person]) ?>
 					</div>
 
@@ -61,8 +67,10 @@ $idCarousel = 'carousel-'.$id;
 			</div>
 		</div>
 	<?php if ($totalPersons > 2) { ?>
-		<a class="col-xs-0-5 next" href="#<?=$idCarousel?>-xs" role="button" data-slide="next">
-			<i class="ion-ios-arrow-right"></i>
-		</a>
+		<div class="col-xs-1" style="float: left;">
+			<a class="next" href="#<?=$idCarousel?>-xs" role="button" data-slide="next">
+				<i class="ion-ios-arrow-right"></i>
+			</a>
+		</div>
 	<?php } ?>
 </div>
