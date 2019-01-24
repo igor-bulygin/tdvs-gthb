@@ -9,13 +9,13 @@ $idCarousel = 'carousel-'.$id;
 <!-- carousel sm md lg -->
 <div class="hidden-xs carusel-container"><!--1-->
 	<?php if ($totalPersons > 4) { ?>
-		<div class="col-sm-1" style="float: left;">
+		<div class="col-sm-1">
 			<a class="prev" href="#<?=$idCarousel?>" role="button" data-slide="prev">
 				<i class="ion-ios-arrow-left"></i>
 			</a>
 		</div>
 	<?php } ?>
-		<div style="height: 320px; float: left;" class="col-sm-10 carousel-devisers-container <?= $totalPersons > 3 ? 'carousel slide' : ''?>" id="<?=$idCarousel?>" data-ride="carousel" data-interval="false"><!--2-->
+		<div style="height: 320px;" class="col-sm-10 <?= $totalPersons > 3 ? 'carousel slide' : ''?>" id="<?=$idCarousel?>" data-ride="carousel" data-interval="false"><!--2-->
 			<div class="col-sm-12 <?= $totalPersons > 4 ? 'carousel-inner' : ''?>" role="listbox"><!--3-->
 				<?php foreach ($persons as $i => $person) { ?>
 					<?php if ($i % 4 === 0) { ?>
@@ -33,7 +33,7 @@ $idCarousel = 'carousel-'.$id;
 			</div><!--3-->
 		</div><!--2-->
 	<?php if ($totalPersons > 4) { ?>
-		<div class="col-sm-1" style="float: left;">
+		<div class="col-sm-1">
 			<a class="next" href="#<?=$idCarousel?>" role="button" data-slide="next">
 				<i class="ion-ios-arrow-right"></i>
 			</a>
