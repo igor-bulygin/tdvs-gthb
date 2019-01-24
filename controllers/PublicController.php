@@ -159,10 +159,10 @@ class PublicController extends CController
 		}
 
 		// Devisers
-		$devisers = Person::getRandomDevisers(21, $categoryShortIds);
+		$devisers = Person::getRandomDevisers(20, $categoryShortIds);
 
 		// Influencers
-		$influencers = Person::getRandomInfluencers(21, $categoryShortIds);
+		$influencers = Person::getRandomInfluencers(20, $categoryShortIds);
 
 		// Boxes
 		$boxes = Box::getRandomBoxes(8, null, true);
