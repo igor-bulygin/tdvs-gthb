@@ -944,7 +944,8 @@ a.btn span {
     margin: 0.3em 0 !important;
     padding: 0.3em 0 !important;
     font-size: 1.1em;
-    background-color: #1C1919; }
+    background-color: #1C1919;
+    border: 1px solid #1C1919; }
 
 .btn-follow-header {
   height: auto;
@@ -992,7 +993,7 @@ a.btn span {
   padding: 1em 0 !important; }
 
 /*.big-btn{
-    @extend %btn; 
+    @extend %btn;
     width: 460px;
     height: 60px;
     margin: 20px 0!important;
