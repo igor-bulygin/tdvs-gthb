@@ -49,10 +49,18 @@ $this->params['person_links_target'] = 'public_view';
 					</div>
 					<?php foreach ($person->getPosts() as $index=>$post) { ?>
 					<div id="content-posts" class="col-xs-4" ng-repeat="post in socialManagerCtrl.posts" ng-cloak ng-if="post.id == '<?= $post->short_id; ?>'" style="padding: 0 3px;">
-						<figure class="showcase" ng-click="socialManagerCtrl.openPostDetailsModal(post)">
-							<div class="images-box">
+						<figure class="showcase">
+							<div class="images-box" ng-click="socialManagerCtrl.openPostDetailsModal(post)">
 								<img class="col-xs-12 grid-image" style="width: 100%; height: 100%; padding: 0; object-fit: cover;" src="<?= Utils::url_scheme() ?><?= Utils::thumborize('/uploads/deviser/'.$person->short_id.'/'.$post->photo)->resize(300, 0) ?>">
 							</div>
+							<figcaption ng-if="socialManagerCtrl.viewingConnectedUser()">
+								<div class="row no-mar">
+									<div class="col-xs-4 col-xs-offset-8 col-sm-4 col-md-4 no-padding posts-edit">
+										<a ng-click="socialManagerCtrl.editPost(post.id)"><span class="edit-post-icon"><i class="ion-edit"></i></span></a>
+										<a ng-click="socialManagerCtrl.deletePost(post.id)"><span class="close-post-icon"></span></a>
+									</div>
+								</div>
+							</figcaption>
 						</figure>
 					</div>
 					<?php } ?>
@@ -67,8 +75,8 @@ $this->params['person_links_target'] = 'public_view';
 				<span class="ion-android-close" aria-hidden="true"></span>
 			</button>
 			<h3>
-				<span ng-if="!socialManagerCtrl.resolve.isEdition" translate="person.posts.NEW_POST"></span>
-				<span ng-if="socialManagerCtrl.resolve.isEdition" translate="person.posts.EDIT_POST"></span>
+				<span ng-if="!socialManagerCtrl.isEdition" translate="person.posts.NEW_POST"></span>
+				<span ng-if="socialManagerCtrl.isEdition" translate="person.posts.EDIT_POST"></span>
 			</h3>
 		</div>
 		<div class="modal-body">

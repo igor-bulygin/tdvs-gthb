@@ -58,6 +58,7 @@
 
         function showNewPost() {
             vm.newPost = { photo: "", text: "", person_id: person.short_id, post_state: 'post_state_active', selected_language: vm.selected_language };
+            vm.isEdition = false;
             vm.newPostModal = $uibModal.open({
                 templateUrl: 'newPostModal',
                 scope: $scope,
@@ -143,6 +144,7 @@
                 personDataService.updatePost(vm.newPost, { id: vm.newPost.id }, onCreatePostsSuccess, onCreatePostsError);
             } else {
                 personDataService.publishPost(vm.newPost, onCreatePostsSuccess, onCreatePostsError);
+                window.location.reload();
             }
         }
 

@@ -35,10 +35,10 @@
 #content-posts {
 	figcaption {
 		position: relative;
-		margin-bottom: 26px;
-		padding: 8px;
-		height: 100px;
+		padding: 0;
+		height: auto;
 		background-color: none;
+		margin-top: 0px !important;
 	}
 }
 .posts-edit{
