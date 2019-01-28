@@ -546,6 +546,12 @@ a, a:hover, a:focus {
   width: 100%;
   float: left; }
 
+.ft-right {
+  float: right; }
+
+.ft-left {
+  float: left; }
+
 .relativize-me {
   position: relative; }
 
@@ -564,6 +570,9 @@ a, a:hover, a:focus {
 
 .font-sz-16 {
   font-size: 16px !important; }
+
+.m-5 {
+  margin: 5px !important; }
 
 .mt-0 {
   margin-top: 0 !important; }
@@ -643,8 +652,15 @@ a, a:hover, a:focus {
 .ml-30 {
   margin-left: 30px; }
 
+@media (max-width: 767px) {
+  .ml-xs-90 {
+    margin-left: 90px !important; } }
+
 .p-0 {
   padding: 0 !important; }
+
+.p-20 {
+  padding: 20px !important; }
 
 @media (min-width: 1200px) {
   .px-lg-80 {
@@ -689,6 +705,10 @@ a, a:hover, a:focus {
 @media (max-width: 767px) {
   .pl-xs-10 {
     padding-left: 10px !important; } }
+
+@media (max-width: 767px) {
+  .pl-xs-5 {
+    padding-left: 5px !important; } }
 
 .pr-0 {
   padding-right: 0px !important; }
@@ -924,7 +944,8 @@ a.btn span {
     margin: 0.3em 0 !important;
     padding: 0.3em 0 !important;
     font-size: 1.1em;
-    background-color: #1C1919; }
+    background-color: #1C1919;
+    border: 1px solid #1C1919; }
 
 .btn-follow-header {
   height: auto;
@@ -972,7 +993,7 @@ a.btn span {
   padding: 1em 0 !important; }
 
 /*.big-btn{
-    @extend %btn; 
+    @extend %btn;
     width: 460px;
     height: 60px;
     margin: 20px 0!important;
@@ -1704,11 +1725,22 @@ label {
     padding: 20px;
     height: 100px; }
 
+.error-prom-code {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #e06a7f; }
+
 .optional-info-input-right {
   float: right;
   font-size: 12px;
   color: #888;
   margin: 22px 0 5px 0; }
+
+.optional-info-input {
+  font-size: 12px;
+  color: #888;
+  margin: 22px 0 5px 0;
+  margin-left: 8px; }
 
 .login-title {
   margin-top: 80px;
@@ -1726,6 +1758,29 @@ label {
 
 .inverse .login-title {
   color: #1C1919 !important; }
+
+.already-user-mobile {
+  display: none;
+  color: #c91c39 !important; }
+  .already-user-mobile:hover {
+    cursor: pointer;
+    color: #F7284B !important;
+    text-decoration: none;
+    -moz-transition-property: color;
+    -o-transition-property: color;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -moz-transition-timing-function: ease-out;
+    -o-transition-timing-function: ease-out;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out; }
+  @media (max-width: 991px) {
+    .already-user-mobile {
+      display: inline; } }
 
 .white-rounded-input {
   margin-bottom: 15px;
@@ -4150,7 +4205,7 @@ h3 {
   max-width: 360px;
   text-align: center;
   cursor: pointer;
-  margin: 1em 0;
+  margin: 3px 0;
   border: 1px solid #bfbfbf;
   box-shadow: 2px 2px 4px #bfbfbf;
   -webkit-box-shadow: 2px 2px 4px #bfbfbf;
@@ -4162,7 +4217,7 @@ h3 {
   @media (max-width: 767px) {
     .showcase {
       float: none;
-      margin: 1em auto; } }
+      margin: 3px auto; } }
   .showcase img {
     width: 100%; }
   .showcase figcaption {
@@ -4226,6 +4281,18 @@ h3 {
     @media (max-width: 320px) {
       .showcase.influencers img {
         max-width: 260px; } }
+
+.mw-100 {
+  max-width: 100% !important; }
+
+.img-round {
+  border-radius: 50%;
+  border: 1px solid #CCCCCC; }
+
+.img-fit {
+  width: auto !important;
+  padding: 0;
+  object-fit: cover; }
 
 .carousel-devisers-container {
   max-width: 900px;
@@ -7841,7 +7908,7 @@ span.optional-text.pull-left {
 
 .create-deviser-account-wrapper {
   padding: 20px;
-  background-color: #1C1919;
+  background-color: #ffffff;
   float: left;
   width: 100%; }
   .create-deviser-account-wrapper.inverse {
@@ -7906,6 +7973,13 @@ span.optional-text.pull-left {
     text-decoration: underline;
     color: #ffffff; }
 
+.remember-me-black label {
+  text-transform: none;
+  font-size: 14px; }
+  .remember-me-black label a {
+    text-decoration: underline;
+    color: #1C1919; }
+
 .remember-me label::before {
   background-color: transparent;
   border: 1px solid #939393; }
@@ -7913,8 +7987,15 @@ span.optional-text.pull-left {
 .remember-me label::after {
   color: #F7284B; }
 
+.remember-me-black label::before {
+  background-color: transparent;
+  border: 1px solid #939393; }
+
+.remember-me-black label::after {
+  color: #F7284B; }
+
 .title-create-account {
-  color: #e9e9e9; }
+  color: #1C1919 !important; }
   .title-create-account .first-title {
     width: 100%;
     font-size: 72px;
