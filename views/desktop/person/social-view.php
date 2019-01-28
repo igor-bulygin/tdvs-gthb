@@ -49,20 +49,13 @@ $this->params['person_links_target'] = 'public_view';
 					</div>
 					<?php foreach ($person->getPosts() as $index=>$post) { ?>
 					<div id="content-posts" class="col-xs-4" ng-repeat="post in socialManagerCtrl.posts" ng-cloak ng-if="post.id == '<?= $post->short_id; ?>'" style="padding: 0 3px;">
-						<figure class="showcase" ng-click="socialManagerCtrl.openPostDetailsModal(post)">
-							<div class="images-box">
+						<figure class="showcase">
+							<div class="images-box" ng-click="socialManagerCtrl.openPostDetailsModal(post)">
 								<img class="col-xs-12 grid-image" style="width: 100%; height: 100%; padding: 0; object-fit: cover;" src="<?= Utils::url_scheme() ?><?= Utils::thumborize('/uploads/deviser/'.$person->short_id.'/'.$post->photo)->resize(300, 0) ?>">
 							</div>
-							<figcaption>
+							<figcaption ng-if="socialManagerCtrl.viewingConnectedUser()">
 								<div class="row no-mar">
-									<div class="col-xs-2 col-sm-2 col-md-3 col-xs-offset-10 col-sm-offset-10 col-md-offset-9 no-padding">
-										<span ng-bind="post.loveds" class="heart-num"></span>
-										<span ng-if="post.isLoved" class="icons-hover heart-icon heart-red-icon" ng-click="socialManagerCtrl.unLovePost(post)" ng-cloak></span>
-										<span ng-if="!post.isLoved" class="icons-hover heart-icon heart-black-icon" ng-click="socialManagerCtrl.lovePost(post)" ng-cloak></span>
-									</div>
-									<span class="no-padding col-xs-12 posts-text align-left" ng-bind-html="socialManagerCtrl.sanitizeMe(socialManagerCtrl.truncateString(post.text, socialManagerCtrl.maxCharacters, '...'))"></span>
-									<a ng-if="post.text.length > socialManagerCtrl.maxCharacters && !socialManagerCtrl.viewingConnectedUser()" class="col-xs-4 col-xs-push-8 no-padding"><span translate="person.posts.SEE_MORE"></span></a>
-									<div class="col-xs-4 col-xs-offset-8 col-sm-4 col-md-4 no-padding posts-edit" ng-if="socialManagerCtrl.viewingConnectedUser()">
+									<div class="col-xs-4 col-xs-offset-8 col-sm-4 col-md-4 no-padding posts-edit">
 										<a ng-click="socialManagerCtrl.editPost(post.id)"><span class="edit-post-icon"><i class="ion-edit"></i></span></a>
 										<a ng-click="socialManagerCtrl.deletePost(post.id)"><span class="close-post-icon"></span></a>
 									</div>
@@ -82,8 +75,8 @@ $this->params['person_links_target'] = 'public_view';
 				<span class="ion-android-close" aria-hidden="true"></span>
 			</button>
 			<h3>
-				<span ng-if="!socialManagerCtrl.resolve.isEdition" translate="person.posts.NEW_POST"></span>
-				<span ng-if="socialManagerCtrl.resolve.isEdition" translate="person.posts.EDIT_POST"></span>
+				<span ng-if="!socialManagerCtrl.isEdition" translate="person.posts.NEW_POST"></span>
+				<span ng-if="socialManagerCtrl.isEdition" translate="person.posts.EDIT_POST"></span>
 			</h3>
 		</div>
 		<div class="modal-body">
