@@ -5,8 +5,6 @@
         var vm = this;
         vm.ok = ok;
         vm.dismiss = dismiss;
-        vm.lovePost = lovePost;
-        vm.unLovePost = unLovePost;
 
         init();
 

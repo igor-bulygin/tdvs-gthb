@@ -28,6 +28,7 @@
             vm.isFollowed = isFollowed;
             getPerson();
             getLanguages();
+            console.log(vm.isFollowed);
         }
 
         function unFollow(personId) {
