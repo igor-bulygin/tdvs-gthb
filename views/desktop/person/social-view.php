@@ -48,7 +48,7 @@ $this->params['person_links_target'] = 'public_view';
 						<button class="btn btn-red btn-add-box" ng-click="socialManagerCtrl.showNewPost()"><span translate="person.posts.ADD_POST"></span></button>
 					</div>
 					<?php foreach ($person->getPosts() as $index=>$post) { ?>
-					<div id="content-posts" class="col-xs-4" ng-repeat="post in socialManagerCtrl.posts" ng-cloak ng-if="post.id == '<?= $post->short_id; ?>'">
+					<div id="content-posts" class="col-xs-4" ng-repeat="post in socialManagerCtrl.posts" ng-cloak ng-if="post.id == '<?= $post->short_id; ?>'" style="padding: 0 3px;">
 						<figure class="showcase" ng-click="socialManagerCtrl.openPostDetailsModal(post)">
 							<div class="images-box">
 								<img class="col-xs-12 grid-image" style="width: 100%; height: 100%; padding: 0; object-fit: cover;" src="<?= Utils::url_scheme() ?><?= Utils::thumborize('/uploads/deviser/'.$person->short_id.'/'.$post->photo)->resize(300, 0) ?>">

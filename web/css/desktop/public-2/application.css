@@ -4205,7 +4205,7 @@ h3 {
   max-width: 360px;
   text-align: center;
   cursor: pointer;
-  margin: 1em 0;
+  margin: 3px 0;
   border: 1px solid #bfbfbf;
   box-shadow: 2px 2px 4px #bfbfbf;
   -webkit-box-shadow: 2px 2px 4px #bfbfbf;
@@ -4217,7 +4217,7 @@ h3 {
   @media (max-width: 767px) {
     .showcase {
       float: none;
-      margin: 1em auto; } }
+      margin: 3px auto; } }
   .showcase img {
     width: 100%; }
   .showcase figcaption {

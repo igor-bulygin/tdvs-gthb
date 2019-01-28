@@ -55,12 +55,12 @@
 	max-width: 360px;//382px;
 	text-align: center;
 	cursor: pointer;
-	margin: 1em 0;
+	margin: 3px 0;
 	border: 1px solid $light_grey;
 	@include box-shadow(2px,2px,4px,$light_grey);
 	@media (max-width: 767px){
 		float: none;
-		margin: 1em auto;
+		margin: 3px auto;
 	}
 	/*@media(max-width: 350px){
 		max-height: 302px;
