@@ -6164,7 +6164,8 @@ h3 {
       bottom: 50px; } }
   @media (max-width: 480px) {
     .edit-profile-btn-right {
-      bottom: 60px; } }
+      bottom: 60px;
+      right: 5px; } }
 
 @media (max-width: 480px) {
   .btn-follow-header {
@@ -6229,12 +6230,14 @@ h3 {
     right: 110px; }
     @media (max-width: 575px) {
       .deviser-followers.position-followers {
-        right: 80px; } }
+        right: 60px;
+        font-size: 10px; } }
   .deviser-followers.position-following {
     right: 16px; }
     @media (max-width: 575px) {
       .deviser-followers.position-following {
-        right: 5px; } }
+        right: 2px;
+        font-size: 10px; } }
   .deviser-followers p {
     text-align: center;
     margin: auto;
