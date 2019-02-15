@@ -45,7 +45,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
                     <label for="csv">CSV file</label>
                     <input type="file" name="csv" id="csv" /> load file
                 </div>
-                <input type="submit" value="Import works" name="Import" />
+                <input type="submit" value="Import works" name="Import" class="btn btn-auto btn-red auto-center"/>
                 <input id="form-token" type="hidden" name="<?=Yii::$app->request->csrfParam?>" value="<?=Yii::$app->request->csrfToken?>" />
             </form>
         </div>

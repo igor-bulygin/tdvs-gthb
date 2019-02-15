@@ -648,6 +648,27 @@ class Product extends CActiveRecord {
 		return $product;
 	}
 
+    /**
+     * Get one entity as array
+     *
+     * @param string $id
+     *
+     * @return array|null
+     * @throws Exception
+     */
+    public static function findOneAsArray($id)
+    {
+        /** @var array $product */
+        $product = static::find()->select(self::getSelectFields())->where(["short_id" => $id])->asArray()->one();
+
+        // if automatic translation is enabled
+        if (static::$translateFields) {
+            Utils::translate($product);
+        }
+        return $product;
+    }
+
+
 	/**
 	 * Get a collection of entities serialized, according to serialization configuration
 	 *

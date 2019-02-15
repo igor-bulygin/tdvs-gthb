@@ -16,7 +16,7 @@ use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UnauthorizedHttpException;
 use yii\web\UploadedFile;
-use app\helpers\ImportHelper;
+use app\helpers\Import\ImportHelper;
 
 class ProductController extends CController
 {
@@ -164,7 +164,7 @@ class ProductController extends CController
     // Check if user is logged in
     if(isset(Yii::$app->user->identity)) {
 
-      $referrer_url = split('/', Yii::$app->request->referrer);  // Getting referrer URL
+      $referrer_url = explode('/', Yii::$app->request->referrer);  // Getting referrer URL
 
       // Checking for devisers, influencers or clients
       $controller_name = isset($referrer_url[3]) ? $referrer_url[3] : '';
@@ -291,16 +291,41 @@ class ProductController extends CController
 //        die();
 
         foreach ($product_arr as $data) {
+            $mode = array_shift($data);
+            $product_id = array_shift($data);
+
             Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
-            $product = new Product();
 
-            $product->setScenario(Product::SCENARIO_PRODUCT_DRAFT);
+            if ($mode == 'add') {
+                $product = new Product();
 
-            if ($product->load(json_decode(json_encode($data), true), '')) {
-                $product->save(false);
+                $product->setScenario(Product::SCENARIO_PRODUCT_DRAFT);
+
+                if ($product->load($data, '')) {
+                    $product->save(false);
+                }
+            }
+            elseif ($mode == 'update') {
+                $product = Product::findOneSerialized($product_id);
+                if (!$product) {
+                    continue;
+                }
+
+                $product->setScenario(Product::SCENARIO_PRODUCT_DRAFT);
+
+                if ($product->load($data, '')) {
+
+                    $product->save(false);
+
+                    $product->moveTempUploadsToProductPath();
+
+
+                } else {
+                    // TODO write error to flash
+                }
+
             }
         }
-
         $this->redirect('/deviser/'.$person->slug.'/'.$person->short_id.'/store/edit?product_state=product_state_draft');
 
 

@@ -61,3 +61,4 @@ db_backup*
 tools/gulp/node_modules
 
 config/assets_compressed.php
+web/info.php

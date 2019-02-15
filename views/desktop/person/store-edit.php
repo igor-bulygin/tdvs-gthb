@@ -48,7 +48,8 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 					</div>
 					<div class="col-xs-12 col-sm-10">
 						<div>
-							<a ng-href="{{editStoreCtrl.deviser.main_link}}" class="red-link-btn"><span translate="person.store.DONE_STORE"></span></a>
+                            <div class="mt-20"><a href="<?= $person->getStoreImportLink()?>" class="red-link-btn"><span translate="person.store.IMPORT_WORKS"></span></a></div>
+                            <a ng-href="{{editStoreCtrl.deviser.main_link}}" class="red-link-btn"><span translate="person.store.DONE_STORE"></span></a>
 						</div>
 						<div class="content-store">
 							<?php if ($unpublishedWorks || count($categories) > 1) { ?>
