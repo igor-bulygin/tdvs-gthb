@@ -607,10 +607,6 @@ class Utils
 		// TODO obtain this from .env file
 		$server = getenv("THUMBOR_SERVER");
 		$secret = getenv("THUMBOR_SECURITY_KEY");
-		echo $server;
-		echo $secret;
-		echo $img_path;
-		
 		return Builder::construct($server, $secret, $img_path);
 	}
 

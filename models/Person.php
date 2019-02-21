@@ -1098,14 +1098,18 @@ class Person extends CActiveRecord implements IdentityInterface
 
 		$image = null;
 		if (Person::existMediaFile($this->mediaMapping->header_cropped)) {
+			echo "11111111111111111111111111111111111";
 			$image = Person::getUrlImagesLocation() . $this->mediaMapping->header_cropped;
 		} elseif (Person::existMediaFile($this->mediaMapping->header)) {
+			echo "22222222222222222222222222222222222";
 			$image = Person::getUrlImagesLocation() . $this->mediaMapping->header;
 		}
 		if ($image) {
 			if ($fill) {
+				echo "fillllllllllllllllllllllllllllllllll";
 				$url = Utils::url_scheme() . Utils::thumborize($image)->fitIn($width, $height)->addFilter('fill', $fill);
 			} else {
+				echo "nooooooooooooooo fillllllllllllllllllllllllllllllllll";
 				$url = Utils::url_scheme() . Utils::thumborize($image)->resize($width, $height);
 			}
 		}
