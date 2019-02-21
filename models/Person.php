@@ -1097,10 +1097,6 @@ class Person extends CActiveRecord implements IdentityInterface
 		$url = "/imgs/default-cover.jpg";
 
 		$image = null;
-
-		print_r($this->mediaMapping);
-		print_r($this);
-		die;
 		if (Person::existMediaFile($this->mediaMapping->header_cropped)) {
 			$image = Person::getUrlImagesLocation() . $this->mediaMapping->header_cropped;
 		} elseif (Person::existMediaFile($this->mediaMapping->header)) {
