@@ -75,6 +75,7 @@ services:
             new:
                 aliases:
                     - thumbor.todevise.com
+                    # ONLY PRODUCTION SERVER - img.todevise.com
         ports:
             - "8000:8000"
         environment:
