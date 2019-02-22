@@ -62,7 +62,7 @@
                     vm.price = original_artwork.price;
                     vm.reference_id = original_artwork.short_id;
                     vm.require_options = false;
-                }z
+                }
                 setProductValoration();
             }
 

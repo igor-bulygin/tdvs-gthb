@@ -52,9 +52,20 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
                             <a ng-href="{{editStoreCtrl.deviser.main_link}}" class="red-link-btn"><span translate="person.store.DONE_STORE"></span></a>
 						</div>
 						<div class="content-store">
+
+                            <?php if (Yii::$app->session->hasFlash('success')): ?>
+                                <div class="alert alert-success alert-dismissable">
+                                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                    <h4><i class="icon fa fa-check"></i>Imported!</h4>
+                                    <?= Yii::$app->session->getFlash('success') ?>
+                                </div>
+                            <?php endif; ?>
+
 							<?php if ($unpublishedWorks || count($categories) > 1) { ?>
 								<div class="cathegory-wrapper">
 									<?php if ($unpublishedWorks) { ?>
+
+
 										<div class="col-md-3 col-sm-3 col-xs-3 pad-cathegory">
 											<a href="<?= $person->getStoreEditLink(['product_state' => \app\models\Product::PRODUCT_STATE_DRAFT])?>">
 												<div class="unpublished-square" ng-click="editStoreCtrl.show_unpublished_works()">
@@ -82,6 +93,7 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
 							<div class="store-grid">
 								<div class="title-wrapper">
 									<div ng-if="editStoreCtrl.view_unpublished_works" ng-cloak>
+
 										<div class="title-wrapper">
 											<span class="title"><span translate="person.store.UNPUBLISHED_WORKS"></span></span>
 										</div>

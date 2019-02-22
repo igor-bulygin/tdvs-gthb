@@ -73,7 +73,7 @@ class shopifyParser
         if (($handle = fopen($this->csv, 'r')) !== false) {
             $lines = array();
             while (($row = fgetcsv($handle, 1024, ",")) != false) {
-                $lines[] = $row;
+                $lines[] = array_map('strip_tags', $row);;
             }
         }
         else {

@@ -4,6 +4,7 @@ namespace app\helpers\Import;
 use app\models\Product;
 use yii\mongodb\ActiveQuery;
 use app\models\Person;
+use Yii;
 
 class ImportHelper {
 
@@ -26,17 +27,27 @@ class ImportHelper {
      */
     private $person;
 
+    /**
+     * @var string
+     * temporary name of uploaded CSV file
+     */
+    private $csv_file;
+
 
 
     public function __construct($csv, $post, $person)
     {
-        $classFile = $post['source'].'Parser';
-        if (file_exists(__DIR__.'/'.$classFile.'.php')) {
-            $className = 'app\\helpers\\Import\\'.$classFile;
-            $this->parser = new $className($csv, $post, $person);
+        $this->csv_file = ($csv && is_readable($csv->tempName)) ? $csv : null;
+
+        if ($post && $this->csv_file) {
+            $classFile = $post['source'] . 'Parser';
+            if (file_exists(__DIR__ . '/' . $classFile . '.php')) {
+                $className = 'app\\helpers\\Import\\' . $classFile;
+                $this->parser = new $className($this->csv_file->tempName, $post, $person);
+            }
+            $this->lang = $post['lang'];
+            $this->person = $person;
         }
-        $this->lang = $post['lang'];
-        $this->person = $person;
     }
 
     public function import()
@@ -48,6 +59,35 @@ class ImportHelper {
 
 
         return $this->checkExistingProducts($parsed_data);
+    }
+
+    public function checkForm()
+    {
+        $csv_mimetypes = array(
+            'text/csv',
+            'text/tsv',
+            'text/plain',
+            'application/csv',
+            'text/comma-separated-values',
+            'application/excel',
+            'application/vnd.ms-excel',
+            'application/vnd.msexcel',
+            'text/anytext',
+            'application/octet-stream',
+            'application/txt',
+        );
+
+        $errors = array();
+
+        if (!$this->csv_file) {
+            $errors[] = Yii::t('app/import', 'FILE_NOT_UPLOADED_CORRECTLY');
+            return $errors;
+        }
+        if (!in_array($this->csv_file->type, $csv_mimetypes) or pathinfo($this->csv_file->name, PATHINFO_EXTENSION) != 'csv') {
+            $errors[] = Yii::t('app/import', 'FILE_TYPE_NOT_CSV');
+        }
+
+        return $errors;
     }
 
     private function checkExistingProducts($data)

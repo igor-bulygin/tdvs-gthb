@@ -261,7 +261,7 @@ class ProductController extends CController
 
         $this->layout = '/desktop/public-2.php';
         return $this->render("product-import", [
-            'person' => $person,
+            'person'    => $person,
         ]);
     }
 
@@ -279,54 +279,75 @@ class ProductController extends CController
         }
 
         $csv_file = UploadedFile::getInstanceByName('csv');
-        if (!$csv_file || $csv_file === null) {
-            throw new \Exception('File not uploaded correctly');
+//        if (!$csv_file || $csv_file === null) {
+//            throw new \Exception('File not uploaded correctly');
+//        }
+
+        $importHelper = new ImportHelper($csv_file, Yii::$app->request->post(), $person);
+
+        $errors = $importHelper->checkForm();
+
+        if (count($errors) > 0) {
+
+            Yii::$app->session->setFlash('error', implode('<br />', $errors));
+
+            $this->layout = '/desktop/public-2.php';
+            return $this->render("product-import", [
+                'person'    => $person,
+                'data'      => Yii::$app->request->post()
+            ]);
         }
-
-        $importHelper = new ImportHelper($csv_file->tempName, Yii::$app->request->post(), $person);
-
-        $product_arr = $importHelper->import();
+        else {
+            $product_arr = $importHelper->import();
+        }
 
 //        print_r($product_arr);
 //        die();
 
-        foreach ($product_arr as $data) {
-            $mode = array_shift($data);
-            $product_id = array_shift($data);
+        if (isset($product_arr) && count($product_arr) > 0) {
+            foreach ($product_arr as $data) {
+                $mode = array_shift($data);
+                $product_id = array_shift($data);
 
-            Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
+                Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
 
-            if ($mode == 'add') {
-                $product = new Product();
+                if ($mode == 'add') {
+                    $product = new Product();
 
-                $product->setScenario(Product::SCENARIO_PRODUCT_DRAFT);
+                    $product->setScenario(Product::SCENARIO_PRODUCT_DRAFT);
 
-                if ($product->load($data, '')) {
-                    $product->save(false);
+                    if ($product->load($data, '')) {
+                        $product->save(false);
+                    }
+                } elseif ($mode == 'update') {
+                    $product = Product::findOneSerialized($product_id);
+                    if (!$product) {
+                        continue;
+                    }
+
+                    $product->setScenario(Product::SCENARIO_PRODUCT_DRAFT);
+
+                    if ($product->load($data, '')) {
+
+                        $product->save(false);
+
+                        $product->moveTempUploadsToProductPath();
+
+
+                    } else {
+                        // TODO write error to flash
+                    }
+
                 }
             }
-            elseif ($mode == 'update') {
-                $product = Product::findOneSerialized($product_id);
-                if (!$product) {
-                    continue;
-                }
 
-                $product->setScenario(Product::SCENARIO_PRODUCT_DRAFT);
-
-                if ($product->load($data, '')) {
-
-                    $product->save(false);
-
-                    $product->moveTempUploadsToProductPath();
-
-
-                } else {
-                    // TODO write error to flash
-                }
-
-            }
+            Yii::$app->session->setFlash('success', "Products have been imported successfully");
         }
-        $this->redirect('/deviser/'.$person->slug.'/'.$person->short_id.'/store/edit?product_state=product_state_draft');
+        else {
+
+            Yii::$app->session->setFlash('error', "Products not have been imported successfully. Please check your export file format and try again");
+        }
+        $this->redirect('/deviser/' . $person->slug . '/' . $person->short_id . '/store/edit?product_state=product_state_draft');
 
 
 

@@ -38,7 +38,7 @@ class ImportUtil
 
     public static function getOptionIdAndValue($name, $value, $lang) {
         $tag = Tag::find()->where(
-            ['name.'.$lang => $name])->select(['short_id', 'options'])->asArray()->one();
+            ['REGEX', 'name.'.$lang, '/^'.$name.'$/i'])->select(['short_id', 'options'])->asArray()->one();
 
         if (!$tag) return null;
 
@@ -71,6 +71,14 @@ class ImportUtil
             return $val;
         }
         return null;
+    }
+
+    public static function stripTagsDeep($value){
+        if (is_array($value)) {
+            return array_map('self::stripTagsDeep', $value);
+        } else{
+            return strip_tags($value);
+        }
     }
 
 

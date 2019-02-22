@@ -1592,7 +1592,7 @@ class Product extends CActiveRecord {
 	 */
 	public function moveTempUploadsToProductPath()
 	{
-		foreach ($this->media['photos'] as $onephoto) {
+	    foreach ($this->media['photos'] as $onephoto) {
 			$this->moveTempFileToProductPath($onephoto['name']);
 			if (isset($onephoto['name_cropped'])) {
 				$this->moveTempFileToProductPath($onephoto['name_cropped']);
@@ -1608,7 +1608,7 @@ class Product extends CActiveRecord {
 
 	protected function moveTempFileToProductPath($file)
 	{
-		$tempFile = Utils::join_paths($this->getTempUploadedFilesPath(), $file);
+	    $tempFile = Utils::join_paths($this->getTempUploadedFilesPath(), $file);
 		if (!file_exists($tempFile)) {
 			return;
 		}
