@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     if ($('#import_source').val() == 'magento') {
         $('#import_url').show();
-        if ($('#import_url').val() == '') {
+        if ($('#source_url').val() == '') {
             $('.no-url-alert').show();
         }
         else {
