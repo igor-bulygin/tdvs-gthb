@@ -79,6 +79,7 @@ return [
 	'CREATE_AN_INFLUENCER_ACCOUNT' => 'Create an influencer account',
     'CREATE_A_DEVISER_ACCOUNT' => 'Create a deviser account',
     'CREATE_NEW_WORK_BY_PERSON_NAME' => 'Create new work by {person_name}',
+    'IMPORT_WORKS_BY_PERSON_NAME' => 'Import works by {person_name}',
     'DAYS' => 'Days',
     'DISCOVER_DEVISERS' => 'Discover devisers',
     'DISCOVER_INFLUENCERS' => 'Discover influencers',

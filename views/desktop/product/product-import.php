@@ -13,7 +13,7 @@ GlobalAsset::register($this);
 /** @var PersonVideo $video */
 
 $this->title = Yii::t('app/public',
-	'CREATE_NEW_WORK_BY_PERSON_NAME',
+	'IMPORT_WORKS_BY_PERSON_NAME',
 	['person_name' => $person->getName()]
 );
 $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD, 'person-var-script');
@@ -40,8 +40,9 @@ $this->registerJsFile(Yii::getAlias('@web') . '/js/desktop/product/import-form.j
                 <div class="form-group">
                     <label for="import_source">Import source</label>
                     <select class="form-control" name="source" id="import_source">
-                        <option value="shopify" <?=((isset($data) && $data['source'] == 'shopify') ? 'selected' : null)?>>Shopify.com</option>
-                        <option value="magento" <?=((isset($data) && $data['source'] == 'magento') ? 'selected' : null)?>>Magento</option>
+                        <option value="shopify"     <?=((isset($data) && $data['source'] == 'shopify') ? 'selected' : null)?>>Shopify.com</option>
+                        <option value="magento"     <?=((isset($data) && $data['source'] == 'magento') ? 'selected' : null)?>>Magento</option>
+                        <option value="prestashop"  <?=((isset($data) && $data['source'] == 'prestashop') ? 'selected' : null)?>>PrestaShop</option>
                     </select>
                 </div>
                 <div class="form-group product-import-url" id="import_url">
