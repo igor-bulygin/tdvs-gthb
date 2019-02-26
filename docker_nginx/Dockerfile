@@ -55,9 +55,18 @@ RUN apk add --no-cache bash \
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php --install-dir=/usr/bin --filename=composer && \
     php -r "unlink('composer-setup.php');" && \
-    pip install -U certbot && \
+    pip install --upgrade pip && \
+    pip install -U certbot-nginx && \
     mkdir -p /etc/letsencrypt/webrootauth && \
+    mkdir -p /etc/letsencrypt/live && \
     apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev
+
+## PRODUCTION LETSENCRYPT CRON RENEW
+## Create the log file to be able to run tail
+#RUN touch /var/log/cron.log
+#
+## Setup cron job
+#RUN (crontab -l mycron; echo "0 */12 * * * certbot --nginx renew >> /var/log/cron.log" >> mycron; echo "5 */12 * * * supervisorctl restart nginx >> /var/log/cron.log" >> mycron; crontab mycron; rm mycron)
 
 RUN apk add /tmp/php5-mongo-1.6.14-r0.apk
 RUN apk add /tmp/php5-redis-2.2.8-r0.apk
@@ -112,7 +121,7 @@ find /etc/php5/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {}
 ADD scripts/start.sh /start.sh
 ADD scripts/letsencrypt-setup /usr/bin/letsencrypt-setup
 ADD scripts/letsencrypt-renew /usr/bin/letsencrypt-renew
-RUN chmod 755 /usr/bin/letsencrypt-setup && chmod 755 /usr/bin/letsencrypt-renew && chmod 755 /start.sh
+RUN chmod 777 /usr/bin/letsencrypt-setup && chmod 777 /usr/bin/letsencrypt-renew && chmod 777 /start.sh
 
 RUN npm install -g bower
 RUN composer config -g github-oauth.github.com cf2c7547fa26152fb1b1ed94c0ab82c21dd03119

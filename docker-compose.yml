@@ -8,7 +8,7 @@ services:
         build: ./docker_nginx
         environment:
             DOMAIN: "todevise.com"
-            GIT_EMAIL: "alexandernst@gmail.com"
+            GIT_EMAIL: "eduard.dr@coditramuntana.com"
             WEBROOT: "/var/www/html/web"
         command: bash -c "cd /var/www/html && ./yii mongodb-migrate --interactive=0 && /start.sh"
         ports:
