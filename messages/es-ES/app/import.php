@@ -17,8 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'ERROR_IMPORT_TITLE'            => 'Hay errores durante la importación',
-    'FILE_NOT_UPLOADED_CORRECTLY'   => 'File no cargado correctamente',
+    'ERROR_IMPORT_TITLE'            => 'Ha habido errores durante la importación',
+    'FILE_NOT_UPLOADED_CORRECTLY'   => 'Archivo no cargado correctamente',
     'FILE_TYPE_NOT_CSV'             => 'El archivo cargado no es un archivo CSV',
     'NO_SOURCE_URL_ALERT'           => 'No has introducido la URL de tu tienda Magento. Las imágenes no serán subidas. ¿Estás seguro de continuar?',
     'IMPORT_WORKS'                  => 'Importar trabajos',
