@@ -1,6 +1,6 @@
 (function () {
 	"use strict";
-	
+
 	function bannerDataService($resource, apiConfig, apiMethods) {
 		var Banner = $resource(apiConfig.baseUrl + 'priv/' + apiConfig.version + 'banner/:id', null, {
 			'update': {
@@ -30,7 +30,7 @@
 			apiMethods.deleteItem(Banner, params, onSuccess, onError);
 		}
 	}
-	
+
 	angular.module('api')
 		.service('bannerDataService', bannerDataService);
 }());

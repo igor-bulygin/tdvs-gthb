@@ -19,7 +19,7 @@ Yii::$app->opengraph->title = $this->title;
 			<span class="second-title"><span translate="todevise.signup.TO"></span></span>
 		</span>
 	</div>
-	<div class="create-deviser-account-container black-form" ng-controller="createAccountCtrl as createAccountCtrl">
+	<div class="create-deviser-account-container grey-input" ng-controller="createAccountCtrl as createAccountCtrl">
 		<form name="createAccountCtrl.form" novalidate>
 			<div>
 				<div class="row no-mar">
@@ -65,13 +65,13 @@ Yii::$app->opengraph->title = $this->title;
 					</div>
 				</div>
 				<div class="row no-mar">
-					<label for="promo_code"><span translate="global.user.PROMO_CODE"></span></label><span class="optional-info-input-right" translate="global.user.OPTIONAL"></span>
+					<label for="promo_code"><span translate="global.user.PROMO_CODE"></span></label><span class="optional-info-input" translate="global.user.OPTIONAL"></span>
 					<div class="input-check-wrapper">
 						<input type="text" id="promo_code" class="form-control grey-input" name="promo_code" ng-model="createAccountCtrl.person.parent_affiliate_id">
 					</div>
 				</div>
 				<div class="row no-mar">
-					<div class="checkbox checkbox-circle remember-me ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.terms_and_conditions)}">
+					<div class="checkbox checkbox-circle remember-me-black ng-class:{'error-input': createAccountCtrl.has_error(createAccountCtrl.form, createAccountCtrl.form.terms_and_conditions)}">
 						<input id="checkbox7" class="styled" type="checkbox" name="terms_and_conditions" ng-model="createAccountCtrl.terms_and_conditions" required>
 						<label for="checkbox7">
 							<span translate="todevise.ACCEPT_TERMS"></span>

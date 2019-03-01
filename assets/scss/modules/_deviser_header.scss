@@ -40,7 +40,7 @@
             }
         }
     }
-	.divProfileCover { 
+	.divProfileCover {
 		@media(max-width:575px) {
 			height: 183px;
 			overflow: hidden;
@@ -310,6 +310,7 @@
     }
     @media(max-width: 480px) {
         bottom: 60px;
+				right: 5px;
     }
 }
 .btn-follow-header {
@@ -380,13 +381,15 @@
 	&.position-followers{
 		right: 110px;
         @media (max-width: 575px) {
-            right: 80px;
+					right: 60px;
+    			font-size: 10px;
         }
 	}
 	&.position-following{
 		right: 16px;
         @media (max-width: 575px) {
-            right: 5px;
+					right: 2px;
+					font-size: 10px;
         }
 	}
 	p {

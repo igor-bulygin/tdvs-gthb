@@ -149,6 +149,7 @@ a{
         padding: 0.3em 0 !important;
         font-size: 1.1em;
         background-color: $black;
+				border: 1px solid $black;
     }
 }
 .btn-follow-header{
@@ -202,7 +203,7 @@ a{
     padding: 1em 0 !important;
 }
 /*.big-btn{
-    @extend %btn; 
+    @extend %btn;
     width: 460px;
     height: 60px;
     margin: 20px 0!important;
@@ -534,15 +535,15 @@ footer{
 }
 #go_to_footer{
     @include size(50px,50px);
-    cursor: pointer; 
+    cursor: pointer;
     display: none;
     border: none;
-    z-index: 999; 
-    text-decoration: none; 
-    text-align: center; 
-    position: fixed; 
-    bottom: 80px; 
-    right: 40px; 
+    z-index: 999;
+    text-decoration: none;
+    text-align: center;
+    position: fixed;
+    bottom: 80px;
+    right: 40px;
     background: transparent;
     margin: 0;
     padding: 0;
@@ -594,7 +595,7 @@ footer{
     padding-top: 6px;
     @media(max-width:320px){
         width: 55px;
-    }    
+    }
     i{
         font-size: 27px;
         line-height: 10px;
@@ -748,7 +749,7 @@ footer{
     .box-icon{
         &:hover{
             background: url(/imgs/box-white.svg) 0 0 no-repeat transparent;
-        }   
+        }
     }
 }
 .btn-edit{

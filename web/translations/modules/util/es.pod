@@ -53,7 +53,8 @@
 			"A_PRODUCT":" un producto.",
 			"ALREADY_MEMBER":"¿Ya eres miembro? Inicia Sesión",
 			"BECOME_MEMBER":"Conviértase en miembro de Todevise (es 100% gratuito)",
-			"SIGN_UP":"Registrarse"
+			"SIGN_UP":"Registrarse",
+			"A_POST": "un post"
 		},
 		"product_card": {
 			"QUANTITY":"Cantidad:"

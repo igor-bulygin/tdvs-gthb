@@ -8,12 +8,14 @@ services:
         build: ./docker_nginx
         environment:
             DOMAIN: "todevise.com"
-            GIT_EMAIL: "alexandernst@gmail.com"
+            GIT_EMAIL: "eduard.dr@coditramuntana.com"
             WEBROOT: "/var/www/html/web"
         command: bash -c "cd /var/www/html && ./yii mongodb-migrate --interactive=0 && /start.sh"
         ports:
             - "8443:8443"
             - "8080:8080"
+            # ONLY SERVER AFTER CAP DEPLOY - "443:8443"
+            # ONLY SERVER AFTER CAP DEPLOY - "80:8080"
         volumes:
             - .:/var/www/html/
             # ONLY SERVER AFTER CAP DEPLOY - ./shared/system/vendor/:/var/www/html/vendor/
@@ -66,13 +68,14 @@ services:
             - ./web:/images
             - ./thumbor_cache:/images_cache
             - ./thumbor_resized:/images_resized
-            # ONLY SERVER AFTER CAP DEPLOY - ./shared/public/web/:/images/
+            # ONLY SERVER AFTER CAP DEPLOY - ./shared/public/images/:/images/
             # ONLY SERVER AFTER CAP DEPLOY - ./shared/public/thumbor_cache/:/images_cache/
             # ONLY SERVER AFTER CAP DEPLOY - ./shared/public/thumbor_resized/:/images_resized/
         networks:
             new:
                 aliases:
                     - thumbor.todevise.com
+                    # ONLY PRODUCTION SERVER - img.todevise.com
         ports:
             - "8000:8000"
         environment:

@@ -194,9 +194,9 @@ $config = [
 			'useFileTransport' => YII_ENV_PROD ? false : true,
 			'transport' => [
 				'class' => 'Swift_SmtpTransport',
-				'host' => 'localhost',
-				'username' => '',
-				'password' => '',
+				'host' => 'relaysmtp.ilimit.es',
+				'username' => 'tessaractic',
+				'password' => 'Nowgyiept9',
 				'port' => '25',
 			],
 

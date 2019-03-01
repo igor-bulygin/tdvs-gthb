@@ -23,7 +23,7 @@ $this->registerJs("var person = ".\yii\helpers\Json::encode($person), yii\web\Vi
 
 <div class="store" ng-controller="personNotPublicCtrl as personNotPublicCtrl">
 	<div class="container">
-		<div class="row">
+		<div class="row mb-40">
 			<div class="col-md-12">
 				<img class="icon-face" src="/imgs/happy-face.svg">
 				<h3 class="succes-black-title text-center"><span translate="person.not_public.ALMOST_DONE"></span></h3>
