@@ -17,12 +17,12 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'IMPORT_WORKS_TITLE'            => 'Import works',
     'ERROR_IMPORT_TITLE'            => 'Import errors',
-	  'FILE_NOT_UPLOADED_CORRECTLY'   => 'File not uploaded correctly',
+    'FILE_NOT_UPLOADED_CORRECTLY'   => 'File not uploaded correctly',
     'FILE_TYPE_NOT_CSV'             => 'Uploaded file is not CSV file',
     'NO_SOURCE_URL_ALERT'           => 'You have not entered URL of your Magento shop. Images will not be uploaded. Are you sure to continue?',
     'IMPORT_WORKS'                  => 'Import works',
+    'IMPORT_WORKS_TITLE'            => 'Import works',
     'IMPORT_SOURCE'                 => 'Import source',
     'IMPORT_LANGUAGE'               => 'Import language',
     'CSV_FILE'                      => 'CSV file',
