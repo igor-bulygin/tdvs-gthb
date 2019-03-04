@@ -31,4 +31,8 @@ return [
     'IMPORT_LANG_ENGLISH'           => 'English',
     'IMPORT_LANG_SPANISH'           => 'Spanish',
     'SOURCE_SHOP_URL'               => 'Source shop main page url',
+    'IMPORT_SUCCESS'                => 'Products have been imported successfully',
+    'IMPORT_ERROR'                  => 'Products not have been imported successfully. Please check your export file format and try again',
+    'FLASH_TITLE_IMPORTED'          => 'Imported!',
+    'FLASH_TITLE_ERROR'             => 'Error!'
 ];

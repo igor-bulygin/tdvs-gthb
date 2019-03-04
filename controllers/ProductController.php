@@ -341,11 +341,11 @@ class ProductController extends CController
                 }
             }
 
-            Yii::$app->session->setFlash('success', "Products have been imported successfully");
+            Yii::$app->session->setFlash('success', Yii::t('app/import', 'IMPORT_SUCCESS'));
         }
         else {
 
-            Yii::$app->session->setFlash('error', "Products not have been imported successfully. Please check your export file format and try again");
+            Yii::$app->session->setFlash('error', Yii::t('app/import', 'IMPORT_ERROR'));
         }
         $this->redirect('/deviser/' . $person->slug . '/' . $person->short_id . '/store/edit?product_state=product_state_draft');
 

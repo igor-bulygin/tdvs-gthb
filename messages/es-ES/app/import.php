@@ -31,4 +31,8 @@ return [
     'IMPORT_LANG_ENGLISH'           => 'Inglés',
     'IMPORT_LANG_SPANISH'           => 'Español',
     'SOURCE_SHOP_URL'               => 'URL de la página principal de la tienda',
+    'IMPORT_SUCCESS'                => 'Los productos han sido importados con éxito',
+    'IMPORT_ERROR'                  => 'Los productos no han sido importados con éxito. Por favor, compruebe su formato de archivo de exportación y vuelva a intentarlo',
+    'FLASH_TITLE_IMPORTED'          => 'Importado!',
+    'FLASH_TITLE_ERROR'             => 'Errore!'
 ];

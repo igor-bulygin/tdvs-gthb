@@ -56,10 +56,19 @@ $this->registerJs("var person = ".Json::encode($person), yii\web\View::POS_HEAD,
                             <?php if (Yii::$app->session->hasFlash('success')): ?>
                                 <div class="alert alert-success alert-dismissable">
                                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                                    <h4><i class="icon fa fa-check"></i>Imported!</h4>
+                                    <h4><i class="icon fa fa-check"></i>Yii::t('app/import', 'FLASH_TITLE_IMPORTED')</h4>
                                     <?= Yii::$app->session->getFlash('success') ?>
                                 </div>
                             <?php endif; ?>
+
+                            <?php if (Yii::$app->session->hasFlash('error')): ?>
+                                <div class="alert alert-danger alert-dismissable">
+                                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                                    <h4><i class="icon fa fa-check"></i>Yii::t('app/import', 'FLASH_TITLE_ERROR')</h4>
+                                    <?= Yii::$app->session->getFlash('error') ?>
+                                </div>
+                            <?php endif; ?>
+
 
 							<?php if ($unpublishedWorks || count($categories) > 1) { ?>
 								<div class="cathegory-wrapper">
