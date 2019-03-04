@@ -40,7 +40,7 @@ $this->registerJsFile(Yii::getAlias('@web') . '/js/desktop/product/import-form.j
                 <div class="form-group">
                     <label for="import_source"><?=Yii::t('app/import', 'IMPORT_SOURCE')?></label>
                     <select class="form-control" name="source" id="import_source">
-                        <option value="shopify"     <?=((isset($data) && $data['source'] == 'shopify') ? 'selected' : null)?>>Shopify.com</option>
+                        <option value="shopify"     <?=((isset($data) && $data['source'] == 'shopify') ? 'selected' : null)?>>Shopify</option>
                         <option value="magento"     <?=((isset($data) && $data['source'] == 'magento') ? 'selected' : null)?>>Magento</option>
                         <option value="prestashop"  <?=((isset($data) && $data['source'] == 'prestashop') ? 'selected' : null)?>>PrestaShop</option>
                     </select>
