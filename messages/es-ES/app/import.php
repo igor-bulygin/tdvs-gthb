@@ -17,9 +17,18 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'IMPORT_WORKS_TITLE'            => 'Importar trabajos',
     'ERROR_IMPORT_TITLE'            => 'Hay errores durante la importación',
     'FILE_NOT_UPLOADED_CORRECTLY'   => 'File no cargado correctamente',
     'FILE_TYPE_NOT_CSV'             => 'El archivo cargado no es un archivo CSV',
     'NO_SOURCE_URL_ALERT'           => 'No has introducido la URL de tu tienda Magento. Las imágenes no serán subidas. ¿Estás seguro de continuar?',
     'IMPORT_WORKS'                  => 'Importar trabajos',
+    'IMPORT_SOURCE'                 => 'Origen de importación',
+    'IMPORT_LANGUAGE'               => 'Idioma de importación',
+    'CSV_FILE'                      => 'CSV file',
+    'UPLOAD_FILE'                   => 'Cargar file',
+    'IMPORT_SUBMIT'                 => 'Importar',
+    'IMPORT_LANG_ENGLISH'           => 'Inglés',
+    'IMPORT_LANG_SPANISH'           => 'Español',
+    'SOURCE_SHOP_URL'               => 'URL de la página principal de la tienda',
 ];

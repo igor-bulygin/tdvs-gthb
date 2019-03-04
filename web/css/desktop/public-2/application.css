@@ -6378,7 +6378,7 @@ h3 {
   color: transparent; }
 
 .upload-csv-input::before {
-  content: 'Upload CSV';
+  content: attr(data-label);
   display: inline-block;
   background-color: #c91c39;
   color: #ffffff;
