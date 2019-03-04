@@ -40,20 +40,20 @@ $this->registerJsFile(Yii::getAlias('@web') . '/js/desktop/product/import-form.j
                 <div class="form-group">
                     <label for="import_source"><?=Yii::t('app/import', 'IMPORT_SOURCE')?></label>
                     <select class="form-control" name="source" id="import_source">
-                        <option value="shopify"     <?=((isset($data) && $data['source'] == 'shopify') ? 'selected' : null)?>>Shopify</option>
-                        <option value="magento"     <?=((isset($data) && $data['source'] == 'magento') ? 'selected' : null)?>>Magento</option>
-                        <option value="prestashop"  <?=((isset($data) && $data['source'] == 'prestashop') ? 'selected' : null)?>>PrestaShop</option>
+                        <option value="shopify"     <?=((isset($data) && isset($data['source']) && $data['source'] == 'shopify') ? 'selected' : null)?>>Shopify</option>
+                        <option value="magento"     <?=((isset($data) && isset($data['source']) && $data['source'] == 'magento') ? 'selected' : null)?>>Magento</option>
+                        <option value="prestashop"  <?=((isset($data) && isset($data['source']) && $data['source'] == 'prestashop') ? 'selected' : null)?>>PrestaShop</option>
                     </select>
                 </div>
                 <div class="form-group product-import-url" id="import_url">
                     <label for="source_url"><?=Yii::t('app/import', 'SOURCE_SHOP_URL')?></label>
-                    <input id="source_url" class="form-control" type="text" name="source-url" value="<?=((isset($data)) ? $data['source-url'] : '')?>" placeholder="https://my-magento-shop.com" />
+                    <input id="source_url" class="form-control" type="text" name="source-url" value="<?=((isset($data) && isset($data['source-url'])) ? $data['source-url'] : '')?>" placeholder="https://my-magento-shop.com" />
                 </div>
                 <div class="form-group">
                     <label for="lang"><?=Yii::t('app/import', 'IMPORT_LANGUAGE')?></label>
                     <select class="form-control" name="lang" id="lang">
-                        <option value="en-US" <?=((isset($data) && $data['lang'] == 'en-US') ? 'selected' : null)?>><?=Yii::t('app/import', 'IMPORT_LANG_ENGLISH')?></option>
-                        <option value="es-ES" <?=((isset($data) && $data['lang'] == 'es-ES') ? 'selected' : null)?>><?=Yii::t('app/import', 'IMPORT_LANG_SPANISH')?></option>
+                        <option value="en-US" <?=((isset($data) && isset($data['lang']) && $data['lang'] == 'en-US') ? 'selected' : null)?>><?=Yii::t('app/import', 'IMPORT_LANG_ENGLISH')?></option>
+                        <option value="es-ES" <?=((isset($data) && isset($data['lang']) && $data['lang'] == 'es-ES') ? 'selected' : null)?>><?=Yii::t('app/import', 'IMPORT_LANG_SPANISH')?></option>
                     </select>
                 </div>
                 <div class="form-group">
