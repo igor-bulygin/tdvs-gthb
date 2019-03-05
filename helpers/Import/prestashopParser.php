@@ -67,7 +67,9 @@ class prestashopParser
         if (($handle = fopen($this->csv, 'r')) !== false) {
             $lines = array();
             while (($row = fgetcsv($handle, 1024, ";")) != false) {
-                $lines[] = array_map('strip_tags', $row);;
+                $lines[] = array_map(function ($item) {
+                    return strip_tags($item, '<p><br>');
+                }, $row);
             }
         }
         else {
@@ -118,6 +120,8 @@ class prestashopParser
             $line['options']       = $options;
             $line['price_stock']   = $price_stock;
             $line['avalaible']     = 1;
+            $line['warranty']                   = array('type' => 0, 'value' => null);
+            $line['returns']                    = array('type' => 0, 'value' => null);
 
             $result[] = $line;
         }

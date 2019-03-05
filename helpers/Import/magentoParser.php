@@ -85,7 +85,11 @@ class magentoParser
 
         if (($handle = fopen($this->csv, 'r')) !== false) {
             while (($row = fgetcsv($handle, 4192, ",")) != false) {
-                $this->lines[] = array_map('strip_tags', $row);
+//                $this->lines[] = array_map('strip_tags', $row);
+                $this->lines[] = array_map(function ($item) {
+                    return strip_tags($item, '<p><br>');
+                }, $row);
+
             }
         }
         else {
@@ -162,10 +166,13 @@ class magentoParser
             $line['name'] = array(
                 $this->lang => $row[$cols['name']]
             );
-            $line['deviser_id']                = $this->person->short_id;
-            $line['description']               = array();
-            $line['description'][$this->lang]  = trim($row[$cols['description']]);
-            $line['product_state']             = 'product_state_draft';
+            $line['deviser_id']                 = $this->person->short_id;
+            $line['description']                = array();
+            $line['description'][$this->lang]   = trim($row[$cols['description']]);
+            $line['product_state']              = 'product_state_draft';
+            $line['warranty']                   = array('type' => 0, 'value' => null);
+            $line['returns']                    = array('type' => 0, 'value' => null);
+
 
             // get product options from 'additional_attributes' field
             $attrs = null;

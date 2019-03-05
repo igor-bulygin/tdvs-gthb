@@ -73,7 +73,9 @@ class shopifyParser
         if (($handle = fopen($this->csv, 'r')) !== false) {
             $lines = array();
             while (($row = fgetcsv($handle, 1024, ",")) != false) {
-                $lines[] = array_map('strip_tags', $row);;
+                $lines[] = array_map(function ($item) {
+                    return strip_tags($item, '<p><br>');
+                }, $row);
             }
         }
         else {
@@ -169,7 +171,7 @@ class shopifyParser
                 $result[$row[$cols['handle']]]['name']                      = array();
                 $result[$row[$cols['handle']]]['name'][$this->lang]         = trim($row[$cols['title']]);
                 $result[$row[$cols['handle']]]['description']               = array();
-                $result[$row[$cols['handle']]]['description'][$this->lang]  = trim($row[$cols['description']]);
+                $result[$row[$cols['handle']]]['description'][$this->lang]  = nl2br(trim($row[$cols['description']]));
                 $result[$row[$cols['handle']]]['product_state']             = 'product_state_draft';
 //                        'weight_unit'   => $row[44],
                 $result[$row[$cols['handle']]]['weight_unit']   = 'g';
@@ -181,6 +183,8 @@ class shopifyParser
                     $result[$row[$cols['handle']]]['tags'] = $tags;
                 }
                 $result[$row[$cols['handle']]]['avalaible']     = 1;
+                $result[$row[$cols['handle']]]['warranty']      = array('type' => 0, 'value' => null);
+                $result[$row[$cols['handle']]]['returns']       = array('type' => 0, 'value' => null);
             }
             else {
                 if (isset($row[$cols['opt_value1']]) && strlen($row[$cols['opt_value1']]) > 0 && $row[$cols['opt_value1']] !== 'Default title') {
