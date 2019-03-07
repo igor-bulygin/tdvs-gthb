@@ -32,6 +32,19 @@ class ImportUploadImage
      */
     private $image_prefix = 'product.photo.';
 
+    /**
+     * Height of main preview image
+     * @var int
+     */
+    private $preview_height = 768;
+
+    /**
+     * Width of main preview image
+     * @var int
+     */
+    private $preview_width = 614;
+
+
     private $OriginalUserAgent;
 
     function __construct()
@@ -49,25 +62,57 @@ class ImportUploadImage
         ini_set('user_agent', $this->OriginalUserAgent);
     }
 
-    public function upload($src)
+    /**
+     * @param $src - URL of image
+     * @param bool $is_main - create or no PNG main image
+     * @return null|array
+     */
+    public function upload($src, $is_main = false)
     {
         $path = Utils::join_paths(Yii::getAlias("@product"), "temp");
         $type = $this->getImageMimeType($src);
-        if (!in_array($type, $this->allowed_types)) {
+        if (!$type or !in_array($type, $this->allowed_types)) {
             return null;
         }
         $ext = Utils::getFileExtensionFromMimeType($type);
         $filename = $this->image_prefix . uniqid() . '.' . $ext;
         if (copy($src, $path . '/' . $filename)) {
-            return $filename;
+            if ($is_main) {
+                $filename_cropped = ($is_main) ? $this->image_prefix . uniqid() . '.png' : null;
+                if ($this->makeMainImage($path, $filename, $filename_cropped)) {
+                    return array(
+                        'name'                  => $filename,
+                        'name_cropped'          => $filename_cropped,
+                        'main_product_photo'    => true
+                    );
+                }
+                else {
+                    return array('name' => $filename);
+                }
+            }
+            else {
+                return array('name' => $filename);
+            }
         }
         return null;
     }
 
     private function getImageMimeType($src)
     {
-        $headers = get_headers($src, 1);
-        return $headers['Content-Type'];
+        $headers = @get_headers($src, 1);
+        if ($headers) {
+            return $headers['Content-Type'];
+        }
+        return false;
+    }
+
+    private function makeMainImage($path, $src, $dest)
+    {
+        if (imagepng(imagecreatefromstring(file_get_contents($path . '/' . $src)), $path . '/'.$dest)) {
+            $f = $path . '/'.$dest;
+            return Utils::resizeAndCrop($f, $this->preview_width, $this->preview_height, true);
+        }
+        return false;
     }
 
 

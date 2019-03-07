@@ -172,6 +172,13 @@ class magentoParser
             $line['product_state']              = 'product_state_draft';
             $line['warranty']                   = array('type' => 0, 'value' => null);
             $line['returns']                    = array('type' => 0, 'value' => null);
+            $line['bespoke']                    = array('type' => 0, 'value' => null);
+            $line['madetoorder']                = array('type' => 0, 'value' => null);
+            $line['preorder']                   = array('type' => 0, 'end' => null, 'ship' => null);
+            $line['weight_unit']                = 'g';
+            $line['dimension_unit']             = 'cm';
+
+
 
 
             // get product options from 'additional_attributes' field
@@ -200,9 +207,10 @@ class magentoParser
                 }
                 // if there aren't variations - we have only 1 variation stored in the main line of product
                 if (!isset($row['children']) or count($row['children']) == 0) {
-                    $price_stock_line['price'] = round($row[$cols['price']], 2);
-                    $price_stock_line['stock'] = round($row[$cols['qty']]);
-                    $price_stock_line['sku']   = Slugger::slugify($row[$cols['sku']]);
+                    $price_stock_line['price']      = round($row[$cols['price']], 2);
+                    $price_stock_line['stock']      = round($row[$cols['qty']]);
+                    $price_stock_line['sku']        = Slugger::slugify($row[$cols['sku']]);
+                    $price_stock_line['available']  = true;
 
                     $price_stock[] = $price_stock_line;
                 }
@@ -259,9 +267,10 @@ class magentoParser
                             }
                         }
                     }
-                    $price_stock_child['price'] = round($child[$cols['price']], 2);
-                    $price_stock_child['stock'] = round($child[$cols['qty']]);
-                    $price_stock_child['sku']   = Slugger::slugify($child[$cols['sku']]);
+                    $price_stock_child['price']     = round($child[$cols['price']], 2);
+                    $price_stock_child['stock']     = round($child[$cols['qty']]);
+                    $price_stock_child['sku']       = Slugger::slugify($child[$cols['sku']]);
+                    $price_stock_child['available'] = true;
 
                     if (isset($this->post['source-url']) && strlen($this->post['source-url']) > 0) {
                         $images_child_arr[] = $this->parseImages($child[$cols['base_image']], $child[$cols['additional_images']]);
@@ -289,10 +298,13 @@ class magentoParser
 
                 $server = $this->getServer();
                 if ($server) {
+                    $i = 0;
                     foreach ($images_arr as $image) {
                         $image_url = $server.$this->server_images_path.$image;
-                        if ($uploaded_image = $upload->upload($image_url)) {
-                            $media['photos'][] = array('name' => $uploaded_image);
+                        $is_main = ($i == 0) ? true : false;
+                        if ($uploaded_image = $upload->upload($image_url, $is_main)) {
+                            $media['photos'][] = $uploaded_image;
+                            $i++;
                         }
                     }
                 }

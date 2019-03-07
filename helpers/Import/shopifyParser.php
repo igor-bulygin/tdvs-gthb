@@ -151,17 +151,18 @@ class shopifyParser
                     }
                 }
                 if ($price_stock_line) {
-                    $price_stock_line['price']    = floatval($row[$cols['price']]);
-                    $price_stock_line['stock']    = intval($row[$cols['qty']]);
-                    $price_stock_line['weight']   = $row[$cols['grams']];
-                    $price_stock_line['sku']      = $row[$cols['sku']];
+                    $price_stock_line['price']      = floatval($row[$cols['price']]);
+                    $price_stock_line['stock']      = intval($row[$cols['qty']]);
+                    $price_stock_line['weight']     = $row[$cols['grams']];
+                    $price_stock_line['sku']        = $row[$cols['sku']];
+                    $price_stock_line['available']  = true;
                     $price_stock[] = $price_stock_line;
                 }
                 // images upload
                 if (isset($row[$cols['image']]) && strlen($row[$cols['image']]) > 0) {
-                    $image = $upload->upload($row[$cols['image']]);
+                    $image = $upload->upload($row[$cols['image']], true);
                     if ($image) {
-                        $media['photos'][] = array('name' => $image);
+                        $media['photos'][] = $image;
                         // $media->description_photos[] = '';
                     }
                 }
@@ -173,8 +174,8 @@ class shopifyParser
                 $result[$row[$cols['handle']]]['description']               = array();
                 $result[$row[$cols['handle']]]['description'][$this->lang]  = nl2br(trim($row[$cols['description']]));
                 $result[$row[$cols['handle']]]['product_state']             = 'product_state_draft';
-//                        'weight_unit'   => $row[44],
                 $result[$row[$cols['handle']]]['weight_unit']   = 'g';
+                $result[$row[$cols['handle']]]['dimension_unit']   = 'cm';
                 $result[$row[$cols['handle']]]['media']         = $media;
                 $result[$row[$cols['handle']]]['categories']    = $categories;
                 $result[$row[$cols['handle']]]['options']       = $options;
@@ -182,9 +183,12 @@ class shopifyParser
                 if ($tags) {
                     $result[$row[$cols['handle']]]['tags'] = $tags;
                 }
-                $result[$row[$cols['handle']]]['avalaible']     = 1;
                 $result[$row[$cols['handle']]]['warranty']      = array('type' => 0, 'value' => null);
                 $result[$row[$cols['handle']]]['returns']       = array('type' => 0, 'value' => null);
+                $result[$row[$cols['handle']]]['bespoke']       = array('type' => 0, 'value' => null);
+                $result[$row[$cols['handle']]]['madetoorder']   = array('type' => 0, 'value' => null);
+                $result[$row[$cols['handle']]]['preorder']      = array('type' => 0, 'end' => null, 'ship' => null);
+
             }
             else {
                 if (isset($row[$cols['opt_value1']]) && strlen($row[$cols['opt_value1']]) > 0 && $row[$cols['opt_value1']] !== 'Default title') {
@@ -217,22 +221,23 @@ class shopifyParser
                     }
                 }
                 if ($price_stock_line) {
-                    $price_stock_line['price']    = floatval($row[$cols['price']]);
-                    $price_stock_line['stock']    = intval($row[$cols['qty']]);
-                    $price_stock_line['weight']   = $row[$cols['grams']];
-                    $price_stock_line['sku']      = $row[$cols['sku']];
+                    $price_stock_line['price']      = floatval($row[$cols['price']]);
+                    $price_stock_line['stock']      = intval($row[$cols['qty']]);
+                    $price_stock_line['weight']     = $row[$cols['grams']];
+                    $price_stock_line['sku']        = $row[$cols['sku']];
+                    $price_stock_line['available']  = true;
 
                     $result[$row[$cols['handle']]]['price_stock'][] = $price_stock_line;
                 }
                 if (isset($row[$cols['image']]) && strlen($row[$cols['image']]) > 0) {
-                    $image = $upload->upload($row[$cols['image']]);
+                    $image = $upload->upload($row[$cols['image']], false);
                     if ($image) {
-                        $media['photos'][] = array('name' => $image);
+//                        $media['photos'][] = array('name' => $image);
                         // $media->description_photos[] = '';
-                        $result[$row[$cols['handle']]]['media']['photos'][] = array('name' => $image);
+                        $result[$row[$cols['handle']]]['media']['photos'][] = $image;
                     }
                 }
-                $result[$row[$cols['handle']]]['avalaible']     = 1;
+
             }
 //            var_dump($row);
         }

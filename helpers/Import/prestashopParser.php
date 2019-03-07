@@ -99,12 +99,13 @@ class prestashopParser
             $price_stock_line['price']    = floatval($row[$cols['price']]);
             $price_stock_line['stock']    = intval($row[$cols['qty']]);
             $price_stock_line['sku']      = Slugger::slugify($row[$cols['title']]);
+            $price_stock_line['available'] = true;
             $price_stock[] = $price_stock_line;
             // images upload
             if (isset($row[$cols['image']]) && strlen($row[$cols['image']]) > 0) {
-                $image = $upload->upload($row[$cols['image']]);
+                $image = $upload->upload($row[$cols['image']], true);
                 if ($image) {
-                    $media['photos'][] = array('name' => $image);
+                    $media['photos'][] = $image;
                     // $media->description_photos[] = '';
                 }
             }
@@ -115,13 +116,19 @@ class prestashopParser
             $line['name'][$this->lang]         = trim($row[$cols['title']]);
             $line['product_state']             = 'product_state_draft';
 //                        'weight_unit'   => $row[44],
-            $line['media']         = $media;
-            $line['categories']    = $categories;
-            $line['options']       = $options;
-            $line['price_stock']   = $price_stock;
-            $line['avalaible']     = 1;
-            $line['warranty']                   = array('type' => 0, 'value' => null);
-            $line['returns']                    = array('type' => 0, 'value' => null);
+            $line['media']          = $media;
+            $line['categories']     = $categories;
+            $line['options']        = $options;
+            $line['price_stock']    = $price_stock;
+            $line['avalaible']      = 1;
+            $line['warranty']       = array('type' => 0, 'value' => null);
+            $line['returns']        = array('type' => 0, 'value' => null);
+            $line['bespoke']        = array('type' => 0, 'value' => null);
+            $line['madetoorder']    = array('type' => 0, 'value' => null);
+            $line['preorder']       = array('type' => 0, 'end' => null, 'ship' => null);
+            $line['weight_unit']                = 'g';
+            $line['dimension_unit']             = 'cm';
+
 
             $result[] = $line;
         }

@@ -1,6 +1,8 @@
 <?php
 namespace app\helpers;
 
+include __DIR__.'/lib/resize_crop.php';
+
 use app\models\Category;
 use app\models\Lang;
 use app\models\Loved;
@@ -779,4 +781,112 @@ class Utils
 
 		return false;
 	}
+
+    /**
+     * Adjusts image width to $w_max value
+     * @param $f - path to the image
+     * @param $w_max - max image width. Height does not matter and is changed accordingly
+     */
+    static function adjustImageWidth($f, $w_max)
+    {
+        $gis = GetImageSize($f);
+        $w_src = $gis[0];
+        if ($w_src > $w_max) {
+            resize($f, $f, $w_max, null, false);
+        }
+    }
+
+    /**
+     * Adjusts image height to $h_max value
+     * @param $f - path to image
+     * @param $h_max - max image height. Width does not matter and is changed accordingly
+     */
+    static function adjustImageHeight($f, $h_max)
+    {
+        $gis = GetImageSize($f);
+        $h_src = $gis[1];
+        if ($h_src > $h_max) {
+            resize($f, $f, null, $h_max, false);
+        }
+    }
+
+
+    /**
+     * @param $f - path to image
+     * @param $w_aim - width of target image
+     * @param $h_aim - height of target image
+     * @param bool $crop - crop or not
+     * @return array|bool|void
+     */
+    static function resizeAndCrop($f, $w_aim, $h_aim, $crop = false) {
+
+        if (!$gis = GetImageSize($f)) return false;
+
+        $_w_src = $gis[0];
+        $_h_src = $gis[1];
+
+        if ($crop && $_w_src == $w_aim && $_h_src == $h_aim) return;
+
+        $exif = @exif_read_data($f);
+        if(null !== $exif && !empty($exif['Orientation'])) {
+            switch($exif['Orientation']) {
+                case 8:
+                    $w_src = $_h_src;
+                    $h_src = $_w_src;
+                    break;
+                case 6:
+                    $w_src = $_h_src;
+                    $h_src = $_w_src;
+                    break;
+                default:
+                    $w_src = $_w_src;
+                    $h_src = $_h_src;
+                    break;
+            }
+        }
+        else {
+            $w_src = $_w_src;
+            $h_src = $_h_src;
+        }
+
+
+        if ($crop) {
+            $ratio = $w_aim/$h_aim;
+        }
+
+        if (!$crop) {
+            if ($h_aim && $h_src > $h_aim) {
+                resize($f, $f, null, $h_aim, false);
+            }
+            elseif ($w_aim && $w_src > $w_aim) {
+                resize($f, $f, $w_aim, null, false);
+            }
+
+            $final_size = GetImageSize($f);
+        }
+        else {
+            if ($w_src/$h_src >= $ratio) {
+                resize($f, $f, null, $h_aim, false);
+            }
+            else {
+                resize($f, $f, $w_aim, null, false);
+            }
+
+            $gis_list = $final_size = GetImageSize($f);
+            $w_list = $gis_list[0];
+            $h_list = $gis_list[1];
+            $x_list = ceil(($w_list-$w_aim)/4);
+            $y_list = ceil(($h_list-$h_aim)/4);
+            if ($w_src/$h_src >= $ratio) {
+                crop($f, $f, array($x_list,0,$w_aim+$x_list,$h_aim));
+            }
+            else {
+                crop($f, $f, array(0,$y_list,$w_aim,$h_aim+$y_list));
+            }
+
+            $final_size = GetImageSize($f);
+        }
+        return (count($final_size) > 0);
+    }
+
 }
