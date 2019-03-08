@@ -42,6 +42,13 @@ class prestashopParser
      */
     private $lang;
 
+    /**
+     * Array of warnings about problems during import. Allows to show them to user
+     * @var array
+     */
+    private $warnings = array();
+
+
 
 
     public function __construct($csv, $post, $person)
@@ -134,7 +141,12 @@ class prestashopParser
         }
         fclose($handle);
 
-        return $result;
+//        return $result;
+        return array(
+            'products' => $result,
+            'warnings' => $this->warnings
+        );
+
     }
 
     /**

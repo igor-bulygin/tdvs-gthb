@@ -32,7 +32,13 @@ return [
     'IMPORT_LANG_SPANISH'           => 'Spanish',
     'SOURCE_SHOP_URL'               => 'Source shop main page url',
     'IMPORT_SUCCESS'                => 'Products have been imported successfully',
+    'IMPORT_SUCCESS_WITH_WARNINGS'  => 'Products have been imported with problems',
     'IMPORT_ERROR'                  => 'Products not have been imported successfully. Please check your export file format and try again',
     'FLASH_TITLE_IMPORTED'          => 'Imported!',
-    'FLASH_TITLE_ERROR'             => 'Error!'
+    'FLASH_TITLE_ERROR'             => 'Error!',
+
+    // Warnings
+
+    'WARNING_IMAGE_UNREACHABLE'     => 'Image is unreachable',
+    'WARNING_HOST_UNREACHABLE'      => 'Given shop URL address is unreachable. Images are not uploaded',
 ];

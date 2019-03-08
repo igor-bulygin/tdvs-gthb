@@ -58,7 +58,10 @@ class ImportHelper {
         $parsed_data = $this->parser->parse();
 
 
-        return $this->checkExistingProducts($parsed_data);
+        return array(
+            'products' => $this->checkExistingProducts($parsed_data['products']),
+            'warnings' => $parsed_data['warnings']
+        );
     }
 
     public function checkForm()

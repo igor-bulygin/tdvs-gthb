@@ -60,6 +60,12 @@ class magentoParser
      */
     private $server_images_path = '/pub/media/catalog/product';
 
+    /**
+     * Array of warnings about problems during import. Allows to show them to user
+     * @var array
+     */
+    private $warnings = array();
+
 
 
 
@@ -143,6 +149,10 @@ class magentoParser
 //        var_dump($parsed_lines);
 //        die();
 
+        $server = $this->getServer();
+        if (!$server) {
+            $this->warnings[] = array('object' => $this->post['source-url'], 'error' => 'HOST_UNREACHABLE');
+        }
 
         $result = array();
         foreach ($parsed_lines as $row) {
@@ -296,7 +306,6 @@ class magentoParser
                  **/
                 $images_arr = array_unique(array_merge($images_parent, $images_child));
 
-                $server = $this->getServer();
                 if ($server) {
                     $i = 0;
                     foreach ($images_arr as $image) {
@@ -305,6 +314,9 @@ class magentoParser
                         if ($uploaded_image = $upload->upload($image_url, $is_main)) {
                             $media['photos'][] = $uploaded_image;
                             $i++;
+                        }
+                        else {
+                            $this->warnings = $upload->getWarnings();
                         }
                     }
                 }
@@ -316,7 +328,10 @@ class magentoParser
 
             $result[] = $line;
         }
-        return $result;
+        return array(
+            'products' => $result,
+            'warnings' => $this->warnings
+        );
     }
 
     /**
@@ -448,6 +463,10 @@ class magentoParser
         return $res;
     }
 
+    /**
+     * Function adds 'http' or 'https' to shop URL and checks if it is working
+     * @return null|string
+     */
     private function getServer()
     {
         $domain = rtrim($this->post['source-url'], '/');
@@ -462,9 +481,11 @@ class magentoParser
             }
             if ($fp) fclose($fp);
 
-            return $url;
+            if (ImportUtil::urlTest($url)) {
+                return $url;
+            }
         }
-
+        return null;
     }
 
 

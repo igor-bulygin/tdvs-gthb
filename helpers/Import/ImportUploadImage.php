@@ -44,6 +44,12 @@ class ImportUploadImage
      */
     private $preview_width = 614;
 
+    /**
+     * Variable for returning warnings during upload files
+     * @var array
+     */
+    private $warnings = array();
+
 
     private $OriginalUserAgent;
 
@@ -71,9 +77,15 @@ class ImportUploadImage
     {
         $path = Utils::join_paths(Yii::getAlias("@product"), "temp");
         $type = $this->getImageMimeType($src);
-        if (!$type or !in_array($type, $this->allowed_types)) {
+        if (!$type) {
+            $this->warnings[] = array('object' => $src, 'error' => 'IMAGE_UNREACHABLE');
             return null;
         }
+        if (!in_array($type, $this->allowed_types)) {
+            $this->warnings[] = array('object' => $src, 'error' => 'WRONG_TYPE');
+            return null;
+        }
+
         $ext = Utils::getFileExtensionFromMimeType($type);
         $filename = $this->image_prefix . uniqid() . '.' . $ext;
         if (copy($src, $path . '/' . $filename)) {
@@ -95,6 +107,11 @@ class ImportUploadImage
             }
         }
         return null;
+    }
+
+    public function getWarnings()
+    {
+        return $this->warnings;
     }
 
     private function getImageMimeType($src)

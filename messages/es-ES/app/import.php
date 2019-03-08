@@ -32,7 +32,14 @@ return [
     'IMPORT_LANG_SPANISH'           => 'Español',
     'SOURCE_SHOP_URL'               => 'URL de la página principal de la tienda',
     'IMPORT_SUCCESS'                => 'Los productos han sido importados con éxito',
+    'IMPORT_SUCCESS_WITH_WARNINGS'  => 'Los productos han sido importados con problemas',
     'IMPORT_ERROR'                  => 'Los productos no han sido importados con éxito. Por favor, compruebe su formato de archivo de exportación y vuelva a intentarlo',
     'FLASH_TITLE_IMPORTED'          => 'Importado!',
-    'FLASH_TITLE_ERROR'             => 'Errore!'
+    'FLASH_TITLE_ERROR'             => 'Errore!',
+
+    // Warnings
+
+    'WARNING_IMAGE_UNREACHABLE'     => 'La imagen es inalcanzable',
+    'WARNING_HOST_UNREACHABLE'      => 'La dirección URL de la tienda dada es inalcanzable. Las imágenes no son subidas',
+
 ];

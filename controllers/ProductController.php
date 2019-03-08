@@ -298,9 +298,12 @@ class ProductController extends CController
             ]);
         }
         else {
-            $product_arr = $importHelper->import();
+            $result = $importHelper->import();
+            $product_arr = $result['products'];
+            $warnings   =   $result['warnings'];
         }
 
+//        print_r($result);
 //        print_r($product_arr);
 //        die();
 
@@ -340,8 +343,16 @@ class ProductController extends CController
 
                 }
             }
-
-            Yii::$app->session->setFlash('success', Yii::t('app/import', 'IMPORT_SUCCESS'));
+            if (count($warnings) > 0) {
+                $message = '<p>'.Yii::t('app/import', 'IMPORT_SUCCESS_WITH_WARNINGS').'</p>';
+                foreach ($warnings as $value) {
+                    $message .= '<b>'.Yii::t('app/import', 'WARNING_'.$value['error']).'</b>: '.$value['object'].'<br>';
+                }
+                Yii::$app->session->setFlash('warning', $message);
+            }
+            else {
+                Yii::$app->session->setFlash('success', Yii::t('app/import', 'IMPORT_SUCCESS'));
+            }
         }
         else {
 

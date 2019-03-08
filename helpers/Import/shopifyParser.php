@@ -47,6 +47,13 @@ class shopifyParser
      */
     private $options_num = 3;
 
+    /**
+     * Array of warnings about problems during import. Allows to show them to user
+     * @var array
+     */
+    private $warnings = array();
+
+
 
 
 
@@ -243,7 +250,12 @@ class shopifyParser
         }
         fclose($handle);
 
-        return $result;
+//        return $result;
+        return array(
+            'products' => $result,
+            'warnings' => $this->warnings
+        );
+
     }
 
     /**
