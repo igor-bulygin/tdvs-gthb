@@ -5,6 +5,7 @@ use app\models\Product;
 use yii\mongodb\ActiveQuery;
 use app\models\Person;
 use Yii;
+use app\helpers\Import\ImportUtil;
 
 class ImportHelper {
 
@@ -57,9 +58,22 @@ class ImportHelper {
          */
         $parsed_data = $this->parser->parse();
 
+        $result = $this->checkExistingProducts($parsed_data['products']);
+
+        /**
+         * Add sizecharts for products and save them into DB
+         */
+        $result_with_sizecharts =  array();
+        foreach ($result as $value) {
+            if ($value['mode'] == 'add' && $sizechart = ImportUtil::makeSizeChart($value, $this->person, $this->lang)) {
+                $value['sizechart'] = $sizechart;
+            }
+            $result_with_sizecharts[] = $value;
+        }
+
 
         return array(
-            'products' => $this->checkExistingProducts($parsed_data['products']),
+            'products' => $result_with_sizecharts,
             'warnings' => $parsed_data['warnings']
         );
     }

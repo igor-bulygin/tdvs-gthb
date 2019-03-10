@@ -151,7 +151,12 @@ class shopifyParser
                                 );
                             }
                             if ($price_stock_line) {
-                                $price_stock_line['options'][$option_name] = array($option_data);
+                                if (strtolower($option_name) == 'size') {
+                                    $price_stock_line['options'][$option_name] = $option_data;
+                                }
+                                else {
+                                    $price_stock_line['options'][$option_name] = array($option_data);
+                                }
                             }
                             $pos[$j] = $option_name; // write option name into $pos array for next iterations
                         }
@@ -246,6 +251,7 @@ class shopifyParser
                 }
 
             }
+//            $sizechart = ImportUtil::makeSizeChart($result[$row[$cols['handle']]]['price_stock']);
 //            var_dump($row);
         }
         fclose($handle);

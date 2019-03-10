@@ -12,6 +12,8 @@ use app\models\Category;
 use app\models\Tag;
 use Yii;
 use app\helpers\Utils;
+use app\models\SizeChart;
+use yii\helpers\ArrayHelper;
 
 
 class ImportUtil
@@ -81,6 +83,11 @@ class ImportUtil
         }
     }
 
+    /**
+     * Checks if URL is reachable
+     * @param $url
+     * @return bool
+     */
     public static function urlTest( $url ) {
         $timeout = 10;
         $ch = curl_init();
@@ -97,6 +104,44 @@ class ImportUtil
             return false;
         }
         curl_close( $ch );
+    }
+
+    /**
+     * Return array os product sizechart, based on product's price_stock array
+     * @param $product - producr data
+     * @param $person - person data (for save deviser_id)
+     * @param $lang - lang for save name of sizechart
+     * @return bool|array
+     */
+    public static function makeSizeChart($product, $person, $lang)
+    {
+        if (count($product['price_stock']) > 0) {
+            $chart = array();
+            $chart['categories']    = $product['categories'];
+            $chart['countries']     = array('EU');
+            $chart['metric_unit']   = 'cm';
+            $chart['deviser_id']    = $person->short_id;
+            $chart['columns']       = array();
+            $chart['values']        = array();
+            $chart['type']          = 1;
+            $chart['name']          =  array('es-ES' => $product['name'][$lang]. ' sizechart', 'en-US' => $product['name'][$lang]. ' sizechart');
+            foreach ($product['price_stock'] as $line) {
+                if (array_key_exists('size', $line['options'])) {
+                    $chart['values'][] = array($line['options']['size']);
+                }
+            }
+            if (count($chart['values']) > 0) {
+                SizeChart::setSerializeScenario(SizeChart::SERIALIZE_SCENARIO_OWNER);
+                $sizeChart = new SizeChart();
+
+                $sizeChart->load($chart, '');
+                $sizeChart->short_id = null;
+                $sizeChart->save(false);
+
+                return ArrayHelper::toArray($sizeChart);
+            }
+        }
+        return null;
     }
 
 }
