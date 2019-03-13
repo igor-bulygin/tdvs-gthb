@@ -312,6 +312,8 @@ class ProductController extends CController
                 $mode = array_shift($data);
                 $product_id = array_shift($data);
 
+                unset($data['_id']);
+
                 Product::setSerializeScenario(Product::SERIALIZE_SCENARIO_OWNER);
 
                 if ($mode == 'add') {

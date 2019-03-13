@@ -62,7 +62,7 @@ class shopifyParser
         $this->csv = $csv;
         $this->post = $post;
         $this->person = $person;
-        $this->lang = $this->post['lang'];
+        $this->lang = (isset($this->post['lang']) && strlen($this->post['lang']) > 0) ? $this->post['lang'] : 'en-US';
     }
 
     /**
@@ -81,7 +81,7 @@ class shopifyParser
             $lines = array();
             while (($row = fgetcsv($handle, 1024, ",")) != false) {
                 $lines[] = array_map(function ($item) {
-                    return strip_tags($item, '<p><br>');
+                    return strip_tags($item);
                 }, $row);
             }
         }
