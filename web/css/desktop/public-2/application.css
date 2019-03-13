@@ -6375,9 +6375,14 @@ h3 {
   visibility: hidden; }
 
 .upload-csv-input {
-  color: transparent; }
+  position: relative;
+  padding: 5px 0 0 30px;
+  min-height: 50px; }
 
 .upload-csv-input::before {
+  position: absolute;
+  left: 0;
+  top: 0;
   content: attr(data-label);
   display: inline-block;
   background-color: #c91c39;
