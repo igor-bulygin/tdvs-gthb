@@ -30,22 +30,25 @@ function resize($file_input, $file_output, $w_o, $h_o, $percent = false) {
     if ($ext) {
     	$func = 'imagecreatefrom'.$ext;
     	$img = @$func($file_input);
-        $exif = @exif_read_data($file_input);
-//        var_dump($exif);
-//        exit;
-        if($exif && !empty($exif['Orientation'])) {
-            switch($exif['Orientation']) {
-                case 8:
-                    $img = imagerotate($img,90,0);
-                    break;
-                case 3:
-                    $img = imagerotate($img,180,0);
-                    break;
-                case 6:
-                    $img = imagerotate($img,-90,0);
-                    break;
-            }
-        }
+			$exif = false;
+			if (function_exists('exif_read_data')) {
+			    $exif = @exif_read_data($file_input);
+			} else if (preg_match('@\x12\x01\x03\x00\x01\x00\x00\x00(.)\x00\x00\x00@', file_get_contents($file_input), $matches)) {
+			    $exif['Orientation'] = ord($matches[1]);
+			}
+      if($exif && !empty($exif['Orientation'])) {
+          switch($exif['Orientation']) {
+              case 8:
+                  $img = imagerotate($img,90,0);
+                  break;
+              case 3:
+                  $img = imagerotate($img,180,0);
+                  break;
+              case 6:
+                  $img = imagerotate($img,-90,0);
+                  break;
+          }
+      }
     } else {
     	echo 'Некорректный формат файла';
 		return;

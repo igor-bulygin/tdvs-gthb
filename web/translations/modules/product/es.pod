@@ -83,7 +83,7 @@
 			"SPECIFY_RETURNS_DAYS": "Debe especificar los días para devolución",
 			"PHOTOS": "Fotos",
 			"ADD_PHOTOS": "Añadir fotos",
-			"MARK_AS_MAIN": "Marque una de las fotos como 'foto principal' pinchando en el icno de estrella.",
+			"MARK_AS_MAIN": "Marque una de las fotos como 'foto principal' pinchando en el icono de estrella.",
 			"MARKED_AS_MAIN": "Marcar como foto principal",
 			"UPLOAD_1_PHOTO": "Por favor suba al menos 1 foto.",
 			"TAGS": "Etiquetas",

@@ -137,7 +137,7 @@ $config = [
 					'categories' => ['yii\db\*', 'yii\mongodb\*'],
 					'message' => [
 						'from' => ['info@todevise.com'],
-						'to' => ['josevazquezviader@gmail.com'],
+						'to' => ['eduard.dr@coditramuntana.com'],
 						'subject' => 'TODEVISE - Database error',
 					],
 				],

@@ -527,7 +527,7 @@ class ProductController extends CController
 				$product->delete();
 
 			} else {
-				
+
 				$deviser = Person::findOneSerialized($product->deviser_id);
 
 				if (empty($deviser)) {

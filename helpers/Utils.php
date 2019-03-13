@@ -827,7 +827,12 @@ class Utils
 
         if ($crop && $_w_src == $w_aim && $_h_src == $h_aim) return;
 
-        $exif = @exif_read_data($f);
+				$exif = false;
+				if (function_exists('exif_read_data')) {
+				    $exif = @exif_read_data($f);
+				} else if (preg_match('@\x12\x01\x03\x00\x01\x00\x00\x00(.)\x00\x00\x00@', file_get_contents($f), $matches)) {
+				    $exif['Orientation'] = ord($matches[1]);
+				}
         if(null !== $exif && !empty($exif['Orientation'])) {
             switch($exif['Orientation']) {
                 case 8:

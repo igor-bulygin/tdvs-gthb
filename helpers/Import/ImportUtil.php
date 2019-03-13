@@ -126,7 +126,7 @@ class ImportUtil
             $chart['type']          = 1;
             $chart['name']          =  array('es-ES' => $product['name'][$lang]. ' sizechart', 'en-US' => $product['name'][$lang]. ' sizechart');
             foreach ($product['price_stock'] as $line) {
-                if (array_key_exists('size', $line['options'])) {
+                if (!empty($line['options']) && array_key_exists('size', $line['options'])) {
                     $chart['values'][] = array($line['options']['size']);
                 }
             }
