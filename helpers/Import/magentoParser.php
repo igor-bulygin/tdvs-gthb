@@ -245,6 +245,7 @@ class magentoParser
                     }
                     if ($attrs) {
                         foreach ($attrs as $attr) {
+                          if (trim($attr[0]) != '') {
                             if ($attr[0] != 'size' && !in_array($attr[0], $this->skip_attrs)) {
                                 if (array_key_exists($attr[0], $options_child)) {
                                     if (!in_array($attr[1], $options_child[$attr[0]][0])) {
@@ -275,6 +276,7 @@ class magentoParser
                                     $price_stock_child['options'][$attr[0]] = array($attr[1]);
                                 }
                             }
+                          }
                         }
                     }
                     $price_stock_child['price']     = round($child[$cols['price']], 2);
