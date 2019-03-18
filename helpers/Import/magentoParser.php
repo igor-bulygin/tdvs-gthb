@@ -200,18 +200,19 @@ class magentoParser
             if ($attrs) {
                 $price_stock_line['options'] = array();
                 foreach ($attrs as $attr) {
-                    if ($attr[0] != 'size' && !in_array($attr[0], $this->skip_attrs)) {
-                        $options[$attr[0]] = array(array($attr[1]));
-                    }
+                    if (trim($attr[0]) != '') {
+                        if ($attr[0] != 'size' && !in_array($attr[0], $this->skip_attrs)) {
+                            $options[$attr[0]] = array(array($attr[1]));
+                        }
 
-                    if (!in_array($attr[0], $this->skip_attrs)) {
-                        $price_stock_line['options'][$attr[0]] = array(array($attr[1]));
-                    }
-                    // get dimensions from 'additional attributes'. They are stored into 'ts_dimensions_' variables
-                    else {
-                        if (strpos($attr[0], 'ts_dimensions') !== false) {
-                            $attr_name = str_replace('ts_dimensions_', '', $attr[0]);
-                            $price_stock_line[$attr_name] = round($attr[1], 2);
+                        if (!in_array($attr[0], $this->skip_attrs)) {
+                            $price_stock_line['options'][$attr[0]] = array(array($attr[1]));
+                        } // get dimensions from 'additional attributes'. They are stored into 'ts_dimensions_' variables
+                        else {
+                            if (strpos($attr[0], 'ts_dimensions') !== false) {
+                                $attr_name = str_replace('ts_dimensions_', '', $attr[0]);
+                                $price_stock_line[$attr_name] = round($attr[1], 2);
+                            }
                         }
                     }
                 }
@@ -248,8 +249,8 @@ class magentoParser
                           if (trim($attr[0]) != '') {
                             if ($attr[0] != 'size' && !in_array($attr[0], $this->skip_attrs)) {
                                 if (array_key_exists($attr[0], $options_child)) {
-                                    if (!in_array($attr[1], $options_child[$attr[0]][0])) {
-                                        array_push($options_child[$attr[0]][0], $attr[1]);
+                                    if (!in_array(array($attr[1]), $options_child[$attr[0]])) {
+                                        array_push($options_child[$attr[0]], array($attr[1]));
                                     }
                                 }
                                 else {

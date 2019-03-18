@@ -141,8 +141,9 @@
 			for(var i = 0; i < categories.length; i++) {
 				var split_fathers = categories[i].path.split('/');
 				for(var j = 0; j < split_fathers.length; j++) {
-					if(split_fathers[j] === "")
-						split_fathers.splice(j, 1);
+					if(split_fathers[j] === '') {
+                        split_fathers.splice(j, 1);
+                    }
 				}
 				var father = split_fathers[split_fathers.length-1];
 				if(father === id)

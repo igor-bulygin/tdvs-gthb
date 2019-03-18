@@ -172,12 +172,12 @@
         function getSizeText(value) {
             var text = null;
             vm.product.options.forEach(function(option) {
-                if (option.id == "size") {
+                if (option.id === "size") {
                     option.values.forEach(function(element) {
-                        if (value == element.value) {
+                        if (value === element.value) {
                             text = element.text;
                         }
-                    })
+                    });
                 }
             })
             return text;
@@ -187,8 +187,8 @@
             vm.product.options.forEach(function(element) {
                 element.values.forEach(function(value) {
                     value['disabled'] = false;
-                })
-            })
+                });
+            });
         }
 
         function isOptionRequired(key) {
@@ -205,6 +205,7 @@
             vm.stock = null;
             vm.quantity = 1;
             var prices = [];
+            var all_prices = [];
             var options = angular.copy(options_selected);
             var reference;
             if (options['size'] && !UtilService.isObject(options['size'])) {
@@ -220,26 +221,38 @@
                 var isReference = true;
                 for (var key in options) {
                     var valueToCompare;
-                    if (key === 'size' || !angular.isString(options[key]))
+                    if (key === 'size' || !angular.isString(options[key])) {
                         valueToCompare = options[key];
+                    }
                     else {
                         valueToCompare = [options[key]];
                     }
-                    if (!angular.equals(valueToCompare, element.options[key]))
+
+                    if (!angular.equals(valueToCompare, element.options[key])) {
                         isReference = false;
+                    }
                 }
                 if (isReference && element.available && !element.original_artwork) {
                     reference = element.short_id;
                     if (element.stock !== null)
                         vm.stock += element.stock;
                     else {
-                        vm.stock = angular.copy(vm.stock, element.stock)
+                        vm.stock = angular.copy(vm.stock, element.stock);
                     }
                     prices.push(element.price);
                 }
+                else {
+                    if (element.price && parseInt(element.price) > 0) {
+                        all_prices.push(element.price);
+                    }
+                }
             });
-            if (angular.isArray(prices) && prices.length > 0)
+            if (angular.isArray(prices) && prices.length > 0) {
                 vm.price = Math.min(...prices);
+            }
+            else if (angular.isArray(all_prices) && all_prices.length > 0) {
+                vm.price = Math.min(...all_prices);
+            }
             else {
                 vm.price = '-';
             }

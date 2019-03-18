@@ -289,7 +289,15 @@
 						</ol>
 					</div>
 					<div class="col-sm-3 pad-about col-xs-12 mb-10">
-						<ol class="nya-bs-select btn-group bootstrap-select form-control categories-select ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart_country}" ng-model="productVariationsCtrl.selected_sizechart_country" ng-if="productVariationsCtrl.countriesAvailable.length > 0 && productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.selected_sizechart, productVariationsCtrl.selected_sizechart_country)" ng-cloak>
+						<ol class="
+						nya-bs-select
+						btn-group
+						bootstrap-select
+						form-control
+						categories-select
+						ng-class:{'error-input': productVariationsCtrl.form_submitted && !productVariationsCtrl.selected_sizechart_country && (!productVariationsCtrl.product.is_imported || productVariationsCtrl.product.is_imported == 0)}" ng-model="productVariationsCtrl.selected_sizechart_country" ng-if="productVariationsCtrl.countriesAvailable.length > 0 && productVariationsCtrl.selected_sizechart" ng-change="productVariationsCtrl.sizesSelect(productVariationsCtrl.selected_sizechart, productVariationsCtrl.selected_sizechart_country)"
+						ng-cloak
+						>
 							<li nya-bs-option="country in productVariationsCtrl.countriesAvailable" data-value="country">
 								<a><span ng-bind="country"></span></a>
 							</li>

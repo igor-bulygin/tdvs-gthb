@@ -74,6 +74,7 @@ class ImportHelper {
 
         return array(
             'products' => $result_with_sizecharts,
+//            'products' => $result,
             'warnings' => $parsed_data['warnings']
         );
     }
@@ -113,13 +114,13 @@ class ImportHelper {
         $query = new ActiveQuery(Product::class);
         foreach ($data as $product) {
             if ($exist_id = $this->checkProductExistsBySKU($product, $query)) {
-                $res[] = array('mode' => 'update', 'product_id' => $exist_id) + $this->mergeData($exist_id, $product);
+                $res[] = array('mode' => 'update', 'product_id' => $exist_id, 'is_imported' => 1) + $this->mergeData($exist_id, $product);
             }
             elseif ($exist_id = $this->checkProductExistsByTitle($product, $query)) {
-                $res[] = array('mode' => 'update', 'product_id' => $exist_id) + $this->mergeData($exist_id, $product);
+                $res[] = array('mode' => 'update', 'product_id' => $exist_id, 'is_imported' => 1) + $this->mergeData($exist_id, $product);
             }
             else {
-                $res[] = array('mode' => 'add', 'product_id' => null) + $product;
+                $res[] = array('mode' => 'add', 'product_id' => null, 'is_imported' => 1) + $product;
             }
         }
         return $res;

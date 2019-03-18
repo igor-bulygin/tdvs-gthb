@@ -31,7 +31,7 @@ class ImportUtil
             return $res;
         }
         $cats = Category::find()->where(
-            ['like', "name.".$lang, $name])->select(['short_id'])->asArray()->all();
+            ['REGEX', "name.".$lang, '/^'.$name.'/i'])->select(['short_id'])->asArray()->all();
         foreach ($cats as $v) {
             $res[] = $v['short_id'];
         }
@@ -130,15 +130,19 @@ class ImportUtil
                     $chart['values'][] = array($line['options']['size']);
                 }
             }
+
             if (count($chart['values']) > 0) {
-                SizeChart::setSerializeScenario(SizeChart::SERIALIZE_SCENARIO_OWNER);
-                $sizeChart = new SizeChart();
 
-                $sizeChart->load($chart, '');
-                $sizeChart->short_id = null;
-                $sizeChart->save(false);
+                return $chart;
 
-                return ArrayHelper::toArray($sizeChart);
+//                SizeChart::setSerializeScenario(SizeChart::SERIALIZE_SCENARIO_OWNER);
+//                $sizeChart = new SizeChart();
+//
+//                $sizeChart->load($chart, '');
+//                $sizeChart->short_id = null;
+//                $sizeChart->save(false);
+//
+//                return ArrayHelper::toArray($sizeChart);
             }
         }
         return null;

@@ -195,7 +195,9 @@
 			if(!vm.fromedit) {
 				if(angular.isObject(newValue) || (!newValue && angular.isObject(oldValue))) {
 					vm.old_cartesian = getCartesian(vm.product.options, oldValue, vm.product.sizechart);
-					createTable();
+                    if (!vm.product.is_imported || vm.product.is_imported !== 1) {
+                        createTable();
+                    }
 				}
 			}
 		}, true);
@@ -204,7 +206,9 @@
 			if(!vm.fromedit || (vm.fromedit && vm.product.price_stock.length === 0)) {
 				if(angular.isObject(newValue) && !UtilService.isEmpty(newValue)) {
 					vm.old_cartesian = getCartesian(oldValue, vm.product.prints, vm.product.sizechart);
-					createTable();
+					if (!vm.product.is_imported || vm.product.is_imported !== 1) {
+                        createTable();
+                    }
 				}
 			}
 		}, true);
@@ -213,7 +217,9 @@
 			if(!vm.fromedit) {
 				if(angular.isObject(newValue)) {
 					vm.old_cartesian = getCartesian(vm.product.options, vm.product.prints, oldValue);
-					createTable();
+                    if (!vm.product.is_imported || vm.product.is_imported !== 1) {
+                        createTable();
+                    }
 				}
 			}
 		}, true);
@@ -237,7 +243,9 @@
 				if(!values[0] && !values[1]) {
 					if(!vm.fromedit) {
 						vm.old_cartesian = getCartesian(vm.product.options, vm.product.prints, vm.product.sizechart);
-						createTable();
+                        if (!vm.product.is_imported || vm.product.is_imported !== 1) {
+                            createTable();
+                        }
 					}
 				}
 				//if we do have prints, set original artwork to true
@@ -249,12 +257,14 @@
 				}
 			})
 			if(!vm.fromedit) {
-				//reset options
-				delete vm.product.price_stock;
-				delete vm.product.prints;
-				delete vm.product.sizechart;
-				vm.old_cartesian = getCartesian(vm.product.options, vm.product.prints, vm.product.sizechart);
-				createTable();
+				//reset options if product is not imported
+                if (!vm.product.is_imported || vm.product.is_imported !== 1) {
+					delete vm.product.price_stock;
+					delete vm.product.prints;
+					delete vm.product.sizechart;
+					vm.old_cartesian = getCartesian(vm.product.options, vm.product.prints, vm.product.sizechart);
+                    createTable();
+                }
 			}
 		});
 

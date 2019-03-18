@@ -154,9 +154,20 @@
 					}
 				});
 			});
+            /**
+			 * if there are not needed options in product object - add them
+             */
 			vm.tags_setted.forEach(function(element) {
 				if(!vm.product.options[element]) {
 					vm.product.options[element] = [[]];
+				}
+			});
+            /**
+			 * Removes redundant options
+             */
+			Object.keys(vm.product.options).forEach(function(key) {
+				if (!vm.tags_setted.includes(key)) {
+					delete vm.product.options[key];
 				}
 			});
 		}
@@ -196,7 +207,11 @@
 					countriesSelect(vm.selected_sizechart);
 				}
 				vm.savingSizechart=false;
-				if (vm.sizechart_helper.length>0) {
+
+                /**
+				 * if product is imported - hde Sizes section
+                 */
+				if (vm.sizechart_helper.length > 0 && (!vm.product.is_imported || vm.product.is_imported !== 1)) {
 					vm.show_sizecharts = true;
 				}
 			}
@@ -209,8 +224,9 @@
 
 		function deviserSizecharts() {
 			vm.sizecharts.forEach(function(element) {
-				if(element.type === 1 && element.deviser_id === person.short_id)
-					vm.deviserSizecharts.push(element);
+				if(element.type === 1 && element.deviser_id === person.short_id) {
+                    vm.deviserSizecharts.push(element);
+                }
 			});
 		}
 
@@ -264,7 +280,7 @@
 					vm.sizechart_helper.push(data);
 					vm.showNewSizechart=false;
 					vm.savingSizechart=false;
-				}
+				};
 				sizechartDataService.postDeviserSizechart(vm.newSizechart, onSaveSizechartSuccess, UtilService.onError);
 			}
 		}
@@ -482,6 +498,7 @@
 			vm.show_sizecharts = false;
 			vm.prints = false;
 			args.categories.forEach(function(element) {
+
 				var values = productService.searchPrintSizechartsOnCategory(vm.categories, element);
 				if(values[0]) {
 					vm.prints = true;
@@ -493,16 +510,31 @@
 					if(angular.isObject(vm.product.prints)) {
 						delete vm.product.prints;
 					}
-					vm.show_sizecharts = true;
-					if(vm.product.sizechart && !vm.fromedit)
-						delete vm.product.sizechart;
-					else if(vm.product.sizechart && vm.fromedit) {
-						delete vm.fromedit;
-						setSizechartFromProduct();
-					}
+                    /**
+					 * if product is imported - leave sizes as they are
+                     */
+					if (!vm.product.is_imported || vm.product.is_imported !== 1) {
+                        vm.show_sizecharts = true;
+                        if (vm.product.sizechart && !vm.fromedit) {
+                            delete vm.product.sizechart;
+                        }
+                        else if (vm.product.sizechart && vm.fromedit) {
+                            delete vm.fromedit;
+                            setSizechartFromProduct();
+                        }
+                    }
 				}
 			});
 		});
+
+        /**
+		 * if we change set of categories - then we have to change product available options set
+         */
+		$scope.$on(productEvents.setTagsFromCategory, function(event, args) {
+            getTagsByCategory(args.categories);
+            // categoriesSizecharts(args.categories);
+            // deviserSizecharts();
+        });
 
 		$scope.$on(productEvents.requiredErrors, function (event, args) {
 			//vm.forms_submitted is true if we sent the form and we have to apply validations
@@ -520,8 +552,9 @@
 
 		//tag orders
 		function tagComparator(option) {
-			if(vm.tag_order.indexOf(option.name) > -1)
-				return vm.tag_order.indexOf(option.name)
+			if(vm.tag_order.indexOf(option.name) > -1) {
+                return vm.tag_order.indexOf(option.name);
+            }
 		}
 		
 	}

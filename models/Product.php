@@ -49,6 +49,7 @@ use yii2tech\ar\position\PositionBehavior;
  * @property MongoDate created_at
  * @property MongoDate updated_at
  * @property int enabled
+ * @property int is_imported
  * @method   PositionBehavior moveToPosition($position)
  */
 class Product extends CActiveRecord {
@@ -117,6 +118,7 @@ class Product extends CActiveRecord {
             'sold_num',
 			'created_at',
 			'updated_at',
+            'is_imported',
 		];
 	}
 
@@ -164,6 +166,8 @@ class Product extends CActiveRecord {
 
 		$this->faq = [];
 		$this->comments = [];
+
+		$this->is_imported = 0;
 	}
 
 	public function embedMediaMapping()
@@ -382,6 +386,7 @@ class Product extends CActiveRecord {
 					'boxes',
 					'prints',
 					'product_state',
+                    'is_imported',
 				],
 				'safe',
 				'on' => [self::SCENARIO_PRODUCT_OLD_API, self::SCENARIO_PRODUCT_DRAFT, self::SCENARIO_PRODUCT_PUBLIC]
@@ -574,6 +579,7 @@ class Product extends CActiveRecord {
 					'prints',
 					'price_stock',
 					'tags',
+                    'is_imported'
 				];
 				static::$retrieveExtraFields = [
 					'deviser_id',
@@ -609,6 +615,7 @@ class Product extends CActiveRecord {
 					'tags',
 					'url_images' => 'urlImagesLocation',
 					'product_state',
+                    'is_imported'
 				];
 				static::$translateFields = false;
 				break;

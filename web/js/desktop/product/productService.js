@@ -120,7 +120,12 @@
 				}
 			}
 			//sizecharts
-			if(angular.isObject(product.sizechart) && !UtilService.isEmpty(product.sizechart) && !UtilService.isEmpty(product.sizechart.values)) {
+			if (
+				angular.isObject(product.sizechart) &&
+				!UtilService.isEmpty(product.sizechart) &&
+				!UtilService.isEmpty(product.sizechart.values) &&
+				(!product.is_imported || product.is_imported == 0)
+			) {
 				if(!product.sizechart.metric_unit) {
                     required.push('metric_unit');
                 }
